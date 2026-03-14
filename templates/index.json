@@ -107,6 +107,7 @@
             "cell_a_text_size": 16,
             "cell_a_bg_color": "#141414",
             "cell_a_text_color": "#ffffff",
+            "cell_b_image": "shopify://shop_images/481174788_1139671901283098_7998003288883320964_n_1.png",
             "cell_c_heading": "Featured Product",
             "cell_c_subtext": "Limited edition",
             "cell_c_price": "$99",
