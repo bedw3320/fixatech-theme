@@ -12,11 +12,8 @@
 -%}
 
 {% style %}
-  #shopify-section-{{ section.id }} {
-    {% render 'spacing-style', settings: section.settings %}
-  }
-
   .bento-hero--{{ section.id }} {
+    {% render 'spacing-style', settings: section.settings %}
     --cell-a-bg:    {{ section.settings.cell_a_bg_color }};
     --cell-a-color: {{ section.settings.cell_a_text_color }};
     --cell-c-bg:    {{ section.settings.cell_c_bg_color }};
@@ -26,8 +23,8 @@
   }
 {% endstyle %}
 
-<div class="bento-hero bento-hero--{{ section.id }}">
-  <div class="{% if section.settings.section_width == 'page-width' %}page-width{% endif %}">
+<div class="section section--{{ section.settings.section_width }} spacing-style bento-hero bento-hero--{{ section.id }}">
+  <div>
     <div class="bento-hero__grid">
 
       {%- comment -%} ── Cell A — Text card ─────────────────────────── {%- endcomment -%}
