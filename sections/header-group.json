@@ -82,7 +82,7 @@
       "settings": {
         "logo_position": "left",
         "menu_position": "left",
-        "menu_row": "top",
+        "menu_row": "bottom",
         "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "center",
@@ -105,7 +105,7 @@
         "actions_font": "body",
         "actions_text_case": "none",
         "color_scheme_top": "scheme-4",
-        "color_scheme_bottom": "",
+        "color_scheme_bottom": "scheme-4",
         "color_scheme_transparent": "scheme-6",
         "enable_transparent_header_home": false,
         "home_color_scheme": "inverse",

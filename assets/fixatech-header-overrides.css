@@ -9,12 +9,11 @@
  *
  * Sections:
  *   1. Main Header (120px height, 3-col: logo / search / account+cart)
- *   2. Hide Horizon Default Menu (Accueil, Catalogue, Contact)
+ *   2. Horizon Nav Menu (bottom row)
  *   3. Search Bar (pill, centered)
  *   4. Account Button (outlined pill with "Mon compte" text)
  *   5. Cart Bubble (white bg / dark text)
- *   6. Sub-Navigation Bar (60px, sticky)
- *   7. Responsive Overrides
+ *   6. Responsive Overrides
  */
 
 /* ═══════════════════════════════════════════════════════════════
@@ -45,14 +44,10 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   2. HIDE HORIZON DEFAULT MENU
-   ═══════════════════════════════════════════════════════════════
-   The Accueil / Catalogue / Contact links are replaced by
-   our fixatech-subnav bar. Hide the Horizon menu entirely.  */
+   2. HORIZON NAV MENU — bottom row
+   ═══════════════════════════════════════════════════════════════ */
 
-#header-component header-menu.header-menu {
-  display: none !important; /* stylelint-disable-line declaration-no-important */
-}
+/* (Horizon default styles apply — no overrides needed here yet) */
 
 /* ═══════════════════════════════════════════════════════════════
    3. SEARCH BAR — center column, pill shape
@@ -188,88 +183,11 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   6. SUB-NAVIGATION BAR — 60px, sticky below header
-   ═══════════════════════════════════════════════════════════════ */
-
-.fixatech-subnav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: var(--fixatech-subnav-height); /* 60px */
-  background-color: var(--fixatech-background-dark);
-  border-top: 0.5px solid var(--fixatech-border); /* #343434 */
-  position: sticky;
-  top: var(--header-height, var(--fixatech-header-height));
-  z-index: 99;
-}
-
-.fixatech-subnav__list {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.fixatech-subnav__item {
-  display: flex;
-  align-items: center;
-}
-
-.fixatech-subnav__link {
-  display: flex;
-  align-items: center;
-  height: 36px;
-  padding: 8px 16px;
-  font-family: var(--fixatech-font-body);
-  font-size: var(--fixatech-font-size-body); /* 12px */
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fixatech-white);
-  text-decoration: none;
-  border-radius: var(--fixatech-radius-pill);
-  transition: var(--fixatech-transition-fast);
-  white-space: nowrap;
-}
-
-.fixatech-subnav__link:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--fixatech-gold-underline); /* #B9930D */
-  text-underline-offset: 3px;
-}
-
-/* Active: yellow pill */
-.fixatech-subnav__link--active,
-.fixatech-subnav__link[aria-current='page'] {
-  background-color: var(--fixatech-primary); /* #FFC600 */
-  color: var(--fixatech-background-dark); /* #141414 */
-  text-decoration: none;
-}
-
-.fixatech-subnav__link--active:hover,
-.fixatech-subnav__link[aria-current='page']:hover {
-  background-color: var(--fixatech-primary-hover); /* #E9B217 */
-  text-decoration: none;
-}
-
-.fixatech-subnav__link:focus-visible {
-  outline: var(--fixatech-focus-outline);
-  outline-offset: var(--fixatech-focus-offset);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   7. RESPONSIVE OVERRIDES
+   6. RESPONSIVE OVERRIDES
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─── Tablet (768px – 1511px) ─────────────────────────────── */
 @media screen and (max-width: 1511px) {
-  .fixatech-subnav__list {
-    gap: 24px;
-  }
-
   .header__column--center .search-action {
     width: clamp(200px, 22vw, 340px);
   }
@@ -277,10 +195,6 @@ header-component.header {
 
 /* ─── Mobile (max 767px) ──────────────────────────────────── */
 @media screen and (max-width: 767px) {
-  .fixatech-subnav {
-    display: none;
-  }
-
   .header__column--center .search-action {
     display: none;
   }
