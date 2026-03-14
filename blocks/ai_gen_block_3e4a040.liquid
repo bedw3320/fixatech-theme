@@ -1,66 +1,81 @@
 {% doc %}
   @prompt
-    A Bento Hero section, can be page or full width, composed of 2-row × 3-column CSS grid. Unequal columns: left two are roughly equal (1fr 1fr), right column is wider (1.3fr). Rows are equal height. Gap ~8px. All cells border-radius:
-      12px, overflow: hidden.
-    
-      grid-template-columns: 1fr 1fr 1.3fr
-      grid-template-rows: 1fr 1fr
-      gap: 8px
-    
-      Cell placement
-    
-      ┌──────┬────────────────────────────────────────┐
-      │ Cell │               Placement                │
-      ├──────┼────────────────────────────────────────┤
-      │ A    │ col 1 / row 1                          │
-      ├──────┼────────────────────────────────────────┤
-      │ B    │ col 2 / row 1                          │
-      ├──────┼────────────────────────────────────────┤
-      │ C    │ col 3 / rows 1–2 (grid-row: span 2)    │
-      ├──────┼────────────────────────────────────────┤
-      │ D    │ cols 1–2 / row 2 (grid-column: span 2) │
-      └──────┴────────────────────────────────────────┘
-    
-      Cell types
-    
-      A — Solid dark bg, vertically + horizontally centered text block. No image.
-    
-      B — Full-bleed <img> / background-image, object-fit: cover. No overlay, no text.
-    
-      C — Solid brand-color bg (yellow). Top: text block. Middle: product <img> centered. Bottom-right: absolutely positioned circular price badge.
-    
-      D — Full-bleed <img> / background-image, object-fit: cover. Linear gradient overlay from transparent → rgba(0,0,0,0.5) bottom-up. Bottom-left: absolutely positioned pill CTA
-      button with icon.
-    
-      Each cell is position: relative. C and D have absolutely positioned children.
+    A Bento Hero section composed of a 2-row × 3-column CSS grid. Unequal columns: left two are
+    roughly equal (1fr 1fr), right column is wider (1.3fr). Rows are equal height. Gap ~8px. All
+    cells border-radius: 12px, overflow: hidden.
+
+    grid-template-columns: 1fr 1fr 1.3fr
+    grid-template-rows: 1fr 1fr
+    gap: 8px
+
+    Cell placement
+
+    ┌──────┬────────────────────────────────────────┐
+    │ Cell │               Placement                │
+    ├──────┼────────────────────────────────────────┤
+    │ A    │ col 1 / row 1                          │
+    ├──────┼────────────────────────────────────────┤
+    │ B    │ col 2 / row 1                          │
+    ├──────┼────────────────────────────────────────┤
+    │ C    │ col 3 / rows 1–2 (grid-row: span 2)    │
+    ├──────┼────────────────────────────────────────┤
+    │ D    │ cols 1–2 / row 2 (grid-column: span 2) │
+    └──────┴────────────────────────────────────────┘
+
+    Cell types
+
+    A — Solid dark bg, vertically + horizontally centered text block. No image.
+
+    B — Full-bleed <img> / background-image, object-fit: cover. No overlay, no text.
+
+    C — Solid brand-color bg (yellow). Top: text block. Middle: product <img> centered.
+        Bottom-right: absolutely positioned circular price badge.
+
+    D — Full-bleed <img> / background-image, object-fit: cover. Linear gradient overlay from
+        transparent → rgba(0,0,0,0.5) bottom-up. Bottom-left: absolutely positioned pill CTA
+        button with icon.
+
+    Each cell is position: relative. C and D have absolutely positioned children.
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
+  /*
+   * Make the Horizon _blocks section wrapper flex item fill its container.
+   * Without this, shopify-block sits at its content width instead of
+   * stretching to fill the section-content-wrapper flex row.
+   */
+  .shopify-block:has(.ai-bento-hero-{{ ai_gen_id }}) {
+    flex: 1;
+    min-width: 0;
+  }
+
   .ai-bento-hero-{{ ai_gen_id }} {
     display: block;
     width: 100%;
-    {% if block.settings.container_width == 'page' %}
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    {% endif %}
   }
 
+  /* ── Grid ─────────────────────────────────────────────────── */
+  /*
+   * aspect-ratio drives proportional height growth as section widens.
+   * 16/7 ≈ the original 1440×630 design intent. No fixed height needed.
+   */
   .ai-bento-hero-grid-{{ ai_gen_id }} {
     display: grid;
     grid-template-columns: 1fr 1fr 1.3fr;
     grid-template-rows: 1fr 1fr;
-    gap: {{ block.settings.grid_gap }}px;
-    min-height: {{ block.settings.grid_height }}px;
+    gap: 8px;
+    aspect-ratio: 16 / 7;
   }
 
+  /* ── Cells (shared) ───────────────────────────────────────── */
   .ai-bento-hero-cell-{{ ai_gen_id }} {
     position: relative;
-    border-radius: {{ block.settings.cell_border_radius }}px;
+    border-radius: 12px;
     overflow: hidden;
   }
 
+  /* ── Cell A ───────────────────────────────────────────────── */
   .ai-bento-hero-cell-a-{{ ai_gen_id }} {
     grid-column: 1;
     grid-row: 1;
@@ -77,17 +92,18 @@
   }
 
   .ai-bento-hero-cell-a-heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.cell_a_heading_size }}px;
+    font-size: 32px;
     margin: 0 0 12px;
     color: {{ block.settings.cell_a_text_color }};
   }
 
   .ai-bento-hero-cell-a-text-{{ ai_gen_id }} {
-    font-size: {{ block.settings.cell_a_text_size }}px;
+    font-size: 16px;
     margin: 0;
     color: {{ block.settings.cell_a_text_color }};
   }
 
+  /* ── Cell B ───────────────────────────────────────────────── */
   .ai-bento-hero-cell-b-{{ ai_gen_id }} {
     grid-column: 2;
     grid-row: 1;
@@ -115,6 +131,7 @@
     max-height: 200px;
   }
 
+  /* ── Cell C ───────────────────────────────────────────────── */
   .ai-bento-hero-cell-c-{{ ai_gen_id }} {
     grid-column: 3;
     grid-row: span 2;
@@ -130,13 +147,13 @@
   }
 
   .ai-bento-hero-cell-c-heading-{{ ai_gen_id }} {
-    font-size: {{ block.settings.cell_c_heading_size }}px;
+    font-size: 28px;
     margin: 0 0 12px;
     color: {{ block.settings.cell_c_text_color }};
   }
 
   .ai-bento-hero-cell-c-subtext-{{ ai_gen_id }} {
-    font-size: {{ block.settings.cell_c_text_size }}px;
+    font-size: 14px;
     margin: 0;
     color: {{ block.settings.cell_c_text_color }};
   }
@@ -174,18 +191,19 @@
     position: absolute;
     bottom: 30px;
     right: 30px;
-    width: {{ block.settings.price_badge_size }}px;
-    height: {{ block.settings.price_badge_size }}px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background-color: {{ block.settings.price_badge_bg_color }};
+    background-color: #141414;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: {{ block.settings.price_badge_text_size }}px;
+    font-size: 18px;
     font-weight: 700;
-    color: {{ block.settings.price_badge_text_color }};
+    color: #ffc600;
   }
 
+  /* ── Cell D ───────────────────────────────────────────────── */
   .ai-bento-hero-cell-d-{{ ai_gen_id }} {
     grid-column: span 2;
     grid-row: 2;
@@ -215,11 +233,8 @@
 
   .ai-bento-hero-cell-d-overlay-{{ ai_gen_id }} {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, {{ block.settings.overlay_opacity }}), transparent);
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
     pointer-events: none;
   }
 
@@ -235,13 +250,13 @@
     color: {{ block.settings.cta_text_color }};
     text-decoration: none;
     border-radius: 100px;
-    font-size: {{ block.settings.cta_text_size }}px;
+    font-size: 16px;
     font-weight: 600;
-    transition: background-color 0.3s ease;
+    transition: filter 0.2s ease;
   }
 
   .ai-bento-hero-cell-d-cta-{{ ai_gen_id }}:hover {
-    background-color: {{ block.settings.cta_hover_bg_color }};
+    filter: brightness(0.85);
   }
 
   .ai-bento-hero-cell-d-cta-icon-{{ ai_gen_id }} {
@@ -249,11 +264,12 @@
     height: 20px;
   }
 
+  /* ── Tablet (≤ 989px) ─────────────────────────────────────── */
   @media screen and (max-width: 989px) {
     .ai-bento-hero-grid-{{ ai_gen_id }} {
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto;
-      min-height: auto;
+      aspect-ratio: auto;
     }
 
     .ai-bento-hero-cell-a-{{ ai_gen_id }} {
@@ -281,10 +297,10 @@
     }
   }
 
+  /* ── Mobile (≤ 749px) ─────────────────────────────────────── */
   @media screen and (max-width: 749px) {
     .ai-bento-hero-grid-{{ ai_gen_id }} {
       grid-template-columns: 1fr;
-      gap: {{ block.settings.grid_gap | times: 0.75 }}px;
     }
 
     .ai-bento-hero-cell-a-{{ ai_gen_id }} {
@@ -310,17 +326,17 @@
     }
 
     .ai-bento-hero-cell-a-heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.cell_a_heading_size | times: 0.7 }}px;
+      font-size: 22px;
     }
 
     .ai-bento-hero-cell-c-heading-{{ ai_gen_id }} {
-      font-size: {{ block.settings.cell_c_heading_size | times: 0.7 }}px;
+      font-size: 20px;
     }
 
     .ai-bento-hero-cell-c-badge-{{ ai_gen_id }} {
-      width: {{ block.settings.price_badge_size | times: 0.8 }}px;
-      height: {{ block.settings.price_badge_size | times: 0.8 }}px;
-      font-size: {{ block.settings.price_badge_text_size | times: 0.8 }}px;
+      width: 64px;
+      height: 64px;
+      font-size: 14px;
       bottom: 20px;
       right: 20px;
     }
@@ -329,7 +345,7 @@
       bottom: 20px;
       left: 20px;
       padding: 12px 24px;
-      font-size: {{ block.settings.cta_text_size | times: 0.9 }}px;
+      font-size: 14px;
     }
   }
 {% endstyle %}
@@ -462,57 +478,7 @@
   "settings": [
     {
       "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "container_width",
-      "label": "Container width",
-      "options": [
-        {
-          "value": "full",
-          "label": "Full width"
-        },
-        {
-          "value": "page",
-          "label": "Page width"
-        }
-      ],
-      "default": "page"
-    },
-    {
-      "type": "range",
-      "id": "grid_height",
-      "label": "Grid height",
-      "min": 400,
-      "max": 800,
-      "step": 50,
-      "unit": "px",
-      "default": 600
-    },
-    {
-      "type": "range",
-      "id": "grid_gap",
-      "label": "Grid gap",
-      "min": 4,
-      "max": 20,
-      "step": 2,
-      "unit": "px",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "cell_border_radius",
-      "label": "Cell border radius",
-      "min": 0,
-      "max": 32,
-      "step": 2,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "header",
-      "content": "Cell A"
+      "content": "Cell A — Text card"
     },
     {
       "type": "text",
@@ -523,28 +489,7 @@
     {
       "type": "textarea",
       "id": "cell_a_text",
-      "label": "Text",
-      "default": "Discover our latest arrivals"
-    },
-    {
-      "type": "range",
-      "id": "cell_a_heading_size",
-      "label": "Heading size",
-      "min": 16,
-      "max": 64,
-      "step": 2,
-      "unit": "px",
-      "default": 32
-    },
-    {
-      "type": "range",
-      "id": "cell_a_text_size",
-      "label": "Text size",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "default": 16
+      "label": "Subtext"
     },
     {
       "type": "color",
@@ -560,7 +505,7 @@
     },
     {
       "type": "header",
-      "content": "Cell B"
+      "content": "Cell B — Photo"
     },
     {
       "type": "image_picker",
@@ -569,19 +514,18 @@
     },
     {
       "type": "header",
-      "content": "Cell C"
+      "content": "Cell C — Promo panel"
     },
     {
       "type": "text",
       "id": "cell_c_heading",
       "label": "Heading",
-      "default": "Featured Product"
+      "default": "Promotion de la semaine"
     },
     {
       "type": "textarea",
       "id": "cell_c_subtext",
-      "label": "Subtext",
-      "default": "Limited edition"
+      "label": "Subtext"
     },
     {
       "type": "image_picker",
@@ -591,28 +535,8 @@
     {
       "type": "text",
       "id": "cell_c_price",
-      "label": "Price badge text",
+      "label": "Price badge (e.g. $99)",
       "default": "$99"
-    },
-    {
-      "type": "range",
-      "id": "cell_c_heading_size",
-      "label": "Heading size",
-      "min": 16,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 28
-    },
-    {
-      "type": "range",
-      "id": "cell_c_text_size",
-      "label": "Text size",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 14
     },
     {
       "type": "color",
@@ -627,40 +551,8 @@
       "default": "#141414"
     },
     {
-      "type": "range",
-      "id": "price_badge_size",
-      "label": "Price badge size",
-      "min": 60,
-      "max": 120,
-      "step": 5,
-      "unit": "px",
-      "default": 80
-    },
-    {
-      "type": "range",
-      "id": "price_badge_text_size",
-      "label": "Price badge text size",
-      "min": 14,
-      "max": 28,
-      "step": 2,
-      "unit": "px",
-      "default": 18
-    },
-    {
-      "type": "color",
-      "id": "price_badge_bg_color",
-      "label": "Price badge background",
-      "default": "#141414"
-    },
-    {
-      "type": "color",
-      "id": "price_badge_text_color",
-      "label": "Price badge text",
-      "default": "#ffc600"
-    },
-    {
       "type": "header",
-      "content": "Cell D"
+      "content": "Cell D — Full-width photo + CTA"
     },
     {
       "type": "image_picker",
@@ -668,52 +560,27 @@
       "label": "Image"
     },
     {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Overlay opacity",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "default": 0.5
-    },
-    {
       "type": "text",
       "id": "cell_d_cta_text",
-      "label": "CTA button text",
+      "label": "Button text",
       "default": "Shop Now"
     },
     {
       "type": "url",
       "id": "cell_d_cta_link",
-      "label": "CTA button link"
-    },
-    {
-      "type": "range",
-      "id": "cta_text_size",
-      "label": "CTA text size",
-      "min": 12,
-      "max": 20,
-      "step": 1,
-      "unit": "px",
-      "default": 16
+      "label": "Button link"
     },
     {
       "type": "color",
       "id": "cta_bg_color",
-      "label": "CTA background color",
+      "label": "Button color",
       "default": "#ffc600"
     },
     {
       "type": "color",
       "id": "cta_text_color",
-      "label": "CTA text color",
+      "label": "Button text color",
       "default": "#141414"
-    },
-    {
-      "type": "color",
-      "id": "cta_hover_bg_color",
-      "label": "CTA hover background",
-      "default": "#e9b217"
     }
   ],
   "presets": [
