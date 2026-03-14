@@ -1,0 +1,344 @@
+/**
+ * Fixatech Header — CSS Overrides
+ * Theme: Shopify Horizon v3.2.1
+ *
+ * Strategy: Additive overrides using CSS specificity.
+ *   DO NOT modify base Horizon files.
+ *   All values reference Fixatech CSS custom properties from
+ *   fixatech-variables.css.liquid (loaded globally).
+ *
+ * Sections:
+ *   1. Main Header (120px height, 3-col: logo / search / account+cart)
+ *   2. Hide Horizon Default Menu (Accueil, Catalogue, Contact)
+ *   3. Search Bar (pill, centered)
+ *   4. Account Button (outlined pill with "Mon compte" text)
+ *   5. Cart Bubble (white bg / dark text)
+ *   6. Sub-Navigation Bar (60px, sticky)
+ *   7. Responsive Overrides
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   1. MAIN HEADER — 120px height
+   ═══════════════════════════════════════════════════════════════ */
+
+header-component.header {
+  z-index: 100;
+}
+
+#header-component .header__row--top {
+  min-height: var(--fixatech-header-height); /* 120px */
+  padding-block: 0;
+}
+
+#header-component .header__row--top .header__columns {
+  min-height: var(--fixatech-header-height);
+}
+
+#header-component .header__row--top .header__column {
+  display: flex;
+  align-items: center;
+}
+
+/* Hide the empty navigation bar row (Horizon renders it even when empty) */
+#header-component .header__navigation-bar-row {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. HIDE HORIZON DEFAULT MENU
+   ═══════════════════════════════════════════════════════════════
+   The Accueil / Catalogue / Contact links are replaced by
+   our fixatech-subnav bar. Hide the Horizon menu entirely.  */
+
+#header-component header-menu.header-menu {
+  display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. SEARCH BAR — center column, pill shape
+   ═══════════════════════════════════════════════════════════════ */
+
+.header__column--center .search-action {
+  width: clamp(240px, 28vw, 400px);
+  flex-shrink: 0;
+}
+
+.header__column--center .search-action .button-unstyled {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  height: var(--fixatech-input-height); /* 42px */
+  padding-inline: 24px;
+  background-color: transparent;
+  border: 0.5px solid var(--fixatech-white);
+  border-radius: var(--fixatech-radius-pill); /* 39.5px */
+  color: var(--fixatech-white);
+  font-family: var(--fixatech-font-body);
+  font-size: var(--fixatech-font-size-body); /* 12px */
+  letter-spacing: 0.02em;
+  cursor: text;
+  transition: var(--fixatech-transition-fast);
+}
+
+.header__column--center .search-action .button-unstyled:hover,
+.header__column--center .search-action .button-unstyled:focus-within {
+  border-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.header__column--center .search-action .button-unstyled:focus-visible {
+  outline: var(--fixatech-focus-outline);
+  outline-offset: var(--fixatech-focus-offset);
+}
+
+/* Show the search text label (Horizon hides it with .hidden utility) */
+.header__column--center .search-action .hidden {
+  display: block !important; /* stylelint-disable-line declaration-no-important */
+  clip: auto !important; /* stylelint-disable-line declaration-no-important */
+  width: auto !important; /* stylelint-disable-line declaration-no-important */
+  height: auto !important; /* stylelint-disable-line declaration-no-important */
+  overflow: visible !important; /* stylelint-disable-line declaration-no-important */
+  position: static !important; /* stylelint-disable-line declaration-no-important */
+  flex: 1;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.7); /* 70% white — placeholder style */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Search icon on the right */
+.header__column--center .search-action .svg-wrapper {
+  display: flex !important; /* stylelint-disable-line declaration-no-important */
+  flex-shrink: 0;
+  color: var(--fixatech-white);
+}
+
+.header__column--center .search-action .svg-wrapper svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. ACCOUNT BUTTON — outlined pill ("Mon compte")
+   ═══════════════════════════════════════════════════════════════ */
+
+.header__column--right .account-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--fixatech-input-height); /* 42px */
+  padding-inline: 16px;
+  border: 1px solid var(--fixatech-white);
+  border-radius: var(--fixatech-radius-pill); /* 39.5px */
+  background: transparent !important; /* stylelint-disable-line declaration-no-important */
+  cursor: pointer;
+  transition: var(--fixatech-transition-fast);
+}
+
+.header__column--right .account-button:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important; /* stylelint-disable-line declaration-no-important */
+}
+
+.header__column--right .account-button:focus-within {
+  outline: var(--fixatech-focus-outline);
+  outline-offset: var(--fixatech-focus-offset);
+}
+
+/* Force-show account text label (Horizon hides it with .hidden class) */
+.header__column--right .account-button .account-button__text.hidden {
+  display: inline !important; /* stylelint-disable-line declaration-no-important */
+  clip: auto !important; /* stylelint-disable-line declaration-no-important */
+  width: auto !important; /* stylelint-disable-line declaration-no-important */
+  height: auto !important; /* stylelint-disable-line declaration-no-important */
+  overflow: visible !important; /* stylelint-disable-line declaration-no-important */
+  position: static !important; /* stylelint-disable-line declaration-no-important */
+  color: var(--fixatech-white);
+  font-family: var(--fixatech-font-body);
+  font-size: var(--fixatech-font-size-body); /* 12px */
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* Account icon color */
+.header__column--right .account-button__icon {
+  color: var(--fixatech-white);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. CART BUBBLE — white circle, dark text, 24px diameter
+   ═══════════════════════════════════════════════════════════════ */
+
+.header__column--right .header-actions__cart-icon {
+  --cart-bubble-size: 24px;
+  --cart-bubble-top: 2px;
+  --cart-bubble-right: 0px;
+}
+
+.header__column--right .header-actions__cart-icon .cart-bubble__background {
+  background-color: var(--fixatech-white) !important; /* stylelint-disable-line declaration-no-important */
+  border-radius: 50%;
+}
+
+.header__column--right .header-actions__cart-icon .cart-bubble__text {
+  color: var(--fixatech-background-dark) !important; /* stylelint-disable-line declaration-no-important */
+  font-size: var(--fixatech-font-size-caption) !important; /* 10px, stylelint-disable-line */
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. SUB-NAVIGATION BAR — 60px, sticky below header
+   ═══════════════════════════════════════════════════════════════ */
+
+.fixatech-subnav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--fixatech-subnav-height); /* 60px */
+  background-color: var(--fixatech-background-dark);
+  border-top: 0.5px solid var(--fixatech-border); /* #343434 */
+  position: sticky;
+  top: var(--header-height, var(--fixatech-header-height));
+  z-index: 99;
+}
+
+.fixatech-subnav__list {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fixatech-subnav__item {
+  display: flex;
+  align-items: center;
+}
+
+.fixatech-subnav__link {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  padding: 8px 16px;
+  font-family: var(--fixatech-font-body);
+  font-size: var(--fixatech-font-size-body); /* 12px */
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fixatech-white);
+  text-decoration: none;
+  border-radius: var(--fixatech-radius-pill);
+  transition: var(--fixatech-transition-fast);
+  white-space: nowrap;
+}
+
+.fixatech-subnav__link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--fixatech-gold-underline); /* #B9930D */
+  text-underline-offset: 3px;
+}
+
+/* Active: yellow pill */
+.fixatech-subnav__link--active,
+.fixatech-subnav__link[aria-current='page'] {
+  background-color: var(--fixatech-primary); /* #FFC600 */
+  color: var(--fixatech-background-dark); /* #141414 */
+  text-decoration: none;
+}
+
+.fixatech-subnav__link--active:hover,
+.fixatech-subnav__link[aria-current='page']:hover {
+  background-color: var(--fixatech-primary-hover); /* #E9B217 */
+  text-decoration: none;
+}
+
+.fixatech-subnav__link:focus-visible {
+  outline: var(--fixatech-focus-outline);
+  outline-offset: var(--fixatech-focus-offset);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. RESPONSIVE OVERRIDES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Tablet (768px – 1511px) ─────────────────────────────── */
+@media screen and (max-width: 1511px) {
+  .fixatech-subnav__list {
+    gap: 24px;
+  }
+
+  .header__column--center .search-action {
+    width: clamp(200px, 22vw, 340px);
+  }
+}
+
+/* ─── Mobile (max 767px) ──────────────────────────────────── */
+@media screen and (max-width: 767px) {
+  .fixatech-subnav {
+    display: none;
+  }
+
+  .header__column--center .search-action {
+    display: none;
+  }
+
+  #header-component .header__row--top {
+    min-height: 72px;
+  }
+
+  #header-component .header__row--top .header__columns {
+    min-height: 72px;
+  }
+
+  /* ── Mobile header: replace Horizon's complex grid with simple flexbox ──
+     Layout: [hamburger] [logo centered] [account + cart]                   */
+  #header-component .header__row--top .header__columns {
+    display: flex !important; /* stylelint-disable-line declaration-no-important */
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 16px;
+  }
+
+  /* Left column: just hamburger */
+  #header-component .header__column--left {
+    flex: 0 0 auto;
+    gap: 10px !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  /* Hide search icon on mobile — search is in the drawer */
+  .header__column--left .search-action--hidden-on-menu {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  /* Hide the logo from the left column; we want it centered */
+  .header__column--left .header-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Center column: hidden on mobile */
+  #header-component .header__column--center {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  /* Right column: account + cart, flush right */
+  #header-component .header__column--right {
+    flex: 0 0 auto;
+  }
+
+  /* Hide account button text on mobile, keep icon only */
+  .header__column--right .account-button .account-button__text.hidden {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  /* Simplify account button on mobile — icon only, no pill border */
+  .header__column--right .account-button {
+    border: none;
+    padding-inline: 8px;
+    height: auto;
+  }
+}

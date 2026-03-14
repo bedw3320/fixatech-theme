@@ -1,0 +1,350 @@
+{%- liquid
+  assign heading = section.settings.heading
+  assign description = section.settings.description
+  assign cta_text = section.settings.cta_text
+  assign cta_url = section.settings.cta_url
+  assign bg_image = section.settings.background_image
+  assign overlay_opacity = section.settings.overlay_opacity | divided_by: 100.0
+-%}
+
+{% style %}
+  .fixatech-hero--{{ section.id }} {
+    {% if bg_image != blank %}
+      background-image: url('{{ bg_image | image_url: width: 3024 }}');
+    {% endif %}
+    --hero-overlay-opacity: {{ overlay_opacity }};
+  }
+{% endstyle %}
+
+<div class="fixatech-hero fixatech-hero--{{ section.id }}">
+  <div class="fixatech-hero__overlay" aria-hidden="true"></div>
+
+  <div class="fixatech-hero__container">
+    <div class="fixatech-hero__content">
+      {%- if heading != blank -%}
+        <h1 class="fixatech-hero__heading">{{ heading }}</h1>
+      {%- endif -%}
+
+      {%- if description != blank -%}
+        <p class="fixatech-hero__description">{{ description }}</p>
+      {%- endif -%}
+
+      {%- if cta_text != blank and cta_url != blank -%}
+        {% render 'fixatech-button',
+          text: cta_text,
+          url: cta_url,
+          style: 'primary',
+          arrow: true
+        %}
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="fixatech-hero__grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'showcase_image' -%}
+            <div class="fixatech-hero__grid-item" role="listitem" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                {%- assign img_alt = block.settings.image_alt | default: block.settings.image.alt | default: heading -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 778
+                  | image_tag:
+                    class: 'fixatech-hero__grid-img',
+                    loading: 'eager',
+                    widths: '389, 500, 778',
+                    sizes: '(max-width: 767px) calc(100vw - 48px), (max-width: 1511px) 30vw, 389px',
+                    alt: img_alt
+                }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'fixatech-hero__grid-placeholder' }}
+              {%- endif -%}
+
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="fixatech-hero__grid-link" aria-label="{{ img_alt }}"></a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  /* ─── Fixatech Hero Section ────────────────────────────────── */
+  .fixatech-hero {
+    position: relative;
+    width: 100%;
+    min-height: var(--fixatech-section-height, 982px);
+    background-color: var(--fixatech-background-dark, #141414);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .fixatech-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, var(--hero-overlay-opacity, 0.7));
+    z-index: 1;
+  }
+
+  /* ─── Container ────────────────────────────────────────────── */
+  .fixatech-hero__container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--fixatech-container-width, 1512px);
+    margin: 0 auto;
+    padding: 0 var(--fixatech-side-padding, 137px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  /* ─── Content (left side) ──────────────────────────────────── */
+  .fixatech-hero__content {
+    flex: 0 1 auto;
+    max-width: 550px;
+  }
+
+  .fixatech-hero__heading {
+    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
+    font-size: var(--fixatech-font-size-hero, 90px);
+    line-height: var(--fixatech-line-height-heading, 73px);
+    color: var(--fixatech-white, #fff);
+    margin: 0 0 24px;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+
+  .fixatech-hero__description {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: var(--fixatech-font-size-body-lg, 15px);
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: var(--fixatech-white, #fff);
+    line-height: 1.6;
+    margin: 0 0 32px;
+    max-width: 460px;
+  }
+
+  /* ─── Image Grid (right side) ──────────────────────────────── */
+  .fixatech-hero__grid {
+    display: flex;
+    gap: var(--fixatech-spacing-xs, 13px);
+    flex-shrink: 0;
+  }
+
+  .fixatech-hero__grid-item {
+    position: relative;
+    width: 389px;
+    height: 497px;
+    border-radius: var(--fixatech-radius-sm, 13px);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .fixatech-hero__grid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fixatech-hero__grid-placeholder {
+    width: 100%;
+    height: 100%;
+    fill: var(--fixatech-border, #343434);
+  }
+
+  .fixatech-hero__grid-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .fixatech-hero__grid-link:focus-visible {
+    outline: var(--fixatech-focus-outline, 2px solid #FFC600);
+    outline-offset: var(--fixatech-focus-offset, 2px);
+  }
+
+  /* ─── Responsive: Tablet (768px–1511px) ────────────────────── */
+  @media (max-width: 1511px) {
+    .fixatech-hero {
+      min-height: 700px;
+    }
+
+    .fixatech-hero__container {
+      gap: 40px;
+    }
+
+    .fixatech-hero__heading {
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .fixatech-hero__grid-item {
+      width: 260px;
+      height: 332px;
+    }
+
+    .fixatech-hero__content {
+      max-width: 420px;
+    }
+  }
+
+  /* Tablet: hide third image if space is tight */
+  @media (max-width: 1100px) {
+    .fixatech-hero__grid-item:nth-child(3) {
+      display: none;
+    }
+  }
+
+  /* ─── Responsive: Mobile (<768px) ──────────────────────────── */
+  @media (max-width: 767px) {
+    .fixatech-hero {
+      min-height: auto;
+      padding: 60px 0;
+    }
+
+    .fixatech-hero__container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .fixatech-hero__content {
+      max-width: none;
+    }
+
+    .fixatech-hero__heading {
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .fixatech-hero__description {
+      max-width: none;
+      margin-bottom: 24px;
+    }
+
+    .fixatech-hero__grid {
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+    }
+
+    .fixatech-hero__grid-item {
+      width: 280px;
+      height: 358px;
+      scroll-snap-align: start;
+    }
+
+    /* Show all 3 images in scrollable row on mobile */
+    .fixatech-hero__grid-item:nth-child(3) {
+      display: block;
+    }
+  }
+
+  /* ─── Reduced Motion ───────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .fixatech-hero__grid-img {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fixatech Hero",
+  "tag": "section",
+  "class": "fixatech-hero-section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Recommended: 1512×982px or larger."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 70,
+      "unit": "%"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FIXATECH"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Votre partenaire de confiance pour les fixations, l'équipement et les services de réparation."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Magasiner"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "showcase_image",
+      "name": "Showcase image",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended: 389×497px."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text",
+          "info": "Describe the image for accessibility."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fixatech Hero",
+      "blocks": [
+        { "type": "showcase_image" },
+        { "type": "showcase_image" },
+        { "type": "showcase_image" }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": ["index"]
+  }
+}
+{% endschema %}

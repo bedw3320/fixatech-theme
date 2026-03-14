@@ -1,0 +1,279 @@
+{% doc %}
+  Fixatech product card with hover overlay, optional price badge.
+  Dark industrial aesthetic — 0.5px border, 13px radius, zoom on hover.
+
+  @param {object} product - Shopify product object (required)
+  @param {boolean} [show_badge] - Show circular price badge on image
+  @param {string} [badge_position] - 'top-right' | 'center' (default: 'top-right')
+  @param {boolean} [show_vendor] - Show vendor/brand line (default: false)
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'fixatech-product-card', product: product, show_badge: false %}
+{% enddoc %}
+
+{%- liquid
+  assign show_badge = show_badge | default: false
+  assign badge_position = badge_position | default: 'top-right'
+  assign show_vendor = show_vendor | default: false
+  assign card_class = class | default: ''
+  assign featured_image = product.featured_image
+  assign price = product.price
+  assign compare_price = product.compare_at_price
+  assign on_sale = false
+  if compare_price > price
+    assign on_sale = true
+  endif
+-%}
+
+<article class="fixatech-card{% if card_class != '' %} {{ card_class }}{% endif %}">
+  <a href="{{ product.url }}" class="fixatech-card__link" aria-label="{{ product.title }}">
+
+    {%- comment -%} Image + overlay {%- endcomment -%}
+    <div class="fixatech-card__media">
+      {%- if featured_image != blank -%}
+        {{
+          featured_image
+          | image_url: width: 630
+          | image_tag:
+            class: 'fixatech-card__img',
+            loading: 'lazy',
+            widths: '315, 420, 630',
+            sizes: '(max-width: 767px) 50vw, 315px'
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'fixatech-card__placeholder' }}
+      {%- endif -%}
+
+      <div class="fixatech-card__overlay" aria-hidden="true">
+        <span class="fixatech-card__overlay-text">{{ 'products.card.view' | t | default: 'Voir le produit' }}</span>
+      </div>
+
+      {%- if show_badge and price > 0 -%}
+        {%- assign price_dollars = price | money_without_trailing_zeros | split: '.' | first | remove: '$' | remove: ',' -%}
+        {%- assign price_cents_raw = price | modulo: 100 -%}
+        {%- assign price_cents = price_cents_raw | prepend: '00' | slice: -2, 2 -%}
+        <div class="fixatech-card__badge fixatech-card__badge--{{ badge_position }}">
+          <span class="fixatech-card__badge-dollars">{{ price_dollars }}</span>
+          <span class="fixatech-card__badge-cents">.{{ price_cents }}$</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Content {%- endcomment -%}
+    <div class="fixatech-card__content">
+      <h3 class="fixatech-card__title">{{ product.title }}</h3>
+
+      {%- if show_vendor and product.vendor != blank -%}
+        <p class="fixatech-card__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <div class="fixatech-card__pricing">
+        <span class="fixatech-card__price{% if on_sale %} fixatech-card__price--sale{% endif %}">
+          {{ price | money }}
+        </span>
+        {%- if on_sale -%}
+          <s class="fixatech-card__compare-price">{{ compare_price | money }}</s>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </a>
+</article>
+
+{% stylesheet %}
+  /* ─── Fixatech Product Card ────────────────────────────────── */
+  .fixatech-card {
+    width: 100%;
+    max-width: 315px;
+    border: 0.5px solid var(--fixatech-border, #343434);
+    border-radius: var(--fixatech-radius-sm, 13px);
+    padding: 17px;
+    background: transparent;
+    transition: var(--fixatech-transition-fast, all 0.2s ease);
+  }
+
+  .fixatech-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ─── Image ────────────────────────────────────────────────── */
+  .fixatech-card__media {
+    position: relative;
+    border-radius: var(--fixatech-radius-sm, 13px);
+    overflow: hidden;
+    aspect-ratio: 1 / 1.1;
+    background: var(--fixatech-background-dark, #141414);
+  }
+
+  .fixatech-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .fixatech-card__placeholder {
+    width: 100%;
+    height: 100%;
+    fill: var(--fixatech-border, #343434);
+  }
+
+  .fixatech-card:hover .fixatech-card__img {
+    transform: scale(1.1);
+  }
+
+  /* ─── Hover Overlay ────────────────────────────────────────── */
+  .fixatech-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--fixatech-overlay-dark, rgba(0, 0, 0, 0.7));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .fixatech-card:hover .fixatech-card__overlay,
+  .fixatech-card__link:focus-visible .fixatech-card__overlay {
+    opacity: 1;
+  }
+
+  .fixatech-card__overlay-text {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: var(--fixatech-font-size-body-lg, 15px);
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: var(--fixatech-white, #fff);
+  }
+
+  /* ─── Price Badge ──────────────────────────────────────────── */
+  .fixatech-card__badge {
+    position: absolute;
+    width: 125.6px;
+    height: 125.6px;
+    border-radius: 50%;
+    background: var(--fixatech-white, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 2;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .fixatech-card__badge--top-right {
+    top: 12px;
+    right: 12px;
+  }
+
+  .fixatech-card__badge--center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .fixatech-card__badge-dollars {
+    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
+    font-size: var(--fixatech-font-size-price, 38px);
+    line-height: 1;
+    color: var(--fixatech-black, #000);
+  }
+
+  .fixatech-card__badge-cents {
+    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
+    font-size: var(--fixatech-font-size-price-cents, 24.51px);
+    line-height: 1;
+    color: var(--fixatech-black, #000);
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  /* ─── Content ──────────────────────────────────────────────── */
+  .fixatech-card__content {
+    padding-top: 12px;
+  }
+
+  .fixatech-card__title {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: var(--fixatech-font-size-body-lg, 15px);
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: var(--fixatech-white, #fff);
+    margin: 0;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .fixatech-card__vendor {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: var(--fixatech-font-size-caption, 10px);
+    color: #999;
+    margin: 4px 0 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .fixatech-card__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .fixatech-card__price {
+    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
+    font-size: var(--fixatech-font-size-h4, 24px);
+    color: var(--fixatech-primary, #FFC600);
+    line-height: 1;
+  }
+
+  .fixatech-card__price--sale {
+    color: var(--fixatech-primary, #FFC600);
+  }
+
+  .fixatech-card__compare-price {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: var(--fixatech-font-size-body, 12px);
+    color: #999;
+    text-decoration: line-through;
+  }
+
+  /* ─── Responsive ───────────────────────────────────────────── */
+  @media (max-width: 767px) {
+    .fixatech-card {
+      max-width: none;
+      padding: 12px;
+    }
+
+    .fixatech-card__badge {
+      width: 90px;
+      height: 90px;
+    }
+
+    .fixatech-card__badge-dollars {
+      font-size: 28px;
+    }
+
+    .fixatech-card__badge-cents {
+      font-size: 18px;
+    }
+  }
+
+  /* ─── Reduced Motion ───────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .fixatech-card__img,
+    .fixatech-card__overlay {
+      transition: none;
+    }
+
+    .fixatech-card:hover .fixatech-card__img {
+      transform: none;
+    }
+  }
+{% endstylesheet %}

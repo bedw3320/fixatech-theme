@@ -1,0 +1,129 @@
+/**
+ * Fixatech Design System — CSS Custom Properties
+ * Theme: Shopify Horizon v3.2.1
+ * Source: discovery/design-system-specification.md
+ *
+ * Color contrast ratios (WCAG):
+ *   White on Dark (#141414):    15.48:1 — AAA ✓
+ *   Yellow on Dark (#FFC600):   10.05:1 — AAA ✓
+ *   Black on Yellow (#FFC600):  11.48:1 — AAA ✓
+ */
+
+:root {
+  /* ─── Brand Colors ────────────────────────────────────────── */
+  --fixatech-primary: {{ settings.color_schemes.scheme-1.settings.primary_button_background | default: '#FFC600' }};
+  --fixatech-primary-hover: #E9B217;
+  --fixatech-gold-underline: #B9930D;
+  --fixatech-background-dark: {{ settings.color_schemes.scheme-1.settings.background | default: '#141414' }};
+  --fixatech-black: #000000;
+  --fixatech-white: #FFFFFF;
+  --fixatech-border: #343434;
+  --fixatech-text-dark: #333333;
+
+  /* ─── Overlay Colors ──────────────────────────────────────── */
+  --fixatech-overlay-light: rgba(255, 255, 255, 0.8);
+  --fixatech-overlay-dark: rgba(0, 0, 0, 0.7);
+
+  /* ─── Custom Fonts (uploaded to assets/ when available) ───── */
+  --fixatech-font-heading: 'Flintstock Round', Inter, Helvetica, Arial, sans-serif;
+  --fixatech-font-body: 'Geist', Inter, Arial, Helvetica, sans-serif;
+  --fixatech-font-weight-medium: 500;
+
+  /* ─── Font Face Declarations (placeholder — activate once    */
+  /*     flintstock-round.woff2 and geist-medium.woff2 are      */
+  /*     uploaded to assets/)                                    */
+  /* @font-face {
+       font-family: 'Flintstock Round';
+       src: url('flintstock-round.woff2') format('woff2'),
+            url('flintstock-round.woff') format('woff');
+       font-weight: normal;
+       font-style: normal;
+       font-display: swap;
+     }
+     @font-face {
+       font-family: 'Geist';
+       src: url('geist-medium.woff2') format('woff2'),
+            url('geist-medium.woff') format('woff');
+       font-weight: 500;
+       font-style: normal;
+       font-display: swap;
+     } */
+
+  /* ─── Typography Scale ────────────────────────────────────── */
+  --fixatech-font-size-hero: 90px;
+  --fixatech-font-size-h2: 60px;
+  --fixatech-font-size-h3: 32px;
+  --fixatech-font-size-h4: 24px;
+  --fixatech-font-size-price: 38px;
+  --fixatech-font-size-price-cents: 24.51px;
+  --fixatech-font-size-body-lg: 15px;
+  --fixatech-font-size-body: 12px;
+  --fixatech-font-size-caption: 10px;
+
+  /* ─── Line Heights ────────────────────────────────────────── */
+  --fixatech-line-height-heading: 73px;
+  --fixatech-line-height-normal: normal;
+
+  /* ─── Spacing (8px base unit) ─────────────────────────────── */
+  --fixatech-spacing-xxs: 10px;
+  --fixatech-spacing-xs: 13px;
+  --fixatech-spacing-sm: 26px;
+  --fixatech-spacing-md: 27px;
+  --fixatech-spacing-lg: 137px;
+  --fixatech-spacing-xl: 234px;
+
+  /* ─── Border Radius ───────────────────────────────────────── */
+  --fixatech-radius-sm: 13px;
+  --fixatech-radius-pill: 39.5px;
+
+  /* ─── Transitions ─────────────────────────────────────────── */
+  --fixatech-transition-base: all 0.3s ease-in-out;
+  --fixatech-transition-fast: all 0.2s ease;
+
+  /* ─── Layout Dimensions ───────────────────────────────────── */
+  --fixatech-container-width: 1512px;
+  --fixatech-content-width: 1238px;
+  --fixatech-side-padding: 137px;
+
+  /* ─── Component Sizes ─────────────────────────────────────── */
+  --fixatech-header-height: 120px;
+  --fixatech-subnav-height: 60px;
+  --fixatech-input-height: 42px;
+  --fixatech-section-height: 982px;
+
+  /* ─── Focus Styles (WCAG 2.1 AA) ─────────────────────────── */
+  --fixatech-focus-outline: 2px solid #FFC600;
+  --fixatech-focus-offset: 2px;
+}
+
+/* ─── Responsive: Tablet (768px–1511px) ────────────────────── */
+@media (max-width: 1511px) {
+  :root {
+    --fixatech-font-size-hero: 60px;
+    --fixatech-font-size-h2: 48px;
+    --fixatech-side-padding: 48px;
+  }
+}
+
+/* ─── Responsive: Mobile (<768px) ──────────────────────────── */
+@media (max-width: 767px) {
+  :root {
+    --fixatech-font-size-hero: 48px;
+    --fixatech-font-size-h2: 36px;
+    --fixatech-side-padding: 24px;
+  }
+}
+
+/* ─── Global Focus Styles ───────────────────────────────────── */
+:focus-visible {
+  outline: var(--fixatech-focus-outline);
+  outline-offset: var(--fixatech-focus-offset);
+}
+
+/* ─── Prefers Reduced Motion ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fixatech-transition-base: none;
+    --fixatech-transition-fast: none;
+  }
+}

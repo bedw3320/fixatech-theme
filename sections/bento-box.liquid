@@ -1,0 +1,549 @@
+{%- liquid
+  assign brand_image        = section.settings.brand_image
+  assign store_image        = section.settings.store_image
+  assign contest_image      = section.settings.contest_image
+  assign button_text        = section.settings.button_text
+  assign button_url         = section.settings.button_url
+  assign promo_title_image  = section.settings.promo_title_image
+  assign promo_product_image = section.settings.promo_product_image
+  assign promo_price        = section.settings.promo_price
+  assign promo_price_cents  = section.settings.promo_price_cents
+  assign promo_bg_color     = section.settings.promo_bg_color
+  assign section_width      = section.settings.section_width
+-%}
+
+{% style %}
+  .bento-box--{{ section.id }} {
+    --promo-bg: {{ promo_bg_color }};
+    {% render 'spacing-style', settings: section.settings %}
+  }
+{% endstyle %}
+
+<div class="bento-box bento-box--{{ section.id }}">
+  <div class="bento-box__inner {% if section_width == 'full-width' %}bento-box__inner--full{% else %}page-width{% endif %}">
+    <div class="bento-box__grid">
+
+      {%- comment -%} ── LEFT COLUMN ─────────────────────────────────────── {%- endcomment -%}
+      <div class="bento-box__left">
+
+        {%- comment -%} Top row: brand card + store photo {%- endcomment -%}
+        <div class="bento-box__top-row">
+
+          {%- comment -%} Brand card {%- endcomment -%}
+          <div class="bento-box__brand-card">
+            {%- if brand_image != blank -%}
+              {{
+                brand_image
+                | image_url: width: 762
+                | image_tag:
+                  class: 'bento-box__brand-img',
+                  loading: 'lazy',
+                  widths: '381, 762',
+                  sizes: '381px',
+                  alt: brand_image.alt | default: 'Brand image'
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'bento-box__brand-img bento-box__placeholder' }}
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Store photo {%- endcomment -%}
+          <div class="bento-box__store-card">
+            {%- if store_image != blank -%}
+              {{
+                store_image
+                | image_url: width: 900
+                | image_tag:
+                  class: 'bento-box__store-img',
+                  loading: 'lazy',
+                  widths: '450, 900',
+                  sizes: '(max-width: 767px) 100vw, 50vw',
+                  alt: store_image.alt | default: 'Store photo'
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'bento-box__store-img bento-box__placeholder' }}
+            {%- endif -%}
+          </div>
+
+        </div>{%- comment -%} /.bento-box__top-row {%- endcomment -%}
+
+        {%- comment -%} Contest / bottom photo {%- endcomment -%}
+        <div class="bento-box__contest-card">
+          {%- if contest_image != blank -%}
+            {{
+              contest_image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'bento-box__contest-img',
+                loading: 'lazy',
+                widths: '600, 900, 1200',
+                sizes: '(max-width: 767px) 100vw, 60vw',
+                alt: contest_image.alt | default: 'Contest photo'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'bento-box__contest-img bento-box__placeholder' }}
+          {%- endif -%}
+
+          <div class="bento-box__overlay" aria-hidden="true"></div>
+
+          {%- if button_text != blank -%}
+            <a
+              href="{{ button_url | default: '#' }}"
+              class="bento-box__cta"
+              {% if button_url == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- button_text -}}
+              <span class="bento-box__cta-arrow" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.167 10h11.666M10.833 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          {%- endif -%}
+        </div>
+
+      </div>{%- comment -%} /.bento-box__left {%- endcomment -%}
+
+      {%- comment -%} ── RIGHT COLUMN — Promo panel ──────────────────────── {%- endcomment -%}
+      <div class="bento-box__promo">
+
+        {%- if promo_title_image != blank -%}
+          {{
+            promo_title_image
+            | image_url: width: 471
+            | image_tag:
+              class: 'bento-box__promo-title',
+              loading: 'lazy',
+              widths: '235, 471',
+              sizes: '(max-width: 767px) 80vw, 235px',
+              alt: promo_title_image.alt | default: 'Promotion de la semaine'
+          }}
+        {%- else -%}
+          <p class="bento-box__promo-title-fallback">Promotion de la semaine</p>
+        {%- endif -%}
+
+        {%- if promo_product_image != blank -%}
+          {{
+            promo_product_image
+            | image_url: width: 471
+            | image_tag:
+              class: 'bento-box__promo-product',
+              loading: 'lazy',
+              widths: '235, 471',
+              sizes: '(max-width: 767px) 80vw, 235px',
+              alt: promo_product_image.alt | default: 'Produit en promotion'
+          }}
+        {%- else -%}
+          {{ 'product-5' | placeholder_svg_tag: 'bento-box__promo-product bento-box__placeholder' }}
+        {%- endif -%}
+
+        {%- if promo_price != blank -%}
+          <div class="bento-box__price-badge" aria-label="{{ promo_price }}.{{ promo_price_cents | default: '00' }} $">
+            <span class="bento-box__price-whole">{{ promo_price }}</span>
+            <span class="bento-box__price-cents">.{{ promo_price_cents | default: '00' }}&nbsp;$</span>
+          </div>
+        {%- endif -%}
+
+      </div>{%- comment -%} /.bento-box__promo {%- endcomment -%}
+
+    </div>{%- comment -%} /.bento-box__grid {%- endcomment -%}
+  </div>
+</div>
+
+{% stylesheet %}
+/* ─── Bento Box Section ─────────────────────────────────────── */
+.bento-box {
+  background-color: var(--color-background, #fff);
+}
+
+.bento-box__inner {
+  margin: 0 auto;
+}
+
+.bento-box__inner--full {
+  width: 100%;
+  padding-inline: 0;
+}
+
+/* ─── Two-column grid ───────────────────────────────────────── */
+.bento-box__grid {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* ─── Left column ───────────────────────────────────────────── */
+.bento-box__left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ─── Top row (brand + store) ───────────────────────────────── */
+.bento-box__top-row {
+  display: flex;
+  gap: 16px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.bento-box__brand-card {
+  position: relative;
+  width: 381px;
+  flex-shrink: 0;
+  background: #141414;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bento-box__brand-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bento-box__store-card {
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.bento-box__store-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Contest / bottom photo ────────────────────────────────── */
+.bento-box__contest-card {
+  flex: 1;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.bento-box__contest-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bento-box__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* ─── CTA button ────────────────────────────────────────────── */
+.bento-box__cta {
+  position: absolute;
+  bottom: 27px;
+  left: 37px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border: 1px solid #fff;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  font-family: Geist, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.bento-box__cta:hover,
+.bento-box__cta:focus-visible {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.bento-box__cta:focus-visible {
+  outline: 2px solid #FFC600;
+  outline-offset: 2px;
+}
+
+.bento-box__cta-arrow {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ─── Right column — Promo panel ────────────────────────────── */
+.bento-box__promo {
+  aspect-ratio: 471 / 696;
+  background: var(--promo-bg, #FFC600);
+  border-radius: 13px;
+  padding: 32px 16px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bento-box__promo-title {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.bento-box__promo-title-fallback {
+  font-family: Geist, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #141414;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bento-box__promo-product {
+  display: block;
+  width: 100%;
+  height: auto;
+  flex: 1;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Price badge ───────────────────────────────────────────── */
+.bento-box__price-badge {
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  z-index: 2;
+  background: #141414;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Geist, sans-serif;
+  line-height: 1;
+}
+
+.bento-box__price-whole {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.bento-box__price-cents {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ─── Placeholder SVGs ──────────────────────────────────────── */
+.bento-box__placeholder {
+  width: 100%;
+  height: 100%;
+  fill: #343434;
+  display: block;
+}
+
+/* ─── Responsive: tablet (≤ 1100px) ────────────────────────── */
+@media (max-width: 1100px) {
+  .bento-box__brand-card {
+    width: 260px;
+  }
+}
+
+/* ─── Responsive: mobile (< 768px) ─────────────────────────── */
+@media (max-width: 767px) {
+  .bento-box__grid {
+    flex-direction: column;
+  }
+
+  .bento-box__left {
+    width: 100%;
+  }
+
+  .bento-box__top-row {
+    height: 200px;
+  }
+
+  .bento-box__brand-card {
+    width: 50%;
+  }
+
+  .bento-box__contest-card {
+    min-height: 260px;
+  }
+
+  .bento-box__cta {
+    bottom: 16px;
+    left: 16px;
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .bento-box__promo {
+    aspect-ratio: auto;
+    height: 300px;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  .bento-box__price-badge {
+    width: 64px;
+    height: 64px;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .bento-box__price-whole {
+    font-size: 22px;
+  }
+
+  .bento-box__price-cents {
+    font-size: 10px;
+  }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bento-box__cta {
+    transition: none;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bento Box",
+  "tag": "section",
+  "class": "bento-box-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left column — Top row"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Brand / graphic image",
+      "info": "Appears in the dark card (top-left). Recommended: 381×280px."
+    },
+    {
+      "type": "image_picker",
+      "id": "store_image",
+      "label": "Store photo",
+      "info": "Fills the remaining width of the top row. Recommended: 16:9."
+    },
+    {
+      "type": "header",
+      "content": "Left column — Contest photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "contest_image",
+      "label": "Contest / people photo",
+      "info": "Large photo with dark overlay. Recommended: 16:9 or wider."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Participer au concours Milwaukee"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Right column — Promo panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_title_image",
+      "label": "Promo title image",
+      "info": "Stylized "Promotion de la semaine" image. Recommended: 439×100px."
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_product_image",
+      "label": "Product image",
+      "info": "The featured promotional product. Recommended: 439×400px, transparent PNG."
+    },
+    {
+      "type": "text",
+      "id": "promo_price",
+      "label": "Price (whole number)",
+      "default": "139"
+    },
+    {
+      "type": "text",
+      "id": "promo_price_cents",
+      "label": "Price (cents)",
+      "default": "00"
+    },
+    {
+      "type": "color",
+      "id": "promo_bg_color",
+      "label": "Promo panel background color",
+      "default": "#FFC600"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        { "value": "page-width", "label": "Page width" },
+        { "value": "full-width", "label": "Full width" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bento Box"
+    }
+  ]
+}
+{% endschema %}

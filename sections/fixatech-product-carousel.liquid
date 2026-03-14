@@ -1,0 +1,464 @@
+{% doc %}
+  Fixatech product carousel — horizontal scroll with snap behavior.
+  5 cards on desktop, 3 on tablet, 1 on mobile. Custom nav arrows + dot indicators.
+
+  Uses fixatech-product-card snippet for each product.
+  Collection-based: picks products from a selected collection.
+
+  @example
+  Add via index.json or theme customizer.
+{% enddoc %}
+
+{%- liquid
+  assign collection_handle = section.settings.collection
+  assign heading = section.settings.heading
+  assign cta_text = section.settings.cta_text
+  assign cta_url = section.settings.cta_url
+  assign show_badge = section.settings.show_badge
+  assign max_products = section.settings.max_products | default: 10
+  assign products = collections[collection_handle].products
+-%}
+
+<section
+  class="fixatech-carousel fixatech-carousel--{{ section.id }}"
+  aria-label="{{ heading | default: 'Produits vedettes' }}"
+  data-fixatech-carousel
+>
+  {%- if heading != blank -%}
+    <div class="fixatech-carousel__header">
+      <h2 class="fixatech-carousel__heading">{{ heading }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="fixatech-carousel__viewport">
+    {%- comment -%} Navigation arrows {%- endcomment -%}
+    <button
+      class="fixatech-carousel__arrow fixatech-carousel__arrow--prev"
+      aria-label="{{ 'sections.carousel.previous' | t | default: 'Précédent' }}"
+      data-carousel-prev
+      disabled
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <button
+      class="fixatech-carousel__arrow fixatech-carousel__arrow--next"
+      aria-label="{{ 'sections.carousel.next' | t | default: 'Suivant' }}"
+      data-carousel-next
+    >
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    {%- comment -%} Scrollable track {%- endcomment -%}
+    <div class="fixatech-carousel__track" data-carousel-track>
+      {%- if products.size > 0 -%}
+        {%- for product in products limit: max_products -%}
+          <div class="fixatech-carousel__slide">
+            {% render 'fixatech-product-card', product: product, show_badge: show_badge %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Placeholder cards for empty / editor preview {%- endcomment -%}
+        {%- for i in (1..5) -%}
+          <div class="fixatech-carousel__slide">
+            <article class="fixatech-card">
+              <div class="fixatech-card__link">
+                <div class="fixatech-card__media">
+                  {{ 'product-1' | placeholder_svg_tag: 'fixatech-card__placeholder' }}
+                </div>
+                <div class="fixatech-card__content">
+                  <h3 class="fixatech-card__title">{{ 'sections.carousel.placeholder_title' | t | default: 'Produit exemple' }}</h3>
+                  <div class="fixatech-card__pricing">
+                    <span class="fixatech-card__price">$0.00</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} Dot indicators {%- endcomment -%}
+  <div class="fixatech-carousel__dots" data-carousel-dots aria-label="{{ 'sections.carousel.pagination' | t | default: 'Navigation du carrousel' }}">
+    {%- comment -%} Dots are injected via JS based on visible card count {%- endcomment -%}
+  </div>
+
+  {%- comment -%} CTA button {%- endcomment -%}
+  {%- if cta_text != blank -%}
+    <div class="fixatech-carousel__cta">
+      {% render 'fixatech-button', text: cta_text, url: cta_url, style: 'primary', arrow: true %}
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  /* ─── Fixatech Product Carousel ────────────────────────────── */
+  .fixatech-carousel {
+    padding: 60px var(--fixatech-side-padding, 137px);
+    max-width: var(--fixatech-container-width, 1512px);
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ─── Header ───────────────────────────────────────────────── */
+  .fixatech-carousel__header {
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .fixatech-carousel__heading {
+    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
+    font-size: var(--fixatech-font-size-h2, 60px);
+    color: var(--fixatech-white, #fff);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  /* ─── Viewport (contains arrows + track) ───────────────────── */
+  .fixatech-carousel__viewport {
+    position: relative;
+  }
+
+  /* ─── Track ────────────────────────────────────────────────── */
+  .fixatech-carousel__track {
+    display: flex;
+    gap: var(--fixatech-spacing-xs, 13px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .fixatech-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ─── Slide ────────────────────────────────────────────────── */
+  .fixatech-carousel__slide {
+    flex: 0 0 calc((100% - 13px * 4) / 5);
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+
+  .fixatech-carousel__slide .fixatech-card {
+    max-width: none;
+  }
+
+  /* ─── Navigation Arrows ────────────────────────────────────── */
+  .fixatech-carousel__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--fixatech-white, #fff);
+    color: var(--fixatech-black, #000);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--fixatech-transition-fast, all 0.2s ease);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .fixatech-carousel__arrow:hover {
+    background: var(--fixatech-primary, #FFC600);
+    color: var(--fixatech-black, #000);
+  }
+
+  .fixatech-carousel__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .fixatech-carousel__arrow:focus-visible {
+    outline: var(--fixatech-focus-outline, 2px solid #FFC600);
+    outline-offset: var(--fixatech-focus-offset, 2px);
+  }
+
+  .fixatech-carousel__arrow--prev {
+    left: -24px;
+  }
+
+  .fixatech-carousel__arrow--next {
+    right: -24px;
+  }
+
+  /* ─── Dot Indicators ───────────────────────────────────────── */
+  .fixatech-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .fixatech-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: var(--fixatech-border, #343434);
+    cursor: pointer;
+    transition: var(--fixatech-transition-fast, all 0.2s ease);
+  }
+
+  .fixatech-carousel__dot:hover {
+    background: #666;
+  }
+
+  .fixatech-carousel__dot--active {
+    background: var(--fixatech-white, #fff);
+  }
+
+  .fixatech-carousel__dot:focus-visible {
+    outline: var(--fixatech-focus-outline, 2px solid #FFC600);
+    outline-offset: var(--fixatech-focus-offset, 2px);
+  }
+
+  /* ─── CTA ──────────────────────────────────────────────────── */
+  .fixatech-carousel__cta {
+    text-align: center;
+    margin-top: 32px;
+  }
+
+  /* ─── Responsive: Tablet (768px–1511px) ────────────────────── */
+  @media (max-width: 1511px) {
+    .fixatech-carousel {
+      padding: 48px var(--fixatech-side-padding, 48px);
+    }
+
+    .fixatech-carousel__heading {
+      font-size: var(--fixatech-font-size-h2, 48px);
+    }
+
+    .fixatech-carousel__slide {
+      flex: 0 0 calc((100% - 13px * 2) / 3);
+    }
+
+    .fixatech-carousel__arrow--prev {
+      left: -16px;
+    }
+
+    .fixatech-carousel__arrow--next {
+      right: -16px;
+    }
+  }
+
+  /* ─── Responsive: Mobile (<768px) ──────────────────────────── */
+  @media (max-width: 767px) {
+    .fixatech-carousel {
+      padding: 40px var(--fixatech-side-padding, 24px);
+    }
+
+    .fixatech-carousel__heading {
+      font-size: var(--fixatech-font-size-h2, 36px);
+      margin-bottom: 24px;
+    }
+
+    .fixatech-carousel__slide {
+      flex: 0 0 85%;
+    }
+
+    .fixatech-carousel__arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    .fixatech-carousel__arrow--prev {
+      left: -8px;
+    }
+
+    .fixatech-carousel__arrow--next {
+      right: -8px;
+    }
+  }
+
+  /* ─── Reduced Motion ───────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .fixatech-carousel__track {
+      scroll-behavior: auto;
+    }
+
+    .fixatech-carousel__arrow,
+    .fixatech-carousel__dot {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  /* ─── Fixatech Product Carousel Controller ─────────────────── */
+  (function () {
+    const carousels = document.querySelectorAll('[data-fixatech-carousel]');
+
+    carousels.forEach(function (carousel) {
+      const track = carousel.querySelector('[data-carousel-track]');
+      const prevBtn = carousel.querySelector('[data-carousel-prev]');
+      const nextBtn = carousel.querySelector('[data-carousel-next]');
+      const dotsContainer = carousel.querySelector('[data-carousel-dots]');
+      const slides = track.querySelectorAll('.fixatech-carousel__slide');
+
+      if (!track || slides.length === 0) return;
+
+      /* ── Helpers ──────────────────────────────────────────── */
+      function getVisibleCount() {
+        var w = window.innerWidth;
+        if (w < 768) return 1;
+        if (w < 1512) return 3;
+        return 5;
+      }
+
+      function getPageCount() {
+        var visible = getVisibleCount();
+        return Math.ceil(slides.length / visible);
+      }
+
+      function getCurrentPage() {
+        var slideWidth = slides[0].offsetWidth + 13; /* gap */
+        var scrollPos = track.scrollLeft;
+        var visible = getVisibleCount();
+        return Math.round(scrollPos / (slideWidth * visible));
+      }
+
+      /* ── Dot Creation ────────────────────────────────────── */
+      function buildDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        var pages = getPageCount();
+        if (pages <= 1) return;
+
+        for (var i = 0; i < pages; i++) {
+          var dot = document.createElement('button');
+          dot.className = 'fixatech-carousel__dot' + (i === 0 ? ' fixatech-carousel__dot--active' : '');
+          dot.setAttribute('aria-label', 'Page ' + (i + 1));
+          dot.dataset.page = i;
+          dot.addEventListener('click', function () {
+            scrollToPage(parseInt(this.dataset.page, 10));
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      /* ── Scroll To Page ──────────────────────────────────── */
+      function scrollToPage(page) {
+        var visible = getVisibleCount();
+        var slideWidth = slides[0].offsetWidth + 13;
+        track.scrollTo({ left: page * visible * slideWidth, behavior: 'smooth' });
+      }
+
+      /* ── Update State ────────────────────────────────────── */
+      function updateState() {
+        var page = getCurrentPage();
+        var pages = getPageCount();
+
+        /* Arrows */
+        if (prevBtn) prevBtn.disabled = page <= 0;
+        if (nextBtn) nextBtn.disabled = page >= pages - 1;
+
+        /* Dots */
+        if (dotsContainer) {
+          var dots = dotsContainer.querySelectorAll('.fixatech-carousel__dot');
+          dots.forEach(function (dot, i) {
+            dot.classList.toggle('fixatech-carousel__dot--active', i === page);
+          });
+        }
+      }
+
+      /* ── Event Listeners ─────────────────────────────────── */
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+          var page = getCurrentPage();
+          if (page > 0) scrollToPage(page - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+          var page = getCurrentPage();
+          if (page < getPageCount() - 1) scrollToPage(page + 1);
+        });
+      }
+
+      var scrollTimer;
+      track.addEventListener('scroll', function () {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateState, 100);
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        buildDots();
+        updateState();
+      });
+
+      /* ── Init ─────────────────────────────────────────────── */
+      buildDots();
+      updateState();
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Fixatech — Carrousel produits",
+  "tag": "section",
+  "class": "fixatech-section fixatech-section--carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Produits vedettes"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show price badge",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA button text",
+      "default": "Voir tous les produits"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fixatech — Carrousel produits"
+    }
+  ]
+}
+{% endschema %}

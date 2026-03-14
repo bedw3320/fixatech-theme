@@ -1,0 +1,139 @@
+{% comment %}
+  @param {string}  id           - Input ID (required — also sets label's for= attribute)
+  @param {string}  name         - Form field name
+  @param {string}  type         - Input type: 'text' | 'email' | 'password' | 'tel' | 'search' (default: 'text')
+  @param {string}  label        - Label text (shown above input)
+  @param {string}  placeholder  - Placeholder text
+  @param {boolean} required     - Whether the field is required (default: false)
+  @param {string}  value        - Pre-filled value (optional)
+  @param {string}  autocomplete - Autocomplete attribute value (optional)
+  @param {string}  class        - Additional CSS classes for the wrapper
+  @param {boolean} hide_label   - Visually hide the label (still accessible; default: false)
+{% endcomment %}
+
+{%- liquid
+  assign input_type  = type   | default: 'text'
+  assign input_class = class  | default: ''
+  assign is_required = required | default: false
+-%}
+
+<div class="fixatech-field{% if input_class != '' %} {{ input_class }}{% endif %}">
+  {%- if label != blank -%}
+    <label
+      for="{{ id }}"
+      class="fixatech-field__label{% if hide_label %} visually-hidden{% endif %}"
+    >
+      {{ label }}
+      {%- if is_required %}<span class="fixatech-field__required" aria-hidden="true"> *</span>{%- endif -%}
+    </label>
+  {%- endif -%}
+
+  <input
+    id="{{ id }}"
+    name="{{ name | default: id }}"
+    type="{{ input_type }}"
+    class="fixatech-field__input"
+    {%- if placeholder != blank %} placeholder="{{ placeholder }}"{% endif %}
+    {%- if value != blank %} value="{{ value }}"{% endif %}
+    {%- if autocomplete != blank %} autocomplete="{{ autocomplete }}"{% endif %}
+    {%- if is_required %} required aria-required="true"{% endif %}
+  >
+</div>
+
+{% stylesheet %}
+  /* ─── Fixatech Field Wrapper ───────────────────────────────── */
+  .fixatech-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* ─── Label ────────────────────────────────────────────────── */
+  .fixatech-field__label {
+    font-family: var(--fixatech-font-body, 'Geist', Arial, sans-serif);
+    font-size: var(--fixatech-font-size-body-lg, 15px);
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: currentColor;
+    line-height: var(--fixatech-line-height-normal, normal);
+  }
+
+  .fixatech-field__required {
+    color: #FFC600;
+  }
+
+  /* ─── Input ────────────────────────────────────────────────── */
+  .fixatech-field__input {
+    display: block;
+    width: 100%;
+    height: var(--fixatech-input-height, 42px);
+    padding: 0 24px;
+    border-radius: var(--fixatech-radius-pill, 39.5px);
+    font-family: var(--fixatech-font-body, 'Geist', Arial, sans-serif);
+    font-size: var(--fixatech-font-size-body-lg, 15px);
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    background-color: var(--fixatech-overlay-light, rgba(255, 255, 255, 0.8));
+    color: #141414;
+    border: none;
+    outline: none;
+    transition: var(--fixatech-transition-fast, all 0.2s ease);
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .fixatech-field__input::placeholder {
+    color: #141414;
+    opacity: 0.6;
+  }
+
+  .fixatech-field__input:focus,
+  .fixatech-field__input:focus-visible {
+    outline: 2px solid #FFC600;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+
+  .fixatech-field__input:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* ─── Variant: On dark backgrounds (solid white input) ─────── */
+  .fixatech-field--dark .fixatech-field__input {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 0.5px solid #ffffff;
+  }
+
+  .fixatech-field--dark .fixatech-field__input::placeholder {
+    color: #ffffff;
+    opacity: 0.6;
+  }
+
+  .fixatech-field--dark .fixatech-field__input:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* ─── Variant: Outlined (explicit border) ──────────────────── */
+  .fixatech-field--outlined .fixatech-field__input {
+    background-color: transparent;
+    border: 0.5px solid currentColor;
+    color: inherit;
+  }
+
+  .fixatech-field--outlined .fixatech-field__input::placeholder {
+    opacity: 0.6;
+  }
+
+  /* ─── Visually hidden (accessible label hiding) ────────────── */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+{% endstylesheet %}

@@ -1,0 +1,135 @@
+{% comment %}
+  @param {string} text    - Button label text
+  @param {string} url     - Link destination (required for <a>, omit for <button>)
+  @param {string} style   - 'primary' | 'secondary' | 'outlined'  (default: 'primary')
+  @param {boolean} arrow  - Show → arrow prefix (default: true)
+  @param {string} type    - Button type attribute: 'button' | 'submit' (default: 'button')
+  @param {string} class   - Additional CSS classes
+  @param {string} aria_label - Override aria-label (optional)
+{% endcomment %}
+
+{%- liquid
+  assign btn_style  = style  | default: 'primary'
+  assign btn_arrow  = arrow  | default: true
+  assign btn_type   = type   | default: 'button'
+  assign btn_class  = class  | default: ''
+-%}
+
+{%- capture btn_content -%}
+  {%- if btn_arrow != false and btn_arrow != 'false' -%}
+    <span class="fixatech-btn__arrow" aria-hidden="true">→</span>
+  {%- endif -%}
+  <span class="fixatech-btn__text">{{ text }}</span>
+{%- endcapture -%}
+
+{%- if url != blank -%}
+  <a
+    href="{{ url }}"
+    class="fixatech-btn fixatech-btn--{{ btn_style }}{% if btn_class != '' %} {{ btn_class }}{% endif %}"
+    {%- if aria_label != blank %} aria-label="{{ aria_label }}"{% endif %}
+  >
+    {{ btn_content }}
+  </a>
+{%- else -%}
+  <button
+    type="{{ btn_type }}"
+    class="fixatech-btn fixatech-btn--{{ btn_style }}{% if btn_class != '' %} {{ btn_class }}{% endif %}"
+    {%- if aria_label != blank %} aria-label="{{ aria_label }}"{% endif %}
+  >
+    {{ btn_content }}
+  </button>
+{%- endif -%}
+
+{% stylesheet %}
+  /* ─── Fixatech Button Base ─────────────────────────────────── */
+  .fixatech-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 26px;
+    border-radius: var(--fixatech-radius-pill, 39.5px);
+    font-family: var(--fixatech-font-body, 'Geist', Arial, sans-serif);
+    font-size: var(--fixatech-font-size-body, 12px);
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0.5px solid transparent;
+    transition: var(--fixatech-transition-fast, all 0.2s ease);
+    white-space: nowrap;
+  }
+
+  .fixatech-btn:focus-visible {
+    outline: var(--fixatech-focus-outline, 2px solid #FFC600);
+    outline-offset: var(--fixatech-focus-offset, 2px);
+  }
+
+  .fixatech-btn:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .fixatech-btn__arrow {
+    font-style: normal;
+    line-height: 1;
+  }
+
+  /* ─── Primary: Yellow CTA ──────────────────────────────────── */
+  .fixatech-btn--primary {
+    background-color: #FFC600;
+    color: #141414;
+    border-color: #FFC600;
+  }
+
+  .fixatech-btn--primary:hover,
+  .fixatech-btn--primary:focus-visible {
+    background-color: #E9B217;
+    border-color: #E9B217;
+    color: #141414;
+    transform: scale(1.05);
+  }
+
+  .fixatech-btn--primary:active {
+    background-color: #B9930D;
+    border-color: #B9930D;
+    transform: scale(1);
+  }
+
+  /* ─── Secondary: Black ─────────────────────────────────────── */
+  .fixatech-btn--secondary {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+
+  .fixatech-btn--secondary:hover,
+  .fixatech-btn--secondary:focus-visible {
+    background-color: #1a1a1a;
+    border-color: #1a1a1a;
+    color: #ffffff;
+    opacity: 0.9;
+  }
+
+  .fixatech-btn--secondary:active {
+    background-color: #333333;
+    transform: scale(0.98);
+  }
+
+  /* ─── Outlined: Transparent with White Border ──────────────── */
+  .fixatech-btn--outlined {
+    background-color: transparent;
+    color: #ffffff;
+    border-color: #ffffff;
+    border-width: 0.5px;
+  }
+
+  .fixatech-btn--outlined:hover,
+  .fixatech-btn--outlined:focus-visible {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+
+  .fixatech-btn--outlined:active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+{% endstylesheet %}

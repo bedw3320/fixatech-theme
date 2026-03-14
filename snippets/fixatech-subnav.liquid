@@ -1,0 +1,110 @@
+{%- doc -%}
+  Fixatech Sub-Navigation Bar
+  Renders a sticky 60px navigation bar directly below the main header.
+  This is a Fixatech-custom addition — not part of Horizon's default header.
+
+  Sits inside #header-group in theme.liquid so Horizon's JS includes
+  its height in --header-group-height for correct content offset.
+
+  Active state: compares request.path against each link URL.
+  Translation keys live in the `fixatech.subnav` namespace.
+
+  @example
+  {% render 'fixatech-subnav' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign current_path = request.path | downcase
+
+  comment
+    Build active-state flags by comparing the current URL path.
+    "shop"         → any collection or product page
+    "pro_corner"   → /pages/b2b-pro (or its locale-prefixed variant)
+    "repair"       → /pages/service-reparation
+    "gift_card"    → /products/carte-cadeau or /collections/carte-cadeau
+  endcomment
+
+  assign shop_active        = false
+  assign pro_corner_active  = false
+  assign repair_active      = false
+  assign gift_card_active   = false
+
+  if request.page_type == 'collection' or request.page_type == 'product'
+    assign shop_active = true
+  endif
+
+  if current_path contains '/pages/b2b-pro'
+    assign pro_corner_active = true
+  endif
+
+  if current_path contains '/pages/service-reparation'
+    assign repair_active = true
+  endif
+
+  if current_path contains '/products/carte-cadeau' or current_path contains '/collections/carte-cadeau'
+    assign gift_card_active = true
+  endif
+
+  comment
+    Build the nav item URLs using routes.root_url so they are
+    locale-aware (e.g. /fr/ prefix for French-primary store).
+  endcomment
+  assign shop_url       = routes.root_url | append: 'collections/all'
+  assign pro_corner_url = routes.root_url | append: 'pages/b2b-pro'
+  assign repair_url     = routes.root_url | append: 'pages/service-reparation'
+  assign gift_card_url  = routes.root_url | append: 'products/carte-cadeau'
+-%}
+
+<nav
+  class="fixatech-subnav"
+  aria-label="{{ 'fixatech.subnav.nav_label' | t }}"
+  id="fixatech-subnav"
+>
+  <ul class="fixatech-subnav__list" role="list">
+
+    {%- comment -%} ── MAGASINER ── {%- endcomment -%}
+    <li class="fixatech-subnav__item">
+      <a
+        href="{{ shop_url }}"
+        class="fixatech-subnav__link{% if shop_active %} fixatech-subnav__link--active{% endif %}"
+        {% if shop_active %}aria-current="page"{% endif %}
+      >
+        {{- 'fixatech.subnav.shop' | t -}}
+      </a>
+    </li>
+
+    {%- comment -%} ── LE COIN DES PROS ── {%- endcomment -%}
+    <li class="fixatech-subnav__item">
+      <a
+        href="{{ pro_corner_url }}"
+        class="fixatech-subnav__link{% if pro_corner_active %} fixatech-subnav__link--active{% endif %}"
+        {% if pro_corner_active %}aria-current="page"{% endif %}
+      >
+        {{- 'fixatech.subnav.pro_corner' | t -}}
+      </a>
+    </li>
+
+    {%- comment -%} ── SERVICE DE RÉPARATION ── {%- endcomment -%}
+    <li class="fixatech-subnav__item">
+      <a
+        href="{{ repair_url }}"
+        class="fixatech-subnav__link{% if repair_active %} fixatech-subnav__link--active{% endif %}"
+        {% if repair_active %}aria-current="page"{% endif %}
+      >
+        {{- 'fixatech.subnav.repair_service' | t -}}
+      </a>
+    </li>
+
+    {%- comment -%} ── CARTE-CADEAU ── {%- endcomment -%}
+    <li class="fixatech-subnav__item">
+      <a
+        href="{{ gift_card_url }}"
+        class="fixatech-subnav__link{% if gift_card_active %} fixatech-subnav__link--active{% endif %}"
+        {% if gift_card_active %}aria-current="page"{% endif %}
+      >
+        {{- 'fixatech.subnav.gift_card' | t -}}
+      </a>
+    </li>
+
+  </ul>
+</nav>
