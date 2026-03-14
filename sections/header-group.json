@@ -87,7 +87,7 @@
         "show_search": true,
         "search_position": "center",
         "search_row": "top",
-        "show_country": true,
+        "show_country": false,
         "country_selector_style": false,
         "show_language": true,
         "localization_font": "heading",
