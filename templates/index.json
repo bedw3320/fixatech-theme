@@ -111,8 +111,8 @@
         "cta_text_color": "#141414",
         "cell_c_width_pct": 35,
         "cell_d_height_pct": 60,
-        "section_height": "large",
-        "section_height_custom": 60,
+        "section_height": "custom",
+        "section_height_custom": 75,
         "section_width": "page-width",
         "padding-block-start": 0,
         "padding-block-end": 0
