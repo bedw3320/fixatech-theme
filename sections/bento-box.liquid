@@ -1,15 +1,14 @@
 {%- liquid
-  assign brand_image        = section.settings.brand_image
-  assign store_image        = section.settings.store_image
-  assign contest_image      = section.settings.contest_image
-  assign button_text        = section.settings.button_text
-  assign button_url         = section.settings.button_url
-  assign promo_title_image  = section.settings.promo_title_image
+  assign brand_image         = section.settings.brand_image
+  assign store_image         = section.settings.store_image
+  assign contest_image       = section.settings.contest_image
+  assign button_text         = section.settings.button_text
+  assign button_url          = section.settings.button_url
+  assign promo_title_image   = section.settings.promo_title_image
   assign promo_product_image = section.settings.promo_product_image
-  assign promo_price        = section.settings.promo_price
-  assign promo_price_cents  = section.settings.promo_price_cents
-  assign promo_bg_color     = section.settings.promo_bg_color
-  assign section_width      = section.settings.section_width
+  assign promo_price         = section.settings.promo_price
+  assign promo_price_cents   = section.settings.promo_price_cents
+  assign promo_bg_color      = section.settings.promo_bg_color
 -%}
 
 {% style %}
@@ -20,8 +19,7 @@
 {% endstyle %}
 
 <div class="bento-box bento-box--{{ section.id }}">
-  <div class="bento-box__inner {% if section_width == 'full-width' %}bento-box__inner--full{% else %}page-width{% endif %}">
-    <div class="bento-box__grid">
+  <div class="bento-box__grid">
 
       {%- comment -%} ── LEFT COLUMN ─────────────────────────────────────── {%- endcomment -%}
       <div class="bento-box__left">
@@ -147,7 +145,6 @@
       </div>{%- comment -%} /.bento-box__promo {%- endcomment -%}
 
     </div>{%- comment -%} /.bento-box__grid {%- endcomment -%}
-  </div>
 </div>
 
 {% stylesheet %}
@@ -155,15 +152,6 @@
 .bento-box {
   background-color: var(--color-background, #fff);
   width: 100%; /* fill Horizon's section-content-wrapper flex row */
-}
-
-.bento-box__inner {
-  margin: 0 auto;
-}
-
-.bento-box__inner--full {
-  width: 100%;
-  padding-inline: 0;
 }
 
 /* ─── Two-column grid ───────────────────────────────────────── */
@@ -421,18 +409,6 @@
   }
 }
 
-/* ─── Wide desktop (> 1420px) — proportional growth ────────── */
-@media (min-width: 1421px) {
-  .bento-box__grid {
-    aspect-ratio: 1233 / 596;
-  }
-
-  .bento-box__promo {
-    aspect-ratio: auto;
-    flex: 0 0 38%;
-  }
-}
-
 /* ─── Reduced motion ────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .bento-box__cta {
@@ -520,17 +496,7 @@
     },
     {
       "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "section_width",
-      "label": "Section width",
-      "options": [
-        { "value": "page-width", "label": "Page width" },
-        { "value": "full-width", "label": "Full width" }
-      ],
-      "default": "page-width"
+      "content": "Spacing"
     },
     {
       "type": "range",
