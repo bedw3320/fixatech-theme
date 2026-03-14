@@ -134,13 +134,13 @@
         "ai_gen_block_3e4a040_byg94P"
       ],
       "settings": {
-        "content_direction": "row",
+        "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
+        "horizontal_alignment": "center",
         "vertical_alignment": "center",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "space-between",
         "gap": 12,
         "section_width": "page-width",
         "section_height": "",
