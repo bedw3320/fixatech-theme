@@ -26,13 +26,13 @@
       aspect-ratio: 16 / 7;
     {% elsif section.settings.section_height == 'custom' %}
       aspect-ratio: auto;
-      min-height: {{ section.settings.section_height_custom }}svh;
+      height: {{ section.settings.section_height_custom }}svh;
     {% elsif section.settings.section_height == 'full-screen' %}
       aspect-ratio: auto;
-      min-height: 100svh;
+      height: 100svh;
     {% else %}
       aspect-ratio: auto;
-      min-height: var(--section-height-{{ section.settings.section_height }});
+      height: var(--section-height-{{ section.settings.section_height }});
     {% endif %}
   }
 {% endstyle %}
