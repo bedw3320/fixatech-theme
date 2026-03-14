@@ -91,57 +91,23 @@
         "padding-block-end": 72
       }
     },
-    "177351976724cde3f0": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_3e4a040_byg94P": {
-          "type": "ai_gen_block_3e4a040",
-          "settings": {
-            "cell_a_heading": "ON EST LÀ POUR ÇA",
-            "cell_a_text": "",
-            "cell_a_bg_color": "#141414",
-            "cell_a_text_color": "#ffffff",
-            "cell_b_image": "shopify://shop_images/481174788_1139671901283098_7998003288883320964_n_1.png",
-            "cell_c_heading": "Featured Product",
-            "cell_c_subtext": "Limited edition",
-            "cell_c_price": "$99",
-            "cell_c_bg_color": "#ffc600",
-            "cell_c_text_color": "#141414",
-            "cell_d_cta_text": "Shop Now",
-            "cell_d_cta_link": "",
-            "cta_bg_color": "#ffc600",
-            "cta_text_color": "#141414"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_3e4a040_byg94P"
-      ],
+    "bento_hero_main": {
+      "type": "bento-hero",
       "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
+        "cell_a_heading": "ON EST LÀ POUR ÇA",
+        "cell_a_text": "",
+        "cell_a_bg_color": "#141414",
+        "cell_a_text_color": "#ffffff",
+        "cell_b_image": "shopify://shop_images/481174788_1139671901283098_7998003288883320964_n_1.png",
+        "cell_c_heading": "Featured Product",
+        "cell_c_subtext": "Limited edition",
+        "cell_c_price": "$99",
+        "cell_c_bg_color": "#ffc600",
+        "cell_c_text_color": "#141414",
+        "cell_d_cta_text": "Shop Now",
+        "cell_d_cta_link": "",
+        "cta_bg_color": "#ffc600",
+        "cta_text_color": "#141414",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -343,7 +309,7 @@
   },
   "order": [
     "hero_jVaWmY",
-    "177351976724cde3f0",
+    "bento_hero_main",
     "product_list_fa6P9H"
   ]
 }

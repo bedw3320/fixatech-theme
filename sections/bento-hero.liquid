@@ -1,0 +1,499 @@
+{%- liquid
+  assign cell_a_heading       = section.settings.cell_a_heading
+  assign cell_a_text          = section.settings.cell_a_text
+  assign cell_b_image         = section.settings.cell_b_image
+  assign cell_c_heading       = section.settings.cell_c_heading
+  assign cell_c_subtext       = section.settings.cell_c_subtext
+  assign cell_c_product_image = section.settings.cell_c_product_image
+  assign cell_c_price         = section.settings.cell_c_price
+  assign cell_d_image         = section.settings.cell_d_image
+  assign cell_d_cta_text      = section.settings.cell_d_cta_text
+  assign cell_d_cta_link      = section.settings.cell_d_cta_link
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    {% render 'spacing-style', settings: section.settings %}
+  }
+
+  .bento-hero--{{ section.id }} {
+    --cell-a-bg:    {{ section.settings.cell_a_bg_color }};
+    --cell-a-color: {{ section.settings.cell_a_text_color }};
+    --cell-c-bg:    {{ section.settings.cell_c_bg_color }};
+    --cell-c-color: {{ section.settings.cell_c_text_color }};
+    --cta-bg:       {{ section.settings.cta_bg_color }};
+    --cta-color:    {{ section.settings.cta_text_color }};
+  }
+{% endstyle %}
+
+<div class="bento-hero bento-hero--{{ section.id }}">
+  <div class="page-width">
+    <div class="bento-hero__grid">
+
+      {%- comment -%} ── Cell A — Text card ─────────────────────────── {%- endcomment -%}
+      <div class="bento-hero__cell bento-hero__cell-a">
+        <div class="bento-hero__cell-a-content">
+          {%- if cell_a_heading != blank -%}
+            <h2 class="bento-hero__cell-a-heading">{{ cell_a_heading }}</h2>
+          {%- endif -%}
+          {%- if cell_a_text != blank -%}
+            <p class="bento-hero__cell-a-text">{{ cell_a_text }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ── Cell B — Photo ─────────────────────────────── {%- endcomment -%}
+      <div class="bento-hero__cell bento-hero__cell-b">
+        {%- if cell_b_image != blank -%}
+          {{
+            cell_b_image
+            | image_url: width: 800
+            | image_tag:
+              class: 'bento-hero__cell-b-img',
+              loading: 'lazy',
+              widths: '400, 800',
+              sizes: '(max-width: 749px) 100vw, 33vw',
+              alt: cell_b_image.alt | default: ''
+          }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ── Cell C — Promo panel (spans both rows) ──────── {%- endcomment -%}
+      <div class="bento-hero__cell bento-hero__cell-c">
+        <div class="bento-hero__cell-c-text">
+          {%- if cell_c_heading != blank -%}
+            <h3 class="bento-hero__cell-c-heading">{{ cell_c_heading }}</h3>
+          {%- endif -%}
+          {%- if cell_c_subtext != blank -%}
+            <p class="bento-hero__cell-c-subtext">{{ cell_c_subtext }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="bento-hero__cell-c-product">
+          {%- if cell_c_product_image != blank -%}
+            {{
+              cell_c_product_image
+              | image_url: width: 600
+              | image_tag:
+                class: 'bento-hero__cell-c-product-img',
+                loading: 'lazy',
+                widths: '300, 600',
+                sizes: '(max-width: 749px) 80vw, 25vw',
+                alt: cell_c_product_image.alt | default: ''
+            }}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+          {%- endif -%}
+        </div>
+
+        {%- if cell_c_price != blank -%}
+          <div class="bento-hero__price-badge">{{ cell_c_price }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ── Cell D — Wide photo + CTA ───────────────────── {%- endcomment -%}
+      <div class="bento-hero__cell bento-hero__cell-d">
+        {%- if cell_d_image != blank -%}
+          {{
+            cell_d_image
+            | image_url: width: 1200
+            | image_tag:
+              class: 'bento-hero__cell-d-img',
+              loading: 'lazy',
+              widths: '600, 900, 1200',
+              sizes: '(max-width: 749px) 100vw, 66vw',
+              alt: cell_d_image.alt | default: ''
+          }}
+        {%- else -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+        {%- endif -%}
+
+        <div class="bento-hero__cell-d-overlay" aria-hidden="true"></div>
+
+        {%- if cell_d_cta_text != blank -%}
+          <a
+            href="{{ cell_d_cta_link | default: '#' }}"
+            class="bento-hero__cta"
+            {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
+          >
+            {{- cell_d_cta_text -}}
+            <svg class="bento-hero__cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+/* ── Bento Hero Section ──────────────────────────────────────────
+   The .page-width class (applied by Horizon) handles max-width,
+   padding-inline, and margin: auto. The grid inside fills 100% of
+   that container and scales proportionally via aspect-ratio.
+   ─────────────────────────────────────────────────────────────── */
+
+.bento-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+  /* Proportional height — grows with section width, no fixed height */
+  aspect-ratio: 16 / 7;
+}
+
+/* ── Shared cell styles ─────────────────────────────────────── */
+.bento-hero__cell {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ── Cell A — Text card ─────────────────────────────────────── */
+.bento-hero__cell-a {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: var(--cell-a-bg, #141414);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
+}
+
+.bento-hero__cell-a-content {
+  text-align: center;
+  color: var(--cell-a-color, #fff);
+}
+
+.bento-hero__cell-a-heading {
+  font-size: 32px;
+  margin: 0 0 12px;
+  color: var(--cell-a-color, #fff);
+}
+
+.bento-hero__cell-a-text {
+  font-size: 16px;
+  margin: 0;
+  color: var(--cell-a-color, #fff);
+}
+
+/* ── Cell B — Photo ─────────────────────────────────────────── */
+.bento-hero__cell-b {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.bento-hero__cell-b-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Cell C — Promo panel (spans both rows) ─────────────────── */
+.bento-hero__cell-c {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  background-color: var(--cell-c-bg, #ffc600);
+  display: flex;
+  flex-direction: column;
+  padding: 40px 30px;
+}
+
+.bento-hero__cell-c-text {
+  color: var(--cell-c-color, #141414);
+  margin-bottom: 20px;
+}
+
+.bento-hero__cell-c-heading {
+  font-size: 28px;
+  margin: 0 0 12px;
+  color: var(--cell-c-color, #141414);
+}
+
+.bento-hero__cell-c-subtext {
+  font-size: 14px;
+  margin: 0;
+  color: var(--cell-c-color, #141414);
+}
+
+.bento-hero__cell-c-product {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.bento-hero__cell-c-product-img {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.bento-hero__price-badge {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #141414;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffc600;
+}
+
+/* ── Cell D — Wide photo + CTA ──────────────────────────────── */
+.bento-hero__cell-d {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+.bento-hero__cell-d-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bento-hero__cell-d-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  pointer-events: none;
+}
+
+/* ── CTA button ─────────────────────────────────────────────── */
+.bento-hero__cta {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background-color: var(--cta-bg, #ffc600);
+  color: var(--cta-color, #141414);
+  text-decoration: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: filter 0.2s ease;
+}
+
+.bento-hero__cta:hover {
+  filter: brightness(0.85);
+}
+
+.bento-hero__cta-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Placeholder SVGs ───────────────────────────────────────── */
+.bento-hero__placeholder {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: #343434;
+}
+
+/* ── Tablet (≤ 989px) ───────────────────────────────────────── */
+@media screen and (max-width: 989px) {
+  .bento-hero__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    aspect-ratio: auto;
+  }
+
+  .bento-hero__cell-a { grid-column: 1; grid-row: 1; min-height: 250px; }
+  .bento-hero__cell-b { grid-column: 2; grid-row: 1; min-height: 250px; }
+  .bento-hero__cell-c { grid-column: 1 / -1; grid-row: 2; min-height: 400px; }
+  .bento-hero__cell-d { grid-column: 1 / -1; grid-row: 3; min-height: 300px; }
+}
+
+/* ── Mobile (≤ 749px) ───────────────────────────────────────── */
+@media screen and (max-width: 749px) {
+  .bento-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bento-hero__cell-a { grid-column: 1; grid-row: 1; padding: 30px 20px; }
+  .bento-hero__cell-b { grid-column: 1; grid-row: 2; }
+  .bento-hero__cell-c { grid-column: 1; grid-row: 3; padding: 30px 20px; }
+  .bento-hero__cell-d { grid-column: 1; grid-row: 4; }
+
+  .bento-hero__cell-a-heading { font-size: 22px; }
+  .bento-hero__cell-c-heading { font-size: 20px; }
+
+  .bento-hero__price-badge {
+    width: 64px;
+    height: 64px;
+    font-size: 14px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .bento-hero__cta {
+    bottom: 20px;
+    left: 20px;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bento hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Cell A — Text card"
+    },
+    {
+      "type": "text",
+      "id": "cell_a_heading",
+      "label": "Heading",
+      "default": "New Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "cell_a_text",
+      "label": "Subtext"
+    },
+    {
+      "type": "color",
+      "id": "cell_a_bg_color",
+      "label": "Background color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "cell_a_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Cell B — Photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_b_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Cell C — Promo panel"
+    },
+    {
+      "type": "text",
+      "id": "cell_c_heading",
+      "label": "Heading",
+      "default": "Promotion de la semaine"
+    },
+    {
+      "type": "textarea",
+      "id": "cell_c_subtext",
+      "label": "Subtext"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_c_product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "cell_c_price",
+      "label": "Price badge (e.g. $99)",
+      "default": "$99"
+    },
+    {
+      "type": "color",
+      "id": "cell_c_bg_color",
+      "label": "Background color",
+      "default": "#ffc600"
+    },
+    {
+      "type": "color",
+      "id": "cell_c_text_color",
+      "label": "Text color",
+      "default": "#141414"
+    },
+    {
+      "type": "header",
+      "content": "Cell D — Wide photo + CTA"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_d_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "cell_d_cta_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cell_d_cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "Button color",
+      "default": "#ffc600"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "Button text color",
+      "default": "#141414"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 0,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bento hero"
+    }
+  ]
+}
+{% endschema %}
