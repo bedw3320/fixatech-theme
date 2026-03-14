@@ -27,7 +27,7 @@
 {% endstyle %}
 
 <div class="bento-hero bento-hero--{{ section.id }}">
-  <div class="page-width">
+  <div class="{% if section.settings.section_width == 'page-width' %}page-width{% endif %}">
     <div class="bento-hero__grid">
 
       {%- comment -%} ── Cell A — Text card ─────────────────────────── {%- endcomment -%}
@@ -464,6 +464,20 @@
       "id": "cta_text_color",
       "label": "Button text color",
       "default": "#141414"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        { "value": "page-width", "label": "Page width" },
+        { "value": "full-width", "label": "Full width" }
+      ],
+      "default": "page-width"
     },
     {
       "type": "header",

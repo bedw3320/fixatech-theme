@@ -108,6 +108,7 @@
         "cell_d_cta_link": "",
         "cta_bg_color": "#ffc600",
         "cta_text_color": "#141414",
+        "section_width": "page-width",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
