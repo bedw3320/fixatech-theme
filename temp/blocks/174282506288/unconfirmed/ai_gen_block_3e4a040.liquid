@@ -1,6 +1,725 @@
+{% doc %}
+  @prompt
+    A Bento Hero section, can be page or full width, composed of 2-row × 3-column CSS grid. Unequal columns: left two are roughly equal (1fr 1fr), right column is wider (1.3fr). Rows are equal height. Gap ~8px. All cells border-radius:
+      12px, overflow: hidden.
+    
+      grid-template-columns: 1fr 1fr 1.3fr
+      grid-template-rows: 1fr 1fr
+      gap: 8px
+    
+      Cell placement
+    
+      ┌──────┬────────────────────────────────────────┐
+      │ Cell │               Placement                │
+      ├──────┼────────────────────────────────────────┤
+      │ A    │ col 1 / row 1                          │
+      ├──────┼────────────────────────────────────────┤
+      │ B    │ col 2 / row 1                          │
+      ├──────┼────────────────────────────────────────┤
+      │ C    │ col 3 / rows 1–2 (grid-row: span 2)    │
+      ├──────┼────────────────────────────────────────┤
+      │ D    │ cols 1–2 / row 2 (grid-column: span 2) │
+      └──────┴────────────────────────────────────────┘
+    
+      Cell types
+    
+      A — Solid dark bg, vertically + horizontally centered text block. No image.
+    
+      B — Full-bleed <img> / background-image, object-fit: cover. No overlay, no text.
+    
+      C — Solid brand-color bg (yellow). Top: text block. Middle: product <img> centered. Bottom-right: absolutely positioned circular price badge.
+    
+      D — Full-bleed <img> / background-image, object-fit: cover. Linear gradient overlay from transparent → rgba(0,0,0,0.5) bottom-up. Bottom-left: absolutely positioned pill CTA
+      button with icon.
+    
+      Each cell is position: relative. C and D have absolutely positioned children.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-bento-hero-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    {% if block.settings.container_width == 'page' %}
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    {% endif %}
+  }
+
+  .ai-bento-hero-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr;
+    grid-template-rows: 1fr 1fr;
+    gap: {{ block.settings.grid_gap }}px;
+    min-height: {{ block.settings.grid_height }}px;
+  }
+
+  .ai-bento-hero-cell-{{ ai_gen_id }} {
+    position: relative;
+    border-radius: {{ block.settings.cell_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-bento-hero-cell-a-{{ ai_gen_id }} {
+    grid-column: 1;
+    grid-row: 1;
+    background-color: {{ block.settings.cell_a_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 30px;
+  }
+
+  .ai-bento-hero-cell-a-content-{{ ai_gen_id }} {
+    text-align: center;
+    color: {{ block.settings.cell_a_text_color }};
+  }
+
+  .ai-bento-hero-cell-a-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.cell_a_heading_size }}px;
+    margin: 0 0 12px;
+    color: {{ block.settings.cell_a_text_color }};
+  }
+
+  .ai-bento-hero-cell-a-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.cell_a_text_size }}px;
+    margin: 0;
+    color: {{ block.settings.cell_a_text_color }};
+  }
+
+  .ai-bento-hero-cell-b-{{ ai_gen_id }} {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .ai-bento-hero-cell-b-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-bento-hero-cell-b-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-bento-hero-cell-b-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-bento-hero-cell-c-{{ ai_gen_id }} {
+    grid-column: 3;
+    grid-row: span 2;
+    background-color: {{ block.settings.cell_c_bg_color }};
+    display: flex;
+    flex-direction: column;
+    padding: 40px 30px;
+  }
+
+  .ai-bento-hero-cell-c-text-{{ ai_gen_id }} {
+    color: {{ block.settings.cell_c_text_color }};
+    margin-bottom: 20px;
+  }
+
+  .ai-bento-hero-cell-c-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.cell_c_heading_size }}px;
+    margin: 0 0 12px;
+    color: {{ block.settings.cell_c_text_color }};
+  }
+
+  .ai-bento-hero-cell-c-subtext-{{ ai_gen_id }} {
+    font-size: {{ block.settings.cell_c_text_size }}px;
+    margin: 0;
+    color: {{ block.settings.cell_c_text_color }};
+  }
+
+  .ai-bento-hero-cell-c-product-{{ ai_gen_id }} {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .ai-bento-hero-cell-c-product-image-{{ ai_gen_id }} {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+  }
+
+  .ai-bento-hero-cell-c-product-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-bento-hero-cell-c-product-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-bento-hero-cell-c-badge-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: {{ block.settings.price_badge_size }}px;
+    height: {{ block.settings.price_badge_size }}px;
+    border-radius: 50%;
+    background-color: {{ block.settings.price_badge_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: {{ block.settings.price_badge_text_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.price_badge_text_color }};
+  }
+
+  .ai-bento-hero-cell-d-{{ ai_gen_id }} {
+    grid-column: span 2;
+    grid-row: 2;
+  }
+
+  .ai-bento-hero-cell-d-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-bento-hero-cell-d-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-bento-hero-cell-d-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 200px;
+  }
+
+  .ai-bento-hero-cell-d-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, {{ block.settings.overlay_opacity }}), transparent);
+    pointer-events: none;
+  }
+
+  .ai-bento-hero-cell-d-cta-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background-color: {{ block.settings.cta_bg_color }};
+    color: {{ block.settings.cta_text_color }};
+    text-decoration: none;
+    border-radius: 100px;
+    font-size: {{ block.settings.cta_text_size }}px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-bento-hero-cell-d-cta-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.cta_hover_bg_color }};
+  }
+
+  .ai-bento-hero-cell-d-cta-icon-{{ ai_gen_id }} {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-bento-hero-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      min-height: auto;
+    }
+
+    .ai-bento-hero-cell-a-{{ ai_gen_id }} {
+      grid-column: 1;
+      grid-row: 1;
+      min-height: 250px;
+    }
+
+    .ai-bento-hero-cell-b-{{ ai_gen_id }} {
+      grid-column: 2;
+      grid-row: 1;
+      min-height: 250px;
+    }
+
+    .ai-bento-hero-cell-c-{{ ai_gen_id }} {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      min-height: 400px;
+    }
+
+    .ai-bento-hero-cell-d-{{ ai_gen_id }} {
+      grid-column: 1 / -1;
+      grid-row: 3;
+      min-height: 300px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-bento-hero-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: {{ block.settings.grid_gap | times: 0.75 }}px;
+    }
+
+    .ai-bento-hero-cell-a-{{ ai_gen_id }} {
+      grid-column: 1;
+      grid-row: 1;
+      padding: 30px 20px;
+    }
+
+    .ai-bento-hero-cell-b-{{ ai_gen_id }} {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .ai-bento-hero-cell-c-{{ ai_gen_id }} {
+      grid-column: 1;
+      grid-row: 3;
+      padding: 30px 20px;
+    }
+
+    .ai-bento-hero-cell-d-{{ ai_gen_id }} {
+      grid-column: 1;
+      grid-row: 4;
+    }
+
+    .ai-bento-hero-cell-a-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.cell_a_heading_size | times: 0.7 }}px;
+    }
+
+    .ai-bento-hero-cell-c-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.cell_c_heading_size | times: 0.7 }}px;
+    }
+
+    .ai-bento-hero-cell-c-badge-{{ ai_gen_id }} {
+      width: {{ block.settings.price_badge_size | times: 0.8 }}px;
+      height: {{ block.settings.price_badge_size | times: 0.8 }}px;
+      font-size: {{ block.settings.price_badge_text_size | times: 0.8 }}px;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .ai-bento-hero-cell-d-cta-{{ ai_gen_id }} {
+      bottom: 20px;
+      left: 20px;
+      padding: 12px 24px;
+      font-size: {{ block.settings.cta_text_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<bento-hero-{{ ai_gen_id }} class="ai-bento-hero-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-bento-hero-grid-{{ ai_gen_id }}">
+    <div class="ai-bento-hero-cell-{{ ai_gen_id }} ai-bento-hero-cell-a-{{ ai_gen_id }}">
+      <div class="ai-bento-hero-cell-a-content-{{ ai_gen_id }}">
+        {% if block.settings.cell_a_heading != blank %}
+          <h2 class="ai-bento-hero-cell-a-heading-{{ ai_gen_id }}">{{ block.settings.cell_a_heading }}</h2>
+        {% endif %}
+        {% if block.settings.cell_a_text != blank %}
+          <p class="ai-bento-hero-cell-a-text-{{ ai_gen_id }}">{{ block.settings.cell_a_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="ai-bento-hero-cell-{{ ai_gen_id }} ai-bento-hero-cell-b-{{ ai_gen_id }}">
+      {% if block.settings.cell_b_image %}
+        <img
+          src="{{ block.settings.cell_b_image | image_url: width: 800 }}"
+          alt="{{ block.settings.cell_b_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.cell_b_image.width }}"
+          height="{{ block.settings.cell_b_image.height }}"
+          class="ai-bento-hero-cell-b-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-bento-hero-cell-b-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-bento-hero-cell-{{ ai_gen_id }} ai-bento-hero-cell-c-{{ ai_gen_id }}">
+      <div class="ai-bento-hero-cell-c-text-{{ ai_gen_id }}">
+        {% if block.settings.cell_c_heading != blank %}
+          <h3 class="ai-bento-hero-cell-c-heading-{{ ai_gen_id }}">{{ block.settings.cell_c_heading }}</h3>
+        {% endif %}
+        {% if block.settings.cell_c_subtext != blank %}
+          <p class="ai-bento-hero-cell-c-subtext-{{ ai_gen_id }}">{{ block.settings.cell_c_subtext }}</p>
+        {% endif %}
+      </div>
+
+      <div class="ai-bento-hero-cell-c-product-{{ ai_gen_id }}">
+        {% if block.settings.cell_c_product_image %}
+          <img
+            src="{{ block.settings.cell_c_product_image | image_url: width: 600 }}"
+            alt="{{ block.settings.cell_c_product_image.alt | escape }}"
+            loading="lazy"
+            width="{{ block.settings.cell_c_product_image.width }}"
+            height="{{ block.settings.cell_c_product_image.height }}"
+            class="ai-bento-hero-cell-c-product-image-{{ ai_gen_id }}"
+          >
+        {% else %}
+          <div class="ai-bento-hero-cell-c-product-placeholder-{{ ai_gen_id }}">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if block.settings.cell_c_price != blank %}
+        <div class="ai-bento-hero-cell-c-badge-{{ ai_gen_id }}">
+          {{ block.settings.cell_c_price }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-bento-hero-cell-{{ ai_gen_id }} ai-bento-hero-cell-d-{{ ai_gen_id }}">
+      {% if block.settings.cell_d_image %}
+        <img
+          src="{{ block.settings.cell_d_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.cell_d_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.cell_d_image.width }}"
+          height="{{ block.settings.cell_d_image.height }}"
+          class="ai-bento-hero-cell-d-image-{{ ai_gen_id }}"
+        >
+      {% else %}
+        <div class="ai-bento-hero-cell-d-placeholder-{{ ai_gen_id }}">
+          {{ 'hero-apparel-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+
+      <div class="ai-bento-hero-cell-d-overlay-{{ ai_gen_id }}"></div>
+
+      {% if block.settings.cell_d_cta_text != blank %}
+        <a
+          href="{{ block.settings.cell_d_cta_link }}"
+          class="ai-bento-hero-cell-d-cta-{{ ai_gen_id }}"
+        >
+          {{ block.settings.cell_d_cta_text }}
+          <svg
+            class="ai-bento-hero-cell-d-cta-icon-{{ ai_gen_id }}"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</bento-hero-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BentoHero{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('bento-hero-{{ ai_gen_id }}', BentoHero{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Bento hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full width"
+        },
+        {
+          "value": "page",
+          "label": "Page width"
+        }
+      ],
+      "default": "page"
+    },
+    {
+      "type": "range",
+      "id": "grid_height",
+      "label": "Grid height",
+      "min": 400,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "cell_border_radius",
+      "label": "Cell border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Cell A"
+    },
+    {
+      "type": "text",
+      "id": "cell_a_heading",
+      "label": "Heading",
+      "default": "New Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "cell_a_text",
+      "label": "Text",
+      "default": "Discover our latest arrivals"
+    },
+    {
+      "type": "range",
+      "id": "cell_a_heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "cell_a_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "cell_a_bg_color",
+      "label": "Background color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "cell_a_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Cell B"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_b_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Cell C"
+    },
+    {
+      "type": "text",
+      "id": "cell_c_heading",
+      "label": "Heading",
+      "default": "Featured Product"
+    },
+    {
+      "type": "textarea",
+      "id": "cell_c_subtext",
+      "label": "Subtext",
+      "default": "Limited edition"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_c_product_image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "cell_c_price",
+      "label": "Price badge text",
+      "default": "$99"
+    },
+    {
+      "type": "range",
+      "id": "cell_c_heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "cell_c_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "cell_c_bg_color",
+      "label": "Background color",
+      "default": "#ffc600"
+    },
+    {
+      "type": "color",
+      "id": "cell_c_text_color",
+      "label": "Text color",
+      "default": "#141414"
+    },
+    {
+      "type": "range",
+      "id": "price_badge_size",
+      "label": "Price badge size",
+      "min": 60,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "price_badge_text_size",
+      "label": "Price badge text size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "price_badge_bg_color",
+      "label": "Price badge background",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "price_badge_text_color",
+      "label": "Price badge text",
+      "default": "#ffc600"
+    },
+    {
+      "type": "header",
+      "content": "Cell D"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_d_image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "text",
+      "id": "cell_d_cta_text",
+      "label": "CTA button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cell_d_cta_link",
+      "label": "CTA button link"
+    },
+    {
+      "type": "range",
+      "id": "cta_text_size",
+      "label": "CTA text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA background color",
+      "default": "#ffc600"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA text color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_bg_color",
+      "label": "CTA hover background",
+      "default": "#e9b217"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bento hero"
+    }
+  ]
+}
 {% endschema %}
