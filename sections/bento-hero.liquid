@@ -22,6 +22,8 @@
     --cta-color:    {{ section.settings.cta_text_color }};
   }
   .bento-hero--{{ section.id }} .bento-hero__grid {
+    --bento-col-c: {{ section.settings.cell_c_width_pct }}%;
+    --bento-row-d: {{ section.settings.cell_d_height_pct }}%;
     {% if section.settings.section_height == 'auto' %}
       aspect-ratio: 16 / 7;
     {% elsif section.settings.section_height == 'custom' %}
@@ -151,8 +153,8 @@
 
 .bento-hero__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.3fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr var(--bento-col-c, 35%);
+  grid-template-rows: 1fr var(--bento-row-d, 50%);
   gap: 8px;
 }
 
@@ -477,6 +479,28 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "cell_c_width_pct",
+      "label": "Box C width (right column)",
+      "info": "Controls the width of box C. Boxes A, B and D adjust to fill the rest.",
+      "min": 15,
+      "max": 55,
+      "step": 5,
+      "default": 35,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "cell_d_height_pct",
+      "label": "Box D height (bottom row)",
+      "info": "Controls the height of box D. Boxes A and B adjust to fill the rest.",
+      "min": 20,
+      "max": 70,
+      "step": 5,
+      "default": 50,
+      "unit": "%"
     },
     {
       "type": "select",
