@@ -104,6 +104,7 @@
         "cell_c_price": "$99",
         "cell_c_bg_color": "#ffc600",
         "cell_c_text_color": "#141414",
+        "cell_d_image": "shopify://shop_images/fc67970a49dbf0ffcce5718caa9a0b8abfca4116.jpg",
         "cell_d_cta_text": "Shop Now",
         "cell_d_cta_link": "",
         "cta_bg_color": "#ffc600",
