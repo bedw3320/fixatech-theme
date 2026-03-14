@@ -170,29 +170,31 @@
   display: flex;
   gap: 16px;
   align-items: stretch;
+  aspect-ratio: 1233 / 596; /* proportional: height tracks width */
 }
 
 /* ─── Left column ───────────────────────────────────────────── */
 .bento-box__left {
-  flex: 1;
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
   min-width: 0;
+  min-height: 0;
 }
 
 /* ─── Top row (brand + store) ───────────────────────────────── */
 .bento-box__top-row {
   display: flex;
   gap: 16px;
-  height: 280px;
-  flex-shrink: 0;
+  flex: 1 1 0; /* proportional — was height: 280px */
+  min-height: 0;
 }
 
 .bento-box__brand-card {
   position: relative;
-  width: 381px;
-  flex-shrink: 0;
+  flex: 1; /* proportional — was width: 381px; flex-shrink: 0 */
+  min-width: 0;
   background: #141414;
   border-radius: 12px;
   overflow: hidden;
@@ -221,11 +223,11 @@
 
 /* ─── Contest / bottom photo ────────────────────────────────── */
 .bento-box__contest-card {
-  flex: 1;
+  flex: 1 1 0; /* proportional — removed min-height: 300px */
+  min-height: 0;
   position: relative;
   border-radius: 12px;
   overflow: hidden;
-  min-height: 300px;
 }
 
 .bento-box__contest-img {
@@ -280,13 +282,13 @@
 
 /* ─── Right column — Promo panel ────────────────────────────── */
 .bento-box__promo {
-  aspect-ratio: 471 / 696;
+  flex: 0 0 38%; /* proportional — was aspect-ratio: 471/696; flex-shrink: 0 */
+  min-height: 0;
   background: var(--promo-bg, #FFC600);
   border-radius: 13px;
   padding: 32px 16px;
   position: relative;
   overflow: hidden;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -361,17 +363,11 @@
   display: block;
 }
 
-/* ─── Responsive: tablet (≤ 1100px) ────────────────────────── */
-@media (max-width: 1100px) {
-  .bento-box__brand-card {
-    width: 260px;
-  }
-}
-
 /* ─── Responsive: mobile (< 768px) ─────────────────────────── */
 @media (max-width: 767px) {
   .bento-box__grid {
     flex-direction: column;
+    aspect-ratio: auto; /* restore auto height in stacked layout */
   }
 
   .bento-box__left {
@@ -379,14 +375,17 @@
   }
 
   .bento-box__top-row {
+    flex: none;
     height: 200px;
   }
 
   .bento-box__brand-card {
+    flex: none;
     width: 50%;
   }
 
   .bento-box__contest-card {
+    flex: none;
     min-height: 260px;
   }
 
@@ -398,10 +397,9 @@
   }
 
   .bento-box__promo {
-    aspect-ratio: auto;
+    flex: none;
     height: 300px;
     width: 100%;
-    flex-shrink: 0;
   }
 
   .bento-box__price-badge {
