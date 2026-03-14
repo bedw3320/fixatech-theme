@@ -97,7 +97,7 @@
         "section_width": "page-width",
         "section_height": "standard",
         "enable_sticky_header": "scroll-up",
-        "divider_width": 3,
+        "divider_width": 1.5,
         "divider_size": "page-width",
         "border_width": 0,
         "actions_display_style": "icon",
