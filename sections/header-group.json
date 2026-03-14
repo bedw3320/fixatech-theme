@@ -36,7 +36,7 @@
         "speed": 5,
         "section_width": "full-width",
         "color_scheme": "scheme-2",
-        "divider_width": 1,
+        "divider_width": 0,
         "padding-block-start": 24,
         "padding-block-end": 24
       }
