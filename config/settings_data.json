@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "current": {
     "logo": "shopify://shop_images/Logo_Blanc_1.png",
     "logo_height": 28,
@@ -76,7 +76,7 @@
     "variant_swatch_height": 34,
     "variant_swatch_radius": 32,
     "variant_button_border_width": 1,
-    "variant_button_radius": 40,
+    "variant_button_radius": 12,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "color_schemes": {
