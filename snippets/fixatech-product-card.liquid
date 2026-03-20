@@ -1,96 +1,156 @@
 {% doc %}
-  Fixatech product card with hover overlay, optional price badge.
-  Dark industrial aesthetic — 0.5px border, 13px radius, zoom on hover.
+  Fixatech product card — light-themed card matching Figma specs.
+  White background with border, works on both dark and light backgrounds.
 
   @param {object} product - Shopify product object (required)
-  @param {boolean} [show_badge] - Show circular price badge on image
-  @param {string} [badge_position] - 'top-right' | 'center' (default: 'top-right')
-  @param {boolean} [show_vendor] - Show vendor/brand line (default: false)
+  @param {boolean} [show_vendor] - Show SKU/code produit line (default: false)
+  @param {boolean} [show_quantity] - Show quantity selector (default: false)
   @param {string} [class] - Additional CSS classes
 
   @example
-  {% render 'fixatech-product-card', product: product, show_badge: false %}
+  {% render 'fixatech-product-card', product: product, show_vendor: true, show_quantity: false %}
 {% enddoc %}
 
 {%- liquid
-  assign show_badge = show_badge | default: false
-  assign badge_position = badge_position | default: 'top-right'
   assign show_vendor = show_vendor | default: false
+  assign show_quantity = show_quantity | default: false
   assign card_class = class | default: ''
   assign featured_image = product.featured_image
-  assign price = product.price
-  assign compare_price = product.compare_at_price
+  assign current_variant = product.selected_or_first_available_variant
+  assign price = current_variant.price | default: product.price
+  assign compare_price = current_variant.compare_at_price | default: product.compare_at_price
   assign on_sale = false
   if compare_price > price
     assign on_sale = true
   endif
+  assign available = product.available
 -%}
 
-<article class="fixatech-card{% if card_class != '' %} {{ card_class }}{% endif %}">
+<article class="fixatech-card{% if card_class != '' %} {{ card_class }}{% endif %}" data-fixatech-card>
   <a href="{{ product.url }}" class="fixatech-card__link" aria-label="{{ product.title }}">
 
-    {%- comment -%} Image + overlay {%- endcomment -%}
+    {%- comment -%} Image area — 316×320 ratio {%- endcomment -%}
     <div class="fixatech-card__media">
       {%- if featured_image != blank -%}
         {{
           featured_image
-          | image_url: width: 630
+          | image_url: width: 632
           | image_tag:
             class: 'fixatech-card__img',
             loading: 'lazy',
-            widths: '315, 420, 630',
-            sizes: '(max-width: 767px) 50vw, 315px'
+            widths: '316, 420, 632',
+            sizes: '(max-width: 767px) 45vw, 316px'
         }}
       {%- else -%}
-        {{ 'product-1' | placeholder_svg_tag: 'fixatech-card__placeholder' }}
+        <div class="fixatech-card__placeholder" aria-hidden="true"></div>
       {%- endif -%}
 
-      <div class="fixatech-card__overlay" aria-hidden="true">
-        <span class="fixatech-card__overlay-text">{{ 'products.card.view' | t | default: 'Voir le produit' }}</span>
-      </div>
-
-      {%- if show_badge and price > 0 -%}
-        {%- assign price_dollars = price | money_without_trailing_zeros | split: '.' | first | remove: '$' | remove: ',' -%}
-        {%- assign price_cents_raw = price | modulo: 100 -%}
-        {%- assign price_cents = price_cents_raw | prepend: '00' | slice: -2, 2 -%}
-        <div class="fixatech-card__badge fixatech-card__badge--{{ badge_position }}">
-          <span class="fixatech-card__badge-dollars">{{ price_dollars }}</span>
-          <span class="fixatech-card__badge-cents">.{{ price_cents }}$</span>
-        </div>
+      {%- comment -%} Promo badge (only when on sale) {%- endcomment -%}
+      {%- if on_sale -%}
+        {%- assign discount_pct = compare_price | minus: price | times: 100.0 | divided_by: compare_price | round -%}
+        <span class="fixatech-card__promo-badge">-{{ discount_pct }}%</span>
       {%- endif -%}
     </div>
 
-    {%- comment -%} Content {%- endcomment -%}
+    {%- comment -%} Content area {%- endcomment -%}
     <div class="fixatech-card__content">
-      <h3 class="fixatech-card__title">{{ product.title }}</h3>
+      <div class="fixatech-card__info">
+        <h3 class="fixatech-card__title">{{ product.title }}</h3>
 
-      {%- if show_vendor and product.vendor != blank -%}
-        <p class="fixatech-card__vendor">{{ product.vendor }}</p>
-      {%- endif -%}
+        {%- if show_vendor and product.vendor != blank -%}
+          <p class="fixatech-card__sku">{{ product.vendor }}</p>
+        {%- endif -%}
 
+        {%- comment -%} Stock status {%- endcomment -%}
+        <div class="fixatech-card__stock">
+          {%- if available -%}
+            <span class="fixatech-card__stock-dot fixatech-card__stock-dot--in" aria-hidden="true"></span>
+            <span class="fixatech-card__stock-text">{{ 'products.card.in_stock' | t | default: 'En stock' }}</span>
+          {%- else -%}
+            <span class="fixatech-card__stock-dot fixatech-card__stock-dot--out" aria-hidden="true"></span>
+            <span class="fixatech-card__stock-text">{{ 'products.card.out_of_stock' | t | default: 'Rupture de stock' }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Pricing {%- endcomment -%}
       <div class="fixatech-card__pricing">
-        <span class="fixatech-card__price{% if on_sale %} fixatech-card__price--sale{% endif %}">
-          {{ price | money }}
-        </span>
+        <span class="fixatech-card__price">{{ price | money }}</span>
         {%- if on_sale -%}
           <s class="fixatech-card__compare-price">{{ compare_price | money }}</s>
         {%- endif -%}
       </div>
     </div>
-
   </a>
+
+  {%- comment -%} Add to cart + quantity (outside the <a> link) {%- endcomment -%}
+  <div class="fixatech-card__actions">
+    {%- if show_quantity -%}
+      <div class="fixatech-card__quantity" data-fixatech-qty>
+        <button
+          type="button"
+          class="fixatech-card__qty-btn"
+          aria-label="{{ 'products.card.decrease_quantity' | t | default: 'Diminuer la quantité' }}"
+          data-qty-minus
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <input
+          type="number"
+          class="fixatech-card__qty-input"
+          value="1"
+          min="1"
+          max="{{ current_variant.inventory_quantity | default: 99 }}"
+          aria-label="{{ 'products.card.quantity' | t | default: 'Quantité' }}"
+          data-qty-value
+          readonly
+        >
+        <button
+          type="button"
+          class="fixatech-card__qty-btn"
+          aria-label="{{ 'products.card.increase_quantity' | t | default: 'Augmenter la quantité' }}"
+          data-qty-plus
+        >
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    {%- endif -%}
+
+    <button
+      type="button"
+      class="fixatech-card__atc-btn"
+      aria-label="{{ 'products.card.add_to_cart' | t | default: 'Ajouter au panier' }} — {{ product.title }}"
+      data-fixatech-atc
+      data-variant-id="{{ current_variant.id }}"
+      {%- unless available %} disabled{% endunless %}
+    >
+      <svg class="fixatech-card__atc-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="fixatech-card__atc-text">{{ 'products.card.add_to_cart' | t | default: 'Ajouter au panier' }}</span>
+      <svg class="fixatech-card__atc-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
 </article>
 
 {% stylesheet %}
-  /* ─── Fixatech Product Card ────────────────────────────────── */
+  /* ─── Fixatech Product Card (Rebuilt from Figma) ───────────── */
+
   .fixatech-card {
     width: 100%;
-    max-width: 315px;
-    border: 0.5px solid var(--fixatech-border, #343434);
-    border-radius: var(--fixatech-radius-sm, 13px);
-    padding: 17px;
-    background: transparent;
-    transition: var(--fixatech-transition-fast, all 0.2s ease);
+    max-width: 316px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .fixatech-card__link {
@@ -99,13 +159,13 @@
     color: inherit;
   }
 
-  /* ─── Image ────────────────────────────────────────────────── */
+  /* ─── Image Area ───────────────────────────────────────────── */
   .fixatech-card__media {
     position: relative;
-    border-radius: var(--fixatech-radius-sm, 13px);
+    width: 100%;
+    aspect-ratio: 316 / 320;
+    background: #D9D9D9;
     overflow: hidden;
-    aspect-ratio: 1 / 1.1;
-    background: var(--fixatech-background-dark, #141414);
   }
 
   .fixatech-card__img {
@@ -115,160 +175,290 @@
     transition: transform 0.3s ease;
   }
 
+  .fixatech-card:hover .fixatech-card__img {
+    transform: scale(1.05);
+  }
+
   .fixatech-card__placeholder {
     width: 100%;
     height: 100%;
-    fill: var(--fixatech-border, #343434);
+    background: #D9D9D9;
   }
 
-  .fixatech-card:hover .fixatech-card__img {
-    transform: scale(1.1);
-  }
-
-  /* ─── Hover Overlay ────────────────────────────────────────── */
-  .fixatech-card__overlay {
+  /* ─── Promo Badge ──────────────────────────────────────────── */
+  .fixatech-card__promo-badge {
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--fixatech-overlay-dark, rgba(0, 0, 0, 0.7));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-
-  .fixatech-card:hover .fixatech-card__overlay,
-  .fixatech-card__link:focus-visible .fixatech-card__overlay {
-    opacity: 1;
-  }
-
-  .fixatech-card__overlay-text {
-    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-    font-size: var(--fixatech-font-size-body-lg, 15px);
-    font-weight: var(--fixatech-font-weight-medium, 500);
-    color: var(--fixatech-white, #fff);
-  }
-
-  /* ─── Price Badge ──────────────────────────────────────────── */
-  .fixatech-card__badge {
-    position: absolute;
-    width: 125.6px;
-    height: 125.6px;
-    border-radius: 50%;
-    background: var(--fixatech-white, #fff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    z-index: 2;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .fixatech-card__badge--top-right {
     top: 12px;
-    right: 12px;
-  }
-
-  .fixatech-card__badge--center {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .fixatech-card__badge-dollars {
+    left: 12px;
+    background: #FFC600;
+    color: #000000;
     font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
-    font-size: var(--fixatech-font-size-price, 38px);
+    font-size: 14px;
     line-height: 1;
-    color: var(--fixatech-black, #000);
+    padding: 8px;
+    border-radius: 6px;
+    z-index: 1;
   }
 
-  .fixatech-card__badge-cents {
-    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
-    font-size: var(--fixatech-font-size-price-cents, 24.51px);
-    line-height: 1;
-    color: var(--fixatech-black, #000);
-    align-self: flex-start;
-    margin-top: 4px;
-  }
-
-  /* ─── Content ──────────────────────────────────────────────── */
+  /* ─── Content Area ─────────────────────────────────────────── */
   .fixatech-card__content {
-    padding-top: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fixatech-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .fixatech-card__title {
     font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-    font-size: var(--fixatech-font-size-body-lg, 15px);
+    font-size: 16px;
     font-weight: var(--fixatech-font-weight-medium, 500);
-    color: var(--fixatech-white, #fff);
+    color: #000000;
+    line-height: 24px;
     margin: 0;
-    line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .fixatech-card__vendor {
+  .fixatech-card__sku {
     font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-    font-size: var(--fixatech-font-size-caption, 10px);
-    color: #999;
-    margin: 4px 0 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 14px;
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: #A6A6A6;
+    line-height: 24px;
+    margin: 0;
   }
 
+  /* ─── Stock Status ─────────────────────────────────────────── */
+  .fixatech-card__stock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .fixatech-card__stock-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .fixatech-card__stock-dot--in {
+    background: #A1DB3D;
+  }
+
+  .fixatech-card__stock-dot--out {
+    background: #D9D9D9;
+  }
+
+  .fixatech-card__stock-text {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: 12px;
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: #A6A6A6;
+    line-height: 1;
+  }
+
+  /* ─── Pricing ──────────────────────────────────────────────── */
   .fixatech-card__pricing {
     display: flex;
     align-items: baseline;
     gap: 8px;
-    margin-top: 8px;
   }
 
   .fixatech-card__price {
-    font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
-    font-size: var(--fixatech-font-size-h4, 24px);
-    color: var(--fixatech-primary, #FFC600);
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: 20px;
+    font-weight: 600;
+    color: #000000;
     line-height: 1;
-  }
-
-  .fixatech-card__price--sale {
-    color: var(--fixatech-primary, #FFC600);
   }
 
   .fixatech-card__compare-price {
     font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-    font-size: var(--fixatech-font-size-body, 12px);
-    color: #999;
+    font-size: 20px;
+    font-weight: 400;
+    color: #A6A6A6;
     text-decoration: line-through;
+    line-height: 1;
   }
 
-  /* ─── Responsive ───────────────────────────────────────────── */
+  /* ─── Actions (ATC + Quantity) ──────────────────────────────── */
+  .fixatech-card__actions {
+    padding: 0 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  /* ─── Quantity Selector ────────────────────────────────────── */
+  .fixatech-card__quantity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 48px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding: 10px;
+    background: transparent;
+  }
+
+  .fixatech-card__qty-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: #000000;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+  }
+
+  .fixatech-card__qty-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .fixatech-card__qty-btn:focus-visible {
+    outline: var(--fixatech-focus-outline, 2px solid #FFC600);
+    outline-offset: var(--fixatech-focus-offset, 2px);
+  }
+
+  .fixatech-card__qty-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: 14px;
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: #000000;
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  .fixatech-card__qty-input::-webkit-outer-spin-button,
+  .fixatech-card__qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* ─── Add to Cart Button ───────────────────────────────────── */
+  .fixatech-card__atc-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 48px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    background: transparent;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .fixatech-card__atc-btn:hover {
+    background: #000000;
+    color: #FFFFFF;
+  }
+
+  .fixatech-card__atc-btn:hover .fixatech-card__atc-icon,
+  .fixatech-card__atc-btn:hover .fixatech-card__atc-text {
+    color: #FFFFFF;
+  }
+
+  .fixatech-card__atc-btn:focus-visible {
+    outline: var(--fixatech-focus-outline, 2px solid #FFC600);
+    outline-offset: var(--fixatech-focus-offset, 2px);
+  }
+
+  .fixatech-card__atc-btn:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .fixatech-card__atc-icon {
+    color: #000000;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+  }
+
+  .fixatech-card__atc-text {
+    font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+    font-size: 14px;
+    font-weight: var(--fixatech-font-weight-medium, 500);
+    color: #000000;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+
+  /* ─── Responsive: Tablet (768px–1511px) ────────────────────── */
+  @media (max-width: 1511px) {
+    .fixatech-card {
+      max-width: none;
+    }
+  }
+
+  /* ─── Responsive: Mobile (<768px) ──────────────────────────── */
   @media (max-width: 767px) {
     .fixatech-card {
       max-width: none;
+    }
+
+    .fixatech-card__content {
       padding: 12px;
+      gap: 12px;
     }
 
-    .fixatech-card__badge {
-      width: 90px;
-      height: 90px;
+    .fixatech-card__actions {
+      padding: 0 12px 12px;
     }
 
-    .fixatech-card__badge-dollars {
-      font-size: 28px;
+    .fixatech-card__title {
+      font-size: 14px;
+      line-height: 20px;
     }
 
-    .fixatech-card__badge-cents {
+    .fixatech-card__sku {
+      font-size: 12px;
+      line-height: 20px;
+    }
+
+    .fixatech-card__price {
       font-size: 18px;
+    }
+
+    .fixatech-card__compare-price {
+      font-size: 18px;
+    }
+
+    .fixatech-card__quantity,
+    .fixatech-card__atc-btn {
+      height: 44px;
     }
   }
 
   /* ─── Reduced Motion ───────────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     .fixatech-card__img,
-    .fixatech-card__overlay {
+    .fixatech-card__atc-btn,
+    .fixatech-card__atc-icon,
+    .fixatech-card__atc-text {
       transition: none;
     }
 
@@ -277,3 +467,72 @@
     }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  /* ─── Fixatech Product Card — Quantity Controller ──────────── */
+  (function () {
+    document.addEventListener('click', function (e) {
+      var minusBtn = e.target.closest('[data-qty-minus]');
+      var plusBtn = e.target.closest('[data-qty-plus]');
+
+      if (!minusBtn && !plusBtn) return;
+
+      var container = (minusBtn || plusBtn).closest('[data-fixatech-qty]');
+      if (!container) return;
+
+      var input = container.querySelector('[data-qty-value]');
+      if (!input) return;
+
+      var current = parseInt(input.value, 10) || 1;
+      var min = parseInt(input.min, 10) || 1;
+      var max = parseInt(input.max, 10) || 99;
+
+      if (minusBtn && current > min) {
+        input.value = current - 1;
+      } else if (plusBtn && current < max) {
+        input.value = current + 1;
+      }
+    });
+
+    /* ── Add to Cart (Ajax API) ────────────────────────────── */
+    document.addEventListener('click', function (e) {
+      var atcBtn = e.target.closest('[data-fixatech-atc]');
+      if (!atcBtn) return;
+
+      var card = atcBtn.closest('[data-fixatech-card]');
+      var variantId = atcBtn.dataset.variantId;
+      if (!variantId) return;
+
+      var qty = 1;
+      var qtyInput = card ? card.querySelector('[data-qty-value]') : null;
+      if (qtyInput) {
+        qty = parseInt(qtyInput.value, 10) || 1;
+      }
+
+      atcBtn.disabled = true;
+      var originalText = atcBtn.querySelector('.fixatech-card__atc-text');
+      var savedLabel = originalText ? originalText.textContent : '';
+      if (originalText) originalText.textContent = '…';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: parseInt(variantId, 10), quantity: qty })
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('ATC failed');
+        if (originalText) originalText.textContent = '✓';
+        setTimeout(function () {
+          if (originalText) originalText.textContent = savedLabel;
+          atcBtn.disabled = false;
+        }, 1200);
+        /* Dispatch cart update event for theme cart drawers */
+        document.dispatchEvent(new CustomEvent('cart:updated'));
+      })
+      .catch(function () {
+        if (originalText) originalText.textContent = savedLabel;
+        atcBtn.disabled = false;
+      });
+    });
+  })();
+{% endjavascript %}
