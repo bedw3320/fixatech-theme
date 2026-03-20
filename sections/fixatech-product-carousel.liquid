@@ -58,7 +58,7 @@
       {%- if products.size > 0 -%}
         {%- for product in products limit: max_products -%}
           <div class="fixatech-carousel__slide">
-            {% render 'fixatech-product-card', product: product, show_badge: show_badge %}
+            {% render 'fixatech-product-card', product: product %}
           </div>
         {%- endfor -%}
       {%- else -%}
