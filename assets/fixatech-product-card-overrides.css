@@ -232,7 +232,35 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   10. VARIANT SWATCHES
+   10. INVENTORY / STOCK STATUS ("En stock" with green dot)
+   ═══════════════════════════════════════════════════════════════ */
+
+:is(.product-grid, .section-resource-list) product-card .product-inventory,
+:is(.product-grid, .section-resource-list) product-card [class*="inventory"] {
+  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: #A6A6A6;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Green dot indicator */
+:is(.product-grid, .section-resource-list) product-card .product-inventory::before,
+:is(.product-grid, .section-resource-list) product-card [class*="inventory"][class*="in-stock"]::before,
+:is(.product-grid, .section-resource-list) product-card [class*="inventory"][class*="in_stock"]::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4CAF50;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11. VARIANT SWATCHES
    ═══════════════════════════════════════════════════════════════ */
 
 /* Keep swatches compact and aligned with card style */
@@ -241,7 +269,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   11. CARD HOVER — subtle lift
+   12. CARD HOVER — subtle lift
    ═══════════════════════════════════════════════════════════════ */
 
 :is(.product-grid, .section-resource-list) product-card {
@@ -253,7 +281,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   12. CARD LINK OVERLAY — ensure full card is clickable
+   13. CARD LINK OVERLAY — ensure full card is clickable
    ═══════════════════════════════════════════════════════════════ */
 
 :is(.product-grid, .section-resource-list) product-card .product-card__link {
