@@ -1,24 +1,14 @@
 /* ─── Fixatech: Product card gallery — full-width bleed ───────────────
  * Makes the card gallery ignore the PARENT card's inline padding
  * so the image goes edge-to-edge within the card border.
+ * Respects the gallery block's OWN spacing settings (top padding etc).
  *
- * DOM structure (Horizon + Shopify blocks):
- *   product-card
- *     .product-card__content.spacing-style  ← has --padding-inline-start/end
- *       <shopify-block>                     ← Shopify wrapper (no direct child)
- *         .card-gallery.spacing-style       ← gallery block
- *
- * The gallery's own padding controls (top/bottom/left/right) are set via
- * its own spacing-style. We zero out inline padding on the gallery itself
- * and use negative margin to escape the parent card's inline padding.
+ * The parent .product-card__content sets padding via --padding-inline-start
+ * and --padding-inline-end. We pull the gallery out with negative margins
+ * and compensate the width.
  * ──────────────────────────────────────────────────────────────────── */
 
-/* Gallery escapes parent card's inline padding */
-:is(.product-grid, .section-resource-list) .product-card__content .card-gallery {
-  margin-inline-start: calc(var(--padding-inline-start, 0px) * -1);
-  margin-inline-end: calc(var(--padding-inline-end, 0px) * -1);
+:is(.product-grid, .section-resource-list) .product-card__content > .card-gallery {
+  margin-inline: calc(var(--padding-inline-start, 0px) * -1) calc(var(--padding-inline-end, 0px) * -1);
   width: calc(100% + var(--padding-inline-start, 0px) + var(--padding-inline-end, 0px));
-  /* Zero out gallery's own inline padding so image truly fills edge-to-edge */
-  --padding-inline-start: 0px;
-  --padding-inline-end: 0px;
 }
