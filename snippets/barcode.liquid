@@ -1,0 +1,20 @@
+{%- doc -%}
+  Renders a product barcode (UPC/EAN).
+  Mirrors the SKU snippet pattern but uses variant.barcode.
+
+  @param {product} product_resource - The product to render
+{%- enddoc -%}
+
+{%- liquid
+  assign barcode = product_resource.selected_or_first_available_variant.barcode
+-%}
+
+<div ref="barcodeContainer">
+  <span
+    class="barcode"
+    ref="barcode"
+    data-testid="product-barcode"
+  >
+    {{- barcode -}}
+  </span>
+</div>

@@ -1,0 +1,16 @@
+/* ─── Fixatech: Product card image bleed ─────────────────────────────
+ * Makes the product card gallery image fill the full width of the card,
+ * ignoring the inline padding applied to .product-card__content.
+ * Other card elements (title, SKU, price, buttons) keep their padding.
+ *
+ * Uses negative margin + matching positive padding to break out of
+ * the parent's padding-inline without affecting other children.
+ * ──────────────────────────────────────────────────────────────────── */
+
+/* Gallery breaks out of parent inline padding */
+:is(.product-grid, .section-resource-list) product-card .card-gallery {
+  margin-inline-start: calc(var(--padding-inline-start, 0px) * -1);
+  margin-inline-end: calc(var(--padding-inline-end, 0px) * -1);
+  margin-block-start: calc(var(--padding-block-start, 0px) * -1);
+  width: calc(100% + var(--padding-inline-start, 0px) + var(--padding-inline-end, 0px));
+}
