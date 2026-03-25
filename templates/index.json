@@ -224,10 +224,10 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "square",
-                "border": "none",
+                "border": "solid",
                 "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 12,
+                "border_opacity": 30,
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
