@@ -2,11 +2,10 @@
  * Styles Horizon's main-collection section to match Figma catalogue specs.
  * Figma: T0UWoZjMrE5Zr43fh9A0FO page 462:1433 frame 504:3545
  *
- * Layout: 1440px page, 64px padding → 1312px content
- * Sidebar: 300px filters (checkboxes, 16px gap)
- * Grid: 3 cards/row @ 316px each, 16px gaps
- * Title: Flintstock 40px black, bottom border
- * Pagination: chevrons + numbered pages, active = #FFC600 border
+ * All values driven by CSS custom properties set via {% style %} in
+ * sections/main-collection.liquid. Merchants can override via:
+ *   - Theme Editor > Theme settings > Fixatech (global tokens)
+ *   - Theme Editor > Collection page > main-collection section (per-section)
  * ──────────────────────────────────────────────────────────────────── */
 
 /* ─── Collection Container ───────────────────────────────────────── */
@@ -19,13 +18,12 @@
 /* ─── Collection Title ───────────────────────────────────────────── */
 .collection-wrapper .collection-header__heading,
 .collection-wrapper .title--primary {
-  font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
-  font-size: 40px;
+  font-size: var(--fixatech-title-size, 40px);
   font-weight: 400;
   color: #000000;
   line-height: 1.2;
   padding-bottom: 16px;
-  border-bottom: 1px solid #000000;
+  border-bottom: var(--fixatech-title-border, 1px solid #000);
   margin-bottom: 24px;
 }
 
@@ -33,15 +31,14 @@
 .collection-wrapper .breadcrumbs,
 .collection-wrapper nav[aria-label="breadcrumbs"],
 .collection-wrapper .breadcrumb {
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
-  color: #666666;
+  color: var(--fixatech-text-secondary, #666666);
   padding-block: 16px;
 }
 
 .collection-wrapper .breadcrumbs a,
 .collection-wrapper .breadcrumb a {
-  color: #666666;
+  color: var(--fixatech-text-secondary, #666666);
   text-decoration: none;
 }
 
@@ -61,9 +58,8 @@
 .collection-wrapper .facets-container input[type="text"] {
   height: 48px;
   border: 1px solid #000000;
-  border-radius: var(--fixatech-radius-sm, 12px);
+  border-radius: var(--fixatech-radius, 12px);
   padding: 0 20px;
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
   background: transparent;
@@ -73,9 +69,8 @@
 .collection-wrapper .facets-container select {
   height: 48px;
   border: 1px solid #000000;
-  border-radius: var(--fixatech-radius-sm, 12px);
+  border-radius: var(--fixatech-radius, 12px);
   padding: 0 20px;
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
   background: transparent;
@@ -85,14 +80,13 @@
 /* ─── Sidebar Filters ────────────────────────────────────────────── */
 .collection-wrapper .facets__wrapper,
 .collection-wrapper .facets-vertical {
-  min-width: 300px;
-  max-width: 300px;
+  min-width: var(--fixatech-sidebar-width, 300px);
+  max-width: var(--fixatech-sidebar-width, 300px);
   gap: 16px;
 }
 
 .collection-wrapper .facets__disclosure label,
 .collection-wrapper .facets__label {
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
   color: #000000;
@@ -101,19 +95,18 @@
 .collection-wrapper .facets__disclosure input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid var(--fixatech-border, #D9D9D9);
   border-radius: 4px;
   accent-color: var(--fixatech-primary, #FFC600);
 }
 
 .collection-wrapper .facets__heading,
 .collection-wrapper .facets__summary {
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 16px;
   font-weight: 600;
   color: #000000;
   padding-block: 12px;
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid var(--fixatech-border, #D9D9D9);
 }
 
 /* ─── Product Grid ───────────────────────────────────────────────── */
@@ -132,9 +125,8 @@
 /* ─── Product Count ──────────────────────────────────────────────── */
 .collection-wrapper .collection-product-count,
 .collection-wrapper .results-count {
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
-  color: #666666;
+  color: var(--fixatech-text-secondary, #666666);
 }
 
 /* ─── Pagination ─────────────────────────────────────────────────── */
@@ -154,13 +146,12 @@
   justify-content: center;
   min-width: 44px;
   height: 44px;
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
   color: #000000;
   text-decoration: none;
-  border-radius: var(--fixatech-radius-sm, 12px);
-  transition: var(--fixatech-transition-fast, all 0.2s ease);
+  border-radius: var(--fixatech-radius, 12px);
+  transition: all 0.2s ease;
 }
 
 .collection-wrapper .pagination__item:hover,
@@ -172,7 +163,7 @@
 .collection-wrapper .pagination__item.is-active,
 .product-grid-container .pagination__item--current,
 .product-grid-container .pagination__item.is-active {
-  border: 2px solid var(--fixatech-primary, #FFC600);
+  border: 2px solid var(--fixatech-pagination-accent, #FFC600);
   font-weight: 600;
 }
 
@@ -186,7 +177,7 @@
   height: 44px;
   border-radius: 50%;
   color: #000000;
-  transition: var(--fixatech-transition-fast, all 0.2s ease);
+  transition: all 0.2s ease;
 }
 
 .collection-wrapper .pagination__arrow:hover,
@@ -196,9 +187,8 @@
 
 /* ─── Empty State ────────────────────────────────────────────────── */
 .collection-wrapper .collection--empty p {
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 16px;
-  color: #666666;
+  color: var(--fixatech-text-secondary, #666666);
   text-align: center;
   padding-block: 48px;
 }
@@ -210,15 +200,14 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  border: 1px solid #D9D9D9;
-  border-radius: var(--fixatech-radius-pill, 39.5px);
-  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+  border: 1px solid var(--fixatech-border, #D9D9D9);
+  border-radius: 39.5px;
   font-size: 12px;
   font-weight: 500;
   color: #000000;
   background: transparent;
   cursor: pointer;
-  transition: var(--fixatech-transition-fast, all 0.2s ease);
+  transition: all 0.2s ease;
 }
 
 .collection-wrapper .active-filters__tag:hover,
@@ -234,7 +223,7 @@
 
   .collection-wrapper .collection-header__heading,
   .collection-wrapper .title--primary {
-    font-size: 32px;
+    font-size: calc(var(--fixatech-title-size, 40px) * 0.8);
   }
 
   .product-grid-container .product-grid.product-grid--grid {
@@ -243,8 +232,8 @@
 
   .collection-wrapper .facets__wrapper,
   .collection-wrapper .facets-vertical {
-    min-width: 240px;
-    max-width: 240px;
+    min-width: calc(var(--fixatech-sidebar-width, 300px) * 0.8);
+    max-width: calc(var(--fixatech-sidebar-width, 300px) * 0.8);
   }
 }
 
@@ -256,7 +245,7 @@
 
   .collection-wrapper .collection-header__heading,
   .collection-wrapper .title--primary {
-    font-size: 24px;
+    font-size: calc(var(--fixatech-title-size, 40px) * 0.6);
     padding-bottom: 12px;
   }
 
@@ -294,6 +283,6 @@
 .collection-wrapper .facets__disclosure input:focus-visible,
 .collection-wrapper select:focus-visible,
 .collection-wrapper input:focus-visible {
-  outline: var(--fixatech-focus-outline, 2px solid #FFC600);
-  outline-offset: var(--fixatech-focus-offset, 2px);
+  outline: 2px solid var(--fixatech-primary, #FFC600);
+  outline-offset: 2px;
 }
