@@ -96,6 +96,9 @@
       {% render 'border-override', settings: block_settings %}
       {% render 'layout-panel-style', settings: block_settings %}
       {% render 'spacing-style', settings: block_settings %}
+      {% comment %} Fixatech: expose card padding for gallery bleed {% endcomment %}
+      --card-padding-inline-start: {{ block_settings.padding-inline-start | default: 0 }}px;
+      --card-padding-inline-end: {{ block_settings.padding-inline-end | default: 0 }}px;
       {% render 'gap-style', value: product_card_gap_value, name: 'product-card-gap' %}
       --quick-add-display: {% if has_quick_add %}flex{% else %}none{% endif %};
       --quick-add-mobile-display: {% if has_mobile_quick_add %}flex{% else %}none{% endif %};

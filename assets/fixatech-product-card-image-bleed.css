@@ -1,14 +1,16 @@
 /* ─── Fixatech: Product card gallery — full-width bleed ───────────────
  * Makes the card gallery ignore the PARENT card's inline padding
  * so the image goes edge-to-edge within the card border.
- * Respects the gallery block's OWN spacing settings (top padding etc).
  *
- * The parent .product-card__content sets padding via --padding-inline-start
- * and --padding-inline-end. We pull the gallery out with negative margins
- * and compensate the width.
+ * The parent .product-card__content exposes its padding as
+ * --card-padding-inline-start/end (set in product-card.liquid).
+ * The gallery uses negative margin to escape that padding.
+ *
+ * Gallery's own spacing controls (top/bottom padding) are preserved.
  * ──────────────────────────────────────────────────────────────────── */
 
-:is(.product-grid, .section-resource-list) .product-card__content > .card-gallery {
-  margin-inline: calc(var(--padding-inline-start, 0px) * -1) calc(var(--padding-inline-end, 0px) * -1);
-  width: calc(100% + var(--padding-inline-start, 0px) + var(--padding-inline-end, 0px));
+:is(.product-grid, .section-resource-list) .product-card__content .card-gallery {
+  margin-inline-start: calc(var(--card-padding-inline-start, 0px) * -1);
+  margin-inline-end: calc(var(--card-padding-inline-end, 0px) * -1);
+  width: calc(100% + var(--card-padding-inline-start, 0px) + var(--card-padding-inline-end, 0px));
 }
