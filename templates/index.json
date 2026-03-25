@@ -213,7 +213,7 @@
             "border_width": 1,
             "border_opacity": 30,
             "border_radius": 12,
-            "padding-block-start": 12,
+            "padding-block-start": 0,
             "padding-block-end": 16,
             "padding-inline-start": 16,
             "padding-inline-end": 16
