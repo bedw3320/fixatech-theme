@@ -240,7 +240,7 @@
               "name": "t:names.product_title",
               "settings": {
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "h5",
                 "font": "var(--font-accent--family)",
@@ -250,6 +250,7 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-foreground)",
+                "hover_underline": true,
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
