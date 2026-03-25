@@ -1,9 +1,8 @@
 /* ─── Fixatech: Product title underline on hover ─────────────────────
- * Controlled by the "Underline on hover" checkbox on the Product title
- * block (under Appearance). Adds .fixatech-hover-underline class.
+ * Controlled by "Underline on hover" checkbox on Product title block.
+ * Only triggers when hovering the title itself, not the whole card.
  * ──────────────────────────────────────────────────────────────────── */
 
-product-card:hover .fixatech-hover-underline product-title,
-product-card:hover .fixatech-hover-underline .text-block {
+.fixatech-hover-underline:hover .text-block {
   text-decoration: underline;
 }
