@@ -2284,5 +2284,70 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Fixatech",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Design system"
+      },
+      {
+        "type": "color",
+        "id": "fixatech_primary",
+        "label": "Primary accent color",
+        "default": "#FFC600",
+        "info": "Used for active states, highlights, and CTAs"
+      },
+      {
+        "type": "color",
+        "id": "fixatech_border",
+        "label": "Border color",
+        "default": "#D9D9D9",
+        "info": "Default border for cards, inputs, and dividers"
+      },
+      {
+        "type": "color",
+        "id": "fixatech_text_secondary",
+        "label": "Secondary text color",
+        "default": "#666666",
+        "info": "Used for breadcrumbs, counts, and meta text"
+      },
+      {
+        "type": "range",
+        "id": "fixatech_radius",
+        "label": "Border radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 12,
+        "info": "Global corner radius for cards, inputs, buttons"
+      },
+      {
+        "type": "header",
+        "content": "Layout"
+      },
+      {
+        "type": "range",
+        "id": "fixatech_side_padding",
+        "label": "Side padding (desktop)",
+        "min": 16,
+        "max": 96,
+        "step": 8,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "fixatech_content_width",
+        "label": "Max content width",
+        "min": 1000,
+        "max": 1440,
+        "step": 8,
+        "unit": "px",
+        "default": 1312
+      }
+    ]
   }
 ]
