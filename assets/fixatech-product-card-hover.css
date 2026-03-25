@@ -1,8 +1,9 @@
 /* ─── Fixatech: Product title underline on hover ─────────────────────
- * Adds text-decoration: underline on hover for the product title
- * inside product cards. No built-in Horizon setting for this.
+ * Controlled by the "Underline on hover" checkbox on the Product title
+ * block (under Appearance). Adds .fixatech-hover-underline class.
  * ──────────────────────────────────────────────────────────────────── */
 
-:is(.product-grid, .section-resource-list) product-card:hover product-title {
+product-card:hover .fixatech-hover-underline product-title,
+product-card:hover .fixatech-hover-underline .text-block {
   text-decoration: underline;
 }

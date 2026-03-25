@@ -6,8 +6,9 @@
   {% render 'text', fallback_text: product_title, block: block %}
 {% else %}
   {% assign product_title = '<p>' | append: closest.product.title | append: '</p>' %}
+  {%- comment -%} Fixatech: hover underline class {%- endcomment -%}
   <a
-    class="contents user-select-text"
+    class="contents user-select-text{% if block.settings.hover_underline %} fixatech-hover-underline{% endif %}"
     ref="productTitleLink"
     href="{{ closest.product.selected_or_first_available_variant.url }}"
   >
@@ -325,6 +326,13 @@
     {
       "type": "header",
       "content": "t:content.appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "hover_underline",
+      "label": "Underline on hover",
+      "default": true,
+      "info": "Show underline when hovering over the product card"
     },
     {
       "type": "checkbox",
