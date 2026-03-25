@@ -263,7 +263,7 @@
             "sku_fixatech": {
               "type": "sku",
               "settings": {
-                "type_preset": "",
+                "type_preset": "h6",
                 "width": "100%",
                 "alignment": "left",
                 "font": "var(--font-body--family)",
