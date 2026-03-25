@@ -23,7 +23,7 @@
    1. CARD CONTAINER
    ═══════════════════════════════════════════════════════════════ */
 
-.product-grid product-card .product-card__content {
+:is(.product-grid, .section-resource-list) product-card .product-card__content {
   background: #FFFFFF;
   border: 1px solid #D9D9D9;
   border-radius: 12px;
@@ -31,7 +31,7 @@
 }
 
 /* Reset Horizon's inline border-style utility when inside product-grid */
-.product-grid product-card .product-card__content.border-style {
+:is(.product-grid, .section-resource-list) product-card .product-card__content.border-style {
   --border-width: 0px;
   --corner-radius: 12px;
 }
@@ -41,26 +41,26 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Gray placeholder background on the card gallery */
-.product-grid product-card .card-gallery {
+:is(.product-grid, .section-resource-list) product-card .card-gallery {
   background: #D9D9D9;
   border-radius: 12px 12px 0 0;
   overflow: hidden;
 }
 
 /* Contained images (cover fill within the gallery area) */
-.product-grid product-card .card-gallery img {
+:is(.product-grid, .section-resource-list) product-card .card-gallery img {
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
 /* Subtle hover zoom on the image */
-.product-grid product-card:hover .card-gallery img {
+:is(.product-grid, .section-resource-list) product-card:hover .card-gallery img {
   transform: scale(1.03);
   transition: transform 0.3s ease;
 }
 
-.product-grid product-card .card-gallery img {
+:is(.product-grid, .section-resource-list) product-card .card-gallery img {
   transition: transform 0.3s ease;
 }
 
@@ -69,8 +69,8 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Product title block (Horizon uses product-title > .text-block) */
-.product-grid product-card product-title,
-.product-grid product-card product-title .text-block {
+:is(.product-grid, .section-resource-list) product-card product-title,
+:is(.product-grid, .section-resource-list) product-card product-title .text-block {
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 16px;
   font-weight: var(--fixatech-font-weight-medium, 500);
@@ -81,7 +81,7 @@
 }
 
 /* Clamp title to 2 lines */
-.product-grid product-card product-title {
+:is(.product-grid, .section-resource-list) product-card product-title {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -93,8 +93,8 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Price container */
-.product-grid product-card product-price,
-.product-grid product-card product-price .text-block {
+:is(.product-grid, .section-resource-list) product-card product-price,
+:is(.product-grid, .section-resource-list) product-card product-price .text-block {
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 20px;
   font-weight: 600;
@@ -103,7 +103,7 @@
 }
 
 /* Current/sale price */
-.product-grid product-card product-price .price {
+:is(.product-grid, .section-resource-list) product-card product-price .price {
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 20px;
   font-weight: 600;
@@ -111,7 +111,7 @@
 }
 
 /* Compare-at (strikethrough) price */
-.product-grid product-card product-price .compare-at-price {
+:is(.product-grid, .section-resource-list) product-card product-price .compare-at-price {
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 20px;
   font-weight: 400;
@@ -124,12 +124,12 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Override Horizon's gap-style for card content */
-.product-grid product-card .product-card__content.gap-style {
+:is(.product-grid, .section-resource-list) product-card .product-card__content.gap-style {
   --product-card-gap: 16px;
 }
 
 /* Consistent padding inside the content area below the image */
-.product-grid product-card .product-card__content.spacing-style {
+:is(.product-grid, .section-resource-list) product-card .product-card__content.spacing-style {
   --padding-block-start: 16px;
   --padding-block-end: 16px;
   --padding-inline-start: 16px;
@@ -142,8 +142,8 @@
 
 /* Horizon renders badges inside .card-gallery via settings.badge_position.
    Override the badge styling to match Figma's yellow promo badge. */
-.product-grid product-card .card-gallery [class*="badge"],
-.product-grid product-card .card-gallery .badge {
+:is(.product-grid, .section-resource-list) product-card .card-gallery [class*="badge"],
+:is(.product-grid, .section-resource-list) product-card .card-gallery .badge {
   background: #FFC600;
   color: #000000;
   font-family: var(--fixatech-font-heading, 'Flintstock Round', sans-serif);
@@ -161,8 +161,8 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Horizon's buy-buttons block inside the product card */
-.product-grid product-card .buy-buttons-block button[type="submit"],
-.product-grid product-card .buy-buttons-block .button {
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[type="submit"],
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block .button {
   border: 1px solid #000000;
   border-radius: 12px;
   height: 48px;
@@ -180,19 +180,19 @@
   width: 100%;
 }
 
-.product-grid product-card .buy-buttons-block button[type="submit"]:hover,
-.product-grid product-card .buy-buttons-block .button:hover {
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[type="submit"]:hover,
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block .button:hover {
   background: #000000;
   color: #FFFFFF;
 }
 
-.product-grid product-card .buy-buttons-block button[type="submit"]:focus-visible,
-.product-grid product-card .buy-buttons-block .button:focus-visible {
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[type="submit"]:focus-visible,
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block .button:focus-visible {
   outline: var(--fixatech-focus-outline, 2px solid #FFC600);
   outline-offset: var(--fixatech-focus-offset, 2px);
 }
 
-.product-grid product-card .buy-buttons-block button[disabled] {
+:is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[disabled] {
   opacity: 0.4;
   pointer-events: none;
 }
@@ -201,7 +201,7 @@
    8. QUICK ADD BUTTON (Horizon's quick-add overlay)
    ═══════════════════════════════════════════════════════════════ */
 
-.product-grid product-card .quick-add-button {
+:is(.product-grid, .section-resource-list) product-card .quick-add-button {
   border: 1px solid #000000;
   border-radius: 12px;
   height: 48px;
@@ -213,7 +213,7 @@
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.product-grid product-card .quick-add-button:hover {
+:is(.product-grid, .section-resource-list) product-card .quick-add-button:hover {
   background: #000000;
   color: #FFFFFF;
 }
@@ -223,7 +223,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Horizon renders SKU via product-sku-component */
-.product-grid product-card product-sku-component {
+:is(.product-grid, .section-resource-list) product-card product-sku-component {
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: var(--fixatech-font-weight-medium, 500);
@@ -236,7 +236,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* Keep swatches compact and aligned with card style */
-.product-grid product-card .variant-swatches {
+:is(.product-grid, .section-resource-list) product-card .variant-swatches {
   padding-top: 0;
 }
 
@@ -244,11 +244,11 @@
    11. CARD HOVER — subtle lift
    ═══════════════════════════════════════════════════════════════ */
 
-.product-grid product-card {
+:is(.product-grid, .section-resource-list) product-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.product-grid product-card:hover {
+:is(.product-grid, .section-resource-list) product-card:hover {
   transform: translateY(-2px);
 }
 
@@ -256,7 +256,7 @@
    12. CARD LINK OVERLAY — ensure full card is clickable
    ═══════════════════════════════════════════════════════════════ */
 
-.product-grid product-card .product-card__link {
+:is(.product-grid, .section-resource-list) product-card .product-card__link {
   border-radius: 12px;
 }
 
@@ -266,31 +266,31 @@
 
 @media screen and (max-width: 1511px) {
   /* Cards flex-fill in grid columns on tablet */
-  .product-grid product-card {
+  :is(.product-grid, .section-resource-list) product-card {
     width: 100%;
   }
 
-  .product-grid product-card .product-card__content.spacing-style {
+  :is(.product-grid, .section-resource-list) product-card .product-card__content.spacing-style {
     --padding-block-start: 14px;
     --padding-block-end: 14px;
     --padding-inline-start: 14px;
     --padding-inline-end: 14px;
   }
 
-  .product-grid product-card product-title,
-  .product-grid product-card product-title .text-block {
+  :is(.product-grid, .section-resource-list) product-card product-title,
+  :is(.product-grid, .section-resource-list) product-card product-title .text-block {
     font-size: 15px;
     line-height: 22px;
   }
 
-  .product-grid product-card product-price .price,
-  .product-grid product-card product-price .compare-at-price {
+  :is(.product-grid, .section-resource-list) product-card product-price .price,
+  :is(.product-grid, .section-resource-list) product-card product-price .compare-at-price {
     font-size: 18px;
   }
 
-  .product-grid product-card .buy-buttons-block button[type="submit"],
-  .product-grid product-card .buy-buttons-block .button,
-  .product-grid product-card .quick-add-button {
+  :is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[type="submit"],
+  :is(.product-grid, .section-resource-list) product-card .buy-buttons-block .button,
+  :is(.product-grid, .section-resource-list) product-card .quick-add-button {
     height: 44px;
   }
 }
@@ -300,48 +300,48 @@
    ═══════════════════════════════════════════════════════════════ */
 
 @media screen and (max-width: 767px) {
-  .product-grid product-card .product-card__content.spacing-style {
+  :is(.product-grid, .section-resource-list) product-card .product-card__content.spacing-style {
     --padding-block-start: 12px;
     --padding-block-end: 12px;
     --padding-inline-start: 12px;
     --padding-inline-end: 12px;
   }
 
-  .product-grid product-card .product-card__content.gap-style {
+  :is(.product-grid, .section-resource-list) product-card .product-card__content.gap-style {
     --product-card-gap: 12px;
   }
 
-  .product-grid product-card product-title,
-  .product-grid product-card product-title .text-block {
+  :is(.product-grid, .section-resource-list) product-card product-title,
+  :is(.product-grid, .section-resource-list) product-card product-title .text-block {
     font-size: 14px;
     line-height: 20px;
   }
 
-  .product-grid product-card product-price .price {
+  :is(.product-grid, .section-resource-list) product-card product-price .price {
     font-size: 18px;
     font-weight: 600;
   }
 
-  .product-grid product-card product-price .compare-at-price {
+  :is(.product-grid, .section-resource-list) product-card product-price .compare-at-price {
     font-size: 18px;
   }
 
-  .product-grid product-card .buy-buttons-block button[type="submit"],
-  .product-grid product-card .buy-buttons-block .button,
-  .product-grid product-card .quick-add-button {
+  :is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[type="submit"],
+  :is(.product-grid, .section-resource-list) product-card .buy-buttons-block .button,
+  :is(.product-grid, .section-resource-list) product-card .quick-add-button {
     height: 44px;
     font-size: 13px;
   }
 
   /* Smaller badge on mobile */
-  .product-grid product-card .card-gallery [class*="badge"],
-  .product-grid product-card .card-gallery .badge {
+  :is(.product-grid, .section-resource-list) product-card .card-gallery [class*="badge"],
+  :is(.product-grid, .section-resource-list) product-card .card-gallery .badge {
     font-size: 12px;
     padding: 6px;
   }
 
   /* Disable hover lift on touch devices */
-  .product-grid product-card:hover {
+  :is(.product-grid, .section-resource-list) product-card:hover {
     transform: none;
   }
 }
@@ -351,19 +351,19 @@
    ═══════════════════════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
-  .product-grid product-card,
-  .product-grid product-card .card-gallery img,
-  .product-grid product-card .buy-buttons-block button[type="submit"],
-  .product-grid product-card .buy-buttons-block .button,
-  .product-grid product-card .quick-add-button {
+  :is(.product-grid, .section-resource-list) product-card,
+  :is(.product-grid, .section-resource-list) product-card .card-gallery img,
+  :is(.product-grid, .section-resource-list) product-card .buy-buttons-block button[type="submit"],
+  :is(.product-grid, .section-resource-list) product-card .buy-buttons-block .button,
+  :is(.product-grid, .section-resource-list) product-card .quick-add-button {
     transition: none;
   }
 
-  .product-grid product-card:hover {
+  :is(.product-grid, .section-resource-list) product-card:hover {
     transform: none;
   }
 
-  .product-grid product-card:hover .card-gallery img {
+  :is(.product-grid, .section-resource-list) product-card:hover .card-gallery img {
     transform: none;
   }
 }
