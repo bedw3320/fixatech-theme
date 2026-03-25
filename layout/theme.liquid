@@ -32,6 +32,7 @@
     {%- render 'color-schemes' -%}
     {{ 'fixatech-header-overrides.css' | asset_url | stylesheet_tag }}
     {{ 'fixatech-product-card-overrides.css' | asset_url | stylesheet_tag }}
+    {{ 'fixatech-collection-overrides.css' | asset_url | stylesheet_tag }}
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
