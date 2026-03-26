@@ -150,8 +150,9 @@ header-component.header {
   overflow: visible !important; /* stylelint-disable-line declaration-no-important */
   position: static !important; /* stylelint-disable-line declaration-no-important */
   color: var(--fixatech-white);
-  font-family: var(--fixatech-font-body);
-  font-size: var(--fixatech-font-size-body); /* 12px */
+  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+  font-size: 14px; /* Fixatech: Figma shows 14px Geist 500 */
+  font-weight: 500;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -171,19 +172,72 @@ header-component.header {
   --cart-bubble-right: 0px;
 }
 
+/* Fixatech: Figma shows yellow cart badge with dark text */
 .header__column--right .header-actions__cart-icon .cart-bubble__background {
-  background-color: var(--fixatech-white) !important; /* stylelint-disable-line declaration-no-important */
+  background-color: var(--fixatech-primary, #ffc600) !important; /* stylelint-disable-line declaration-no-important */
   border-radius: 50%;
 }
 
 .header__column--right .header-actions__cart-icon .cart-bubble__text {
-  color: var(--fixatech-background-dark) !important; /* stylelint-disable-line declaration-no-important */
-  font-size: var(--fixatech-font-size-caption) !important; /* 10px, stylelint-disable-line */
+  color: var(--fixatech-background-dark, #141414) !important; /* stylelint-disable-line declaration-no-important */
+  font-size: var(--fixatech-font-size-caption, 10px) !important; /* stylelint-disable-line */
   font-weight: 700;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   6. RESPONSIVE OVERRIDES
+   6. PHONE NUMBER — "T. 418 871 1211" per Figma
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fixatech: phone number link in header
+   Order: Account (1) → Phone (2) → Cart (3) → Wishlist (4) → Language (5) */
+header-actions {
+  display: flex;
+  align-items: center;
+}
+
+header-actions > .account-button { order: 1; }
+header-actions > .fixatech-phone-link { order: 2; }
+header-actions > cart-drawer-component,
+header-actions > .action__cart { order: 3; }
+header-actions > .fixatech-wishlist-link { order: 4; }
+
+.fixatech-phone-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.fixatech-phone-link:hover {
+  opacity: 0.8;
+}
+
+.fixatech-phone-text {
+  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. WISHLIST HEART ICON — per Figma
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fixatech: wishlist heart icon */
+.fixatech-wishlist-link {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.fixatech-wishlist-link:hover {
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. RESPONSIVE OVERRIDES
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─── Tablet (768px – 1511px) ─────────────────────────────── */
@@ -254,5 +308,14 @@ header-component.header {
     border: none;
     padding-inline: 8px;
     height: auto;
+  }
+
+  /* Fixatech: hide phone number and wishlist on mobile per Figma */
+  .fixatech-phone-link {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  .fixatech-wishlist-link {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
   }
 }
