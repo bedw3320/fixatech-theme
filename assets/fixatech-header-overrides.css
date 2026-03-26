@@ -90,9 +90,17 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   3. HEADER ACTIONS — ordering + spacing
+   3. HEADER ACTIONS — ordering + spacing + hover fix
    Figma: generous space between items, no borders on items
    ═══════════════════════════════════════════════════════════════ */
+
+/* Fixatech: disable Horizon's column-wide dimming effect on header actions.
+   Horizon dims all sibling .header-actions__action when one is hovered,
+   causing flicker. Each item should hover independently. */
+.header__column:has(.header-actions__action:hover) .header-actions__action:not(:hover) {
+  opacity: 1 !important;
+}
+
 
 header-actions {
   display: flex;
@@ -122,7 +130,7 @@ header-actions > .fixatech-wishlist-link { order: 4; }
 }
 
 .header__column--right .account-button:hover {
-  opacity: 0.8;
+  opacity: 0.7;
   background: transparent !important;
 }
 
@@ -164,7 +172,7 @@ header-actions > .fixatech-wishlist-link { order: 4; }
 }
 
 .fixatech-phone-link:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -201,7 +209,7 @@ header-actions > .fixatech-wishlist-link { order: 4; }
 }
 
 .fixatech-wishlist-link:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
 /* ═══════════════════════════════════════════════════════════════
