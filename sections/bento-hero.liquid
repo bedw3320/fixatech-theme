@@ -340,32 +340,37 @@
     height: auto !important;
   }
 
-  .bento-hero__cell-a { grid-column: 1; grid-row: 1; min-height: 200px; }
-  .bento-hero__cell-b { grid-column: 2; grid-row: 1; min-height: 200px; }
-  .bento-hero__cell-c { grid-column: 1 / -1; grid-row: 2; min-height: 300px; }
-  .bento-hero__cell-d { grid-column: 1 / -1; grid-row: 3; min-height: 220px; }
+  /* Fixatech: Figma tablet — C (promo) on top full-width, A+B side by side, D hidden */
+  .bento-hero__cell-c { grid-column: 1 / -1; grid-row: 1; min-height: 300px; }
+  .bento-hero__cell-a { grid-column: 1; grid-row: 2; min-height: 150px; }
+  .bento-hero__cell-b { grid-column: 2; grid-row: 2; min-height: 150px; }
+  .bento-hero__cell-d { display: none; }
 }
 
-/* ── Mobile (≤ 767px) — matches Horizon bento-box breakpoint ── */
+/* ── Mobile (≤ 767px) — matches Horizon bento-box breakpoint ──────── */
+/* Fixatech: Figma mobile layout:
+   Row 1: Cell C (promo) — full width, dominant
+   Row 2: Cells A + B — side by side, short strip
+   Cell D: hidden on mobile */
 @media screen and (max-width: 767px) {
   .bento-hero__grid {
-    grid-template-columns: 1fr;
-    /* Fixatech: let stacked cells determine their own height */
-    aspect-ratio: auto !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     height: auto !important;
+    aspect-ratio: auto !important;
   }
 
-  /* Fixatech: reorder — main promo (D) on top, then C, then A+B stacked */
-  .bento-hero__cell-d { grid-column: 1; grid-row: 1; min-height: 200px; }
-  .bento-hero__cell-c { grid-column: 1; grid-row: 2; min-height: 250px; padding: 24px 16px; }
-  .bento-hero__cell-a { grid-column: 1; grid-row: 3; min-height: 160px; padding: 24px 16px; }
-  .bento-hero__cell-b { grid-column: 1; grid-row: 4; min-height: 160px; }
-
-  .bento-hero__cell-a--image { padding: 0; }
+  .bento-hero__cell-c { grid-column: 1 / -1; grid-row: 1; min-height: 272px; padding: 24px 16px; }
   .bento-hero__cell-c--image { padding: 0; }
-
-  .bento-hero__cell-a-heading { font-size: 22px; }
   .bento-hero__cell-c-heading { font-size: 20px; }
+
+  .bento-hero__cell-a { grid-column: 1; grid-row: 2; min-height: 120px; padding: 20px 16px; }
+  .bento-hero__cell-a--image { padding: 0; }
+  .bento-hero__cell-a-heading { font-size: 18px; }
+
+  .bento-hero__cell-b { grid-column: 2; grid-row: 2; min-height: 120px; }
+
+  .bento-hero__cell-d { display: none; }
 
   .bento-hero__price-badge {
     width: 56px;
@@ -373,13 +378,6 @@
     font-size: 13px;
     bottom: 16px;
     right: 16px;
-  }
-
-  .bento-hero__cta {
-    bottom: 16px;
-    left: 16px;
-    font-size: 14px;
-    padding: 10px 16px;
   }
 }
 {% endstylesheet %}
