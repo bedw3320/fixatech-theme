@@ -1,17 +1,17 @@
 /**
- * Fixatech Header — CSS Overrides
- * Theme: Shopify Horizon
+ * Fixatech Header — CSS Overrides (pixel-perfect v2)
  *
- * Figma spacing reference (from desktop header):
- *   Header top row: padding-top 48px, padding-bottom 24px
- *   Frame 41 (search + actions): gap 32px between search and menu
- *   Menu (actions container): gap 8px between items
- *   All pill buttons (search, account, phone, language): radius 12px, padding 12px 20px
- *   Cart wrapper: padding 8px
- *   Wishlist wrapper: padding 8px
- *   Search bar: width ~190px, radius 12px
- *   Nav bottom row: padding-top 40px, padding-bottom 32px
- *   Nav items: gap 10px, radius 10px, padding 8px 16px
+ * Figma reference:
+ *   Top row: Logo (left) | Search (center) | Mon compte  T. 418 871 1211  Cart  ♡  En (right)
+ *   - Search: subtle thin border, 12px radius, 14px text
+ *   - Mon compte: NO border, just icon + text
+ *   - Phone: NO border, just icon + text
+ *   - Cart: icon with yellow badge, no border
+ *   - Wishlist heart: icon only, no border
+ *   - Language "En": plain text, no border
+ *   - Generous spacing between action items (~32px)
+ *
+ *   Bottom row: ≡ MAGASINER | LE COIN DES PROS | SERVICE DE RÉPARATION ... CARTE-CADEAU (far right)
  */
 
 /* ═══════════════════════════════════════════════════════════════
@@ -22,22 +22,17 @@ header-component.header {
   z-index: 100;
 }
 
-#header-component .header__row--top {
-  padding-block: 0;
-}
-
 #header-component .header__row--top .header__column {
   display: flex;
   align-items: center;
 }
 
-/* Hide the empty navigation bar row */
 #header-component .header__navigation-bar-row {
   display: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   2. SEARCH BAR — Figma: 190px wide, 12px radius, padding 12px 20px
+   2. SEARCH BAR — subtle thin border, 12px radius
    ═══════════════════════════════════════════════════════════════ */
 
 .header__column--center .search-action {
@@ -49,17 +44,16 @@ header-component.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px; /* Figma: gap 8px */
+  gap: 8px;
   width: 100%;
-  padding: 12px 20px; /* Figma: padding 12px 20px */
+  padding: 10px 16px;
   background-color: transparent;
-  border: 0.5px solid var(--fixatech-white, #fff);
-  border-radius: 12px; /* Fixatech: Figma 12px, was pill (39.5px) */
+  border: 0.5px solid rgba(255, 255, 255, 0.4); /* Figma: subtle, not heavy white */
+  border-radius: 12px;
   color: var(--fixatech-white, #fff);
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-  font-size: 14px; /* Figma: 14px Geist 500 */
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.02em;
   cursor: text;
   transition: var(--fixatech-transition-fast);
 }
@@ -70,7 +64,7 @@ header-component.header {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Show the search text label */
+/* Show search text label */
 .header__column--center .search-action .hidden {
   display: block !important;
   clip: auto !important;
@@ -80,9 +74,8 @@ header-component.header {
   position: static !important;
   flex: 1;
   text-align: left;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.5);
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .header__column--center .search-action .svg-wrapper {
@@ -92,20 +85,19 @@ header-component.header {
 }
 
 .header__column--center .search-action .svg-wrapper svg {
-  width: 24px; /* Figma: 24px icon */
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 /* ═══════════════════════════════════════════════════════════════
    3. HEADER ACTIONS — ordering + spacing
-   Figma order: Account → Phone → Cart → Wishlist → Language
-   Figma gap: 8px between items
+   Figma: generous space between items, no borders on items
    ═══════════════════════════════════════════════════════════════ */
 
 header-actions {
   display: flex;
   align-items: center;
-  gap: 8px; /* Figma: Menu gap = 8px */
+  gap: 32px; /* Figma: generous spacing between action groups */
 }
 
 header-actions > .account-button { order: 1; }
@@ -115,23 +107,23 @@ header-actions > .action__cart { order: 3; }
 header-actions > .fixatech-wishlist-link { order: 4; }
 
 /* ═══════════════════════════════════════════════════════════════
-   4. ACCOUNT BUTTON — Figma: 12px radius, padding 12px 20px
+   4. ACCOUNT BUTTON — Figma: NO border, just icon + text
    ═══════════════════════════════════════════════════════════════ */
 
 .header__column--right .account-button {
   display: flex;
   align-items: center;
-  gap: 8px; /* Figma: gap 8px inside button */
-  padding: 12px 20px; /* Figma: padding 12px 20px */
-  border: 1px solid var(--fixatech-white, #fff);
-  border-radius: 12px; /* Fixatech: Figma 12px, was pill (39.5px) */
+  gap: 8px;
+  padding: 0; /* Fixatech: no padding, no border — just icon + text */
+  border: none !important; /* Figma: no border */
+  border-radius: 0;
   background: transparent !important;
   cursor: pointer;
-  transition: var(--fixatech-transition-fast);
 }
 
 .header__column--right .account-button:hover {
-  background-color: rgba(255, 255, 255, 0.08) !important;
+  opacity: 0.8;
+  background: transparent !important;
 }
 
 /* Force-show account text label */
@@ -144,9 +136,8 @@ header-actions > .fixatech-wishlist-link { order: 4; }
   position: static !important;
   color: var(--fixatech-white, #fff);
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-  font-size: 14px; /* Figma: 14px Geist 500 */
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
@@ -155,40 +146,33 @@ header-actions > .fixatech-wishlist-link { order: 4; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   5. PHONE NUMBER — Figma: 12px radius, padding 12px 20px
+   5. PHONE NUMBER — Figma: NO border, just icon + text
    ═══════════════════════════════════════════════════════════════ */
 
 .fixatech-phone-link {
   display: flex;
   align-items: center;
-  gap: 8px; /* Figma: gap 8px inside button */
-  padding: 12px 20px; /* Figma: padding 12px 20px */
-  border: 1px solid var(--fixatech-white, #fff);
-  border-radius: 12px; /* Figma: 12px */
+  gap: 8px;
+  padding: 0; /* Figma: no padding, no border */
+  border: none;
   color: inherit;
   text-decoration: none;
   white-space: nowrap;
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-  font-size: 14px; /* Figma: 14px Geist 500 */
+  font-size: 14px;
   font-weight: 500;
-  transition: var(--fixatech-transition-fast);
 }
 
 .fixatech-phone-link:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  opacity: 0.8;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   6. CART — Figma: 8px padding wrapper
+   6. CART — yellow badge
    ═══════════════════════════════════════════════════════════════ */
 
-header-actions cart-drawer-component,
-header-actions .action__cart {
-  padding: 8px; /* Figma: padding 8px all sides */
-}
-
 .header__column--right .header-actions__cart-icon .cart-bubble__background {
-  background-color: var(--fixatech-primary, #ffc600) !important; /* Figma: yellow badge */
+  background-color: var(--fixatech-primary, #ffc600) !important;
   border-radius: 50%;
 }
 
@@ -199,21 +183,21 @@ header-actions .action__cart {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   7. WISHLIST HEART — Figma: 8px padding wrapper, 32px icon
+   7. WISHLIST HEART — Figma: icon only, no border
    ═══════════════════════════════════════════════════════════════ */
 
 .fixatech-wishlist-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px; /* Figma: padding 8px all sides */
+  padding: 0;
   color: inherit;
   text-decoration: none;
 }
 
 .fixatech-wishlist-link svg {
-  width: 18px; /* Figma: ~18px stroke icon inside 32px container */
-  height: 18px;
+  width: 22px;
+  height: 22px;
 }
 
 .fixatech-wishlist-link:hover {
@@ -221,17 +205,29 @@ header-actions .action__cart {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   8. RESPONSIVE
+   8. NAV BOTTOM ROW — CARTE-CADEAU pushed to far right
    ═══════════════════════════════════════════════════════════════ */
 
-/* ─── Tablet (768px – 1511px) ─────────────────────────────── */
+/* Fixatech: Figma shows CARTE-CADEAU on the far right of nav row */
+#header-component .header__row--bottom overflow-list,
+#header-component .header__row--bottom .header-menu {
+  width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
 @media screen and (max-width: 1511px) {
   .header__column--center .search-action {
     width: clamp(160px, 14vw, 200px);
   }
+
+  header-actions {
+    gap: 20px; /* tighter on tablet */
+  }
 }
 
-/* ─── Mobile (max 767px) ──────────────────────────────────── */
 @media screen and (max-width: 767px) {
   .header__column--center .search-action {
     display: none;
@@ -271,18 +267,19 @@ header-actions .action__cart {
     flex: 0 0 auto;
   }
 
-  /* Mobile: account icon only, no pill border */
+  header-actions {
+    gap: 12px;
+  }
+
+  /* Mobile: icon only, no text, no border */
   .header__column--right .account-button {
-    border: none;
-    padding: 8px;
-    border-radius: 0;
+    padding: 0;
   }
 
   .header__column--right .account-button .account-button__text.hidden {
     display: none !important;
   }
 
-  /* Figma mobile: phone + wishlist hidden */
   .fixatech-phone-link {
     display: none !important;
   }
