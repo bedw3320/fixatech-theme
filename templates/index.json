@@ -414,7 +414,7 @@
             "text_QM6a8Y": {
               "type": "text",
               "settings": {
-                "text": "<p>ON T'ÉQUIPE POUR ÇA</p>",
+                "text": "<h1><em>ON T'ÉQUIPE POUR ÇA</em></h1>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
