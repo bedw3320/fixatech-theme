@@ -94,8 +94,8 @@
     "bento_hero_main": {
       "type": "bento-hero",
       "settings": {
-        "cell_a_image": "shopify://shop_images/Screenshot_2026-03-14_at_6.00.19_PM.png",
-        "cell_a_heading": "ON EST LÀ POUR ÇA",
+        "cell_a_image": "shopify://shop_images/Layer_1_1_1.jpg",
+        "cell_a_heading": "",
         "cell_a_text": "",
         "cell_a_bg_color": "#141414",
         "cell_a_text_color": "#ffffff",
@@ -484,8 +484,8 @@
         "section_height_custom": 30,
         "color_scheme": "scheme-5",
         "toggle_overlay": true,
-        "overlay_color": "#00000026",
-        "overlay_style": "gradient",
+        "overlay_color": "#141414",
+        "overlay_style": "solid",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
