@@ -386,19 +386,6 @@
     "hero_3hBi7d": {
       "type": "hero",
       "blocks": {
-        "spacer_fXk4Ye": {
-          "type": "spacer",
-          "settings": {
-            "size": "pixel",
-            "percent_size": 100,
-            "pixel_size": 24,
-            "custom_mobile_size": false,
-            "size_mobile": "percent",
-            "percent_size_mobile": 100,
-            "pixel_size_mobile": 120
-          },
-          "blocks": {}
-        },
         "marquee_GCcwhe": {
           "type": "_marquee",
           "settings": {
@@ -443,6 +430,7 @@
         },
         "button_edXhjq": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "label": "Acheter maintenant",
             "link": "shopify://collections/all",
@@ -457,7 +445,6 @@
         }
       },
       "block_order": [
-        "spacer_fXk4Ye",
         "marquee_GCcwhe",
         "button_edXhjq"
       ],
@@ -490,7 +477,7 @@
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 0,
-        "padding-block-end": 40
+        "padding-block-end": 0
       }
     }
   },
