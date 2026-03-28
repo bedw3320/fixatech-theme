@@ -309,11 +309,6 @@ header-component.header {
     flex: 0 0 auto;
   }
 
-  /* Hide duplicate mobile search in left column */
-  .header__column--left .search-action--hidden-on-menu {
-    display: none;
-  }
-
   /* Center logo on mobile */
   .header__column--left .header-logo {
     position: absolute;
