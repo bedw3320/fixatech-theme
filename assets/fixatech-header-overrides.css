@@ -26,6 +26,17 @@ header-component.header {
     display: flex;
     align-items: center;
   }
+
+  /* Let logo scale down when grid column shrinks on narrow viewports */
+  #header-component .header-logo {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  #header-component .header-logo__image {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 #header-component .header__navigation-bar-row {
