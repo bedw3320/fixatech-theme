@@ -1540,6 +1540,51 @@
     },
     {
       "type": "header",
+      "content": "Fixatech"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_phone",
+      "label": "Show phone number",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "phone_text",
+      "label": "Phone number text",
+      "default": "T. 418 871 1211",
+      "visible_if": "{{ section.settings.show_phone }}"
+    },
+    {
+      "type": "text",
+      "id": "phone_link",
+      "label": "Phone number link",
+      "info": "Use tel: format (e.g. tel:+14188711211)",
+      "default": "tel:+14188711211",
+      "visible_if": "{{ section.settings.show_phone }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show wishlist icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "wishlist_url",
+      "label": "Wishlist page URL",
+      "default": "/pages/wishlist",
+      "visible_if": "{{ section.settings.show_wishlist }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_label",
+      "label": "Show account text label",
+      "info": "Shows the account name next to the icon on desktop",
+      "default": true
+    },
+    {
+      "type": "header",
       "content": "t:content.colors"
     },
     {
