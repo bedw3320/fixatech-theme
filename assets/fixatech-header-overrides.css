@@ -328,9 +328,10 @@ header-component.header {
   display: flex;
 }
 
-/* Add gap between icon and text on the first item */
+/* Add gap between icon and text on the first item — override Horizon's column direction */
 #header-component .menu-list__list-item:first-child .menu-list__link {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 6px;
 }
