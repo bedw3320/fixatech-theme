@@ -79,10 +79,7 @@
           "blocks": {}
         }
       },
-      "custom_css": [
-        ".header__row--top:not(.divider--page-width),.header__row--top.divider--page-width .header__columns,.header__row--bottom {border-bottom: var(--border-bottom-width) solid white;}",
-        "@media screen and (min-width: 750px) {.header__columns.spacing-style {padding-top: 36px; padding-bottom: 18px; } .header__columns:where(:not(:has(.header__column--center))) {padding-top: 40px; }}"
-      ],
+      "custom_css": [],
       "settings": {
         "logo_position": "left",
         "menu_position": "left",
@@ -104,7 +101,7 @@
         "divider_width": 1.5,
         "divider_size": "page-width",
         "border_width": 0,
-        "actions_display_style": "icon",
+        "actions_display_style": "text",
         "actions_font_size": "0.875rem",
         "actions_font": "body",
         "actions_text_case": "none",
