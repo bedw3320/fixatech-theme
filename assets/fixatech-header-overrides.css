@@ -62,7 +62,7 @@ header-component.header {
     padding-top: 40px;
   }
 
-  #header-component .header__navigation-bar-row .header__columns.spacing-style {
+  #header-component .header__row--bottom .header__columns.spacing-style {
     padding-top: 24px;
     padding-bottom: 24px;
   }
