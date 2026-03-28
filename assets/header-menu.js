@@ -22,6 +22,9 @@ class HeaderMenu extends Component {
    */
   #submenuMutationObserver = null;
 
+  /** @type {ReturnType<typeof setTimeout> | null} */
+  #deactivateTimer = null;
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -32,6 +35,7 @@ class HeaderMenu extends Component {
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    clearTimeout(this.#deactivateTimer);
     window.removeEventListener('resize', this.#resizeListener);
     this.overflowMenu?.removeEventListener('pointerleave', this.#overflowSubmenuListener);
     this.#cleanupMutationObserver();
@@ -46,7 +50,20 @@ class HeaderMenu extends Component {
 
 
   #overflowSubmenuListener = () => {
-    this.#deactivate();
+    this.#deactivateDelayed();
+  };
+
+  /**
+   * Schedule a deactivation after a short delay, giving the cursor time
+   * to reach the submenu panel. Cleared on activate() so switching items
+   * feels instant.
+   * @param {HTMLElement | null} [item]
+   */
+  #deactivateDelayed = (item = this.#state.activeItem) => {
+    clearTimeout(this.#deactivateTimer);
+    this.#deactivateTimer = setTimeout(() => {
+      this.#deactivate(item);
+    }, 150);
   };
 
   /**
@@ -80,6 +97,7 @@ class HeaderMenu extends Component {
    * @param {PointerEvent | FocusEvent} event
    */
   activate = (event) => {
+    clearTimeout(this.#deactivateTimer);
     this.dispatchEvent(new MegaMenuHoverEvent());
 
     if (!(event.target instanceof Element) || !this.headerComponent) return;
@@ -177,7 +195,7 @@ class HeaderMenu extends Component {
 
     if (isMovingWithinMenu || isMovingToOverflowMenu || isMovingToSubmenu) return;
 
-    this.#deactivate();
+    this.#deactivateDelayed();
   }
 
   /**
