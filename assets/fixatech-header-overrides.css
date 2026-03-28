@@ -65,8 +65,8 @@ header-component.header {
    ═══════════════════════════════════════════════════════════════ */
 
 #header-component .search-action--hidden-on-drawer {
-  width: clamp(190px, 14vw, 240px);
-  flex-shrink: 0;
+  width: clamp(120px, 14vw, 240px);
+  min-width: 0;
 }
 
 #header-component .search-action--hidden-on-drawer .button-unstyled {
