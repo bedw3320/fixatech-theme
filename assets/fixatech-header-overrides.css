@@ -401,7 +401,7 @@ header-component.header {
   color: var(--fixatech-white, #fff);
 }
 
-.fixatech-drawer-arrow svg {
+.menu-drawer .fixatech-drawer-arrow svg {
   width: 16px;
   height: 16px;
 }
