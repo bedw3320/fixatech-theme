@@ -270,6 +270,24 @@ header-component.header {
   color: var(--fixatech-white, #fff);
 }
 
+/* Arrow icon on parent links */
+#header-component .mega-menu__link--parent {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#header-component .mega-menu__arrow {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--fixatech-primary, #ffc600);
+}
+
+#header-component .mega-menu__arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* Hover: dim individual link */
 #header-component .mega-menu__link--parent:hover {
   color: var(--fixatech-primary, #ffc600);

@@ -29,7 +29,20 @@
   {%- endif -%}
   {{ block.shopify_attributes }}
 >
-  {{ block_settings.label }}
+  {{- block_settings.label -}}
+  {%- liquid
+    assign show_arrow = false
+    if block_settings.style_class == 'button-secondary'
+      assign show_arrow = settings.secondary_button_show_arrow
+    else
+      assign show_arrow = settings.primary_button_show_arrow
+    endif
+  -%}
+  {%- if show_arrow -%}
+    <span class="svg-wrapper button-arrow" aria-hidden="true">
+      {{- 'icon-arrow.svg' | inline_asset_content -}}
+    </span>
+  {%- endif -%}
 </a>
 
 {% stylesheet %}
@@ -41,5 +54,24 @@
       color: var(--color-primary-hover);
       text-decoration-color: transparent;
     }
+  }
+
+  /* Button arrow icon — injected when theme setting is enabled */
+  .button:has(.button-arrow),
+  .button-secondary:has(.button-arrow) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .button-arrow {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .button-arrow svg {
+    width: 20px;
+    height: 20px;
   }
 {% endstylesheet %}

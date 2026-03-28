@@ -1585,6 +1585,12 @@
         "default": "default"
       },
       {
+        "type": "checkbox",
+        "id": "primary_button_show_arrow",
+        "label": "Show arrow icon",
+        "default": false
+      },
+      {
         "type": "header",
         "content": "t:options.button_secondary"
       },
@@ -1639,6 +1645,12 @@
           }
         ],
         "default": "default"
+      },
+      {
+        "type": "checkbox",
+        "id": "secondary_button_show_arrow",
+        "label": "Show arrow icon",
+        "default": false
       },
       {
         "type": "header",
