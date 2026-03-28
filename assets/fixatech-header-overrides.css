@@ -73,7 +73,7 @@ header-component.header {
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  padding: 10px 16px;
+  padding: 6px 16px;
   background-color: transparent;
   border: 0.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 12px;
@@ -132,14 +132,19 @@ header-component.header {
 #header-component header-actions > .action__cart { order: 3; }
 #header-component header-actions > .fixatech-wishlist-link { order: 4; }
 
-/* Cart drawer wrapper participates in hover dimming */
+/* Hover dimming: all action items dim when one is hovered (matching Horizon's
+   pattern for .header-actions__action). Custom wrappers like cart-drawer-component
+   and search-button need explicit rules since Horizon only targets .header-actions__action. */
 @media (hover: hover) {
-  .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover) {
+  .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover),
+  .header__column:has(.header-actions__action:hover) search-button:not(:hover) {
     opacity: var(--opacity-subdued-text);
+    transition: opacity var(--animation-speed) var(--animation-easing);
   }
 }
 
-cart-drawer-component {
+cart-drawer-component,
+search-button {
   transition: opacity var(--animation-speed) var(--animation-easing);
 }
 
