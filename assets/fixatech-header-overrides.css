@@ -73,7 +73,7 @@ header-component.header {
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  padding: 6px 16px;
+  padding: 0;
   background-color: transparent;
   border: 0.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 12px;
@@ -101,7 +101,7 @@ header-component.header {
   position: static;
   flex: 1;
   text-align: left;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--color-input-text);
   white-space: nowrap;
 }
 
