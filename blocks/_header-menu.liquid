@@ -101,15 +101,17 @@
             {% endif %}
             ref="menuitem"
           >
-            {%- if forloop.first -%}
-              <span class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--open">
-                {{- 'icon-menu.svg' | inline_asset_content -}}
-              </span>
-              <span class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--close">
-                {{- 'icon-close.svg' | inline_asset_content -}}
-              </span>
-            {%- endif -%}
-            <span class="menu-list__link-title">{{- link.title -}}</span>
+            <span class="menu-list__link-title">
+              {%- if forloop.first -%}
+                <span class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--open">
+                  {{- 'icon-menu.svg' | inline_asset_content -}}
+                </span>
+                <span class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--close">
+                  {{- 'icon-close.svg' | inline_asset_content -}}
+                </span>
+              {%- endif -%}
+              {{- link.title -}}
+            </span>
           </a>
           {%- if link.links != blank -%}
             <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">

@@ -328,16 +328,11 @@ header-component.header {
   display: flex;
 }
 
-/* First nav item: inline icon + text, aligned to page edge */
-#header-component .menu-list__list-item:first-child .menu-list__link {
-  display: flex;
-  flex-direction: row;
+/* First nav item: icon + text sit inline inside the title span */
+#header-component .menu-list__list-item:first-child .menu-list__link-title {
+  display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-#header-component .menu-list__list-item:first-child .menu-list__link-title {
-  padding-inline-start: 0;
 }
 
 /* Hide icons on mobile — drawer takes over */
