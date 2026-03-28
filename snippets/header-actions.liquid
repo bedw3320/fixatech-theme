@@ -715,13 +715,17 @@
 
   /* ── Fixatech overrides ──────────────────────────────────────── */
 
-  /* Icon-text spacing inside account button */
-  shopify-account:not(:defined) {
-    gap: var(--gap-2xs);
+  /* Account button: fixed icon size + icon-text gap matching phone link */
+  .account-button__icon {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+    flex-shrink: 0;
   }
 
-  .account-button--text shopify-account {
-    gap: var(--gap-2xs);
+  .account-button {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
   }
 
   /* Include cart drawer wrapper in hover dimming effect */
