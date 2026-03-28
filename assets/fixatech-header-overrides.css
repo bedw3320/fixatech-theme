@@ -402,6 +402,11 @@ header-component.header {
   padding-block: 0;
 }
 
+/* Prevent double min-height on 3-level menu items (li + details + summary all set min-height) */
+.menu-drawer__menu > .menu-drawer__list-item:has(.menu-drawer__menu-container) {
+  min-height: auto;
+}
+
 .menu-drawer .fixatech-drawer-arrow svg {
   width: 16px;
   height: 16px;
