@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Nouveautés</h2>",
+            "text": "<h2>PROMOTION DE LA SEMAINE</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -68,7 +68,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Acheter maintenant",
+            "label": "J'en profites!",
             "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button",
