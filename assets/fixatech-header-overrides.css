@@ -380,3 +380,34 @@ header-component.header {
   }
 
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   12. MOBILE DRAWER — colors and arrow icons
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Parent links — yellow to match desktop mega menu */
+.menu-drawer__menu-item--mainlist,
+.menu-drawer__menu-item--parent {
+  color: var(--fixatech-primary, #ffc600);
+}
+
+/* Child links — full white (override Horizon's subdued opacity) */
+.menu-drawer__menu-item--child {
+  color: var(--fixatech-white, #fff);
+}
+
+/* Arrow icon — sizing, color, rotation */
+.fixatech-drawer-arrow {
+  color: var(--fixatech-primary, #ffc600);
+  transition: transform var(--animation-speed, 0.3s) var(--animation-easing, ease);
+}
+
+.fixatech-drawer-arrow svg {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}
+
+/* Rotate arrow 90° when section is expanded */
+details[open] > summary .fixatech-drawer-arrow {
+  transform: rotate(90deg);
+}
