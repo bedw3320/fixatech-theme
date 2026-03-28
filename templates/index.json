@@ -114,7 +114,7 @@
         "section_height": "custom",
         "section_height_custom": 70,
         "section_width": "page-width",
-        "padding-block-start": 20,
+        "padding-block-start": 12,
         "padding-block-end": 48
       }
     },
