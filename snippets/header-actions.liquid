@@ -82,17 +82,17 @@
         {% else %}
           <span
             slot="signed-out-avatar"
-            class="account-button__text header-actions__text-style {% if display_style == 'icon' %}hidden{% else %}mobile:hidden{% endif %}"
-          >
-            {{ 'content.account_title' | t }}
-          </span>
-
-          <span
-            slot="signed-out-avatar"
             class="{% if display_style != 'icon' %}desktop:hidden{% endif %}"
             aria-hidden="true"
           >
             {{ account_icon }}
+          </span>
+
+          <span
+            slot="signed-out-avatar"
+            class="account-button__text header-actions__text-style {% if display_style == 'icon' %}hidden{% else %}mobile:hidden{% endif %}"
+          >
+            {{ 'content.account_title' | t }}
           </span>
         {% endif %}
       </shopify-account>
@@ -711,5 +711,27 @@
     .header__column--right .header-actions--text {
       margin-inline-start: 0;
     }
+  }
+
+  /* ── Fixatech overrides ──────────────────────────────────────── */
+
+  /* Icon-text spacing inside account button */
+  shopify-account:not(:defined) {
+    gap: var(--gap-2xs);
+  }
+
+  .account-button--text shopify-account {
+    gap: var(--gap-2xs);
+  }
+
+  /* Include cart drawer wrapper in hover dimming effect */
+  @media (hover: hover) {
+    .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover) {
+      opacity: var(--opacity-subdued-text);
+    }
+  }
+
+  cart-drawer-component {
+    transition: opacity var(--animation-speed) var(--animation-easing);
   }
 {% endstylesheet %}
