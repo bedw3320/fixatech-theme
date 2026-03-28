@@ -65,8 +65,10 @@ header-component.header {
    ═══════════════════════════════════════════════════════════════ */
 
 #header-component .search-action--hidden-on-drawer {
-  width: clamp(120px, 14vw, 240px);
+  width: 100%;
+  max-width: 240px;
   min-width: 0;
+  overflow: hidden;
 }
 
 #header-component .search-action--hidden-on-drawer .button-unstyled {
@@ -271,10 +273,6 @@ header-component.header {
    ═══════════════════════════════════════════════════════════════ */
 
 @media screen and (max-width: 989px) {
-  #header-component .search-action--hidden-on-drawer {
-    width: clamp(160px, 14vw, 200px);
-  }
-
   #header-component header-actions {
     gap: 20px;
   }
