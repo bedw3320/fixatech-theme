@@ -62,12 +62,12 @@ header-component.header {
    3. SEARCH BAR — styled as bordered input
    ═══════════════════════════════════════════════════════════════ */
 
-.header__column--center .search-action {
+#header-component .search-action--hidden-on-drawer {
   width: clamp(190px, 14vw, 240px);
   flex-shrink: 0;
 }
 
-.header__column--center .search-action .button-unstyled {
+#header-component .search-action--hidden-on-drawer .button-unstyled {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -85,14 +85,14 @@ header-component.header {
   transition: var(--fixatech-transition-fast);
 }
 
-.header__column--center .search-action .button-unstyled:hover,
-.header__column--center .search-action .button-unstyled:focus-within {
+#header-component .search-action--hidden-on-drawer .button-unstyled:hover,
+#header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
   border-color: rgba(255, 255, 255, 0.7);
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Force-show search text label in center column (overrides icon-mode hidden) */
-.header__column--center .search-action .hidden {
+/* Force-show search text label (overrides icon-mode hidden class) */
+#header-component .search-action--hidden-on-drawer .hidden {
   display: block;
   clip: auto;
   width: auto;
@@ -105,13 +105,13 @@ header-component.header {
   white-space: nowrap;
 }
 
-.header__column--center .search-action .svg-wrapper {
+#header-component .search-action--hidden-on-drawer .svg-wrapper {
   display: flex;
   flex-shrink: 0;
   color: var(--fixatech-white, #fff);
 }
 
-.header__column--center .search-action .svg-wrapper svg {
+#header-component .search-action--hidden-on-drawer .svg-wrapper svg {
   width: 20px;
   height: 20px;
 }
@@ -269,7 +269,7 @@ header-component.header {
    ═══════════════════════════════════════════════════════════════ */
 
 @media screen and (max-width: 989px) {
-  .header__column--center .search-action {
+  #header-component .search-action--hidden-on-drawer {
     width: clamp(160px, 14vw, 200px);
   }
 
@@ -283,12 +283,8 @@ header-component.header {
    ═══════════════════════════════════════════════════════════════ */
 
 @media screen and (max-width: 749px) {
-  /* Hide center column (search bar) */
-  .header__column--center .search-action {
-    display: none;
-  }
-
-  #header-component .header__column--center {
+  /* Hide desktop search bar on mobile (drawer_search takes over) */
+  #header-component .search-action--hidden-on-drawer {
     display: none;
   }
 
