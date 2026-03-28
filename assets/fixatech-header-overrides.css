@@ -21,9 +21,11 @@ header-component.header {
   z-index: 100;
 }
 
-#header-component .header__row--top .header__column {
-  display: flex;
-  align-items: center;
+@media screen and (min-width: 750px) {
+  #header-component .header__row--top .header__column {
+    display: flex;
+    align-items: center;
+  }
 }
 
 #header-component .header__navigation-bar-row {
