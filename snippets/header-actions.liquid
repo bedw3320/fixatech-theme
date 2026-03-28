@@ -710,39 +710,4 @@
     }
   }
 
-  /* ── Fixatech overrides ──────────────────────────────────────── */
-
-  /* Account icon: same sizing as cart/phone/heart via svg-wrapper pattern */
-  .account-button .svg-wrapper {
-    height: var(--button-size);
-    width: var(--button-size);
-    flex-shrink: 0;
-  }
-
-  .account-button svg {
-    width: var(--icon-size-md);
-    height: var(--icon-size-md);
-  }
-
-  /* Account button: icon-text gap matching phone link */
-  .account-button {
-    display: flex;
-    align-items: center;
-    gap: var(--gap-sm);
-  }
-
-  .account-button__text {
-    white-space: nowrap;
-  }
-
-  /* Include cart drawer wrapper in hover dimming effect */
-  @media (hover: hover) {
-    .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover) {
-      opacity: var(--opacity-subdued-text);
-    }
-  }
-
-  cart-drawer-component {
-    transition: opacity var(--animation-speed) var(--animation-easing);
-  }
 {% endstylesheet %}

@@ -569,6 +569,16 @@
         class="menu-drawer__utility-links menu-drawer__animated-element"
         style="--menu-drawer-animation-index: {{ linklist.links.size }};"
       >
+        {%- comment -%} Fixatech: account link in drawer (hidden from header on mobile) {%- endcomment -%}
+        {% if shop.customer_accounts_enabled %}
+          <a
+            href="{{ routes.account_url }}"
+            class="menu-drawer__menu-item link focus-inset h3"
+          >
+            <span class="menu-drawer__menu-item-text">{{ 'content.account_title' | t }}</span>
+          </a>
+        {% endif %}
+
         {% liquid
           assign show_language = section.settings.show_language
           if localization.available_languages.size <= 1

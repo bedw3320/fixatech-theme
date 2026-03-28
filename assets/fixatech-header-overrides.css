@@ -1,21 +1,20 @@
 /**
- * Fixatech Header — CSS Overrides (pixel-perfect v2)
+ * Fixatech Header — All custom overrides
  *
- * Figma reference:
+ * Single source of truth for Fixatech header customizations.
+ * Loaded globally from layout/theme.liquid after base.css.
+ *
+ * Breakpoints (matching Horizon standard):
+ *   750px  — mobile → tablet
+ *   990px  — tablet → desktop
+ *
+ * Figma reference (node 492:3786):
  *   Top row: Logo (left) | Search (center) | Mon compte  T. 418 871 1211  Cart  ♡  En (right)
- *   - Search: subtle thin border, 12px radius, 14px text
- *   - Mon compte: NO border, just icon + text
- *   - Phone: NO border, just icon + text
- *   - Cart: icon with yellow badge, no border
- *   - Wishlist heart: icon only, no border
- *   - Language "En": plain text, no border
- *   - Generous spacing between action items (~32px)
- *
- *   Bottom row: ≡ MAGASINER | LE COIN DES PROS | SERVICE DE RÉPARATION ... CARTE-CADEAU (far right)
+ *   Bottom row: ≡ MAGASINER | LE COIN DES PROS | SERVICE DE RÉPARATION ... CARTE-CADEAU (right)
  */
 
 /* ═══════════════════════════════════════════════════════════════
-   1. MAIN HEADER
+   1. HEADER COMPONENT — z-index, column alignment
    ═══════════════════════════════════════════════════════════════ */
 
 header-component.header {
@@ -32,7 +31,35 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   2. SEARCH BAR — subtle thin border, 12px radius
+   2. GRID — center column shrinks, white borders, row padding
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Allow center column to shrink with the grid */
+#header-component .header__columns {
+  --header-center: minmax(0, auto);
+}
+
+/* White bottom border on header rows */
+#header-component .header__row--top:not(.divider--page-width),
+#header-component .header__row--top.divider--page-width .header__columns,
+#header-component .header__row--bottom {
+  border-bottom: var(--border-bottom-width) solid white;
+}
+
+/* Row padding adjustments */
+@media screen and (min-width: 750px) {
+  #header-component .header__columns.spacing-style {
+    padding-top: 36px;
+    padding-bottom: 18px;
+  }
+
+  #header-component .header__columns:where(:not(:has(.header__column--center))) {
+    padding-top: 40px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. SEARCH BAR — styled as bordered input
    ═══════════════════════════════════════════════════════════════ */
 
 .header__column--center .search-action {
@@ -48,7 +75,7 @@ header-component.header {
   width: 100%;
   padding: 10px 16px;
   background-color: transparent;
-  border: 0.5px solid rgba(255, 255, 255, 0.4); /* Figma: subtle, not heavy white */
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 12px;
   color: var(--fixatech-white, #fff);
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
@@ -64,14 +91,14 @@ header-component.header {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Show search text label */
+/* Force-show search text label in center column (overrides icon-mode hidden) */
 .header__column--center .search-action .hidden {
-  display: block !important;
-  clip: auto !important;
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
-  position: static !important;
+  display: block;
+  clip: auto;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  position: static;
   flex: 1;
   text-align: left;
   color: rgba(255, 255, 255, 0.5);
@@ -79,7 +106,7 @@ header-component.header {
 }
 
 .header__column--center .search-action .svg-wrapper {
-  display: flex !important;
+  display: flex;
   flex-shrink: 0;
   color: var(--fixatech-white, #fff);
 }
@@ -90,58 +117,72 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   3. HEADER ACTIONS — ordering + spacing + hover fix
-   Figma: generous space between items, no borders on items
+   4. HEADER ACTIONS — ordering, spacing, hover
    ═══════════════════════════════════════════════════════════════ */
 
-/* Fixatech: disable Horizon's column-wide dimming effect on header actions.
-   Horizon dims all sibling .header-actions__action when one is hovered,
-   causing flicker. Each item should hover independently. */
-.header__column:has(.header-actions__action:hover) .header-actions__action:not(:hover) {
-  opacity: 1 !important;
-}
-
-
-header-actions {
+#header-component header-actions {
   display: flex;
   align-items: center;
-  gap: 32px; /* Figma: generous spacing between action groups */
+  gap: 32px;
 }
 
-header-actions > .account-button { order: 1; }
-header-actions > .fixatech-phone-link { order: 2; }
-header-actions > cart-drawer-component,
-header-actions > .action__cart { order: 3; }
-header-actions > .fixatech-wishlist-link { order: 4; }
+#header-component header-actions > .account-button { order: 1; }
+#header-component header-actions > .fixatech-phone-link { order: 2; }
+#header-component header-actions > cart-drawer-component,
+#header-component header-actions > .action__cart { order: 3; }
+#header-component header-actions > .fixatech-wishlist-link { order: 4; }
+
+/* Cart drawer wrapper participates in hover dimming */
+@media (hover: hover) {
+  .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover) {
+    opacity: var(--opacity-subdued-text);
+  }
+}
+
+cart-drawer-component {
+  transition: opacity var(--animation-speed) var(--animation-easing);
+}
 
 /* ═══════════════════════════════════════════════════════════════
-   4. ACCOUNT BUTTON — Figma: NO border, just icon + text
+   5. ACCOUNT BUTTON — icon + text, sizing, gap
    ═══════════════════════════════════════════════════════════════ */
 
-.header__column--right .account-button {
+#header-component .account-button {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0; /* Fixatech: no padding, no border — just icon + text */
-  border: none !important; /* Figma: no border */
+  padding: 0;
+  border: none;
   border-radius: 0;
-  background: transparent !important;
+  background: transparent;
   cursor: pointer;
 }
 
-.header__column--right .account-button:hover {
+#header-component .account-button:hover {
   opacity: 0.7;
-  background: transparent !important;
+  background: transparent;
 }
 
-/* Force-show account text label */
-.header__column--right .account-button .account-button__text.hidden {
-  display: inline !important;
-  clip: auto !important;
-  width: auto !important;
-  height: auto !important;
-  overflow: visible !important;
-  position: static !important;
+/* Account icon: same sizing as cart/phone/heart via svg-wrapper */
+#header-component .account-button .svg-wrapper {
+  height: var(--button-size);
+  width: var(--button-size);
+  flex-shrink: 0;
+}
+
+#header-component .account-button svg {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+/* Force-show account text (overrides icon-mode hidden) */
+#header-component .account-button .account-button__text.hidden {
+  display: inline;
+  clip: auto;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  position: static;
   color: var(--fixatech-white, #fff);
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
@@ -149,19 +190,23 @@ header-actions > .fixatech-wishlist-link { order: 4; }
   white-space: nowrap;
 }
 
-.header__column--right .account-button__icon {
+#header-component .account-button__text {
+  white-space: nowrap;
+}
+
+#header-component .account-button__icon {
   color: var(--fixatech-white, #fff);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   5. PHONE NUMBER — Figma: NO border, just icon + text
+   6. PHONE NUMBER
    ═══════════════════════════════════════════════════════════════ */
 
 .fixatech-phone-link {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0; /* Figma: no padding, no border */
+  padding: 0;
   border: none;
   color: inherit;
   text-decoration: none;
@@ -176,22 +221,22 @@ header-actions > .fixatech-wishlist-link { order: 4; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   6. CART — yellow badge
+   7. CART — yellow badge
    ═══════════════════════════════════════════════════════════════ */
 
-.header__column--right .header-actions__cart-icon .cart-bubble__background {
-  background-color: var(--fixatech-primary, #ffc600) !important;
+#header-component .header-actions__cart-icon .cart-bubble__background {
+  background-color: var(--fixatech-primary, #ffc600);
   border-radius: 50%;
 }
 
-.header__column--right .header-actions__cart-icon .cart-bubble__text {
-  color: var(--fixatech-background-dark, #141414) !important;
-  font-size: 10px !important;
+#header-component .header-actions__cart-icon .cart-bubble__text {
+  color: var(--fixatech-background-dark, #141414);
+  font-size: 10px;
   font-weight: 700;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   7. WISHLIST HEART — Figma: icon only, no border
+   8. WISHLIST HEART
    ═══════════════════════════════════════════════════════════════ */
 
 .fixatech-wishlist-link {
@@ -213,41 +258,50 @@ header-actions > .fixatech-wishlist-link { order: 4; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   8. NAV BOTTOM ROW — CARTE-CADEAU pushed to far right
+   9. NAV BOTTOM ROW
    ═══════════════════════════════════════════════════════════════ */
 
-/* Fixatech: Figma shows CARTE-CADEAU on the far right of nav row */
 #header-component .header__row--bottom overflow-list,
 #header-component .header__row--bottom .header-menu {
   width: 100%;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   9. RESPONSIVE
+   10. RESPONSIVE — tablet (< 990px)
    ═══════════════════════════════════════════════════════════════ */
 
-@media screen and (max-width: 1511px) {
+@media screen and (max-width: 989px) {
   .header__column--center .search-action {
     width: clamp(160px, 14vw, 200px);
   }
 
-  header-actions {
-    gap: 20px; /* tighter on tablet */
+  #header-component header-actions {
+    gap: 20px;
   }
 }
 
-@media screen and (max-width: 767px) {
+/* ═══════════════════════════════════════════════════════════════
+   11. RESPONSIVE — mobile (< 750px, Horizon standard breakpoint)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media screen and (max-width: 749px) {
+  /* Hide center column (search bar) */
   .header__column--center .search-action {
     display: none;
   }
 
+  #header-component .header__column--center {
+    display: none;
+  }
+
+  /* Header row: fixed height, flex layout */
   #header-component .header__row--top {
     min-height: 72px;
   }
 
   #header-component .header__row--top .header__columns {
     min-height: 72px;
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding-inline: 16px;
@@ -257,42 +311,36 @@ header-actions > .fixatech-wishlist-link { order: 4; }
     flex: 0 0 auto;
   }
 
+  /* Hide duplicate mobile search in left column */
   .header__column--left .search-action--hidden-on-menu {
-    display: none !important;
+    display: none;
   }
 
+  /* Center logo on mobile */
   .header__column--left .header-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  #header-component .header__column--center {
-    display: none !important;
-  }
-
   #header-component .header__column--right {
     flex: 0 0 auto;
   }
 
-  header-actions {
+  #header-component header-actions {
     gap: 12px;
   }
 
-  /* Mobile: icon only, no text, no border */
-  .header__column--right .account-button {
-    padding: 0;
-  }
-
-  .header__column--right .account-button .account-button__text.hidden {
-    display: none !important;
+  /* Hide everything except cart on mobile */
+  #header-component .account-button {
+    display: none;
   }
 
   .fixatech-phone-link {
-    display: none !important;
+    display: none;
   }
 
   .fixatech-wishlist-link {
-    display: none !important;
+    display: none;
   }
 }
