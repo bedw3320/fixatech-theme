@@ -281,6 +281,50 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   9b. MEGA MENU — hamburger / X toggle on first nav item
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Icon sizing and layout */
+#header-component .fixatech-menu-icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--fixatech-white, #fff);
+}
+
+#header-component .fixatech-menu-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Default: show hamburger, hide X */
+#header-component .fixatech-menu-icon--close {
+  display: none;
+}
+
+/* When mega menu is expanded: show X, hide hamburger */
+#header-component .menu-list__link[aria-expanded="true"] .fixatech-menu-icon--open {
+  display: none;
+}
+
+#header-component .menu-list__link[aria-expanded="true"] .fixatech-menu-icon--close {
+  display: flex;
+}
+
+/* Add gap between icon and text on the first item */
+#header-component .menu-list__list-item:first-child .menu-list__link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Hide icons on mobile — drawer takes over */
+@media screen and (max-width: 749px) {
+  #header-component .fixatech-menu-icon {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    10. RESPONSIVE — tablet (< 990px)
    ═══════════════════════════════════════════════════════════════ */
 
