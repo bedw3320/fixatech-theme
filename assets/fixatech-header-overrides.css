@@ -257,6 +257,30 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   9. MEGA MENU — parent links yellow, child links full white
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Parent category links (e.g. OUTILLAGE, À LA MAIN) — Fixatech yellow */
+#header-component .mega-menu__link--parent {
+  color: var(--fixatech-primary, #ffc600);
+}
+
+/* Child links — full-opacity white (Horizon default is subdued) */
+#header-component .mega-menu__link:not(.mega-menu__link--parent) {
+  color: var(--fixatech-white, #fff);
+}
+
+/* Hover: dim individual link */
+#header-component .mega-menu__link--parent:hover {
+  color: var(--fixatech-primary, #ffc600);
+  opacity: 0.7;
+}
+
+#header-component .mega-menu__link:not(.mega-menu__link--parent):hover {
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    10. RESPONSIVE — tablet (< 990px)
    ═══════════════════════════════════════════════════════════════ */
 
