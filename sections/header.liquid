@@ -1128,17 +1128,9 @@
     }
   }
 
-  /* Prevent search from overlapping logo on narrow desktop viewports */
-  @media screen and (min-width: 750px) {
-    .header__column--left {
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .header__column--center .search-action {
-      min-width: 0;
-      max-width: 100%;
-    }
+  /* Allow center column to shrink with the grid instead of forcing overflow */
+  .header__columns {
+    --header-center: minmax(0, auto);
   }
 {% endstylesheet %}
 
