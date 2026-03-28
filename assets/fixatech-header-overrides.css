@@ -138,8 +138,6 @@ header-component.header {
 #header-component header-actions > .fixatech-phone-link { order: 2; }
 #header-component header-actions > cart-drawer-component,
 #header-component header-actions > .action__cart { order: 3; }
-#header-component header-actions > .fixatech-wishlist-link { order: 4; }
-
 /* Disable Horizon's column-wide sibling dimming — each item hovers independently */
 @media (hover: hover) {
   #header-component .header__column:has(.header-actions__action:hover) .header-actions__action:not(:hover),
@@ -151,8 +149,7 @@ header-component.header {
 
 /* Individual hover: each element dims itself on hover */
 #header-component .header-actions__action:hover,
-#header-component .fixatech-phone-link:hover,
-#header-component .fixatech-wishlist-link:hover {
+#header-component .fixatech-phone-link:hover {
   opacity: 0.7;
 }
 
@@ -246,25 +243,7 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   8. WISHLIST HEART
-   ═══════════════════════════════════════════════════════════════ */
-
-.fixatech-wishlist-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  color: inherit;
-  text-decoration: none;
-}
-
-.fixatech-wishlist-link svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   9. NAV BOTTOM ROW
+   8. NAV BOTTOM ROW
    ═══════════════════════════════════════════════════════════════ */
 
 #header-component .header__row--bottom overflow-list,
@@ -309,7 +288,4 @@ header-component.header {
     display: none;
   }
 
-  #header-component .fixatech-wishlist-link {
-    display: none;
-  }
 }

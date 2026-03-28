@@ -108,8 +108,6 @@
         "show_phone": true,
         "phone_text": "T. 418 871 1211",
         "phone_link": "tel:+14188711211",
-        "show_wishlist": true,
-        "wishlist_url": "/pages/wishlist",
         "show_account_label": true,
         "color_scheme_top": "scheme-4",
         "color_scheme_bottom": "scheme-4",
