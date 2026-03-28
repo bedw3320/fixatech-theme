@@ -39,10 +39,10 @@
           "type": "_search-input",
           "static": true,
           "settings": {
-            "width": "custom",
+            "width": "fill",
             "custom_width": 50,
             "inherit_color_scheme": true,
-            "color_scheme": ""
+            "color_scheme": "scheme-3"
           },
           "blocks": {}
         }
