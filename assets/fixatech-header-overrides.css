@@ -132,20 +132,20 @@ header-component.header {
 #header-component header-actions > .action__cart { order: 3; }
 #header-component header-actions > .fixatech-wishlist-link { order: 4; }
 
-/* Hover dimming: all action items dim when one is hovered (matching Horizon's
-   pattern for .header-actions__action). Custom wrappers like cart-drawer-component
-   and search-button need explicit rules since Horizon only targets .header-actions__action. */
+/* Disable Horizon's column-wide sibling dimming — each item hovers independently */
 @media (hover: hover) {
-  .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover),
-  .header__column:has(.header-actions__action:hover) search-button:not(:hover) {
-    opacity: var(--opacity-subdued-text);
-    transition: opacity var(--animation-speed) var(--animation-easing);
+  #header-component .header__column:has(.header-actions__action:hover) .header-actions__action:not(:hover),
+  #header-component .header__column:has(.header-actions__action:hover) cart-drawer-component:not(:hover),
+  #header-component .header__column:has(.header-actions__action:hover) search-button:not(:hover) {
+    opacity: 1;
   }
 }
 
-cart-drawer-component,
-search-button {
-  transition: opacity var(--animation-speed) var(--animation-easing);
+/* Individual hover: each element dims itself on hover */
+#header-component .header-actions__action:hover,
+#header-component .fixatech-phone-link:hover,
+#header-component .fixatech-wishlist-link:hover {
+  opacity: 0.7;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -164,7 +164,6 @@ search-button {
 }
 
 #header-component .account-button:hover {
-  opacity: 0.7;
   background: transparent;
 }
 
@@ -221,9 +220,7 @@ search-button {
   font-weight: 500;
 }
 
-.fixatech-phone-link:hover {
-  opacity: 0.7;
-}
+/* hover handled by shared rule in section 4 */
 
 /* ═══════════════════════════════════════════════════════════════
    7. CART — yellow badge
@@ -256,10 +253,6 @@ search-button {
 .fixatech-wishlist-link svg {
   width: 22px;
   height: 22px;
-}
-
-.fixatech-wishlist-link:hover {
-  opacity: 0.7;
 }
 
 /* ═══════════════════════════════════════════════════════════════
