@@ -54,8 +54,8 @@ header-component.header {
 /* Row padding adjustments */
 @media screen and (min-width: 750px) {
   #header-component .header__columns.spacing-style {
-    padding-top: 36px;
-    padding-bottom: 18px;
+    padding-top: 24px;
+    padding-bottom: 24px;
   }
 
   #header-component .header__columns:where(:not(:has(.header__column--center))) {
