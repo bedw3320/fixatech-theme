@@ -283,37 +283,13 @@ header-component.header {
    ═══════════════════════════════════════════════════════════════ */
 
 @media screen and (max-width: 749px) {
-  /* Hide desktop search bar on mobile (drawer_search takes over) */
+  /* Hide desktop search bar — Horizon's drawer_search takes over */
   #header-component .search-action--hidden-on-drawer {
     display: none;
   }
 
-  /* Header row: fixed height, flex layout */
   #header-component .header__row--top {
     min-height: 72px;
-  }
-
-  #header-component .header__row--top .header__columns {
-    min-height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline: 16px;
-  }
-
-  #header-component .header__column--left {
-    flex: 0 0 auto;
-  }
-
-  /* Center logo on mobile */
-  .header__column--left .header-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  #header-component .header__column--right {
-    flex: 0 0 auto;
   }
 
   #header-component header-actions {
