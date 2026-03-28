@@ -397,9 +397,8 @@ header-component.header {
 }
 
 /* Arrow icon — sizing, color, no extra padding */
-.menu-drawer__menu-item > .fixatech-drawer-arrow {
+.fixatech-drawer-arrow {
   color: var(--fixatech-white, #fff);
-  padding-block: 0;
 }
 
 .menu-drawer .fixatech-drawer-arrow svg {
