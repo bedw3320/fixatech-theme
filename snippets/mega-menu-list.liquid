@@ -134,6 +134,11 @@
         <span class="wrap-text">
           {{- link.title -}}
         </span>
+        {%- if link.links != blank -%}
+          <span class="svg-wrapper mega-menu__arrow" aria-hidden="true">
+            {{- 'icon-arrow.svg' | inline_asset_content -}}
+          </span>
+        {%- endif -%}
       </a>
       {% if link.links != blank %}
         <ul
