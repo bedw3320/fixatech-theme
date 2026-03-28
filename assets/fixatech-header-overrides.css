@@ -396,15 +396,10 @@ header-component.header {
   color: var(--fixatech-white, #fff);
 }
 
-/* Arrow icon — sizing, color, rotation */
-.fixatech-drawer-arrow {
+/* Arrow icon — sizing, color, no extra padding */
+.menu-drawer__menu-item > .fixatech-drawer-arrow {
   color: var(--fixatech-white, #fff);
   padding-block: 0;
-}
-
-/* Prevent double min-height on 3-level menu items (li + details + summary all set min-height) */
-.menu-drawer__menu > .menu-drawer__list-item:has(.menu-drawer__menu-container) {
-  min-height: auto;
 }
 
 .menu-drawer .fixatech-drawer-arrow svg {
