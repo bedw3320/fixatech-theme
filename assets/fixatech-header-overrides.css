@@ -303,11 +303,11 @@ header-component.header {
     display: none;
   }
 
-  .fixatech-phone-link {
+  #header-component .fixatech-phone-link {
     display: none;
   }
 
-  .fixatech-wishlist-link {
+  #header-component .fixatech-wishlist-link {
     display: none;
   }
 }
