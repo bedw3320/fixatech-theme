@@ -398,7 +398,7 @@ header-component.header {
 
 /* Arrow icon — sizing, color, rotation */
 .fixatech-drawer-arrow {
-  color: var(--fixatech-primary, #ffc600);
+  color: var(--fixatech-white, #fff);
   transition: transform var(--animation-speed, 0.3s) var(--animation-easing, ease);
 }
 
