@@ -27,16 +27,6 @@ header-component.header {
     align-items: center;
   }
 
-  /* Let logo scale down when grid column shrinks on narrow viewports */
-  #header-component .header-logo {
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  #header-component .header-logo__image {
-    max-width: 100%;
-    height: auto;
-  }
 }
 
 #header-component .header__navigation-bar-row {
@@ -47,9 +37,11 @@ header-component.header {
    2. GRID — center column shrinks, white borders, row padding
    ═══════════════════════════════════════════════════════════════ */
 
-/* Allow center column to shrink with the grid */
-#header-component .header__columns {
-  --header-center: minmax(0, auto);
+/* When search is in center: logo and actions keep natural width, search fills the rest */
+#header-component .header__columns:has(.header__column--center) {
+  --header-left: max-content;
+  --header-center: 1fr;
+  --header-right: max-content;
 }
 
 /* White bottom border on header rows */
@@ -77,7 +69,8 @@ header-component.header {
 
 @media screen and (min-width: 750px) {
   #header-component .search-action--hidden-on-drawer {
-    width: clamp(200px, 14vw, 240px);
+    width: 100%;
+    max-width: 240px;
     overflow: hidden;
   }
 }
