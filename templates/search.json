@@ -156,6 +156,19 @@
               },
               "blocks": {}
             },
+            "inventory_search": {
+              "type": "product-inventory",
+              "name": "Inventory",
+              "settings": {
+                "inventory_threshold": 5,
+                "show_inventory_quantity": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "price_fYkUgG": {
               "type": "price",
               "name": "t:names.product_price",
@@ -222,6 +235,7 @@
             "product_card_gallery_cFExAi",
             "product_title_j7qXTx",
             "barcode_CVNhyk",
+            "inventory_search",
             "price_fYkUgG",
             "buy_buttons_zMLcr7"
           ]
