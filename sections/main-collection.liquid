@@ -1,21 +1,3 @@
-
-
-{% comment %} Fixatech: inject section + global settings as CSS custom properties {% endcomment %}
-{% style %}
-  .section-{{ section.id }} {
-    --fixatech-primary: {{ settings.fixatech_primary | default: '#FFC600' }};
-    --fixatech-border: {{ settings.fixatech_border | default: '#D9D9D9' }};
-    --fixatech-text-secondary: {{ settings.fixatech_text_secondary | default: '#666666' }};
-    --fixatech-radius: {{ settings.fixatech_radius | default: 12 }}px;
-    --fixatech-side-padding: {{ settings.fixatech_side_padding | default: 64 }}px;
-    --fixatech-content-width: {{ settings.fixatech_content_width | default: 1312 }}px;
-    --fixatech-title-size: {{ section.settings.fixatech_title_size | default: 40 }}px;
-    --fixatech-sidebar-width: {{ section.settings.fixatech_sidebar_width | default: 300 }}px;
-    --fixatech-title-border: {% if section.settings.fixatech_title_border %}1px solid #000{% else %}none{% endif %};
-    --fixatech-pagination-accent: {% if section.settings.fixatech_pagination_accent %}{{ settings.fixatech_primary | default: '#FFC600' }}{% else %}transparent{% endif %};
-  }
-{% endstyle %}
-
 <script
   src="{{ 'results-list.js' | asset_url }}"
   type="module"
@@ -280,51 +262,6 @@
       "step": 1,
       "unit": "px",
       "default": 8
-    },
-    {
-      "type": "header",
-      "content": "Fixatech — Collection title"
-    },
-    {
-      "type": "range",
-      "id": "fixatech_title_size",
-      "label": "Title font size (desktop)",
-      "min": 24,
-      "max": 64,
-      "step": 2,
-      "unit": "px",
-      "default": 40
-    },
-    {
-      "type": "checkbox",
-      "id": "fixatech_title_border",
-      "label": "Show bottom border on title",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Fixatech — Filters"
-    },
-    {
-      "type": "range",
-      "id": "fixatech_sidebar_width",
-      "label": "Sidebar filter width",
-      "min": 200,
-      "max": 400,
-      "step": 10,
-      "unit": "px",
-      "default": 300,
-      "info": "Width of the sidebar filter panel on desktop"
-    },
-    {
-      "type": "header",
-      "content": "Fixatech — Pagination"
-    },
-    {
-      "type": "checkbox",
-      "id": "fixatech_pagination_accent",
-      "label": "Use accent color for active page",
-      "default": true
     }
   ],
   "presets": [
