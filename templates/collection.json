@@ -229,8 +229,8 @@
         "padding-block-end": 32,
         "fixatech_title_size": 40,
         "fixatech_title_border": true,
-        "fixatech_sidebar_width": 300,
-        "fixatech_pagination_accent": true
+        "fixatech_sidebar_width": 200,
+        "fixatech_pagination_accent": false
       }
     }
   },
