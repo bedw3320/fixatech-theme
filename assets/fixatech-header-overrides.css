@@ -399,6 +399,7 @@ header-component.header {
 /* Arrow icon — sizing, color, rotation */
 .fixatech-drawer-arrow {
   color: var(--fixatech-white, #fff);
+  padding-block: 0;
 }
 
 .menu-drawer .fixatech-drawer-arrow svg {
