@@ -402,7 +402,7 @@ header-component.header {
 }
 
 .fixatech-drawer-arrow svg {
-  width: var(--icon-size-xs);
-  height: var(--icon-size-xs);
+  width: 16px;
+  height: 16px;
 }
 
