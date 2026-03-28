@@ -106,7 +106,6 @@
         "actions_font": "body",
         "actions_text_case": "none",
         "show_phone": true,
-        "show_phone_icon": false,
         "phone_text": "T. 418 871 1211",
         "phone_link": "tel:+14188711211",
         "show_account_label": true,
