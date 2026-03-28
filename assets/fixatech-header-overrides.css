@@ -328,12 +328,16 @@ header-component.header {
   display: flex;
 }
 
-/* Add gap between icon and text on the first item — override Horizon's column direction */
+/* First nav item: inline icon + text, aligned to page edge */
 #header-component .menu-list__list-item:first-child .menu-list__link {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 6px;
+}
+
+#header-component .menu-list__list-item:first-child .menu-list__link-title {
+  padding-inline-start: 0;
 }
 
 /* Hide icons on mobile — drawer takes over */
