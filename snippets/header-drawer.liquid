@@ -96,9 +96,10 @@
           role="list"
         >
           {%- comment -%}
-            Handle menus with fewer than 3 levels of links
+            Fixatech: always use slide-forward pattern for all menu items.
+            Original condition was: if linklist.levels < 3
           {%- endcomment -%}
-          {% if linklist.levels < 3 %}
+          {% if false %}
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}

@@ -55,6 +55,7 @@
     {% liquid
       assign block_settings = block.settings
       assign menu_content_type = block_settings.menu_style | default: 'text'
+      assign mega_menu_layout = block_settings.mega_menu_layout | default: 'cascade'
       assign image_border_radius = block_settings.image_border_radius
       assign color_scheme_classes = ''
       assign color_scheme_setting_id = 'color_scheme_' | append: section.settings.menu_row
@@ -135,7 +136,8 @@
                       grid_columns_count_collection_images: 8,
                       menu_content_type: menu_content_type,
                       content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius
+                      image_border_radius: image_border_radius,
+                      mega_menu_layout: mega_menu_layout
                     %}
                   </div>
                 </div>
@@ -164,6 +166,7 @@
       class="header-menu"
       {{ block.shopify_attributes }}
       data-hydration-key="header-menu"
+      data-mega-menu-layout="{{ mega_menu_layout }}"
     >
       <div class="header-menu__inner">
         <nav
@@ -786,6 +789,22 @@
         }
       ],
       "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "mega_menu_layout",
+      "label": "Mega menu layout",
+      "options": [
+        {
+          "value": "cascade",
+          "label": "Cascade (2-column flyout)"
+        },
+        {
+          "value": "grid",
+          "label": "Grid (show all)"
+        }
+      ],
+      "default": "cascade"
     },
     {
       "type": "header",

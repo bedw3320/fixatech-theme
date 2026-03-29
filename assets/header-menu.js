@@ -31,6 +31,7 @@ class HeaderMenu extends Component {
     onDocumentLoaded(this.#preloadImages);
     window.addEventListener('resize', this.#resizeListener);
     this.overflowMenu?.addEventListener('pointerleave', this.#overflowSubmenuListener);
+    this.#setupCascadeListeners();
   }
 
   disconnectedCallback() {
@@ -71,6 +72,8 @@ class HeaderMenu extends Component {
    */
   #state = {
     activeItem: null,
+    /** @type {HTMLElement | null} */
+    activeCascadeParent: null,
   };
 
   /**
@@ -223,6 +226,8 @@ class HeaderMenu extends Component {
     if (submenu) {
       delete submenu.dataset.active;
     }
+
+    this.#resetCascade();
   };
 
   #getOverflowListLinksHeight() {
@@ -278,6 +283,85 @@ class HeaderMenu extends Component {
     const images = this.querySelectorAll('img[loading="lazy"]');
     images?.forEach((image) => image.removeAttribute('loading'));
   };
+
+  /**
+   * Set up hover/focus listeners on cascade parent triggers.
+   * Only activates when data-mega-menu-layout="cascade".
+   */
+  #setupCascadeListeners() {
+    if (this.dataset.megaMenuLayout !== 'cascade') return;
+
+    this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
+      trigger.addEventListener('pointerenter', this.#activateCascadeParent);
+      trigger.addEventListener('focus', this.#activateCascadeParent);
+    });
+  }
+
+  /**
+   * Activate a 2nd-level parent and show its child panel in column 2.
+   * @param {Event} event
+   */
+  #activateCascadeParent = (event) => {
+    const trigger = /** @type {HTMLElement} */ (event.currentTarget);
+    const panelId = trigger.dataset.cascadeTrigger;
+    const submenuContainer = trigger.closest('.menu-list__submenu');
+    if (!submenuContainer || !panelId) return;
+
+    // Deactivate previous cascade parent
+    if (this.#state.activeCascadeParent && this.#state.activeCascadeParent !== trigger) {
+      this.#deactivateCascadeParent(submenuContainer);
+    }
+
+    // Activate new cascade parent
+    trigger.ariaExpanded = 'true';
+    const panel = submenuContainer.querySelector(`[data-cascade-panel="${panelId}"]`);
+    if (panel) {
+      panel.hidden = false;
+    }
+    this.#state.activeCascadeParent = trigger;
+
+    // Recalculate submenu height since column 2 content changed
+    requestAnimationFrame(() => {
+      const height = submenuContainer.offsetHeight;
+      if (height > 0 && this.headerComponent) {
+        this.headerComponent.style.setProperty('--submenu-height', `${height}px`);
+        this.#setFullOpenHeaderHeight(height);
+      }
+    });
+  };
+
+  /**
+   * Deactivate the current cascade parent and hide its panel.
+   * @param {Element} submenuContainer
+   */
+  #deactivateCascadeParent(submenuContainer) {
+    const prev = this.#state.activeCascadeParent;
+    if (!prev) return;
+
+    prev.ariaExpanded = 'false';
+    const prevPanelId = prev.dataset.cascadeTrigger;
+    if (prevPanelId) {
+      const prevPanel = submenuContainer.querySelector(`[data-cascade-panel="${prevPanelId}"]`);
+      if (prevPanel) {
+        prevPanel.hidden = true;
+      }
+    }
+  }
+
+  /**
+   * Reset all cascade state — called when the mega menu closes.
+   */
+  #resetCascade() {
+    if (this.dataset.megaMenuLayout !== 'cascade') return;
+
+    this.#state.activeCascadeParent = null;
+    this.querySelectorAll('[data-cascade-panel]').forEach((panel) => {
+      /** @type {HTMLElement} */ (panel).hidden = true;
+    });
+    this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
+      /** @type {HTMLElement} */ (trigger).ariaExpanded = 'false';
+    });
+  }
 
   #cleanupMutationObserver() {
     this.#submenuMutationObserver?.disconnect();
