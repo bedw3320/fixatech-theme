@@ -316,7 +316,7 @@ class HeaderMenu extends Component {
     trigger.ariaExpanded = 'true';
     const panel = submenuContainer.querySelector(`[data-cascade-panel="${panelId}"]`);
     if (panel) {
-      panel.hidden = false;
+      panel.classList.add('is-active');
     }
     this.#state.activeCascadeParent = trigger;
 
@@ -343,7 +343,7 @@ class HeaderMenu extends Component {
     if (prevPanelId) {
       const prevPanel = submenuContainer.querySelector(`[data-cascade-panel="${prevPanelId}"]`);
       if (prevPanel) {
-        prevPanel.hidden = true;
+        prevPanel.classList.remove('is-active');
       }
     }
   }
@@ -356,7 +356,7 @@ class HeaderMenu extends Component {
 
     this.#state.activeCascadeParent = null;
     this.querySelectorAll('[data-cascade-panel]').forEach((panel) => {
-      /** @type {HTMLElement} */ (panel).hidden = true;
+      panel.classList.remove('is-active');
     });
     this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
       /** @type {HTMLElement} */ (trigger).ariaExpanded = 'false';

@@ -450,20 +450,29 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parent-item .me
   justify-content: space-between;
   width: 100%;
   padding-block: var(--padding-xs, 8px);
+  transition: opacity 150ms ease;
 }
 
-/* Children panel area — fill remaining width */
+/* Children panel area — relative for absolute-positioned panels */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-children {
+  position: relative;
   min-width: 0;
 }
 
-/* Panels hidden by default */
-header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel[hidden] {
-  display: none;
+/* Child panels: opacity + visibility for smooth fade (can't animate display) */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease, visibility 150ms ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
-header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel:not([hidden]) {
-  display: block;
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel.is-active {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Child list: multi-column only when there's enough width (CSS handles it) */
@@ -478,6 +487,11 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-list li {
 
 /* Active parent: full opacity + color stays yellow (from section 9) */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"] {
+  opacity: 1;
+}
+
+/* Active parent stays full opacity even on hover */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"]:hover {
   opacity: 1;
 }
 
