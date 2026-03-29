@@ -11,6 +11,8 @@
   @param {number} [image_border_radius] - Border radius for content images.
   @param {object} [section] - The section object.
 
+  @param {string} [mega_menu_layout] - 'cascade' for 2-column flyout, 'grid' for default flat grid.
+
   @example
   {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
 {%- enddoc -%}
@@ -71,6 +73,66 @@
     endif
   endif
 %}
+{% if mega_menu_layout == 'cascade' %}
+  {%- comment -%}
+    CASCADE LAYOUT: 2-column flyout
+    Column 1 = parent links, Column 2 = child panels (hidden until hover)
+  {%- endcomment -%}
+  <div class="mega-menu__cascade" data-cascade-menu data-menu-list-id="{{ id }}">
+    <ul class="mega-menu__cascade-parents list-unstyled">
+      {% for link in parent_link.links %}
+        <li class="mega-menu__cascade-parent-item">
+          <a
+            href="{{ link.url }}"
+            class="mega-menu__link {% if link.links != blank %}mega-menu__link--parent{% endif %}"
+            {% if link.links != blank %}
+              data-cascade-trigger="{{ forloop.index }}"
+              aria-expanded="false"
+            {% endif %}
+          >
+            <span class="wrap-text">{{ link.title }}</span>
+            {%- if link.links != blank -%}
+              <span class="svg-wrapper mega-menu__arrow" aria-hidden="true">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+            {%- endif -%}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="mega-menu__cascade-children" data-cascade-children>
+      {% for link in parent_link.links %}
+        {% if link.links != blank %}
+          <div
+            class="mega-menu__cascade-child-panel"
+            data-cascade-panel="{{ forloop.index }}"
+            hidden
+          >
+            <ul class="mega-menu__cascade-child-list list-unstyled"
+              {%- if link.links.size > 20 -%}
+                style="column-count: 3;"
+              {%- elsif link.links.size > 10 -%}
+                style="column-count: 2;"
+              {%- endif -%}
+            >
+              {% for childLink in link.links %}
+                <li>
+                  <a
+                    href="{{ childLink.url }}"
+                    class="mega-menu__link"
+                  >
+                    <span class="wrap-text">{{ childLink.title }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% else %}
 <ul
   data-menu-list-id="{{ id }}"
   class="mega-menu__list list-unstyled"
@@ -348,3 +410,4 @@
       </ul>
     </span>
 {% endcase %}
+{% endif %}

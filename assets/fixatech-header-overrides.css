@@ -406,3 +406,74 @@ header-component.header {
   height: 16px;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   13. CASCADE MEGA MENU — 2-column flyout layout
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 2-column grid: parents (left, ~250px) | children (right, 1fr) */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade {
+  display: grid;
+  grid-template-columns: minmax(200px, 280px) 1fr;
+  gap: 0 var(--padding-xl, 32px);
+  width: 100%;
+  align-items: start;
+}
+
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parents {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding-right: var(--padding-xl, 32px);
+}
+
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parent-item .mega-menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-block: var(--padding-xs, 8px);
+}
+
+/* Children panel area */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-children {
+  min-height: 100%;
+}
+
+/* Panels hidden by default */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel[hidden] {
+  display: none;
+}
+
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel:not([hidden]) {
+  display: block;
+}
+
+/* Child list inside panels */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-list {
+  gap: 0;
+}
+
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-list li {
+  break-inside: avoid;
+}
+
+/* Active parent: full opacity + color stays yellow (from section 9) */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"] {
+  opacity: 1;
+}
+
+/* Non-active parents dim slightly when one is active */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parents:has([aria-expanded="true"]) .mega-menu__link--parent:not([aria-expanded="true"]) {
+  opacity: 0.6;
+}
+
+/* Hide the grid-based mega-menu layout when in cascade mode */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__grid:has(.mega-menu__cascade) {
+  display: contents;
+}
+
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__list {
+  display: contents;
+}
+
