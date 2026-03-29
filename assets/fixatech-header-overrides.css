@@ -288,10 +288,15 @@ header-component.header {
   height: 16px;
 }
 
-/* Hover: dim individual link */
+/* Hover: dim individual link (grid mode only — cascade handles its own hover) */
 #header-component .mega-menu__link--parent:hover {
   color: var(--fixatech-primary, #ffc600);
   opacity: 0.7;
+}
+
+/* Cascade mode: hovered parent stays full yellow */
+#header-component header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent:hover {
+  opacity: 1;
 }
 
 #header-component .mega-menu__link:not(.mega-menu__link--parent):hover {
@@ -490,8 +495,8 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expan
   opacity: 1;
 }
 
-/* Active parent stays full opacity even on hover */
-header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"]:hover {
+/* Active parent stays full opacity even on hover (match #header-component specificity) */
+#header-component header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"]:hover {
   opacity: 1;
 }
 
