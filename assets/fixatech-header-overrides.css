@@ -486,3 +486,23 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parents:has([ar
   opacity: 0.6;
 }
 
+/* 3-column variant: parents | children | featured product */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade--with-featured {
+  grid-template-columns: minmax(200px, 280px) 1fr 280px;
+}
+
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  padding-left: var(--padding-xl, 32px);
+}
+
+/* Hide featured column on tablet — not enough room */
+@media screen and (max-width: 989px) {
+  header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
+    display: none;
+  }
+  header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade--with-featured {
+    grid-template-columns: minmax(200px, 280px) 1fr;
+  }
+}
+

@@ -78,7 +78,13 @@
     CASCADE LAYOUT: 2-column flyout
     Column 1 = parent links, Column 2 = child panels (hidden until hover)
   {%- endcomment -%}
-  <div class="mega-menu__cascade" data-cascade-menu data-menu-list-id="{{ id }}">
+  {%- liquid
+    assign cascade_has_featured = false
+    if menu_content_type == 'featured_products' and collection_object != blank
+      assign cascade_has_featured = true
+    endif
+  -%}
+  <div class="mega-menu__cascade{% if cascade_has_featured %} mega-menu__cascade--with-featured{% endif %}" data-cascade-menu data-menu-list-id="{{ id }}">
     <ul class="mega-menu__cascade-parents list-unstyled">
       {% for link in parent_link.links %}
         <li class="mega-menu__cascade-parent-item">
@@ -125,6 +131,23 @@
         {% endif %}
       {% endfor %}
     </div>
+
+    {%- comment -%} Column 3: featured product card (1 product) {%- endcomment -%}
+    {%- if cascade_has_featured and eager_loading -%}
+      <div class="mega-menu__cascade-featured" style="--resource-card-corner-radius: {{ image_border_radius }}px;">
+        {% paginate collection_object.products by 1 %}
+          {% for item in collection_object.products %}
+            {% render 'resource-card',
+              resource: item,
+              resource_type: 'product',
+              image_hover: true,
+              image_aspect_ratio: content_aspect_ratio,
+              image_sizes: '(min-width: 990px) 280px, 0px'
+            %}
+          {% endfor %}
+        {% endpaginate %}
+      </div>
+    {%- endif -%}
   </div>
 {% else %}
 <ul
