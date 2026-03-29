@@ -410,6 +410,23 @@ header-component.header {
    13. CASCADE MEGA MENU — 2-column flyout layout
    ═══════════════════════════════════════════════════════════════ */
 
+/*
+ * The cascade div sits inside .mega-menu__grid (a 6-col CSS grid from
+ * Horizon's scoped stylesheet) and .menu-list__submenu-inner (display: flex).
+ * We need to neutralize both parent layouts so the cascade can control its
+ * own 2-column grid.
+ */
+
+/* Neutralize Horizon's .mega-menu__grid — let cascade control layout */
+header-menu[data-mega-menu-layout="cascade"] .mega-menu__grid {
+  display: block;
+}
+
+/* Ensure submenu-inner stretches cascade to full width */
+header-menu[data-mega-menu-layout="cascade"] .menu-list__submenu-inner {
+  display: block;
+}
+
 /* 2-column grid: parents (left, ~250px) | children (right, 1fr) */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade {
   display: grid;
@@ -435,9 +452,9 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parent-item .me
   padding-block: var(--padding-xs, 8px);
 }
 
-/* Children panel area */
+/* Children panel area — fill remaining width */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-children {
-  min-height: 100%;
+  min-width: 0;
 }
 
 /* Panels hidden by default */
@@ -449,9 +466,10 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-panel:not
   display: block;
 }
 
-/* Child list inside panels */
+/* Child list: multi-column only when there's enough width (CSS handles it) */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-list {
-  gap: 0;
+  column-width: 200px;
+  column-gap: var(--padding-xl, 32px);
 }
 
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-list li {
@@ -466,14 +484,5 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expan
 /* Non-active parents dim slightly when one is active */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parents:has([aria-expanded="true"]) .mega-menu__link--parent:not([aria-expanded="true"]) {
   opacity: 0.6;
-}
-
-/* Hide the grid-based mega-menu layout when in cascade mode */
-header-menu[data-mega-menu-layout="cascade"] .mega-menu__grid:has(.mega-menu__cascade) {
-  display: contents;
-}
-
-header-menu[data-mega-menu-layout="cascade"] .mega-menu__list {
-  display: contents;
 }
 

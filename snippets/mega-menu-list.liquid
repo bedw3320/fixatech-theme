@@ -109,13 +109,7 @@
             data-cascade-panel="{{ forloop.index }}"
             hidden
           >
-            <ul class="mega-menu__cascade-child-list list-unstyled"
-              {%- if link.links.size > 20 -%}
-                style="column-count: 3;"
-              {%- elsif link.links.size > 10 -%}
-                style="column-count: 2;"
-              {%- endif -%}
-            >
+            <ul class="mega-menu__cascade-child-list list-unstyled">
               {% for childLink in link.links %}
                 <li>
                   <a
