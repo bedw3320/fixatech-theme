@@ -1587,7 +1587,8 @@
       {
         "type": "checkbox",
         "id": "primary_button_show_arrow",
-        "label": "Show arrow icon",
+        "label": "Primary button arrow icon",
+        "info": "Display an arrow icon to the right of primary button text across all sections",
         "default": false
       },
       {
@@ -1649,7 +1650,8 @@
       {
         "type": "checkbox",
         "id": "secondary_button_show_arrow",
-        "label": "Show arrow icon",
+        "label": "Secondary button arrow icon",
+        "info": "Display an arrow icon to the right of secondary button text across all sections",
         "default": false
       },
       {

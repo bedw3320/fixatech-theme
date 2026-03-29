@@ -14,6 +14,17 @@
  */
 
 /* ═══════════════════════════════════════════════════════════════
+   0. FIXATECH DESIGN TOKENS — white opacity variants
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --fixatech-white-5: var(--fixatech-white-5);
+  --fixatech-white-10: var(--fixatech-white-10);
+  --fixatech-white-40: var(--fixatech-white-40);
+  --fixatech-white-70: var(--fixatech-white-70);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    1. HEADER COMPONENT — z-index, column alignment
    ═══════════════════════════════════════════════════════════════ */
 
@@ -37,7 +48,15 @@ header-component.header {
    2. GRID — center column shrinks, white borders, row padding
    ═══════════════════════════════════════════════════════════════ */
 
-/* When search is in center: logo and actions keep natural width, search fills the rest */
+/* When search is in center: logo and actions keep natural width, search fills the rest.
+   Fallback applies the same layout unconditionally for browsers without :has() support. */
+@supports not selector(:has(*)) {
+  #header-component .header__columns {
+    --header-left: max-content;
+    --header-center: 1fr;
+    --header-right: max-content;
+  }
+}
 #header-component .header__columns:has(.header__column--center) {
   --header-left: max-content;
   --header-center: 1fr;
@@ -58,6 +77,12 @@ header-component.header {
     padding-bottom: 18px;
   }
 
+  /* Bottom row (no center column) gets more top padding. Fallback for no :has() support. */
+  @supports not selector(:has(*)) {
+    #header-component .header__row--bottom .header__columns.spacing-style {
+      padding-top: 40px;
+    }
+  }
   #header-component .header__columns:where(:not(:has(.header__column--center))) {
     padding-top: 40px;
   }
@@ -88,7 +113,7 @@ header-component.header {
   width: 100%;
   padding: 0;
   background-color: transparent;
-  border: 0.5px solid rgba(255, 255, 255, 0.4);
+  border: 0.5px solid var(--fixatech-white-40);
   border-radius: 12px;
   color: var(--fixatech-white, #fff);
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
@@ -100,8 +125,8 @@ header-component.header {
 
 #header-component .search-action--hidden-on-drawer .button-unstyled:hover,
 #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
-  border-color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--fixatech-white-70);
+  background-color: var(--fixatech-white-5);
 }
 
 /* Force-show search text label (overrides icon-mode hidden class) */
@@ -445,7 +470,7 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-parents {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--fixatech-white-10);
   padding-right: var(--padding-xl, 32px);
 }
 
@@ -511,7 +536,7 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade--with-featured 
 }
 
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid var(--fixatech-white-10);
   padding-left: var(--padding-xl, 32px);
 }
 

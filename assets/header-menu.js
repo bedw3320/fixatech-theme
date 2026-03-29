@@ -39,6 +39,7 @@ class HeaderMenu extends Component {
     clearTimeout(this.#deactivateTimer);
     window.removeEventListener('resize', this.#resizeListener);
     this.overflowMenu?.removeEventListener('pointerleave', this.#overflowSubmenuListener);
+    this.#cleanupCascadeListeners();
     this.#cleanupMutationObserver();
   }
 
@@ -294,6 +295,13 @@ class HeaderMenu extends Component {
     this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
       trigger.addEventListener('pointerenter', this.#activateCascadeParent);
       trigger.addEventListener('focus', this.#activateCascadeParent);
+    });
+  }
+
+  #cleanupCascadeListeners() {
+    this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
+      trigger.removeEventListener('pointerenter', this.#activateCascadeParent);
+      trigger.removeEventListener('focus', this.#activateCascadeParent);
     });
   }
 
