@@ -143,9 +143,10 @@ header-component.header {
   white-space: nowrap;
 }
 
-#header-component .search-action--hidden-on-drawer .svg-wrapper {
+#header-component .search-action--hidden-on-drawer .button-unstyled .svg-wrapper {
   display: flex;
   flex-shrink: 0;
+  color: inherit;
 }
 
 #header-component .search-action--hidden-on-drawer .svg-wrapper svg {

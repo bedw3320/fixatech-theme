@@ -1106,10 +1106,8 @@
 {% endstylesheet %}
 
 {% style %}
-  /* Fixatech: search bar appearance — border + icon driven by section settings */
   {%- assign search_opacity = section.settings.search_border_opacity | divided_by: 100.0 -%}
 
-  /* Base: subdued border, icon, and text at schema opacity */
   #header-component .search-action--hidden-on-drawer .button-unstyled {
     {%- if section.settings.search_border_style == 'all' -%}
       border-width: {{ section.settings.search_border_width }}px;
@@ -1121,22 +1119,11 @@
     color: rgba(255, 255, 255, {{ search_opacity }});
   }
 
-  /* Icon: force same opacity (needs higher specificity to beat Horizon) */
-  #header-component .search-action--hidden-on-drawer .button-unstyled .svg-wrapper {
-    color: rgba(255, 255, 255, {{ search_opacity }});
-  }
-
-  /* Hover: everything brightens to full white */
   #header-component .search-action--hidden-on-drawer .button-unstyled:hover,
   #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
     {%- if section.settings.search_border_style == 'all' -%}
       border-color: rgba(255, 255, 255, 1);
     {%- endif -%}
-    color: rgba(255, 255, 255, 1);
-  }
-
-  #header-component .search-action--hidden-on-drawer .button-unstyled:hover .svg-wrapper,
-  #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within .svg-wrapper {
     color: rgba(255, 255, 255, 1);
   }
 {% endstyle %}
