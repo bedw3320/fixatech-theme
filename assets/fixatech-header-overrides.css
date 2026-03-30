@@ -127,7 +127,6 @@ header-component.header {
 
 #header-component .search-action--hidden-on-drawer .button-unstyled:hover,
 #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
-  border-color: var(--fixatech-white-70);
   background-color: var(--fixatech-white-5);
 }
 
