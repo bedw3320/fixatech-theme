@@ -117,7 +117,6 @@ header-component.header {
   border-style: solid;
   border-color: var(--fixatech-white-40);
   border-radius: 12px;
-  color: var(--fixatech-white-40);
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
@@ -127,7 +126,6 @@ header-component.header {
 
 #header-component .search-action--hidden-on-drawer .button-unstyled:hover,
 #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
-  color: var(--fixatech-white, #fff);
   background-color: var(--fixatech-white-5);
 }
 
@@ -148,7 +146,6 @@ header-component.header {
 #header-component .search-action--hidden-on-drawer .svg-wrapper {
   display: flex;
   flex-shrink: 0;
-  color: inherit;
 }
 
 #header-component .search-action--hidden-on-drawer .svg-wrapper svg {

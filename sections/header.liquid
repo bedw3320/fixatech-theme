@@ -1106,25 +1106,38 @@
 {% endstylesheet %}
 
 {% style %}
-  /* Fixatech: search bar border — driven by section settings */
-  {%- assign border_opacity = section.settings.search_border_opacity | divided_by: 100.0 -%}
+  /* Fixatech: search bar appearance — border + icon driven by section settings */
+  {%- assign search_opacity = section.settings.search_border_opacity | divided_by: 100.0 -%}
 
+  /* Base: subdued border, icon, and text at schema opacity */
   #header-component .search-action--hidden-on-drawer .button-unstyled {
     {%- if section.settings.search_border_style == 'all' -%}
       border-width: {{ section.settings.search_border_width }}px;
-      border-color: rgba(255, 255, 255, {{ border_opacity }});
+      border-color: rgba(255, 255, 255, {{ search_opacity }});
       border-radius: {{ section.settings.search_border_radius }}px;
     {%- else -%}
       border-width: 0;
     {%- endif -%}
+    color: rgba(255, 255, 255, {{ search_opacity }});
   }
 
-  /* Hover: border goes full white to match icon + text brightening */
+  /* Icon: force same opacity (needs higher specificity to beat Horizon) */
+  #header-component .search-action--hidden-on-drawer .button-unstyled .svg-wrapper {
+    color: rgba(255, 255, 255, {{ search_opacity }});
+  }
+
+  /* Hover: everything brightens to full white */
   #header-component .search-action--hidden-on-drawer .button-unstyled:hover,
   #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
     {%- if section.settings.search_border_style == 'all' -%}
       border-color: rgba(255, 255, 255, 1);
     {%- endif -%}
+    color: rgba(255, 255, 255, 1);
+  }
+
+  #header-component .search-action--hidden-on-drawer .button-unstyled:hover .svg-wrapper,
+  #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within .svg-wrapper {
+    color: rgba(255, 255, 255, 1);
   }
 {% endstyle %}
 
@@ -1300,7 +1313,8 @@
     {
       "type": "range",
       "id": "search_border_opacity",
-      "label": "Search border opacity",
+      "label": "Search bar opacity",
+      "info": "Controls border and icon opacity together. Full white on hover.",
       "min": 0,
       "max": 100,
       "step": 1,
