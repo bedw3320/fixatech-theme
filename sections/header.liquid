@@ -1109,7 +1109,9 @@
   /* Fixatech: search bar border — driven by section settings */
   #header-component .search-action--hidden-on-drawer .button-unstyled {
     {%- if section.settings.search_border_style == 'all' -%}
+      {%- assign border_opacity = section.settings.search_border_opacity | divided_by: 100.0 -%}
       border-width: {{ section.settings.search_border_width }}px;
+      border-color: rgba(255, 255, 255, {{ border_opacity }});
       border-radius: {{ section.settings.search_border_radius }}px;
     {%- else -%}
       border-width: 0;
@@ -1281,9 +1283,20 @@
       "label": "Search border width",
       "min": 0,
       "max": 4,
-      "step": 0.5,
+      "step": 0.1,
       "unit": "px",
-      "default": 0.5,
+      "default": 1.5,
+      "visible_if": "{{ section.settings.search_border_style != 'none' and section.settings.show_search }}"
+    },
+    {
+      "type": "range",
+      "id": "search_border_opacity",
+      "label": "Search border opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 40,
       "visible_if": "{{ section.settings.search_border_style != 'none' and section.settings.show_search }}"
     },
     {
