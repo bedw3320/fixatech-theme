@@ -1,0 +1,25 @@
+{%- comment -%}
+  Fixatech Custom Font Loader
+  Loads Flintstock Round (self-hosted on Shopify CDN) and overrides
+  Horizon's --font-heading--family so H1-H4 use it automatically.
+  Shopify's font_picker doesn't support custom fonts, so this is the
+  standard workaround for self-hosted typefaces.
+{%- endcomment -%}
+
+<style>
+  @font-face {
+    font-family: 'Flintstock Round';
+    src: url('{{ "flintstock-round.woff2" | asset_url }}') format('woff2'),
+         url('{{ "flintstock-round.woff" | asset_url }}') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --font-heading--family: 'Flintstock Round', Inter, Helvetica, Arial, sans-serif;
+    --font-heading--weight: normal;
+    --font-heading--style: normal;
+    --fixatech-font-heading: 'Flintstock Round', Inter, Helvetica, Arial, sans-serif;
+  }
+</style>

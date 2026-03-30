@@ -9,14 +9,9 @@
  *   Black on Yellow (#FFC600):  11.48:1 — AAA ✓
  */
 
-@font-face {
-  font-family: 'Flintstock Round';
-  src: url('{{ "flintstock-round.woff2" | asset_url }}') format('woff2'),
-       url('{{ "flintstock-round.woff" | asset_url }}') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+/* @font-face and --font-heading--family override live in
+   snippets/fixatech-custom-fonts.liquid (inline, guaranteed
+   Liquid processing). This file is NOT loaded in theme.liquid. */
 
 :root {
   /* ─── Brand Colors ────────────────────────────────────────── */
@@ -37,13 +32,6 @@
   --fixatech-font-heading: 'Flintstock Round', Inter, Helvetica, Arial, sans-serif;
   --fixatech-font-body: 'Geist', Inter, Arial, Helvetica, sans-serif;
   --fixatech-font-weight-medium: 500;
-
-  /* ─── Override Horizon heading role with Flintstock Round ──── */
-  /* Horizon's font_picker doesn't have Flintstock, so we override */
-  /* the CSS variable directly. H1-H4 use the "heading" role.     */
-  --font-heading--family: 'Flintstock Round', Inter, Helvetica, Arial, sans-serif;
-  --font-heading--weight: normal;
-  --font-heading--style: normal;
 
   /* ─── Typography Scale ────────────────────────────────────── */
   --fixatech-font-size-hero: 90px;

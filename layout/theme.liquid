@@ -30,7 +30,7 @@
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
-    {{ 'fixatech-variables.css.liquid' | asset_url | stylesheet_tag }}
+    {%- render 'fixatech-custom-fonts' -%}
     {{ 'fixatech-header-overrides.css' | asset_url | stylesheet_tag }}
 
     {{ 'fixatech-product-card-image-bleed.css' | asset_url | stylesheet_tag }}
