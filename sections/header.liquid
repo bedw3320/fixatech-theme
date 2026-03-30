@@ -311,13 +311,7 @@
     --color-scheme-top-row: rgba({{ section.settings.color_scheme_top.settings.background.rgba }});
     --color-scheme-bottom-row: rgba({{ section.settings.color_scheme_bottom.settings.background.rgba }});
     {%- comment -%} Fixatech: utilities locked to icon mode — text-mode CSS vars removed {%- endcomment -%}
-    {%- if section.settings.search_border_style == 'all' -%}
-      --search-border-width: {{ section.settings.search_border_width }}px;
-      --search-border-radius: {{ section.settings.search_border_radius }}px;
-    {%- else -%}
-      --search-border-width: 0px;
-      --search-border-radius: 0px;
-    {%- endif -%}
+    {%- comment -%} Search border vars moved to {% style %} block below {%- endcomment -%}
   "
 >
   <div class="header__underlay header__underlay-closed"></div>
@@ -1110,6 +1104,18 @@
   }
 
 {% endstylesheet %}
+
+{% style %}
+  /* Fixatech: search bar border — driven by section settings */
+  #header-component .search-action--hidden-on-drawer .button-unstyled {
+    {%- if section.settings.search_border_style == 'all' -%}
+      border-width: {{ section.settings.search_border_width }}px;
+      border-radius: {{ section.settings.search_border_radius }}px;
+    {%- else -%}
+      border-width: 0;
+    {%- endif -%}
+  }
+{% endstyle %}
 
 {% unless request.design_mode %}
   <script type="module">
