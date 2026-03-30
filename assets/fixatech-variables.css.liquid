@@ -9,6 +9,15 @@
  *   Black on Yellow (#FFC600):  11.48:1 — AAA ✓
  */
 
+@font-face {
+  font-family: 'Flintstock Round';
+  src: url('{{ "flintstock-round.woff2" | asset_url }}') format('woff2'),
+       url('{{ "flintstock-round.woff" | asset_url }}') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* ─── Brand Colors ────────────────────────────────────────── */
   --fixatech-primary: {{ settings.color_schemes.scheme-1.settings.primary_button_background | default: '#FFC600' }};
@@ -24,30 +33,10 @@
   --fixatech-overlay-light: rgba(255, 255, 255, 0.8);
   --fixatech-overlay-dark: rgba(0, 0, 0, 0.7);
 
-  /* ─── Custom Fonts (uploaded to assets/ when available) ───── */
+  /* ─── Custom Fonts ─────────────────────────────────────────── */
   --fixatech-font-heading: 'Flintstock Round', Inter, Helvetica, Arial, sans-serif;
   --fixatech-font-body: 'Geist', Inter, Arial, Helvetica, sans-serif;
   --fixatech-font-weight-medium: 500;
-
-  /* ─── Font Face Declarations (placeholder — activate once    */
-  /*     flintstock-round.woff2 and geist-medium.woff2 are      */
-  /*     uploaded to assets/)                                    */
-  /* @font-face {
-       font-family: 'Flintstock Round';
-       src: url('flintstock-round.woff2') format('woff2'),
-            url('flintstock-round.woff') format('woff');
-       font-weight: normal;
-       font-style: normal;
-       font-display: swap;
-     }
-     @font-face {
-       font-family: 'Geist';
-       src: url('geist-medium.woff2') format('woff2'),
-            url('geist-medium.woff') format('woff');
-       font-weight: 500;
-       font-style: normal;
-       font-display: swap;
-     } */
 
   /* ─── Typography Scale ────────────────────────────────────── */
   --fixatech-font-size-hero: 90px;
