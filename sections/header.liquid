@@ -311,6 +311,13 @@
     --color-scheme-top-row: rgba({{ section.settings.color_scheme_top.settings.background.rgba }});
     --color-scheme-bottom-row: rgba({{ section.settings.color_scheme_bottom.settings.background.rgba }});
     {%- comment -%} Fixatech: utilities locked to icon mode — text-mode CSS vars removed {%- endcomment -%}
+    {%- if section.settings.search_border_style == 'all' -%}
+      --search-border-width: {{ section.settings.search_border_width }}px;
+      --search-border-radius: {{ section.settings.search_border_radius }}px;
+    {%- else -%}
+      --search-border-width: 0px;
+      --search-border-radius: 0px;
+    {%- endif -%}
   "
 >
   <div class="header__underlay header__underlay-closed"></div>
@@ -1244,6 +1251,45 @@
       ],
       "default": "top",
       "visible_if": "{{ section.settings.show_search }}"
+    },
+    {
+      "type": "select",
+      "id": "search_border_style",
+      "label": "Search border",
+      "options": [
+        {
+          "value": "all",
+          "label": "t:options.all"
+        },
+        {
+          "value": "none",
+          "label": "t:options.none"
+        }
+      ],
+      "default": "all",
+      "visible_if": "{{ section.settings.show_search }}"
+    },
+    {
+      "type": "range",
+      "id": "search_border_width",
+      "label": "Search border width",
+      "min": 0,
+      "max": 4,
+      "step": 0.5,
+      "unit": "px",
+      "default": 0.5,
+      "visible_if": "{{ section.settings.search_border_style != 'none' and section.settings.show_search }}"
+    },
+    {
+      "type": "range",
+      "id": "search_border_radius",
+      "label": "Search border radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ section.settings.search_border_style != 'none' and section.settings.show_search }}"
     },
     {
       "type": "header",
