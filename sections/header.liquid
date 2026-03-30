@@ -1108,9 +1108,6 @@
 {% style %}
   /* Fixatech: search bar border — driven by section settings */
   {%- assign border_opacity = section.settings.search_border_opacity | divided_by: 100.0 -%}
-  {%- assign hover_opacity_raw = section.settings.search_border_opacity | plus: 30 -%}
-  {%- if hover_opacity_raw > 100 -%}{%- assign hover_opacity_raw = 100 -%}{%- endif -%}
-  {%- assign hover_opacity = hover_opacity_raw | divided_by: 100.0 -%}
 
   #header-component .search-action--hidden-on-drawer .button-unstyled {
     {%- if section.settings.search_border_style == 'all' -%}
@@ -1122,10 +1119,11 @@
     {%- endif -%}
   }
 
+  /* Hover: border goes full white to match icon + text brightening */
   #header-component .search-action--hidden-on-drawer .button-unstyled:hover,
   #header-component .search-action--hidden-on-drawer .button-unstyled:focus-within {
     {%- if section.settings.search_border_style == 'all' -%}
-      border-color: rgba(255, 255, 255, {{ hover_opacity }});
+      border-color: rgba(255, 255, 255, 1);
     {%- endif -%}
   }
 {% endstyle %}
