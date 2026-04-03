@@ -1,0 +1,331 @@
+/**
+ * Fixatech Cart Page — CSS Overrides
+ * Theme: Shopify Horizon
+ *
+ * Design system: dark bg (#141414), Geist body 14px, Flintstock headings,
+ * yellow accent (#FFC600), 12px radius, 8px spacing base unit.
+ *
+ * DOM structure (from main-cart.liquid + snippets):
+ *   .cart-page
+ *     .cart-page__title  → cart-title block
+ *     .cart-page__items  → cart-products block (table layout)
+ *     .cart-page__summary → cart-summary block (sidebar on desktop)
+ *
+ * Approach: additive overrides only, no Horizon file edits.
+ * All values reference fixatech-variables.css.liquid tokens.
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   1. CART PAGE LAYOUT
+   Grid: items (left) + summary (right sidebar)
+   ═══════════════════════════════════════════════════════════════ */
+
+.cart-page {
+  gap: 0 var(--padding-5xl);
+  padding-block-start: var(--padding-xl);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   2. CART TITLE — "Cart (2)" heading
+   Flintstock heading font, proper sizing
+   ═══════════════════════════════════════════════════════════════ */
+
+.cart-title {
+  font-family: var(--fixatech-font-heading);
+  font-size: var(--fixatech-font-size-h3);
+  font-weight: normal;
+  letter-spacing: -0.01em;
+  color: var(--color-foreground);
+}
+
+.cart-title__count {
+  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.5);
+  font-weight: normal;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3. CART ITEMS — product rows
+   Clean grid, larger thumbnails, Geist typography
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Larger product thumbnails */
+.cart-items {
+  --cart-item-media-width-min: 4rem;
+  --cart-item-media-width-max: 8rem;
+}
+
+/* Product title */
+.cart-items__title {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-foreground);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.cart-items__title:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Variant options (size, color, etc.) */
+.cart-items__variants {
+  font-size: 13px;
+  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.6);
+}
+
+/* Thumbnail image — slight radius */
+.cart-items__media-image {
+  border-radius: 8px !important;
+}
+
+/* Row dividers — subtle */
+.cart-items--dividers .cart-items__table-row {
+  border-bottom: 1px solid var(--fixatech-border, #343434);
+}
+
+/* Per-item price */
+.cart-items__price {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Unit price smaller and muted */
+.cart-items__unit-price-wrapper {
+  font-size: 13px;
+  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.6);
+}
+
+/* Compare at (original) price — strikethrough */
+.cart-items .compare-at-price {
+  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.4);
+  font-size: 12px;
+}
+
+/* Remove button — subtle, red on hover */
+.cart-items__remove {
+  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.5);
+  transition: color 0.2s ease;
+}
+
+.cart-items__remove:hover {
+  color: #e74c3c;
+}
+
+/* Quantity selector — Fixatech styling */
+.cart-items__quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4. CART SUMMARY — sidebar on desktop
+   Consistent with Fixatech design: clean, spacious
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Summary container */
+.cart-summary {
+  border-radius: 12px;
+}
+
+/* Subtotal / total labels */
+.cart-totals__total-label {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Total value — prominent */
+.cart-totals__total-value {
+  font-family: var(--fixatech-font-body);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Tax note — muted */
+.cart-totals__tax-note {
+  font-size: 12px;
+  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.5);
+}
+
+/* Discount code label */
+.cart-discount__label,
+.cart-note__label {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Discount input */
+.cart-discount__input {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--fixatech-border, #343434);
+  background-color: transparent;
+  color: var(--color-foreground);
+  padding: 10px 14px;
+}
+
+.cart-discount__input:focus {
+  border-color: var(--fixatech-primary);
+  outline: none;
+}
+
+/* Discount apply button */
+.cart-discount__button {
+  border-radius: 8px;
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Discount pill (applied code) */
+.cart-discount__pill {
+  border-radius: 8px;
+  font-family: var(--fixatech-font-body);
+  font-size: 13px;
+}
+
+/* Cart note textarea */
+.cart-note__instructions {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--fixatech-border, #343434);
+  background-color: transparent;
+  color: var(--color-foreground);
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.cart-note__instructions:focus {
+  border-color: var(--fixatech-primary);
+  outline: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5. CHECKOUT BUTTON — primary yellow CTA
+   ═══════════════════════════════════════════════════════════════ */
+
+.cart__checkout-button {
+  background-color: var(--fixatech-primary) !important;
+  color: var(--fixatech-background-dark, #141414) !important;
+  font-family: var(--fixatech-font-body);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 16px 32px;
+  border: none;
+  width: 100%;
+  text-transform: none;
+  letter-spacing: 0;
+  transition: background-color 0.2s ease;
+}
+
+.cart__checkout-button:hover {
+  background-color: var(--fixatech-primary-hover) !important;
+}
+
+.cart__checkout-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6. EMPTY CART STATE
+   Centered, clean messaging
+   ═══════════════════════════════════════════════════════════════ */
+
+.cart-page--empty .cart-title {
+  font-family: var(--fixatech-font-heading);
+  font-size: var(--fixatech-font-size-h3);
+}
+
+.cart-items__empty-button {
+  background-color: var(--fixatech-primary) !important;
+  color: var(--fixatech-background-dark, #141414) !important;
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 14px 28px;
+  border: none;
+  text-transform: none;
+}
+
+.cart-items__empty-button:hover {
+  background-color: var(--fixatech-primary-hover) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7. "YOU MAY ALSO LIKE" SECTION (product-list below cart)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Section heading */
+.cart-page ~ .section .product-list-text h3,
+.cart-page ~ .section .product-list-text h4 {
+  font-family: var(--fixatech-font-heading);
+  font-size: var(--fixatech-font-size-h4);
+  font-weight: normal;
+}
+
+/* "View all" link */
+.cart-page ~ .section .product-list-button {
+  font-family: var(--fixatech-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fixatech-primary);
+}
+
+.cart-page ~ .section .product-list-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8. RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Tablet (768px – 1511px) ─────────────────────────────── */
+@media screen and (max-width: 1511px) {
+  .cart-title {
+    font-size: var(--fixatech-font-size-h4);
+  }
+
+  .cart-items {
+    --cart-item-media-width-max: 6rem;
+  }
+}
+
+/* ─── Mobile (max 767px) ──────────────────────────────────── */
+@media screen and (max-width: 767px) {
+  .cart-title {
+    font-size: 22px;
+  }
+
+  .cart-items {
+    --cart-item-media-width-min: 3rem;
+    --cart-item-media-width-max: 5rem;
+  }
+
+  /* Stack summary below items on mobile */
+  .cart-page__summary {
+    padding-block-start: var(--padding-lg);
+    border-block-start: 1px solid var(--fixatech-border, #343434);
+    margin-block-start: var(--margin-lg);
+  }
+
+  .cart__checkout-button {
+    font-size: 15px;
+    padding: 14px 24px;
+  }
+
+  .cart-totals__total-value {
+    font-size: 16px;
+  }
+}
