@@ -376,6 +376,12 @@
           "remove_item": {
             "many": "Remove the items"
           }
+        },
+        "pickup_items_count": {
+          "many": "Remove %{count} items"
+        },
+        "ship_items_count": {
+          "many": "Ship %{count} items"
         }
       },
       "merchandise_unavailable_in_buyer_location": {
@@ -570,6 +576,11 @@
         },
         "discount_codes_removed_or_modified_summary": {
           "many": "%{count} discount codes have been removed or changed"
+        },
+        "crypto_payment_method": {
+          "cashback_descriptor": {
+            "many": "You will receive your cashback after %{count} days."
+          }
         }
       },
       "shipping_errors": {
@@ -752,6 +763,13 @@
         },
         "pickup_unavailable_banner_title_with_country": {
           "many": "No locations in %{country} with your items"
+        }
+      },
+      "notice_banner": {
+        "validation_errors_banner": {
+          "heading": {
+            "many": "There are {{count}} errors:"
+          }
         }
       }
     },
