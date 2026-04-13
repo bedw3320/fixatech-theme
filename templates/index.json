@@ -648,12 +648,26 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "fixatech_cta_banner_xHLQij": {
+      "type": "fixatech-cta-banner",
+      "name": "Fixatech CTA Banner",
+      "settings": {
+        "text": "<em><strong>ON T'ÉQUIPE POUR ÇA</strong></em>",
+        "button_label": "Découvrez nos services",
+        "button_link": "",
+        "color_scheme": "",
+        "section_width": "page-width",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "bento_hero_main",
     "product_list_fa6P9H",
-    "product_list_RNiM3U"
+    "product_list_RNiM3U",
+    "fixatech_cta_banner_xHLQij"
   ]
 }
