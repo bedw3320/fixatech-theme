@@ -179,6 +179,54 @@
       "default": "scheme-4"
     },
     {
+      "type": "select",
+      "id": "border",
+      "label": "Borders",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Border width",
+      "default": 1,
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Border opacity",
+      "default": 100,
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
       "type": "header",
       "content": "Padding"
     },
@@ -213,6 +261,7 @@
         "vertical_alignment": "center",
         "vertical_on_mobile": true,
         "color_scheme": "scheme-4",
+        "border_radius": 16,
         "padding-block-start": 24,
         "padding-block-end": 24
       },
