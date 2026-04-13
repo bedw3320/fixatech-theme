@@ -282,11 +282,19 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   9. MEGA MENU — parent links yellow, child links full white
+   9. MEGA MENU — parent links white by default, yellow + arrow on hover
    ═══════════════════════════════════════════════════════════════ */
 
-/* Parent category links (e.g. OUTILLAGE, À LA MAIN) — Fixatech yellow */
+/* Parent category links — white at rest, yellow on hover */
 #header-component .mega-menu__link--parent {
+  color: var(--fixatech-white, #fff);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 150ms ease;
+}
+
+#header-component .mega-menu__link--parent:hover {
   color: var(--fixatech-primary, #ffc600);
 }
 
@@ -295,17 +303,17 @@ header-component.header {
   color: var(--fixatech-white, #fff);
 }
 
-/* Arrow icon on parent links */
-#header-component .mega-menu__link--parent {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
+/* Arrow icon — hidden by default, appears on hover */
 #header-component .mega-menu__arrow {
   display: flex;
   flex-shrink: 0;
   color: var(--fixatech-primary, #ffc600);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+#header-component .mega-menu__link--parent:hover .mega-menu__arrow {
+  opacity: 1;
 }
 
 #header-component .mega-menu__arrow svg {
@@ -313,14 +321,12 @@ header-component.header {
   height: 16px;
 }
 
-/* Hover: dim individual link (grid mode only — cascade handles its own hover) */
-#header-component .mega-menu__link--parent:hover {
+/* Cascade mode: active/expanded parent stays yellow with arrow visible */
+#header-component header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"] {
   color: var(--fixatech-primary, #ffc600);
-  opacity: 0.7;
 }
 
-/* Cascade mode: hovered parent stays full yellow */
-#header-component header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent:hover {
+#header-component header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"] .mega-menu__arrow {
   opacity: 1;
 }
 
@@ -515,7 +521,7 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-child-list li {
   break-inside: avoid;
 }
 
-/* Active parent: full opacity + color stays yellow (from section 9) */
+/* Active parent: full opacity (color set to yellow in section 9) */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__link--parent[aria-expanded="true"] {
   opacity: 1;
 }
