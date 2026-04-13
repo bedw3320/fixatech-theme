@@ -757,7 +757,7 @@
         "border_opacity": 100,
         "border_radius": 0,
         "toggle_overlay": true,
-        "overlay_color": "#00000026",
+        "overlay_color": "#ffffff",
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 48,
@@ -902,8 +902,8 @@
         "section_width": "page-width",
         "gap": 16,
         "color_scheme": "scheme-3",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 72,
+        "padding-block-end": 72
       }
     },
     "section_W8WmMj": {
