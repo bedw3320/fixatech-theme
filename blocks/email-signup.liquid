@@ -49,21 +49,13 @@
       >
       <button
         class="email-signup__button {% if block_settings.integrated_button or block_settings.border_style == 'underline' %}email-signup__button--integrated{% endif %} email-signup__button--{{ block_settings.display_type }} {{ block_settings.button_type_preset }} {{ block_settings.style_class }} {{ block_settings.style_class }}--{{ block.id }} {% if block_settings.inherit_color_scheme == false %}color-{{ block_settings.color_scheme }}{% endif %}"
-        {% if block_settings.display_type != 'text' %}
+        {% if block_settings.display_type == 'arrow' %}
           aria-label="{{ 'actions.sign_up' | t }}"
         {% endif %}
       >
-        {% if block_settings.display_type == 'text' %}
+        {% if block_settings.display_type == 'text' or block_settings.display_type == 'text-arrow' %}
           {{- block_settings.label -}}
-          {%- liquid
-            assign show_arrow = false
-            if block_settings.style_class == 'button-secondary'
-              assign show_arrow = settings.secondary_button_show_arrow
-            else
-              assign show_arrow = settings.primary_button_show_arrow
-            endif
-          -%}
-          {%- if show_arrow -%}
+          {%- if block_settings.display_type == 'text-arrow' -%}
             <span class="svg-wrapper button-arrow" aria-hidden="true">
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             </span>
@@ -207,7 +199,8 @@
   }
 
   .email-signup__input,
-  .email-signup__button--text {
+  .email-signup__button--text,
+  .email-signup__button--text-arrow {
     padding: var(--padding-lg) var(--padding-3xl);
   }
 
@@ -291,11 +284,13 @@
       width: fit-content;
     }
 
-    &.email-signup__button--text {
+    &.email-signup__button--text,
+    &.email-signup__button--text-arrow {
       padding: 0 var(--padding-3xl);
     }
 
-    &.email-signup__button--text.button-unstyled {
+    &.email-signup__button--text.button-unstyled,
+    &.email-signup__button--text-arrow.button-unstyled {
       padding: 0 var(--padding-xl);
     }
 
@@ -326,11 +321,13 @@
     margin: 0;
     align-self: center;
 
-    &.email-signup__button--text {
+    &.email-signup__button--text,
+    &.email-signup__button--text-arrow {
       padding-block: 9px;
     }
 
-    &.email-signup__button--text.button-unstyled {
+    &.email-signup__button--text.button-unstyled,
+    &.email-signup__button--text-arrow.button-unstyled {
       padding-inline: 0;
     }
 
@@ -603,6 +600,10 @@
           "label": "t:options.text"
         },
         {
+          "value": "text-arrow",
+          "label": "t:options.text_and_arrow"
+        },
+        {
           "value": "arrow",
           "label": "t:options.arrow"
         }
@@ -614,7 +615,7 @@
       "id": "label",
       "label": "t:settings.label",
       "default": "t:text_defaults.sign_up",
-      "visible_if": "{{ block.settings.display_type == \"text\" }}"
+      "visible_if": "{{ block.settings.display_type == \"text\" or block.settings.display_type == \"text-arrow\" }}"
     },
     {
       "type": "checkbox",
@@ -663,7 +664,7 @@
       ],
       "default": "paragraph",
       "info": "t:info.edit_presets_in_theme_settings",
-      "visible_if": "{{ block.settings.display_type == \"text\" }}"
+      "visible_if": "{{ block.settings.display_type == \"text\" or block.settings.display_type == \"text-arrow\" }}"
     },
     {
       "type": "header",
