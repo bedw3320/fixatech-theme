@@ -356,7 +356,7 @@
         "max_products": 4,
         "cta_enabled": true,
         "cta_first_position": 4,
-        "cta_repeat_interval": 12,
+        "cta_repeat_interval": 8,
         "cta_image": "shopify://shop_images/simone-impei-eZaKj3xAzTE-unsplash_1.png",
         "cta_label": "Tout afficher",
         "cta_style": "button",
