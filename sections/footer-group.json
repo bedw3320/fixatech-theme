@@ -206,9 +206,9 @@
               "name": "t:names.heading",
               "settings": {
                 "text": "<h5>PLAN DU SITE</h5>",
-                "width": "fit-content",
+                "width": "100%",
                 "max_width": "narrow",
-                "alignment": "left",
+                "alignment": "right",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
@@ -298,8 +298,8 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Nouveautés</h2>",
-                "width": "fit-content",
+                "text": "<h5>FIXATECH</h5>",
+                "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
