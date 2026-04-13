@@ -2,6 +2,10 @@
 
 {% liquid
   assign max_items = section.settings.max_products
+  assign cta_enabled = section.settings.cta_enabled
+  assign cta_first = section.settings.cta_first_position
+  assign cta_interval = section.settings.cta_repeat_interval
+  assign cta_link = section.settings.cta_link | default: section.settings.collection.url
 %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -28,12 +32,37 @@
     {% if section.settings.collection != blank and shop.products_count != 0 %}
       {% paginate section.settings.collection.products by max_items %}
         {% for product in section.settings.collection.products limit: max_items %}
-          <div
-            class="resource-list__item"
-          >
-            {% # theme-check-disable UniqueStaticBlockId %}
-              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
-            {% # theme-check-enable UniqueStaticBlockId %}
+          {% liquid
+            assign is_cta = false
+            if cta_enabled
+              if forloop.index == cta_first
+                assign is_cta = true
+              elsif cta_interval > 0 and forloop.index > cta_first
+                assign position_diff = forloop.index | minus: cta_first
+                assign remainder = position_diff | modulo: cta_interval
+                if remainder == 0
+                  assign is_cta = true
+                endif
+              endif
+            endif
+          %}
+
+          <div class="resource-list__item">
+            {% if is_cta %}
+              {% render 'cta-card',
+                image: section.settings.cta_image,
+                url: cta_link,
+                label: section.settings.cta_label,
+                style: section.settings.cta_style,
+                open_in_new_tab: section.settings.cta_open_in_new_tab,
+                toggle_overlay: section.settings.cta_toggle_overlay,
+                overlay_color: section.settings.cta_overlay_color
+              %}
+            {% else %}
+              {% # theme-check-disable UniqueStaticBlockId %}
+                {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+              {% # theme-check-enable UniqueStaticBlockId %}
+            {% endif %}
           </div>
 
           {% unless forloop.last %}
@@ -139,6 +168,98 @@
       "max": 16,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "header",
+      "content": "t:content.cta_card"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_enabled",
+      "label": "t:settings.cta_enabled",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "cta_first_position",
+      "label": "t:settings.cta_first_position",
+      "min": 1,
+      "max": 16,
+      "step": 1,
+      "default": 4,
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "range",
+      "id": "cta_repeat_interval",
+      "label": "t:settings.cta_repeat_interval",
+      "info": "t:content.cta_repeat_interval_info",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 0,
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image",
+      "label": "t:settings.image",
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "t:settings.label",
+      "default": "t:text_defaults.view_all_button_label",
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "select",
+      "id": "cta_style",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:options.primary"
+        },
+        {
+          "value": "secondary",
+          "label": "t:options.secondary"
+        },
+        {
+          "value": "outlined",
+          "label": "t:options.outlined"
+        }
+      ],
+      "default": "primary",
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "t:settings.link",
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_open_in_new_tab",
+      "label": "t:settings.open_new_tab",
+      "default": false,
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_toggle_overlay",
+      "label": "t:settings.media_overlay",
+      "default": false,
+      "visible_if": "{{ section.settings.cta_enabled }}"
+    },
+    {
+      "type": "color",
+      "id": "cta_overlay_color",
+      "label": "t:settings.overlay_color",
+      "default": "#00000040",
+      "visible_if": "{{ section.settings.cta_enabled and section.settings.cta_toggle_overlay }}"
     },
     {
       "type": "range",

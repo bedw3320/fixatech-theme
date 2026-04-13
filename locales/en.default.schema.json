@@ -57,6 +57,8 @@
     "content_layout": "Content layout",
     "content_width": "Content width only applies when the section width is set to full width.",
     "copyright": "Copyright",
+    "cta_card": "CTA card",
+    "cta_repeat_interval_info": "Set to 0 for a single CTA card. Otherwise repeats every N positions after the first.",
     "customer_account": "Customer account",
     "describe_the_video_for": "Describe the video for customers using screen readers. [Learn more](https://help.shopify.com/manual/online-store/themes/theme-structure/theme-features#video-block)",
     "edit_empty_state_collection_in_theme_settings": "Edit empty state collection in [theme settings](/editor?context=theme&category=search)",
@@ -622,6 +624,7 @@
     "one_third": "1/3",
     // Star rating style showing empty star outlines
     "outline": "Outline",
+    "outlined": "Outlined",
     "page": "Page",
     "page_center_aligned": "Page, center aligned",
     "page_left_aligned": "Page, left aligned",
@@ -838,6 +841,9 @@
     "custom_mobile_width": "Custom mobile width",
     "custom_width": "Custom width",
     "custom_liquid": "Liquid code",
+    "cta_enabled": "Enable CTA card",
+    "cta_first_position": "CTA card position",
+    "cta_repeat_interval": "Repeat every",
     // Primary color scheme option, not specialized variants
     "default": "Default",
     "default_logo": "Default logo",

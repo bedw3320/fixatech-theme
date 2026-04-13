@@ -1,0 +1,63 @@
+{%- doc -%}
+  Renders a CTA card that replaces a product card position in a resource list.
+  Full-bleed background image with optional overlay and a centered button.
+
+  @param {object} image - Background image (image_picker value)
+  @param {string} url - Link destination
+  @param {string} label - Button label text
+  @param {string} [style] - Button style: 'primary' | 'secondary' | 'outlined' (default: 'primary')
+  @param {boolean} [open_in_new_tab] - Open link in new tab (default: false)
+  @param {boolean} [toggle_overlay] - Show overlay (default: false)
+  @param {string} [overlay_color] - Overlay color with alpha
+{%- enddoc -%}
+
+<div class="cta-card">
+  <div class="cta-card__media">
+    {% render 'background-media',
+      background_media: 'image',
+      background_image: image,
+      background_image_position: 'cover'
+    %}
+  </div>
+
+  {%- if toggle_overlay -%}
+    <div
+      class="overlay overlay--solid"
+      style="--overlay-color: {{ overlay_color | default: 'rgb(0 0 0 / 0.25)' }};"
+    ></div>
+  {%- endif -%}
+
+  <div class="cta-card__content">
+    {% render 'fixatech-button',
+      text: label,
+      url: url,
+      style: style,
+      arrow: true
+    %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cta-card {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    border-radius: var(--border-radius, 0);
+  }
+
+  .cta-card__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cta-card__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+  }
+{% endstylesheet %}
