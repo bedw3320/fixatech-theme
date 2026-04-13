@@ -652,18 +652,29 @@
     "fixatech_cta_banner_xHLQij": {
       "type": "fixatech-cta-banner",
       "blocks": {
-        "jumbo_text_Qibdd6": {
-          "type": "jumbo-text",
-          "name": "t:names.jumbo_text",
+        "text_FDK8MG": {
+          "type": "text",
+          "name": "t:names.text",
           "settings": {
-            "text": "Soyez audacieux.",
-            "font": "heading",
-            "alignment": "center",
-            "line_height": "1",
+            "text": "<h1><em>ON T'ÉQUIPE POUR ÇA</em></h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
-            "text_effect": "reveal",
-            "animation_repeat": true
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
           },
           "blocks": {}
         },
@@ -675,7 +686,7 @@
             "link": "shopify://pages/contact",
             "open_in_new_tab": false,
             "style_class": "button",
-            "width": "custom",
+            "width": "fit-content",
             "custom_width": 30,
             "width_mobile": "fit-content",
             "custom_width_mobile": 100
@@ -684,7 +695,7 @@
         }
       },
       "block_order": [
-        "jumbo_text_Qibdd6",
+        "text_FDK8MG",
         "button_NhbwND"
       ],
       "name": "Fixatech CTA Banner",
