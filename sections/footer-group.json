@@ -79,9 +79,10 @@
     },
     "divider_WzGywe": {
       "type": "divider",
+      "custom_css": [],
       "name": "t:names.divider_section",
       "settings": {
-        "color_scheme": "",
+        "color_scheme": "scheme-4",
         "section_width": "page-width",
         "thickness": 1,
         "corner_radius": "square",
