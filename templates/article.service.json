@@ -56,7 +56,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Nous fabriquons des articles plus performants et plus durables. Nos produits résolvent de vrais problèmes avec un design épuré et des matériaux honnêtes.</p>",
+                "text": "<p>SERVICE FIXATECH</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
