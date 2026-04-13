@@ -455,7 +455,7 @@
           "settings": {
             "width": "custom",
             "custom_width": 45,
-            "inherit_color_scheme": false,
+            "inherit_color_scheme": true,
             "color_scheme": "scheme-5",
             "heading": "INFOLETTRE",
             "heading_preset": "h5",
