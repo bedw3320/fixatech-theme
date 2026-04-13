@@ -374,15 +374,24 @@ header-component.header {
   height: 16px;
 }
 
-/* Close button: unstyled, hidden by default, appears left of link text */
+/* First list item is positioning context for the absolute close button */
+#header-component .menu-list__list-item:first-child {
+  position: relative;
+}
+
+/* Close button: absolutely positioned over the hamburger icon spot */
 #header-component .fixatech-menu-close-btn {
   display: none;
-  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding-inline-start: calc(var(--gap-xl) / 2);
   margin: 0;
   cursor: pointer;
   color: var(--fixatech-white, #fff);
-  order: -1;
   align-items: center;
+  z-index: 1;
 }
 
 /* When mega menu is expanded: hide hamburger, show close button */
@@ -394,13 +403,7 @@ header-component.header {
   display: flex;
 }
 
-/* First nav item: horizontal flex so close button sits inline with link */
-#header-component .menu-list__list-item:first-child {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
+/* First nav item: icon + text sit inline inside the title span */
 #header-component .menu-list__list-item:first-child .menu-list__link-title {
   display: inline-flex;
   align-items: center;
