@@ -174,7 +174,7 @@
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 12,
             "width": "custom",
-            "custom_width": 40,
+            "custom_width": 50,
             "width_mobile": "fit-content",
             "custom_width_mobile": 100,
             "height": "fill",
@@ -198,7 +198,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 36
           },
           "blocks": {
             "text_X74xtk": {
