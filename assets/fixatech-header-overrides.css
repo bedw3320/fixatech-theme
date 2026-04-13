@@ -190,8 +190,15 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Search bar text has a hardcoded color — override on hover */
-#header-component .search-action--hidden-on-drawer .button-unstyled:hover .hidden {
+/* Search bar — target the wrapper hover so icon + text both turn yellow */
+#header-component .search-action--hidden-on-drawer:hover .button-unstyled,
+#header-component .search-action--hidden-on-drawer:hover .hidden,
+#header-component .search-action--hidden-on-drawer:hover .svg-wrapper {
+  color: var(--fixatech-primary, #ffc600);
+}
+
+/* Language/country dropdown — text and caret turn yellow on hover */
+#header-component .dropdown-localization__button:hover {
   color: var(--fixatech-primary, #ffc600);
 }
 
