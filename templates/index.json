@@ -719,6 +719,20 @@
         "padding-inline-start": 32,
         "padding-inline-end": 32
       }
+    },
+    "divider_UYHAUf": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "section_width": "page-width",
+        "thickness": 0.5,
+        "corner_radius": "square",
+        "width_percent": 5,
+        "alignment_horizontal": "center",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
     }
   },
   "order": [
@@ -726,6 +740,7 @@
     "bento_hero_main",
     "product_list_fa6P9H",
     "product_list_RNiM3U",
-    "fixatech_cta_banner_xHLQij"
+    "fixatech_cta_banner_xHLQij",
+    "divider_UYHAUf"
   ]
 }
