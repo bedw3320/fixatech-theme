@@ -177,10 +177,11 @@ header-component.header {
   }
 }
 
-/* Individual hover: each element dims itself on hover */
+/* Header interactive elements — yellow on hover */
 #header-component .header-actions__action:hover,
-#header-component .fixatech-phone-link:hover {
-  opacity: 0.7;
+#header-component .fixatech-phone-link:hover,
+#header-component .search-action--hidden-on-drawer .button-unstyled:hover {
+  color: var(--fixatech-primary, #ffc600);
 }
 
 /* ═══════════════════════════════════════════════════════════════
