@@ -154,7 +154,7 @@
         "footer_copyright_jweRK8": {
           "type": "footer-copyright",
           "settings": {
-            "custom_text": ", Design par Atelierbienvenue.ca",
+            "custom_text": ", Design par <a href=\"https://Atelierbienvenue.ca\" target=\"_blank\" title=\"https://Atelierbienvenue.ca\">Atelierbienvenue.ca</a>",
             "show_powered_by": true,
             "font_size": "0.75rem",
             "case": "none"
