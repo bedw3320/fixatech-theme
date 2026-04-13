@@ -539,6 +539,7 @@
             "blog-post-info-text": {
               "type": "_blog-post-info-text",
               "name": "t:names.details",
+              "disabled": true,
               "static": true,
               "settings": {
                 "show_date": true,
@@ -554,6 +555,7 @@
             "blog-post-description": {
               "type": "_blog-post-description",
               "name": "t:names.excerpt",
+              "disabled": true,
               "static": true,
               "settings": {
                 "type_preset": "rte",
