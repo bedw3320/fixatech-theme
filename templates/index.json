@@ -657,7 +657,7 @@
           "name": "t:names.text",
           "settings": {
             "text": "<h1><em>ON T'ÉQUIPE POUR ÇA</em></h1>",
-            "width": "100%",
+            "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
             "type_preset": "rte",
@@ -686,7 +686,7 @@
             "link": "shopify://pages/contact",
             "open_in_new_tab": false,
             "style_class": "button",
-            "width": "custom",
+            "width": "fit-content",
             "custom_width": 30,
             "width_mobile": "fit-content",
             "custom_width_mobile": 100
