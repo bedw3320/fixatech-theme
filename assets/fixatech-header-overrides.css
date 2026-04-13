@@ -190,8 +190,12 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Search bar — target the wrapper hover so icon + text both turn yellow */
-#header-component .search-action--hidden-on-drawer:hover .button-unstyled,
+/* Search bar — border, text, and icon all turn yellow on hover */
+#header-component .search-action--hidden-on-drawer:hover .button-unstyled {
+  color: var(--fixatech-primary, #ffc600);
+  border-color: var(--fixatech-primary, #ffc600);
+}
+
 #header-component .search-action--hidden-on-drawer:hover .hidden,
 #header-component .search-action--hidden-on-drawer:hover .svg-wrapper {
   color: var(--fixatech-primary, #ffc600);
