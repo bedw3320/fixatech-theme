@@ -402,8 +402,8 @@
                 "link": "shopify://pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 100,
+                "width": "custom",
+                "custom_width": 90,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
               },
