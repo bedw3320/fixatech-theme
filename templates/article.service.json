@@ -800,7 +800,7 @@
           "static": true,
           "settings": {
             "alignment": "left",
-            "gap": 8,
+            "gap": 16,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "border": "none",
