@@ -726,7 +726,7 @@
       "settings": {
         "color_scheme": "scheme-3",
         "section_width": "page-width",
-        "thickness": 0.5,
+        "thickness": 0,
         "corner_radius": "square",
         "width_percent": 5,
         "alignment_horizontal": "center",
