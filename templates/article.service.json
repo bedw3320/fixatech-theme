@@ -370,7 +370,7 @@
                 "text_XDYqEQ": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Conception intentionnelle</h2>",
+                    "text": "<h2>Étape 1</h2>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -520,7 +520,7 @@
                 "text_p8W8L9": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Fabriqué avec soin</h2>",
+                    "text": "<h2>Étape 2</h2>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
@@ -670,7 +670,7 @@
                 "text_DTD6rE": {
                   "type": "text",
                   "settings": {
-                    "text": "<h2>Une équipe avec un objectif</h2>",
+                    "text": "<h2>Étape 3</h2><h2></h2>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
