@@ -69,105 +69,35 @@
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
-        "group_H6VpwJ": {
-          "type": "group",
+        "email_signup_VdkAYg": {
+          "type": "email-signup",
+          "name": "t:names.email_signup",
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "space-between",
-            "gap": 6,
-            "width": "custom",
-            "custom_width": 50,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
+            "width": "fill",
+            "custom_width": 100,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
+            "heading": "INFOLETTRE",
+            "heading_preset": "h5",
+            "border_style": "all",
             "border_width": 1,
-            "border_opacity": 100,
             "border_radius": 12,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
+            "input_type_preset": "",
+            "style_class": "button",
+            "display_type": "text",
+            "label": "S'inscrire",
+            "integrated_button": false,
+            "button_type_preset": "paragraph",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {
-            "text_LWt8Pz": {
-              "type": "text",
-              "settings": {
-                "text": "<h2>Join our email list</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "email_signup_Yxei94": {
-              "type": "email-signup",
-              "name": "t:names.email_signup",
-              "settings": {
-                "width": "custom",
-                "custom_width": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "heading": "",
-                "heading_preset": "h3",
-                "border_style": "all",
-                "border_width": 1,
-                "border_radius": 100,
-                "input_type_preset": "paragraph",
-                "style_class": "button",
-                "display_type": "text",
-                "label": "S'inscrire",
-                "integrated_button": false,
-                "button_type_preset": "paragraph",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_LWt8Pz",
-            "email_signup_Yxei94"
-          ]
+          "blocks": {}
         }
       },
       "block_order": [
-        "group_H6VpwJ"
+        "email_signup_VdkAYg"
       ],
       "name": "t:names.footer",
       "settings": {
