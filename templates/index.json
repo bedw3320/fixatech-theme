@@ -658,12 +658,12 @@
           "settings": {
             "text": "Soyez audacieux.",
             "font": "heading",
-            "alignment": "left",
-            "line_height": "0.8",
-            "letter_spacing": "-0.03em",
+            "alignment": "center",
+            "line_height": "1",
+            "letter_spacing": "normal",
             "case": "none",
-            "text_effect": "none",
-            "animation_repeat": false
+            "text_effect": "reveal",
+            "animation_repeat": true
           },
           "blocks": {}
         },
@@ -671,8 +671,8 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Acheter maintenant",
-            "link": "shopify://collections/all",
+            "label": "Découvrez nos services",
+            "link": "shopify://pages/contact",
             "open_in_new_tab": false,
             "style_class": "button",
             "width": "fit-content",
