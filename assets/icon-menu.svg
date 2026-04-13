@@ -1,4 +1,1 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M1 3.5H13" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"/>
-  <path d="M1 10.5H13" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.5 17" fill="none"><path d="M18.5 17H0V16H18.5V17ZM18.5 9H0V8H18.5V9ZM18.5 1H0V0H18.5V1Z" fill="currentColor"/></svg>
