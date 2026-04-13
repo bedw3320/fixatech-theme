@@ -767,7 +767,7 @@
           "type": "text",
           "settings": {
             "text": "<h5>Fixatech, c’est plus de 40 ans d’expertise. Toujours à l’affût des nouveautés et des innovations, on est là pour te partager ce qu’il y a de mieux. Tu veux pas manquer ça.</h5>",
-            "width": "fit-content",
+            "width": "100%",
             "max_width": "normal",
             "alignment": "left",
             "type_preset": "rte",
