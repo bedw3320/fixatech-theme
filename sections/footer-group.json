@@ -207,7 +207,7 @@
               "settings": {
                 "text": "<h5>PLAN DU SITE</h5>",
                 "width": "100%",
-                "max_width": "narrow",
+                "max_width": "none",
                 "alignment": "right",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
