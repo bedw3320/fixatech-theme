@@ -886,7 +886,7 @@
           "name": "t:names.title",
           "static": true,
           "settings": {
-            "text": "<h2>{{ closest.blog.title }}</h2>",
+            "text": "<h2>NOS AUTRES SERVICES</h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -1002,7 +1002,7 @@
       },
       "name": "t:names.blog_posts_grid",
       "settings": {
-        "blog": "",
+        "blog": "decouvrez-nos-services",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "post_limit": 3,
