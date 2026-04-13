@@ -190,8 +190,9 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Search bar — border, text, and icon all turn yellow on hover */
-#header-component .search-action--hidden-on-drawer:hover .button-unstyled {
+/* Search bar — border, text, and icon all turn yellow on hover.
+   Extra .search-action class raises specificity above header.liquid inline {% style %} block. */
+#header-component .search-action.search-action--hidden-on-drawer:hover .button-unstyled {
   color: var(--fixatech-primary, #ffc600);
   border-color: var(--fixatech-primary, #ffc600);
 }
@@ -201,8 +202,12 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Language/country dropdown — text and caret turn yellow on hover */
-#header-component .dropdown-localization__button:hover {
+/* Language selector (native <select>) and caret — yellow on hover */
+#header-component .localization-form__select:hover {
+  color: var(--fixatech-primary, #ffc600);
+}
+
+#header-component .language-selector:hover .icon-caret {
   color: var(--fixatech-primary, #ffc600);
 }
 
