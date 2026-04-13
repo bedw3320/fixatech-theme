@@ -54,7 +54,20 @@
         {% endif %}
       >
         {% if block_settings.display_type == 'text' %}
-          {{ block_settings.label }}
+          {{- block_settings.label -}}
+          {%- liquid
+            assign show_arrow = false
+            if block_settings.style_class == 'button-secondary'
+              assign show_arrow = settings.secondary_button_show_arrow
+            else
+              assign show_arrow = settings.primary_button_show_arrow
+            endif
+          -%}
+          {%- if show_arrow -%}
+            <span class="svg-wrapper button-arrow" aria-hidden="true">
+              {{- 'icon-arrow.svg' | inline_asset_content -}}
+            </span>
+          {%- endif -%}
         {% else %}
           <svg
             viewBox="0 0 20 20"
