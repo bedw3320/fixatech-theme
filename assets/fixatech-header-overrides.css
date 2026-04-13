@@ -184,6 +184,17 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
+/* Account button children have their own color declarations — override on hover */
+#header-component .account-button:hover .account-button__icon,
+#header-component .account-button:hover .account-button__text {
+  color: var(--fixatech-primary, #ffc600);
+}
+
+/* Search bar text has a hardcoded color — override on hover */
+#header-component .search-action--hidden-on-drawer .button-unstyled:hover .hidden {
+  color: var(--fixatech-primary, #ffc600);
+}
+
 /* ═══════════════════════════════════════════════════════════════
    5. ACCOUNT BUTTON — icon + text, sizing, gap
    ═══════════════════════════════════════════════════════════════ */
