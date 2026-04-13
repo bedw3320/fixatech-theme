@@ -1,10 +1,40 @@
 
 
-{% capture children %}
-  {% content_for 'blocks' %}
-{% endcapture %}
+{%- comment -%}
+  Two-layer background:
+  - Outer (full-bleed) uses outer_color_scheme
+  - Inner card uses color_scheme + border-radius
+{%- endcomment -%}
+<div class="section-background color-{{ section.settings.outer_color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.outer_color_scheme }}"
+>
+  <div
+    class="border-style color-{{ section.settings.color_scheme }} fixatech-cta-card"
+    style="{% render 'border-override', settings: section.settings %}"
+  >
+    <div
+      class="
+        spacing-style
+        layout-panel-flex
+        layout-panel-flex--{{ section.settings.content_direction }}
+        {% if section.settings.vertical_on_mobile %} mobile-column{% endif %}
+      "
+      style="
+        {% render 'layout-panel-style', settings: section.settings %}
+        {% render 'spacing-style', settings: section.settings %}
+      "
+    >
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</div>
 
-{% render 'section', section: section, children: children %}
+{% stylesheet %}
+  .fixatech-cta-card {
+    background-color: var(--color-background);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -175,8 +205,14 @@
     {
       "type": "color_scheme",
       "id": "color_scheme",
-      "label": "Color scheme",
+      "label": "Card color scheme",
       "default": "scheme-4"
+    },
+    {
+      "type": "color_scheme",
+      "id": "outer_color_scheme",
+      "label": "Outer color scheme",
+      "default": "scheme-1"
     },
     {
       "type": "select",
@@ -261,6 +297,7 @@
         "vertical_alignment": "center",
         "vertical_on_mobile": true,
         "color_scheme": "scheme-4",
+        "outer_color_scheme": "scheme-1",
         "border_radius": 16,
         "padding-block-start": 24,
         "padding-block-end": 24
