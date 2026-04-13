@@ -714,8 +714,8 @@
         "border_width": 1,
         "border_opacity": 100,
         "border_radius": 12,
-        "padding-block-start": 72,
-        "padding-block-end": 72,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
