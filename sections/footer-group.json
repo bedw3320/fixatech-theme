@@ -455,10 +455,10 @@
           "settings": {
             "width": "custom",
             "custom_width": 45,
-            "inherit_color_scheme": true,
+            "inherit_color_scheme": false,
             "color_scheme": "scheme-5",
             "heading": "INFOLETTRE",
-            "heading_preset": "h4",
+            "heading_preset": "h5",
             "border_style": "all",
             "border_width": 1,
             "border_radius": 12,
