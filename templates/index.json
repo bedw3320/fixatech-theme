@@ -186,11 +186,11 @@
               "type": "_product-list-button",
               "name": "t:names.product_list_button",
               "settings": {
-                "label": "View all",
+                "label": "Tout afficher",
                 "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
+                "style_class": "button",
+                "width": "custom",
+                "custom_width": 15,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
               },
