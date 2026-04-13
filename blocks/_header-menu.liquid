@@ -107,13 +107,7 @@
                 <span class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--open">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.5 20H3V19H21.5V20ZM21.5 12H3V11H21.5V12ZM21.5 4H3V3H21.5V4Z" fill="currentColor"/></svg>
                 </span>
-                <span
-                  class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--close"
-                  role="button"
-                  tabindex="0"
-                  aria-label="{{ 'accessibility.close_menu' | t }}"
-                  onclick="event.preventDefault(); event.stopPropagation(); const li = this.closest('.menu-list__list-item'); const link = li.querySelector('.menu-list__link'); link.setAttribute('aria-expanded', 'false'); li.dispatchEvent(new FocusEvent('blur', { bubbles: true, relatedTarget: document.body }));"
-                >
+                <span class="svg-wrapper fixatech-menu-icon fixatech-menu-icon--close">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.0607 12.3536L20.7071 4.70711L20 4L12.3536 11.6464L4.70711 4L4 4.70711L11.6464 12.3536L4 20L4.70711 20.7071L12.3536 13.0607L20 20.7071L20.7071 20L13.0607 12.3536Z" fill="currentColor"/></svg>
                 </span>
               {%- endif -%}

@@ -377,7 +377,6 @@ header-component.header {
 /* Default: show hamburger, hide X */
 #header-component .fixatech-menu-icon--close {
   display: none;
-  cursor: pointer;
 }
 
 /* When mega menu is expanded: show X, hide hamburger */
