@@ -374,31 +374,40 @@ header-component.header {
   height: 16px;
 }
 
-/* Default: show hamburger, hide X */
-#header-component .fixatech-menu-icon--close {
+/* Close button: unstyled, hidden by default */
+#header-component .fixatech-menu-close-btn {
   display: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--fixatech-white, #fff);
 }
 
-/* When mega menu is expanded: show X, hide hamburger */
+/* When mega menu is expanded: hide hamburger, show close button */
 #header-component .menu-list__link[aria-expanded="true"] .fixatech-menu-icon--open {
   display: none;
 }
 
-#header-component .menu-list__link[aria-expanded="true"] .fixatech-menu-icon--close {
+#header-component .menu-list__link[aria-expanded="true"] ~ .fixatech-menu-close-btn {
   display: flex;
 }
 
-/* First nav item: icon + text sit inline inside the title span */
+/* First nav item: icon + text sit inline, close button inline too */
 #header-component .menu-list__list-item:first-child .menu-list__link-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
+#header-component .menu-list__list-item:first-child {
+  display: flex;
+  align-items: center;
+}
+
 /* Hide icons on mobile — drawer takes over */
 @media screen and (max-width: 749px) {
-  #header-component .fixatech-menu-icon {
-    display: none;
+  #header-component .fixatech-menu-icon,
+  #header-component .fixatech-menu-close-btn {
+    display: none !important;
   }
 }
 
@@ -577,6 +586,24 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
   }
   header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade--with-featured {
     grid-template-columns: minmax(200px, 280px) 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MEGA-MENU HOVER BRIDGE
+   Invisible pseudo-element fills the gap between the nav link
+   and the clip-path–visible submenu so the pointer never
+   "leaves" the <li> while crossing the dead zone.
+   ═══════════════════════════════════════════════════════════════ */
+@media screen and (min-width: 990px) {
+  .menu-list__list-item:has([aria-expanded='true'])::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 3rem;
+    pointer-events: auto;
   }
 }
 
