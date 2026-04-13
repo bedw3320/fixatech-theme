@@ -331,7 +331,13 @@ header-component.header {
 }
 
 #header-component .mega-menu__link:not(.mega-menu__link--parent):hover {
-  opacity: 0.7;
+  color: var(--fixatech-primary, #ffc600);
+  opacity: 1;
+}
+
+/* Top-level nav items — yellow on hover */
+#header-component .menu-list .menu-list__list-item:where(:hover, :focus-within) .menu-list__link {
+  color: var(--fixatech-primary, #ffc600);
 }
 
 /* ═══════════════════════════════════════════════════════════════
