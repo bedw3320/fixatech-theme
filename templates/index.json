@@ -451,20 +451,6 @@
         "padding-inline-end": 0
       }
     },
-    "divider_UYHAUf": {
-      "type": "divider",
-      "name": "t:names.divider_section",
-      "settings": {
-        "color_scheme": "scheme-3",
-        "section_width": "page-width",
-        "thickness": 0,
-        "corner_radius": "square",
-        "width_percent": 5,
-        "alignment_horizontal": "center",
-        "padding-block-start": 24,
-        "padding-block-end": 24
-      }
-    },
     "section_W83QwD": {
       "type": "section",
       "blocks": {
@@ -585,7 +571,6 @@
     "bento_hero_main",
     "product_list_fa6P9H",
     "fixatech_cta_banner_xHLQij",
-    "divider_UYHAUf",
     "section_W83QwD"
   ]
 }
