@@ -357,7 +357,7 @@
         "cta_enabled": true,
         "cta_first_position": 4,
         "cta_repeat_interval": 12,
-        "cta_label": "Tout voir",
+        "cta_label": "Tout afficher",
         "cta_style": "button",
         "cta_link": "",
         "cta_open_in_new_tab": false,
