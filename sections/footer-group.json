@@ -74,7 +74,7 @@
           "name": "t:names.email_signup",
           "settings": {
             "width": "custom",
-            "custom_width": 50,
+            "custom_width": 40,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "heading": "INFOLETTRE",
