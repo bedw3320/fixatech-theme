@@ -464,7 +464,7 @@
             "border_radius": 12,
             "input_type_preset": "paragraph",
             "style_class": "button-secondary",
-            "display_type": "text",
+            "display_type": "text-arrow",
             "label": "S'inscrire",
             "integrated_button": false,
             "button_type_preset": "paragraph",
