@@ -709,6 +709,11 @@
         "gap": 24,
         "section_width": "page-width",
         "color_scheme": "",
+        "outer_color_scheme": "scheme-3",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 16,
         "padding-block-start": 48,
         "padding-block-end": 48
       }
