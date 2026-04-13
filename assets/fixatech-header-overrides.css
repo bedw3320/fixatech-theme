@@ -374,32 +374,18 @@ header-component.header {
   height: 16px;
 }
 
-/* First list item is positioning context for the absolute close button */
-#header-component .menu-list__list-item:first-child {
-  position: relative;
-}
-
-/* Close button: absolutely positioned over the hamburger icon spot */
-#header-component .fixatech-menu-close-btn {
+/* Default: show hamburger, hide X */
+#header-component .fixatech-menu-icon--close {
   display: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  padding-inline-start: calc(var(--gap-xl) / 2);
-  margin: 0;
   cursor: pointer;
-  color: var(--fixatech-white, #fff);
-  align-items: center;
-  z-index: 1;
 }
 
-/* When mega menu is expanded: hide hamburger, show close button */
+/* When mega menu is expanded: show X, hide hamburger */
 #header-component .menu-list__link[aria-expanded="true"] .fixatech-menu-icon--open {
   display: none;
 }
 
-#header-component .menu-list__link[aria-expanded="true"] ~ .fixatech-menu-close-btn {
+#header-component .menu-list__link[aria-expanded="true"] .fixatech-menu-icon--close {
   display: flex;
 }
 
@@ -412,8 +398,7 @@ header-component.header {
 
 /* Hide icons on mobile — drawer takes over */
 @media screen and (max-width: 749px) {
-  #header-component .fixatech-menu-icon,
-  #header-component .fixatech-menu-close-btn {
+  #header-component .fixatech-menu-icon {
     display: none !important;
   }
 }
