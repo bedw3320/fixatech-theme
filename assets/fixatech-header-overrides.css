@@ -190,23 +190,13 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Search bar — border, text, and icon all turn yellow on hover.
-   Extra .search-action class raises specificity above header.liquid inline {% style %} block. */
-#header-component .search-action.search-action--hidden-on-drawer:hover .button-unstyled {
-  color: var(--fixatech-primary, #ffc600);
-  border-color: var(--fixatech-primary, #ffc600);
-}
-
-#header-component .search-action--hidden-on-drawer:hover .hidden,
+/* Search bar — only the magnifying glass icon turns yellow on hover */
 #header-component .search-action--hidden-on-drawer:hover .svg-wrapper {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Language selector (native <select>) and caret — yellow on hover */
-#header-component .localization-form__select:hover {
-  color: var(--fixatech-primary, #ffc600);
-}
-
+/* Language selector — text and caret turn yellow together on hover */
+#header-component .language-selector:hover .localization-form__select,
 #header-component .language-selector:hover .icon-caret {
   color: var(--fixatech-primary, #ffc600);
 }
