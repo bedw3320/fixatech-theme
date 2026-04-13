@@ -5,13 +5,17 @@
   @param {object} image - Background image (image_picker value)
   @param {string} url - Link destination
   @param {string} label - Button label text
-  @param {string} [style] - Button style: 'primary' | 'secondary' | 'outlined' (default: 'primary')
+  @param {string} [style_class] - Button style class: 'button' | 'button-secondary' | 'link' (default: 'button')
   @param {boolean} [open_in_new_tab] - Open link in new tab (default: false)
   @param {boolean} [toggle_overlay] - Show overlay (default: false)
   @param {string} [overlay_color] - Overlay color with alpha
+  @param {number} [border_radius] - Card border radius in px (default: 0)
 {%- enddoc -%}
 
-<div class="cta-card">
+<div
+  class="cta-card"
+  style="--border-radius: {{ border_radius | default: 0 }}px;{% if border_radius > 0 %} overflow: hidden;{% endif %}"
+>
   <div class="cta-card__media">
     {% render 'background-media',
       background_media: 'image',
@@ -28,12 +32,21 @@
   {%- endif -%}
 
   <div class="cta-card__content">
-    {% render 'fixatech-button',
-      text: label,
-      url: url,
-      style: style,
-      arrow: true
-    %}
+    <a
+      {% if url == blank %}
+        role="link"
+        aria-disabled="true"
+      {% else %}
+        href="{{ url }}"
+      {% endif %}
+      class="{{ style_class | default: 'button' }}"
+      {%- if open_in_new_tab -%}
+        target="_blank"
+        rel="noopener noreferrer"
+      {%- endif -%}
+    >
+      {{- label -}}
+    </a>
   </div>
 </div>
 
