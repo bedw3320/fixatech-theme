@@ -658,7 +658,7 @@
           "settings": {
             "text": "<h1><em>ON T'ÉQUIPE POUR ÇA</em></h1>",
             "width": "fit-content",
-            "max_width": "normal",
+            "max_width": "none",
             "alignment": "center",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
@@ -701,7 +701,7 @@
       "name": "Fixatech CTA Banner",
       "settings": {
         "content_direction": "row",
-        "vertical_on_mobile": true,
+        "vertical_on_mobile": false,
         "horizontal_alignment": "center",
         "vertical_alignment": "center",
         "horizontal_alignment_flex_direction_column": "flex-start",
@@ -716,8 +716,8 @@
         "border_radius": 12,
         "padding-block-start": 72,
         "padding-block-end": 72,
-        "padding-inline-start": 32,
-        "padding-inline-end": 32
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
       }
     },
     "divider_UYHAUf": {
