@@ -454,7 +454,7 @@
           "type": "email-signup",
           "settings": {
             "width": "custom",
-            "custom_width": 40,
+            "custom_width": 45,
             "inherit_color_scheme": false,
             "color_scheme": "scheme-1",
             "heading": "INFOLETTRE",
