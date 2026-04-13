@@ -237,7 +237,7 @@
                 "show_as_accordion": true,
                 "accordion_icon": "caret",
                 "accordion_dividers": true,
-                "inherit_color_scheme": true,
+                "inherit_color_scheme": false,
                 "color_scheme": "",
                 "heading_preset": "",
                 "link_preset": "paragraph",
