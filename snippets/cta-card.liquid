@@ -46,6 +46,19 @@
       {%- endif -%}
     >
       {{- label -}}
+      {%- liquid
+        assign show_arrow = false
+        if style_class == 'button-secondary'
+          assign show_arrow = settings.secondary_button_show_arrow
+        else
+          assign show_arrow = settings.primary_button_show_arrow
+        endif
+      -%}
+      {%- if show_arrow -%}
+        <span class="svg-wrapper button-arrow" aria-hidden="true">
+          {{- 'icon-arrow.svg' | inline_asset_content -}}
+        </span>
+      {%- endif -%}
     </a>
   </div>
 </div>
