@@ -267,7 +267,7 @@
             "vertical_alignment_flex_direction_column": "space-between",
             "gap": 12,
             "width": "custom",
-            "custom_width": 87,
+            "custom_width": 75,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -320,13 +320,13 @@
               },
               "blocks": {}
             },
-            "text_YbHVkf": {
+            "text_xwMtah": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Nous fabriquons des articles plus performants et plus durables. Nos produits résolvent de vrais problèmes avec un design épuré et des matériaux honnêtes.</p>",
+                "text": "<p>OUVERT DE 7H00 À 17H00, DU LUNDI AU VENDREDI</p>",
                 "width": "fit-content",
-                "max_width": "normal",
+                "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -346,13 +346,13 @@
               },
               "blocks": {}
             },
-            "text_xwMtah": {
+            "text_YbHVkf": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>OUVERT DE 7H00 À 17H00, DU LUNDI AU VENDREDI</p>",
+                "text": "<p>1010, route des Rivières, local 100 Lévis (Québec)  G7A 2V1</p>",
                 "width": "fit-content",
-                "max_width": "narrow",
+                "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
@@ -390,8 +390,8 @@
           },
           "block_order": [
             "text_nXL68h",
-            "text_YbHVkf",
             "text_xwMtah",
+            "text_YbHVkf",
             "button_gLrrAb"
           ]
         }
