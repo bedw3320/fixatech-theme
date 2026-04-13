@@ -398,8 +398,8 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Acheter maintenant",
-                "link": "shopify://collections/all",
+                "label": "CONTACTEZ NOUS",
+                "link": "shopify://pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
