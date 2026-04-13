@@ -458,7 +458,7 @@
             "inherit_color_scheme": true,
             "color_scheme": "scheme-5",
             "heading": "INFOLETTRE",
-            "heading_preset": "h5",
+            "heading_preset": "h4",
             "border_style": "all",
             "border_width": 1,
             "border_radius": 12,
