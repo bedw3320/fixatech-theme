@@ -9,6 +9,19 @@
  */
 {
   "sections": {
+    "fixatech_breadcrumbs_pJEUy3": {
+      "type": "fixatech-breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "font_size": "1rem",
+        "text_case": "capitalize",
+        "font_weight": "400",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 48,
+        "padding-block-end": 0
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -942,19 +955,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 100,
         "padding-block-end": 100
-      }
-    },
-    "fixatech_breadcrumbs_pJEUy3": {
-      "type": "fixatech-breadcrumbs",
-      "name": "Breadcrumbs",
-      "settings": {
-        "menu": "main-menu",
-        "font_size": "0.8125rem",
-        "text_case": "none",
-        "font_weight": "400",
-        "color_scheme": "scheme-3",
-        "padding-block-start": 16,
-        "padding-block-end": 0
       }
     }
   },
