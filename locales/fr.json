@@ -301,6 +301,10 @@
       "pro_corner": "Le coin des pros",
       "repair_service": "Service de réparation",
       "gift_card": "Carte-cadeau"
+    },
+    "breadcrumbs": {
+      "nav_label": "Fil d'Ariane",
+      "home": "Accueil"
     }
   },
   "placeholders": {

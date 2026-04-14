@@ -1,0 +1,125 @@
+{%- doc -%}
+  Fixatech Breadcrumbs Section
+  Renders a breadcrumb navigation bar based on the store's menu hierarchy.
+  Displays on product and collection pages.
+
+  @example
+  Add this section to templates/product.json or templates/collection.json
+{%- enddoc -%}
+
+<div
+  class="fixatech-breadcrumbs-section section section--page-width color-{{ section.settings.color_scheme }}"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  {% render 'fixatech-breadcrumbs', menu_handle: section.settings.menu %}
+</div>
+
+{% stylesheet %}
+  .fixatech-breadcrumbs-section {
+    width: 100%;
+  }
+
+  .fixatech-breadcrumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .fixatech-breadcrumbs__item {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .fixatech-breadcrumbs__link {
+    color: var(--color-foreground);
+    opacity: 0.55;
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .fixatech-breadcrumbs__link:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+  }
+
+  .fixatech-breadcrumbs__separator {
+    display: inline-block;
+    margin-inline: 0.5em;
+    color: var(--color-foreground);
+    opacity: 0.4;
+    font-size: 1em;
+  }
+
+  .fixatech-breadcrumbs__item--current {
+    color: var(--color-foreground);
+    opacity: 0.85;
+    font-weight: 500;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Breadcrumbs",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu",
+      "info": "Select the menu to build breadcrumbs from."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 16,
+        "padding-block-end": 0
+      }
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product", "collection"]
+  }
+}
+{% endschema %}

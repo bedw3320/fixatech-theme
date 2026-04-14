@@ -1,0 +1,213 @@
+{%- doc -%}
+  Fixatech Breadcrumbs
+  Renders a breadcrumb trail based on the store's menu hierarchy.
+  Works on both product and collection pages.
+
+  Walks the linklist to find where the current page's collection appears
+  in the menu, then builds: Home > [parent] > [child] > Current page.
+
+  @param {string} menu_handle - The handle of the menu to traverse (default: 'main-menu')
+
+  @example
+  {% render 'fixatech-breadcrumbs', menu_handle: 'main-menu' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign menu_handle = menu_handle | default: 'main-menu'
+  assign menu = linklists[menu_handle]
+
+  comment
+    Determine the target collection for breadcrumb matching.
+    On product pages: use the referring collection, or fall back to the product's first collection.
+    On collection pages: use the current collection directly.
+  endcomment
+
+  assign breadcrumb_collection = nil
+
+  if request.page_type == 'product'
+    if collection != blank
+      assign breadcrumb_collection = collection
+    elsif product.collections.size > 0
+      assign breadcrumb_collection = product.collections.first
+    endif
+  elsif request.page_type == 'collection'
+    assign breadcrumb_collection = collection
+  endif
+
+  comment
+    Walk the menu hierarchy (up to 3 levels) to find the collection.
+    Store matched crumbs with title and URL.
+  endcomment
+
+  assign crumbs = ''
+  assign crumb_count = 0
+  assign found = false
+
+  if breadcrumb_collection != blank and menu.links.size > 0
+    for parent_link in menu.links
+      if found
+        break
+      endif
+
+      comment Check if parent link matches the collection endcomment
+      if parent_link.object == breadcrumb_collection or parent_link.url == breadcrumb_collection.url
+        assign found = true
+        assign crumb_1_title = parent_link.title
+        assign crumb_1_url = parent_link.url
+        assign crumb_count = 1
+        break
+      endif
+
+      comment Check child links endcomment
+      for child_link in parent_link.links
+        if found
+          break
+        endif
+
+        if child_link.object == breadcrumb_collection or child_link.url == breadcrumb_collection.url
+          assign found = true
+          assign crumb_1_title = parent_link.title
+          assign crumb_1_url = parent_link.url
+          assign crumb_2_title = child_link.title
+          assign crumb_2_url = child_link.url
+          assign crumb_count = 2
+          break
+        endif
+
+        comment Check grandchild links endcomment
+        for grandchild_link in child_link.links
+          if grandchild_link.object == breadcrumb_collection or grandchild_link.url == breadcrumb_collection.url
+            assign found = true
+            assign crumb_1_title = parent_link.title
+            assign crumb_1_url = parent_link.url
+            assign crumb_2_title = child_link.title
+            assign crumb_2_url = child_link.url
+            assign crumb_3_title = grandchild_link.title
+            assign crumb_3_url = grandchild_link.url
+            assign crumb_count = 3
+            break
+          endif
+        endfor
+      endfor
+    endfor
+  endif
+
+  comment
+    Determine the current page title (last breadcrumb item).
+  endcomment
+
+  if request.page_type == 'product'
+    assign current_page_title = product.title
+  elsif request.page_type == 'collection'
+    assign current_page_title = collection.title
+  endif
+-%}
+
+<nav
+  class="fixatech-breadcrumbs"
+  aria-label="{{ 'fixatech.breadcrumbs.nav_label' | t }}"
+>
+  <ol class="fixatech-breadcrumbs__list" role="list">
+    {%- comment -%} Home {%- endcomment -%}
+    <li class="fixatech-breadcrumbs__item">
+      <a href="{{ routes.root_url }}" class="fixatech-breadcrumbs__link">
+        {{- 'fixatech.breadcrumbs.home' | t -}}
+      </a>
+      <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+    </li>
+
+    {%- comment -%} Crumb 1 (top-level menu item) {%- endcomment -%}
+    {%- if crumb_count >= 1 -%}
+      {%- comment -%}
+        On collection pages: if the match is crumb_1 only (crumb_count == 1),
+        the collection IS the current page, so don't render it as a link —
+        it will be the last item below.
+        On product pages: always render intermediate crumbs as links.
+      {%- endcomment -%}
+      {%- if crumb_count > 1 or request.page_type == 'product' -%}
+        <li class="fixatech-breadcrumbs__item">
+          <a href="{{ crumb_1_url }}" class="fixatech-breadcrumbs__link">
+            {{- crumb_1_title -}}
+          </a>
+          <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%} Crumb 2 (second-level menu item) {%- endcomment -%}
+    {%- if crumb_count >= 2 -%}
+      {%- if crumb_count > 2 or request.page_type == 'product' -%}
+        <li class="fixatech-breadcrumbs__item">
+          <a href="{{ crumb_2_url }}" class="fixatech-breadcrumbs__link">
+            {{- crumb_2_title -}}
+          </a>
+          <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%} Crumb 3 (third-level menu item) — only on product pages {%- endcomment -%}
+    {%- if crumb_count == 3 and request.page_type == 'product' -%}
+      <li class="fixatech-breadcrumbs__item">
+        <a href="{{ crumb_3_url }}" class="fixatech-breadcrumbs__link">
+          {{- crumb_3_title -}}
+        </a>
+        <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+      </li>
+    {%- endif -%}
+
+    {%- comment -%} Current page (no link) {%- endcomment -%}
+    <li class="fixatech-breadcrumbs__item fixatech-breadcrumbs__item--current" aria-current="page">
+      {{- current_page_title -}}
+    </li>
+  </ol>
+</nav>
+
+{%- comment -%} JSON-LD BreadcrumbList structured data {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": {{ 'fixatech.breadcrumbs.home' | t | json }},
+      "item": "{{ request.origin }}{{ routes.root_url }}"
+    }
+    {%- assign position = 2 -%}
+    {%- if crumb_count >= 1 and (crumb_count > 1 or request.page_type == 'product') -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ crumb_1_title | json }},
+      "item": "{{ request.origin }}{{ crumb_1_url }}"
+    }
+    {%- assign position = position | plus: 1 -%}
+    {%- endif -%}
+    {%- if crumb_count >= 2 and (crumb_count > 2 or request.page_type == 'product') -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ crumb_2_title | json }},
+      "item": "{{ request.origin }}{{ crumb_2_url }}"
+    }
+    {%- assign position = position | plus: 1 -%}
+    {%- endif -%}
+    {%- if crumb_count == 3 and request.page_type == 'product' -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ crumb_3_title | json }},
+      "item": "{{ request.origin }}{{ crumb_3_url }}"
+    }
+    {%- assign position = position | plus: 1 -%}
+    {%- endif -%}
+    ,{
+      "@type": "ListItem",
+      "position": {{ position }},
+      "name": {{ current_page_title | json }}
+    }
+  ]
+}
+</script>

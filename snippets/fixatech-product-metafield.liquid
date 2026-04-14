@@ -1,0 +1,26 @@
+{%- doc -%}
+  Renders a product metafield value with an optional label prefix.
+  Used by the fixatech-product-metafield block.
+
+  @param {product} product_resource - The product to read the metafield from
+  @param {string} metafield_key - The metafield key in namespace.key format (e.g. custom.manufacturer_part_number)
+  @param {string} [label] - Optional label prefix (e.g. "No. Fabricant:")
+{%- enddoc -%}
+
+{%- liquid
+  if metafield_key != blank
+    assign key_parts = metafield_key | split: '.'
+    assign metafield_value = product_resource.metafields[key_parts[0]][key_parts[1]]
+  endif
+-%}
+
+{%- if metafield_value != blank -%}
+  <div class="fixatech-product-metafield">
+    {%- if label != blank -%}
+      <span class="fixatech-product-metafield__label">{{ label }}&nbsp;</span>
+    {%- endif -%}
+    <span class="fixatech-product-metafield__value" data-testid="product-metafield">
+      {{- metafield_value -}}
+    </span>
+  </div>
+{%- endif -%}

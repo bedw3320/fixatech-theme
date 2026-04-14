@@ -412,7 +412,17 @@
       }
     }
   },
+  "fixatech_breadcrumbs": {
+    "type": "fixatech-breadcrumbs",
+    "settings": {
+      "menu": "main-menu",
+      "color_scheme": "scheme-3",
+      "padding-block-start": 16,
+      "padding-block-end": 0
+    }
+  },
   "order": [
+    "fixatech_breadcrumbs",
     "section_TnRBtx",
     "section",
     "main"

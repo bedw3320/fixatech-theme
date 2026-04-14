@@ -325,6 +325,10 @@
       "pro_corner": "Pro Corner",
       "repair_service": "Repair Service",
       "gift_card": "Gift Card"
+    },
+    "breadcrumbs": {
+      "nav_label": "Breadcrumb",
+      "home": "Home"
     }
   },
   "placeholders": {

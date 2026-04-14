@@ -154,6 +154,27 @@
                   },
                   "blocks": {}
                 },
+                "fixatech_mpn_k7Hn3q": {
+                  "type": "fixatech-product-metafield",
+                  "settings": {
+                    "metafield_key": "custom.manufacturer_part_number",
+                    "label": "No. Fabricant:",
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "product_inventory_YRK4Fq": {
                   "type": "product-inventory",
                   "name": "t:names.product_inventory",
@@ -207,6 +228,7 @@
               "block_order": [
                 "text_xrnftG",
                 "sku_qTGata",
+                "fixatech_mpn_k7Hn3q",
                 "product_inventory_YRK4Fq",
                 "variant_picker_dkacz4",
                 "price_tVjtKg"
@@ -901,7 +923,17 @@
       }
     }
   },
+  "fixatech_breadcrumbs": {
+    "type": "fixatech-breadcrumbs",
+    "settings": {
+      "menu": "main-menu",
+      "color_scheme": "scheme-3",
+      "padding-block-start": 16,
+      "padding-block-end": 0
+    }
+  },
   "order": [
+    "fixatech_breadcrumbs",
     "main",
     "fixatech_product_tabs",
     "product_recommendations_qggXJq",
