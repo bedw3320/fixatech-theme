@@ -11,7 +11,177 @@
   class="fixatech-breadcrumbs-section section section--page-width color-{{ section.settings.color_scheme }}"
   style="{% render 'spacing-style', settings: section.settings %}"
 >
-  {% render 'fixatech-breadcrumbs', menu_handle: section.settings.menu %}
+  {%- liquid
+    assign menu_handle = section.settings.menu | default: 'main-menu'
+    assign menu = linklists[menu_handle]
+
+    assign breadcrumb_collection = nil
+
+    if request.page_type == 'product'
+      if collection != blank
+        assign breadcrumb_collection = collection
+      elsif product.collections.size > 0
+        assign breadcrumb_collection = product.collections.first
+      endif
+    elsif request.page_type == 'collection'
+      assign breadcrumb_collection = collection
+    endif
+
+    assign crumbs = ''
+    assign crumb_count = 0
+    assign found = false
+
+    if breadcrumb_collection != blank and menu.links.size > 0
+      for parent_link in menu.links
+        if found
+          break
+        endif
+
+        if parent_link.object == breadcrumb_collection or parent_link.url == breadcrumb_collection.url
+          assign found = true
+          assign crumb_1_title = parent_link.title
+          assign crumb_1_url = parent_link.url
+          assign crumb_count = 1
+          break
+        endif
+
+        for child_link in parent_link.links
+          if found
+            break
+          endif
+
+          if child_link.object == breadcrumb_collection or child_link.url == breadcrumb_collection.url
+            assign found = true
+            assign crumb_1_title = parent_link.title
+            assign crumb_1_url = parent_link.url
+            assign crumb_2_title = child_link.title
+            assign crumb_2_url = child_link.url
+            assign crumb_count = 2
+            break
+          endif
+
+          for grandchild_link in child_link.links
+            if grandchild_link.object == breadcrumb_collection or grandchild_link.url == breadcrumb_collection.url
+              assign found = true
+              assign crumb_1_title = parent_link.title
+              assign crumb_1_url = parent_link.url
+              assign crumb_2_title = child_link.title
+              assign crumb_2_url = child_link.url
+              assign crumb_3_title = grandchild_link.title
+              assign crumb_3_url = grandchild_link.url
+              assign crumb_count = 3
+              break
+            endif
+          endfor
+        endfor
+      endfor
+    endif
+
+    if request.page_type == 'product'
+      assign current_page_title = product.title
+    elsif request.page_type == 'collection'
+      assign current_page_title = collection.title
+    endif
+  -%}
+
+  <nav
+    class="fixatech-breadcrumbs"
+    aria-label="{{ 'fixatech.breadcrumbs.nav_label' | t }}"
+  >
+    <ol class="fixatech-breadcrumbs__list" role="list">
+      {%- comment -%} Home {%- endcomment -%}
+      <li class="fixatech-breadcrumbs__item">
+        <a href="{{ routes.root_url }}" class="fixatech-breadcrumbs__link">
+          {{- 'fixatech.breadcrumbs.home' | t -}}
+        </a>
+        <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+      </li>
+
+      {%- if crumb_count >= 1 -%}
+        {%- if crumb_count > 1 or request.page_type == 'product' -%}
+          <li class="fixatech-breadcrumbs__item">
+            <a href="{{ crumb_1_url }}" class="fixatech-breadcrumbs__link">
+              {{- crumb_1_title -}}
+            </a>
+            <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+          </li>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if crumb_count >= 2 -%}
+        {%- if crumb_count > 2 or request.page_type == 'product' -%}
+          <li class="fixatech-breadcrumbs__item">
+            <a href="{{ crumb_2_url }}" class="fixatech-breadcrumbs__link">
+              {{- crumb_2_title -}}
+            </a>
+            <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+          </li>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if crumb_count == 3 and request.page_type == 'product' -%}
+        <li class="fixatech-breadcrumbs__item">
+          <a href="{{ crumb_3_url }}" class="fixatech-breadcrumbs__link">
+            {{- crumb_3_title -}}
+          </a>
+          <span class="fixatech-breadcrumbs__separator" aria-hidden="true">&rsaquo;</span>
+        </li>
+      {%- endif -%}
+
+      <li class="fixatech-breadcrumbs__item fixatech-breadcrumbs__item--current" aria-current="page">
+        {{- current_page_title -}}
+      </li>
+    </ol>
+  </nav>
+
+  {%- comment -%} JSON-LD BreadcrumbList structured data {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": {{ 'fixatech.breadcrumbs.home' | t | json }},
+        "item": "{{ request.origin }}{{ routes.root_url }}"
+      }
+      {%- assign position = 2 -%}
+      {%- if crumb_count >= 1 and (crumb_count > 1 or request.page_type == 'product') -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ crumb_1_title | json }},
+        "item": "{{ request.origin }}{{ crumb_1_url }}"
+      }
+      {%- assign position = position | plus: 1 -%}
+      {%- endif -%}
+      {%- if crumb_count >= 2 and (crumb_count > 2 or request.page_type == 'product') -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ crumb_2_title | json }},
+        "item": "{{ request.origin }}{{ crumb_2_url }}"
+      }
+      {%- assign position = position | plus: 1 -%}
+      {%- endif -%}
+      {%- if crumb_count == 3 and request.page_type == 'product' -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ crumb_3_title | json }},
+        "item": "{{ request.origin }}{{ crumb_3_url }}"
+      }
+      {%- assign position = position | plus: 1 -%}
+      {%- endif -%}
+      ,{
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ current_page_title | json }}
+      }
+    ]
+  }
+  </script>
 </div>
 
 {% stylesheet %}
