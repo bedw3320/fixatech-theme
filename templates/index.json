@@ -610,9 +610,9 @@
               "settings": {
                 "label": "{{ closest.article.title }}",
                 "open_in_new_tab": false,
-                "style_class": "link",
-                "font": "var(--font-heading--family)",
-                "font_size": "1.125rem",
+                "style_class": "button",
+                "font": "",
+                "font_size": "0.875rem",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
