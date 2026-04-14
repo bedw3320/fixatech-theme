@@ -168,7 +168,7 @@
                   "type": "sku",
                   "name": "t:names.product_sku",
                   "settings": {
-                    "type_preset": "paragraph",
+                    "type_preset": "h6",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
@@ -190,7 +190,7 @@
                   "settings": {
                     "metafield_key": "custom.manufacturer_part_number",
                     "label": "No. Fabricant:",
-                    "type_preset": "",
+                    "type_preset": "h6",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
