@@ -286,7 +286,7 @@
       },
       "scheme-6": {
         "settings": {
-          "background": "rgba(0,0,0,0)",
+          "background": "#ff4d3b",
           "foreground_heading": "#ffffff",
           "foreground": "#ffffff",
           "primary": "#ffc600",
