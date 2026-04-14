@@ -114,6 +114,16 @@
         "padding-block-end": 24
       }
     },
+    "fixatech_breadcrumbs_Pxmf8R": {
+      "type": "fixatech-breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 16,
+        "padding-block-end": 16
+      }
+    },
     "section": {
       "type": "section",
       "blocks": {
@@ -409,16 +419,6 @@
         "fixatech_title_border": true,
         "fixatech_sidebar_width": 300,
         "fixatech_pagination_accent": true
-      }
-    },
-    "fixatech_breadcrumbs_Pxmf8R": {
-      "type": "fixatech-breadcrumbs",
-      "name": "Breadcrumbs",
-      "settings": {
-        "menu": "main-menu",
-        "color_scheme": "scheme-3",
-        "padding-block-start": 16,
-        "padding-block-end": 0
       }
     }
   },
