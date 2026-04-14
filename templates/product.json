@@ -442,10 +442,10 @@
       "block_order": [
         "text_cbcgyb"
       ],
-      "name": "t:names.product_recommendations",
+      "name": "Produits complémentaires",
       "settings": {
         "product": "{{ closest.product }}",
-        "recommendation_type": "related",
+        "recommendation_type": "complementary",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 4,
