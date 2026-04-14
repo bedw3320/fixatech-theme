@@ -139,7 +139,8 @@
       "item": "{{ request.origin }}{{ routes.root_url }}"
     }
     {%- assign position = 2 -%}
-    {%- if crumb_count >= 1 and (crumb_count > 1 or request.page_type == 'product') -%}
+    {%- if crumb_count >= 1 -%}
+      {%- if crumb_count > 1 or request.page_type == 'product' -%}
     ,{
       "@type": "ListItem",
       "position": {{ position }},
@@ -147,8 +148,10 @@
       "item": "{{ request.origin }}{{ crumb_1_url }}"
     }
     {%- assign position = position | plus: 1 -%}
+      {%- endif -%}
     {%- endif -%}
-    {%- if crumb_count >= 2 and (crumb_count > 2 or request.page_type == 'product') -%}
+    {%- if crumb_count >= 2 -%}
+      {%- if crumb_count > 2 or request.page_type == 'product' -%}
     ,{
       "@type": "ListItem",
       "position": {{ position }},
@@ -156,6 +159,7 @@
       "item": "{{ request.origin }}{{ crumb_2_url }}"
     }
     {%- assign position = position | plus: 1 -%}
+      {%- endif -%}
     {%- endif -%}
     {%- if crumb_count == 3 and request.page_type == 'product' -%}
     ,{

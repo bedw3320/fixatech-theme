@@ -1,0 +1,30 @@
+{%- doc -%}
+  Locale-aware money formatting.
+  French: 188,00$   English: $188.00
+  French: 1 188,00$ English: $1,188.00
+
+  @param {number} value - Price in minor units (cents)
+  @param {boolean} [with_currency] - Include currency code (e.g., CAD)
+{%- enddoc -%}
+
+{%- liquid
+  assign _locale = request.locale.iso_code | slice: 0, 2
+
+  if _locale == 'fr'
+    assign _raw = value | money_without_currency | strip_html | strip
+    assign _fmt = _raw | replace: ',', ' '
+    assign _fmt = _fmt | replace: '.', ','
+    assign _fmt = _fmt | append: '$'
+    if with_currency
+      assign _cur = localization.country.currency.iso_code | default: shop.currency
+      assign _fmt = _fmt | append: ' ' | append: _cur
+    endif
+  else
+    if with_currency
+      assign _fmt = value | money_with_currency
+    else
+      assign _fmt = value | money
+    endif
+  endif
+-%}
+{{- _fmt -}}

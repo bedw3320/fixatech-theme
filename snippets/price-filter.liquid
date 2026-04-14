@@ -38,7 +38,15 @@
     >
       <span class="facets__label">{{ filter.label }}</span>
       <facet-status-component class="facets__status">
-        <template ref="moneyFormat">{{ shop.money_format }}</template>
+        {%- liquid
+          assign _lc = request.locale.iso_code | slice: 0, 2
+          if _lc == 'fr'
+            assign _locale_money_fmt = '{{amount_with_space_separator}}$'
+          else
+            assign _locale_money_fmt = shop.money_format
+          endif
+        -%}
+        <template ref="moneyFormat">{{ _locale_money_fmt }}</template>
 
         <span
           class="hide-when-empty"
@@ -48,16 +56,15 @@
         >
           {%- if filter.min_value.value != null or filter.max_value.value != null %}
             {%- if filter.min_value.value != null and filter.max_value.value != null %}
-              {{- filter.min_value.value | money | strip_html -}}
+              {%- render 'locale-money', value: filter.min_value.value -%}
               –
-              {{- filter.max_value.value | money | strip_html -}}
+              {%- render 'locale-money', value: filter.max_value.value -%}
             {%- elsif filter.min_value.value != null -%}
-              {{ filter.min_value.value | money | strip_html }}–{{ filter.range_max | money | strip_html }}
-
+              {%- render 'locale-money', value: filter.min_value.value -%}–{%- render 'locale-money', value: filter.range_max -%}
             {%- elsif filter.max_value.value != null -%}
-              {{- 0 | money | strip_html -}}
+              {%- render 'locale-money', value: 0 -%}
               –
-              {{- filter.max_value.value | money | strip_html -}}
+              {%- render 'locale-money', value: filter.max_value.value -%}
             {%- endif -%}
           {%- endif -%}
         </span>
@@ -83,7 +90,7 @@
           {%- endif %}
         "
         id="facet-inputs-{{ filter.param_name | escape | replace: '.', '-' }}"
-        data-money-format="{{ shop.money_format | strip_html }}"
+        data-money-format="{{ _locale_money_fmt | strip_html }}"
         data-currency="{{ localization.country.currency.iso_code }}"
         on:change="/updatePriceFilterAndResults"
       >
@@ -152,7 +159,7 @@
             {%- endif %}
           "
         >
-          {%- assign formatted_highest_price = filter.range_max | money -%}
+          {%- capture formatted_highest_price -%}{%- render 'locale-money', value: filter.range_max -%}{%- endcapture -%}
           {{ 'content.price_filter_html' | t: price: formatted_highest_price }}
         </div>
 

@@ -75,9 +75,9 @@
 
       {%- comment -%} Pricing {%- endcomment -%}
       <div class="fixatech-card__pricing">
-        <span class="fixatech-card__price">{{ price | money }}</span>
+        <span class="fixatech-card__price">{%- render 'locale-money', value: price -%}</span>
         {%- if on_sale -%}
-          <s class="fixatech-card__compare-price">{{ compare_price | money }}</s>
+          <s class="fixatech-card__compare-price">{%- render 'locale-money', value: compare_price -%}</s>
         {%- endif -%}
       </div>
     </div>
