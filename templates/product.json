@@ -129,7 +129,7 @@
                     "label_uppercase": false,
                     "link_to_vendor": true,
                     "vendor_size": 16,
-                    "vendor_color": "#141414",
+                    "vendor_color": "#666666",
                     "vendor_hover_color": "#ffc600",
                     "vendor_weight": "400",
                     "vendor_uppercase": true,
