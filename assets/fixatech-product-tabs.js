@@ -1,22 +1,32 @@
 class ProductTabs extends HTMLElement {
   connectedCallback() {
-    this.tabs = [...this.querySelectorAll('[ref="tabs[]"]')];
     this.panels = [...this.querySelectorAll('[ref="panels[]"]')];
+    this.tablist = this.querySelector('[ref="tablist"]');
+    if (!this.tablist || this.panels.length === 0) return;
 
-    // Set initial state: first tab active, rest hidden
+    // Build tab buttons from panel data-tab-label attributes
+    this.tabs = this.panels.map((panel, i) => {
+      const btn = document.createElement('button');
+      btn.role = 'tab';
+      btn.id = panel.getAttribute('aria-labelledby');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.setAttribute('aria-controls', panel.id);
+      btn.tabIndex = i === 0 ? 0 : -1;
+      btn.className = 'fixatech-product-tabs__tab';
+      btn.textContent = panel.dataset.tabLabel || `Tab ${i + 1}`;
+      this.tablist.appendChild(btn);
+      return btn;
+    });
+
     this.selectTab(0);
 
-    this.tablist = this.querySelector('[role="tablist"]');
-    if (this.tablist) {
-      this.tablist.addEventListener('click', this.handleClick.bind(this));
-      this.tablist.addEventListener('keydown', this.handleKeydown.bind(this));
-    }
+    this.tablist.addEventListener('click', this.handleClick.bind(this));
+    this.tablist.addEventListener('keydown', this.handleKeydown.bind(this));
   }
 
   handleClick(event) {
     const tab = event.target.closest('[role="tab"]');
     if (!tab) return;
-
     const index = this.tabs.indexOf(tab);
     if (index !== -1) this.selectTab(index);
   }
@@ -47,7 +57,7 @@ class ProductTabs extends HTMLElement {
     this.tabs.forEach((tab, i) => {
       const selected = i === index;
       tab.setAttribute('aria-selected', selected);
-      tab.setAttribute('tabindex', selected ? '0' : '-1');
+      tab.tabIndex = selected ? 0 : -1;
     });
 
     this.panels.forEach((panel, i) => {

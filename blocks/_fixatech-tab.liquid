@@ -7,6 +7,7 @@
   aria-labelledby="Tab-{{ block.id }}-{{ section.id }}"
   tabindex="0"
   class="fixatech-product-tabs__panel"
+  data-tab-label="{{ block_settings.heading }}"
   {{ block.shopify_attributes }}
 >
   {% case block_settings.content_source %}

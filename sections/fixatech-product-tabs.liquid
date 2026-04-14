@@ -8,20 +8,9 @@
       class="fixatech-product-tabs__nav"
       role="tablist"
       aria-label="{{ 'accessibility.tabs' | t | default: 'Tabs' }}"
+      ref="tablist"
     >
-      {% for block in section.blocks %}
-        <button
-          role="tab"
-          ref="tabs[]"
-          id="Tab-{{ block.id }}-{{ section.id }}"
-          aria-selected="{% if forloop.index0 == 0 %}true{% else %}false{% endif %}"
-          aria-controls="Panel-{{ block.id }}-{{ section.id }}"
-          tabindex="{% if forloop.index0 == 0 %}0{% else %}-1{% endif %}"
-          class="fixatech-product-tabs__tab"
-        >
-          {{ block.settings.heading }}
-        </button>
-      {% endfor %}
+      {%- comment -%}Tab buttons are built by JS from data-tab-label on each panel{%- endcomment -%}
     </div>
 
     <div class="fixatech-product-tabs__panels">
