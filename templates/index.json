@@ -567,7 +567,7 @@
               "type": "_featured-blog-posts-image",
               "static": true,
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "square",
                 "toggle_overlay": true,
                 "overlay_color": "#0000004a",
                 "overlay_style": "solid",
