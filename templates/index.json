@@ -551,8 +551,8 @@
           "settings": {
             "alignment": "left",
             "gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-5",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
