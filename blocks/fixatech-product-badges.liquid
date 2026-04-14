@@ -1,0 +1,73 @@
+{%- liquid
+  assign show_sale = block.settings.show_sale_badge
+  assign show_sold_out = block.settings.show_sold_out_badge
+
+  assign is_on_sale = false
+  if product.compare_at_price > product.price
+    assign is_on_sale = true
+  endif
+
+  assign is_sold_out = false
+  unless product.available
+    assign is_sold_out = true
+  endunless
+
+  assign has_badge = false
+  if show_sale and is_on_sale
+    assign has_badge = true
+  endif
+  if show_sold_out and is_sold_out
+    assign has_badge = true
+  endif
+-%}
+
+{%- if has_badge -%}
+  <div
+    class="fixatech-product-badges"
+    style="
+      --badge-border-radius: {{ settings.badge_corner_radius }}px;
+      --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
+      --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight);
+      --badge-text-transform: {{ settings.badge_text_transform }};
+    "
+  >
+    {%- if show_sold_out and is_sold_out -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
+        {{- 'content.product_badge_sold_out' | t -}}
+      </div>
+    {%- elsif show_sale and is_on_sale -%}
+      <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
+        {{- 'content.product_badge_sale' | t -}}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .fixatech-product-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs, 8px);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product badges",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_sale_badge",
+      "label": "Show sale badge",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sold_out_badge",
+      "label": "Show sold out badge",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
