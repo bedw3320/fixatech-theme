@@ -154,6 +154,19 @@
                   },
                   "blocks": {}
                 },
+                "product_inventory_YRK4Fq": {
+                  "type": "product-inventory",
+                  "name": "t:names.product_inventory",
+                  "settings": {
+                    "inventory_threshold": 10,
+                    "show_inventory_quantity": true,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -180,6 +193,7 @@
               "block_order": [
                 "text_xrnftG",
                 "sku_qTGata",
+                "product_inventory_YRK4Fq",
                 "price_tVjtKg"
               ]
             },
