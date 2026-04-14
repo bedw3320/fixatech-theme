@@ -1,15 +1,39 @@
 
 
 {% assign button_url = closest.article.url %}
+{% assign block_settings = block.settings %}
 
 <div
   class="blog-post-button"
   style="
-    {%- if block.settings.font != blank -%}font-family: {{ block.settings.font }};{%- endif -%}
-    {%- if block.settings.font_size != blank -%}font-size: {{ block.settings.font_size }};{%- endif -%}
+    {%- if block_settings.font != blank -%}font-family: {{ block_settings.font }};{%- endif -%}
+    {%- if block_settings.font_size != blank -%}font-size: {{ block_settings.font_size }};{%- endif -%}
   "
 >
-  {% render 'button', link: button_url %}
+  <a
+    {% if button_url == blank %}
+      role="link"
+      aria-disabled="true"
+    {% else %}
+      href="{{ button_url }}"
+    {% endif %}
+    class="
+      size-style
+      {{ block_settings.style_class }}
+      {{ block_settings.style_class }}--{{ block.id }}
+    "
+    style="{% render 'size-style', settings: block_settings %}"
+    {%- if block_settings.open_in_new_tab -%}
+      target="_blank"
+      rel="noopener noreferrer"
+    {%- endif -%}
+    {{ block.shopify_attributes }}
+  >
+    {{- block_settings.label -}}
+    <span class="svg-wrapper button-arrow" aria-hidden="true">
+      {{- 'icon-arrow.svg' | inline_asset_content -}}
+    </span>
+  </a>
 </div>
 
 {% schema %}
