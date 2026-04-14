@@ -209,6 +209,15 @@
                   },
                   "blocks": {}
                 },
+                "fixatech_product_badges_eR9xQA": {
+                  "type": "fixatech-product-badges",
+                  "name": "Product badges",
+                  "settings": {
+                    "show_sale_badge": true,
+                    "show_sold_out_badge": false
+                  },
+                  "blocks": {}
+                },
                 "product_inventory_YRK4Fq": {
                   "type": "product-inventory",
                   "name": "t:names.product_inventory",
@@ -264,6 +273,7 @@
                 "text_xrnftG",
                 "sku_qTGata",
                 "fixatech_product_metafield_QEGmat",
+                "fixatech_product_badges_eR9xQA",
                 "product_inventory_YRK4Fq",
                 "variant_picker_dkacz4",
                 "price_tVjtKg"
