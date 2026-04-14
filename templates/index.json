@@ -549,7 +549,7 @@
           "name": "t:names.blog_card",
           "static": true,
           "settings": {
-            "alignment": "left",
+            "alignment": "right",
             "gap": 8,
             "inherit_color_scheme": false,
             "color_scheme": "scheme-5",
