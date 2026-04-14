@@ -612,7 +612,7 @@
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "font": "var(--font-heading--family)",
-                "font_size": "1rem",
+                "font_size": "1.125rem",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
