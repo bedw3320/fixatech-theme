@@ -1,5 +1,25 @@
 {%- assign block_settings = block.settings -%}
 
+{%- liquid
+  assign tab_has_content = false
+  case block_settings.content_source
+    when 'product_description'
+      if product.description != blank
+        assign tab_has_content = true
+      endif
+    when 'metafield'
+      if block_settings.metafield_key != blank
+        assign key_parts = block_settings.metafield_key | split: '.'
+        assign mf = product.metafields[key_parts[0]][key_parts[1]]
+        if mf != blank
+          assign tab_has_content = true
+        endif
+      endif
+    when 'custom'
+      assign tab_has_content = true
+  endcase
+-%}
+
 <div
   role="tabpanel"
   ref="panels[]"
@@ -8,6 +28,7 @@
   tabindex="0"
   class="fixatech-product-tabs__panel"
   data-tab-label="{{ block_settings.heading }}"
+  {% unless tab_has_content %}data-tab-empty{% endunless %}
   {{ block.shopify_attributes }}
 >
   {% case block_settings.content_source %}

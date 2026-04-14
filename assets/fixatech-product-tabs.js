@@ -4,6 +4,18 @@ class ProductTabs extends HTMLElement {
     this.tablist = this.querySelector('[ref="tablist"]');
     if (!this.tablist || this.panels.length === 0) return;
 
+    // Filter out empty panels when hide-empty is enabled
+    if (this.hasAttribute('data-hide-empty')) {
+      this.panels = this.panels.filter((panel) => {
+        if (panel.hasAttribute('data-tab-empty') || panel.textContent.trim() === '') {
+          panel.remove();
+          return false;
+        }
+        return true;
+      });
+    }
+    if (this.panels.length === 0) return;
+
     // Build tab buttons from panel data-tab-label attributes
     this.tabs = this.panels.map((panel, i) => {
       const btn = document.createElement('button');

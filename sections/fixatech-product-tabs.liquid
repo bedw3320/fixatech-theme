@@ -3,7 +3,7 @@
   class="section section--page-width spacing-style color-{{ section.settings.color_scheme }}"
   style="{% render 'spacing-style', settings: section.settings %}"
 >
-  <product-tabs>
+  <product-tabs{% if section.settings.hide_empty_tabs %} data-hide-empty{% endif %}>
     <div
       class="fixatech-product-tabs__nav"
       role="tablist"
@@ -152,6 +152,13 @@
     }
   ],
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "hide_empty_tabs",
+      "label": "Hide empty tabs",
+      "default": true,
+      "info": "Automatically hide tabs when their content source is empty"
+    },
     {
       "type": "header",
       "content": "t:content.typography"
