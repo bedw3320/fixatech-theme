@@ -628,7 +628,7 @@
       "settings": {
         "blog": "decouvrez-nos-services",
         "layout_type": "grid",
-        "carousel_on_mobile": true,
+        "carousel_on_mobile": false,
         "post_limit": 3,
         "columns": 3,
         "mobile_columns": "1",
