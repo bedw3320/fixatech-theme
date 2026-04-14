@@ -505,6 +505,10 @@
               "static": true,
               "settings": {
                 "image_ratio": "portrait",
+                "toggle_overlay": true,
+                "overlay_color": "#0000004a",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
