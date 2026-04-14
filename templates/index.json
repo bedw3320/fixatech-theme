@@ -582,6 +582,7 @@
             "title": {
               "type": "_heading",
               "name": "t:names.title",
+              "disabled": true,
               "static": true,
               "settings": {
                 "type_preset": "rte",
@@ -636,7 +637,7 @@
         "icons_shape": "none",
         "section_width": "page-width",
         "gap": 16,
-        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "color_scheme": "scheme-6",
         "padding-block-start": 48,
         "padding-block-end": 100
       }
