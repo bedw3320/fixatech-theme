@@ -108,26 +108,6 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "sku_qTGata": {
-                  "type": "sku",
-                  "name": "t:names.product_sku",
-                  "settings": {
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
                 "text_xrnftG": {
                   "type": "text",
                   "name": "Product title",
@@ -147,6 +127,26 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "sku_qTGata": {
+                  "type": "sku",
+                  "name": "t:names.product_sku",
+                  "settings": {
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -178,8 +178,8 @@
                 }
               },
               "block_order": [
-                "sku_qTGata",
                 "text_xrnftG",
+                "sku_qTGata",
                 "price_tVjtKg"
               ]
             },
