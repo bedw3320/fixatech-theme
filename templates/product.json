@@ -444,7 +444,7 @@
       ],
       "name": "Produits complémentaires",
       "settings": {
-        "product": "{{ closest.product }}",
+        "product": "{{ product }}",
         "recommendation_type": "complementary",
         "layout_type": "grid",
         "carousel_on_mobile": true,
