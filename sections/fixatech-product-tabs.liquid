@@ -9,6 +9,22 @@
       role="tablist"
       aria-label="{{ 'accessibility.tabs' | t | default: 'Tabs' }}"
       ref="tablist"
+      style="
+        --tab-font-family: var(--font-{{ section.settings.type_preset | default: 'heading' }}--family);
+        --tab-font-style: var(--font-{{ section.settings.type_preset | default: 'heading' }}--style);
+        --tab-font-weight: var(--font-{{ section.settings.type_preset | default: 'heading' }}--weight);
+        --tab-font-size: var(--font-{{ section.settings.type_preset | default: 'heading' }}--size);
+        --tab-font-line-height: var(--font-{{ section.settings.type_preset | default: 'heading' }}--line-height);
+        --tab-text-transform: var(--font-{{ section.settings.type_preset | default: 'heading' }}--case);
+        {% if section.settings.type_preset == 'custom' %}
+          --tab-font-family: {{ section.settings.font }};
+          --tab-font-size: {{ section.settings.font_size }};
+          --tab-font-line-height: var(--line-height--{{ section.settings.line_height }});
+          --tab-text-transform: {{ section.settings.case }};
+          --tab-font-weight: inherit;
+          --tab-font-style: normal;
+        {% endif %}
+      "
     >
       {%- comment -%}Tab buttons are built by JS from data-tab-label on each panel{%- endcomment -%}
     </div>
@@ -47,10 +63,12 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    font-family: var(--font-heading--family);
-    font-weight: var(--font-heading--weight);
-    font-size: var(--font-size--lg, 18px);
-    text-transform: uppercase;
+    font-family: var(--tab-font-family);
+    font-style: var(--tab-font-style);
+    font-weight: var(--tab-font-weight);
+    font-size: var(--tab-font-size);
+    line-height: var(--tab-font-line-height);
+    text-transform: var(--tab-text-transform);
     letter-spacing: 0.02em;
     padding: var(--padding-md, 16px) 0;
     white-space: nowrap;
@@ -121,11 +139,6 @@
     text-decoration-thickness: 2px;
   }
 
-  @media screen and (max-width: 749px) {
-    .fixatech-product-tabs__tab {
-      font-size: var(--font-size--md, 16px);
-    }
-  }
 {% endstylesheet %}
 
 {% schema %}
@@ -139,6 +152,163 @@
     }
   ],
   "settings": [
+    {
+      "type": "header",
+      "content": "t:content.typography"
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:settings.preset",
+      "options": [
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "h4",
+      "info": "t:info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "t:settings.font",
+      "options": [
+        {
+          "value": "var(--font-body--family)",
+          "label": "t:options.body"
+        },
+        {
+          "value": "var(--font-subheading--family)",
+          "label": "t:options.subheading"
+        },
+        {
+          "value": "var(--font-heading--family)",
+          "label": "t:options.heading"
+        },
+        {
+          "value": "var(--font-accent--family)",
+          "label": "t:options.accent"
+        }
+      ],
+      "default": "var(--font-heading--family)",
+      "visible_if": "{{ section.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.size",
+      "options": [
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        },
+        {
+          "value": "1.25rem",
+          "label": "20px"
+        },
+        {
+          "value": "1.5rem",
+          "label": "24px"
+        },
+        {
+          "value": "2rem",
+          "label": "32px"
+        },
+        {
+          "value": "2.5rem",
+          "label": "40px"
+        },
+        {
+          "value": "3rem",
+          "label": "48px"
+        }
+      ],
+      "default": "1.125rem",
+      "visible_if": "{{ section.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "line_height",
+      "label": "t:settings.line_height",
+      "options": [
+        {
+          "value": "tight",
+          "label": "t:options.tight"
+        },
+        {
+          "value": "normal",
+          "label": "t:options.normal"
+        },
+        {
+          "value": "loose",
+          "label": "t:options.loose"
+        }
+      ],
+      "default": "normal",
+      "visible_if": "{{ section.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "case",
+      "label": "t:settings.case",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.default"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:options.uppercase"
+        }
+      ],
+      "default": "uppercase",
+      "visible_if": "{{ section.settings.type_preset == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
