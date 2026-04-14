@@ -259,39 +259,12 @@
                 }
               },
               "block_order": []
-            },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "Product description",
-              "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
             }
           },
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "buy_buttons_eYQEYi"
           ]
         }
       },
@@ -304,6 +277,44 @@
         "enable_sticky_add_to_cart": true,
         "color_scheme": "scheme-3",
         "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "fixatech_product_tabs": {
+      "type": "fixatech-product-tabs",
+      "blocks": {
+        "tab_description": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Description",
+            "content_source": "product_description"
+          }
+        },
+        "tab_specs": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Caractéristiques",
+            "content_source": "metafield",
+            "metafield_key": "custom.fiche_technique"
+          }
+        },
+        "tab_resources": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Ressources",
+            "content_source": "metafield",
+            "metafield_key": "custom.product_documentation"
+          }
+        }
+      },
+      "block_order": [
+        "tab_description",
+        "tab_specs",
+        "tab_resources"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "padding-block-start": 0,
         "padding-block-end": 48
       }
     },
@@ -830,6 +841,7 @@
   },
   "order": [
     "main",
+    "fixatech_product_tabs",
     "product_recommendations_qggXJq",
     "fixatech_cta_banner_tENQ87",
     "section_QPz3JW",

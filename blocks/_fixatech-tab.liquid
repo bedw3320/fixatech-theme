@@ -1,0 +1,136 @@
+{%- assign block_index = section.blocks | find_index: 'id', block.id -%}
+{%- assign block_settings = block.settings -%}
+
+<div
+  role="tabpanel"
+  ref="panels[]"
+  id="Panel-{{ block.id }}-{{ section.id }}"
+  aria-labelledby="Tab-{{ block.id }}-{{ section.id }}"
+  tabindex="0"
+  class="fixatech-product-tabs__panel"
+  {% if block_index > 0 %}
+    inert
+    hidden
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  {% case block_settings.content_source %}
+    {% when 'product_description' %}
+      <div class="rte">
+        {{ product.description }}
+      </div>
+
+    {% when 'metafield' %}
+      {% if block_settings.metafield_key != blank %}
+        {% liquid
+          assign key_parts = block_settings.metafield_key | split: '.'
+          assign mf_namespace = key_parts[0]
+          assign mf_key = key_parts[1]
+          assign mf = product.metafields[mf_namespace][mf_key]
+        %}
+        {% if mf != blank %}
+          {% if mf.type == 'rich_text_field' %}
+            <div class="rte">
+              {{ mf | metafield_tag }}
+            </div>
+          {% elsif mf.type == 'file_reference' or mf.type == 'list.file_reference' %}
+            <div class="fixatech-product-tabs__files">
+              {% if mf.type == 'list.file_reference' %}
+                {% for file in mf.value %}
+                  <a href="{{ file.url }}" target="_blank" class="fixatech-product-tabs__file-link">
+                    <span class="svg-wrapper">{{- 'icon-external.svg' | inline_asset_content -}}</span>
+                    {{ file.alt | default: file.filename }}
+                  </a>
+                {% endfor %}
+              {% else %}
+                <a href="{{ mf.value.url }}" target="_blank" class="fixatech-product-tabs__file-link">
+                  <span class="svg-wrapper">{{- 'icon-external.svg' | inline_asset_content -}}</span>
+                  {{ mf.value.alt | default: mf.value.filename }}
+                </a>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="rte">
+              {{ mf | metafield_tag }}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+  {% endcase %}
+
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Tab",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "group"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "icon"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Tab label",
+      "default": "Tab"
+    },
+    {
+      "type": "select",
+      "id": "content_source",
+      "label": "Content source",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom (use child blocks)"
+        },
+        {
+          "value": "product_description",
+          "label": "Product description"
+        },
+        {
+          "value": "metafield",
+          "label": "Product metafield"
+        }
+      ],
+      "default": "custom"
+    },
+    {
+      "type": "text",
+      "id": "metafield_key",
+      "label": "Metafield key",
+      "info": "Format: namespace.key (e.g. custom.fiche_technique)",
+      "visible_if": "{{ block.settings.content_source == 'metafield' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab",
+      "settings": {
+        "heading": "Tab",
+        "content_source": "custom"
+      }
+    }
+  ]
+}
+{% endschema %}

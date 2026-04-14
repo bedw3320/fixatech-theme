@@ -1,0 +1,205 @@
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--page-width spacing-style color-{{ section.settings.color_scheme }}"
+  style="{% render 'spacing-style', settings: section.settings %}"
+>
+  <product-tabs>
+    <div
+      class="fixatech-product-tabs__nav"
+      role="tablist"
+      aria-label="{{ 'accessibility.tabs' | t | default: 'Tabs' }}"
+    >
+      {% for block in section.blocks %}
+        <button
+          role="tab"
+          ref="tabs[]"
+          id="Tab-{{ block.id }}-{{ section.id }}"
+          aria-selected="{% if forloop.index0 == 0 %}true{% else %}false{% endif %}"
+          aria-controls="Panel-{{ block.id }}-{{ section.id }}"
+          tabindex="{% if forloop.index0 == 0 %}0{% else %}-1{% endif %}"
+          class="fixatech-product-tabs__tab"
+        >
+          {{ block.settings.heading }}
+        </button>
+      {% endfor %}
+    </div>
+
+    <div class="fixatech-product-tabs__panels">
+      {% content_for 'blocks' %}
+    </div>
+  </product-tabs>
+</div>
+
+{% stylesheet %}
+  product-tabs {
+    display: block;
+    width: 100%;
+  }
+
+  .fixatech-product-tabs__nav {
+    display: flex;
+    gap: var(--gap-xl, 32px);
+    border-bottom: 1px solid var(--color-border, #d9d9d9);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .fixatech-product-tabs__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fixatech-product-tabs__tab {
+    all: unset;
+    cursor: pointer;
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight);
+    font-size: var(--font-size--lg, 18px);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    padding-block: var(--padding-md, 16px);
+    white-space: nowrap;
+    color: #a6a6a6;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s ease;
+    position: relative;
+    bottom: -1px;
+  }
+
+  .fixatech-product-tabs__tab[aria-selected='true'] {
+    color: var(--color-foreground);
+    border-bottom-color: var(--color-foreground);
+  }
+
+  .fixatech-product-tabs__tab:hover {
+    color: var(--color-foreground);
+  }
+
+  .fixatech-product-tabs__tab:focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: -2px;
+    border-radius: 2px;
+  }
+
+  .fixatech-product-tabs__panels {
+    padding-block-start: var(--padding-xl, 24px);
+  }
+
+  .fixatech-product-tabs__panel {
+    min-height: 80px;
+  }
+
+  .fixatech-product-tabs__panel[hidden] {
+    display: none;
+  }
+
+  .fixatech-product-tabs__files {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm, 8px);
+  }
+
+  .fixatech-product-tabs__file-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-xs, 8px);
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .fixatech-product-tabs__file-link .svg-wrapper {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .fixatech-product-tabs__file-link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .fixatech-product-tabs__tab {
+      font-size: var(--font-size--md, 16px);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "tag": "section",
+  "class": "fixatech-product-tabs-section",
+  "blocks": [
+    {
+      "type": "_fixatech-tab"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tabs",
+      "blocks": {
+        "tab_description": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Description",
+            "content_source": "product_description"
+          }
+        },
+        "tab_specs": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Caractéristiques",
+            "content_source": "metafield",
+            "metafield_key": "custom.fiche_technique"
+          }
+        },
+        "tab_resources": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Ressources",
+            "content_source": "metafield",
+            "metafield_key": "custom.product_documentation"
+          }
+        }
+      },
+      "block_order": ["tab_description", "tab_specs", "tab_resources"]
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}
