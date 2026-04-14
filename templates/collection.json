@@ -123,8 +123,8 @@
         "text_case": "capitalize",
         "font_weight": "400",
         "color_scheme": "scheme-3",
-        "padding-block-start": 16,
-        "padding-block-end": 16
+        "padding-block-start": 48,
+        "padding-block-end": 0
       }
     },
     "section": {
