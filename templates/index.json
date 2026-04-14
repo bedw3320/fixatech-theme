@@ -540,7 +540,7 @@
               "type": "_blog-post-button",
               "static": true,
               "settings": {
-                "label": "Acheter maintenant",
+                "label": "En savoir plus",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "width": "fit-content",
