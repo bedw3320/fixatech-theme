@@ -20,7 +20,7 @@
   {%- liquid
     assign menu_handle = section.settings.menu | default: 'main-menu'
   -%}
-  {% render 'fixatech-breadcrumbs-nav', menu_handle: menu_handle %}
+  {% render 'fixatech-breadcrumbs-nav', menu_handle: menu_handle, collection: collection, product: product %}
 </div>
 
 {% stylesheet %}
