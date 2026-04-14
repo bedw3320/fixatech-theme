@@ -287,8 +287,10 @@
           "type": "_fixatech-tab",
           "settings": {
             "heading": "Description",
-            "content_source": "product_description"
-          }
+            "content_source": "product_description",
+            "metafield_key": ""
+          },
+          "blocks": {}
         },
         "tab_specs": {
           "type": "_fixatech-tab",
@@ -296,7 +298,8 @@
             "heading": "Caractéristiques",
             "content_source": "metafield",
             "metafield_key": "custom.fiche_technique"
-          }
+          },
+          "blocks": {}
         },
         "tab_resources": {
           "type": "_fixatech-tab",
@@ -304,7 +307,8 @@
             "heading": "Ressources",
             "content_source": "metafield",
             "metafield_key": "custom.product_documentation"
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
@@ -370,6 +374,7 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "square",
+                "image_fit": "cover",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
