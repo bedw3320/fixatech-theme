@@ -118,6 +118,26 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "ai_gen_block_1656f94_f3tdfM": {
+                  "type": "ai_gen_block_1656f94",
+                  "settings": {
+                    "show_label": false,
+                    "label_text": "Brand:",
+                    "label_size": 14,
+                    "label_color": "#666666",
+                    "label_weight": "400",
+                    "label_uppercase": false,
+                    "link_to_vendor": true,
+                    "vendor_size": 16,
+                    "vendor_color": "#141414",
+                    "vendor_hover_color": "#ffc600",
+                    "vendor_weight": "600",
+                    "vendor_uppercase": false,
+                    "spacing": 8,
+                    "desktop_width_percent": 100
+                  },
+                  "blocks": {}
+                },
                 "text_xrnftG": {
                   "type": "text",
                   "name": "Product title",
@@ -237,6 +257,7 @@
                 }
               },
               "block_order": [
+                "ai_gen_block_1656f94_f3tdfM",
                 "text_xrnftG",
                 "sku_qTGata",
                 "fixatech_product_metafield_QEGmat",

@@ -1,0 +1,228 @@
+{% doc %}
+  @prompt
+    a block that displays vendor name, remove whitespace before the actual value (it should hug left of container)
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-vendor-display-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-vendor-container-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: {{ block.settings.spacing }}px;
+  }
+
+  .ai-vendor-label-{{ ai_gen_id }} {
+    font-size: {{ block.settings.label_size }}px;
+    color: {{ block.settings.label_color }};
+    font-weight: {{ block.settings.label_weight }};
+    {% if block.settings.label_uppercase %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+
+  .ai-vendor-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.vendor_size }}px;
+    color: {{ block.settings.vendor_color }};
+    font-weight: {{ block.settings.vendor_weight }};
+    {% if block.settings.vendor_uppercase %}
+      text-transform: uppercase;
+    {% endif %}
+  }
+
+  .ai-vendor-link-{{ ai_gen_id }} {
+    color: {{ block.settings.vendor_color }};
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .ai-vendor-link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.vendor_hover_color }};
+  }
+{% endstyle %}
+
+<div class="ai-vendor-display-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-vendor-container-{{ ai_gen_id }}">
+    {% if block.settings.show_label %}
+      <span class="ai-vendor-label-{{ ai_gen_id }}">{{ block.settings.label_text }}</span>
+    {% endif %}
+    
+    {% if product.vendor != blank %}
+      {% if block.settings.link_to_vendor %}
+        <a href="{{ product.vendor | url_for_vendor }}" class="ai-vendor-link-{{ ai_gen_id }}">
+          <span class="ai-vendor-name-{{ ai_gen_id }}">{{ product.vendor }}</span>
+        </a>
+      {% else %}
+        <span class="ai-vendor-name-{{ ai_gen_id }}">{{ product.vendor }}</span>
+      {% endif %}
+    {% else %}
+      <span class="ai-vendor-name-{{ ai_gen_id }}">No vendor</span>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Vendor name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Show label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label_text",
+      "label": "Label text",
+      "default": "Brand:"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Label size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "select",
+      "id": "label_weight",
+      "label": "Label weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "checkbox",
+      "id": "label_uppercase",
+      "label": "Uppercase label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Vendor name"
+    },
+    {
+      "type": "checkbox",
+      "id": "link_to_vendor",
+      "label": "Link to vendor collection",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "vendor_size",
+      "label": "Vendor size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "vendor_color",
+      "label": "Vendor color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "vendor_hover_color",
+      "label": "Vendor hover color",
+      "default": "#ffc600"
+    },
+    {
+      "type": "select",
+      "id": "vendor_weight",
+      "label": "Vendor weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "checkbox",
+      "id": "vendor_uppercase",
+      "label": "Uppercase vendor",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Spacing",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vendor name"
+    }
+  ]
+}
+{% endschema %}
