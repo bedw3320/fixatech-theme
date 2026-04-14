@@ -943,9 +943,20 @@
         "padding-block-start": 100,
         "padding-block-end": 100
       }
+    },
+    "fixatech_breadcrumbs_TQAaAb": {
+      "type": "fixatech-breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "color_scheme": "scheme-3",
+        "padding-block-start": 16,
+        "padding-block-end": 0
+      }
     }
   },
   "order": [
+    "fixatech_breadcrumbs_TQAaAb",
     "main",
     "fixatech_product_tabs",
     "product_recommendations_qggXJq",
