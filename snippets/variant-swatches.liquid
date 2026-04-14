@@ -35,6 +35,16 @@
     }
   }
 
+  swatches-variant-picker-component overflow-list[disabled='true'] {
+    --overflow-list-padding-block: 0px;
+    margin-block-start: calc(
+      var(--product-swatches-padding-block-start) + var(--focus-outline-offset) + var(--focus-outline-width)
+    );
+    margin-block-end: calc(
+      var(--product-swatches-padding-block-end) + var(--focus-outline-offset) + var(--focus-outline-width)
+    );
+  }
+
   .hidden-swatches__count {
     display: flex;
     align-self: center;
@@ -112,8 +122,20 @@
 
               assign featured_media = product_option_value.variant.featured_media
 
+              comment
+                For combined listings, cache the child product reference to avoid
+                resolving `product_option_value.variant.product` multiple times.
+              endcomment
+              assign child_product = nil
+
               if featured_media == blank
-                if product_option_value.variant == blank
+                if product_option_value.product_url
+                  assign child_product = product_option_value.variant.product
+                endif
+
+                if child_product
+                  assign featured_media = child_product.featured_media
+                elsif product_option_value.variant == blank
                   for variant in product_resource.variants
                     if variant.available and variant[swatch_option_key] == product_option_value.name and variant.featured_media
                       assign featured_media = variant.featured_media
@@ -121,10 +143,6 @@
                       break
                     endif
                   endfor
-                elsif product_option_value.product_url
-                  # If the variant has no featured media, and we have a combined listing product (product_url exists),
-                  # then fall back to using the featured media of the child product that is linked to this option value.
-                  assign featured_media = product_option_value.variant.product.featured_media
                 endif
               endif
             %}

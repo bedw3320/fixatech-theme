@@ -252,7 +252,19 @@
     </a>
   {% endif %}
 
+  <span
+    ref="liveRegion"
+    class="visually-hidden"
+    role="status"
+    data-testid="cart-count-live-region"
+  ></span>
 </header-actions>
+
+<script
+  type="module"
+  src="{{ 'header-actions.js' | asset_url }}"
+  fetchpriority="low"
+></script>
 
 {% stylesheet %}
   .header {

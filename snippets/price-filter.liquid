@@ -4,9 +4,10 @@
   @param {object} filter - The filter object to render.
   @param {string} filter_style - The filter style, can be 'horizontal' or 'vertical'.
   @param {boolean} [should_render_clear] - Whether to render the clear button.
+  @param {string} [id_prefix] - Unique prefix to avoid duplicate IDs when rendered multiple times.
 
   @example
-  {% render 'price-filter', filter: filter, filter_style: 'vertical' %}
+  {% render 'price-filter', filter: filter, filter_style: 'vertical', id_prefix: 'dialog' %}
 {%- enddoc -%}
 
 <accordion-custom
@@ -94,7 +95,7 @@
               <input
                 class="field__input price-facet__input"
                 name="{{ filter.min_value.param_name }}"
-                id="{{ filter.label | escape }}-GTE"
+                id="{{ filter.label | escape }}-GTE-{{ id_prefix }}"
                 {%- if filter.min_value.value -%}
                   value="{{ filter.min_value.value | money_without_currency }}"
                 {%- endif -%}
@@ -109,7 +110,7 @@
 
               <label
                 class="field__label price-facet__label"
-                for="{{ filter.label | escape }}-GTE"
+                for="{{ filter.label | escape }}-GTE-{{ id_prefix }}"
               >
                 {{ cart.currency.symbol }}
               </label>
@@ -121,7 +122,7 @@
               <input
                 class="field__input price-facet__input"
                 name="{{ filter.max_value.param_name }}"
-                id="{{ filter.label | escape }}-LTE"
+                id="{{ filter.label | escape }}-LTE-{{ id_prefix }}"
                 {%- if filter.max_value.value -%}
                   value="{{ filter.max_value.value | money_without_currency }}"
                 {%- endif -%}
@@ -135,7 +136,7 @@
               >
               <label
                 class="field__label price-facet__label"
-                for="{{ filter.label | escape }}-LTE"
+                for="{{ filter.label | escape }}-LTE-{{ id_prefix }}"
               >
                 {{ cart.currency.symbol }}
               </label>

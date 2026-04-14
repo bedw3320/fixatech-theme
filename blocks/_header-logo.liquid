@@ -19,6 +19,8 @@
       assign inverse_logo = settings.logo
     endif
   endif
+
+  assign alt_text_fallback = 'accessibility.home_logo_alt' | t: store_name: shop.name
 %}
 
 {% comment %}
@@ -57,6 +59,7 @@
       image: settings.logo,
       class: 'header-logo__image',
       height: settings.logo_height,
+      alt_text_fallback: alt_text_fallback,
       text_fallback: shop.name,
       style: logo_style
     %}
@@ -71,6 +74,7 @@
         image: inverse_logo,
         class: 'header-logo__image',
         height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
         text_fallback: shop.name,
         style: inverse_logo_style
       %}
