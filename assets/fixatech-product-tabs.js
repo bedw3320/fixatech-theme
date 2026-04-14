@@ -19,9 +19,11 @@ class ProductTabs extends HTMLElement {
     });
 
     this.selectTab(0);
+    this.updateScrollHint();
 
     this.tablist.addEventListener('click', this.handleClick.bind(this));
     this.tablist.addEventListener('keydown', this.handleKeydown.bind(this));
+    this.tablist.addEventListener('scroll', this.updateScrollHint.bind(this), { passive: true });
   }
 
   handleClick(event) {
@@ -51,6 +53,17 @@ class ProductTabs extends HTMLElement {
     event.preventDefault();
     this.selectTab(next);
     this.tabs[next].focus();
+  }
+
+  updateScrollHint() {
+    const el = this.tablist;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    const noOverflow = el.scrollWidth <= el.clientWidth;
+    if (atEnd || noOverflow) {
+      el.setAttribute('data-scroll-end', '');
+    } else {
+      el.removeAttribute('data-scroll-end');
+    }
   }
 
   selectTab(index) {
