@@ -628,7 +628,7 @@
       "settings": {
         "blog": "decouvrez-nos-services",
         "layout_type": "grid",
-        "carousel_on_mobile": false,
+        "carousel_on_mobile": true,
         "post_limit": 3,
         "columns": 3,
         "mobile_columns": "1",
@@ -636,7 +636,7 @@
         "columns_gap": 16,
         "rows_gap": 16,
         "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_shape": "square",
         "section_width": "page-width",
         "gap": 16,
         "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
