@@ -7,7 +7,10 @@ class ProductTabs extends HTMLElement {
     // Filter out empty panels when hide-empty is enabled
     if (this.hasAttribute('data-hide-empty')) {
       this.panels = this.panels.filter((panel) => {
-        if (panel.hasAttribute('data-tab-empty') || panel.textContent.trim() === '') {
+        const isEmpty =
+          panel.hasAttribute('data-tab-empty') ||
+          !panel.querySelector('.rte, .fixatech-product-tabs__files, [ref], img, video');
+        if (isEmpty) {
           panel.remove();
           return false;
         }

@@ -11,7 +11,7 @@
       if block_settings.metafield_key != blank
         assign key_parts = block_settings.metafield_key | split: '.'
         assign mf = product.metafields[key_parts[0]][key_parts[1]]
-        if mf != blank
+        if mf != blank and mf.value != blank
           assign tab_has_content = true
         endif
       endif
@@ -45,7 +45,7 @@
           assign mf_key = key_parts[1]
           assign mf = product.metafields[mf_namespace][mf_key]
         %}
-        {% if mf != blank %}
+        {% if mf != blank and mf.value != blank %}
           {% if mf.type == 'rich_text_field' %}
             <div class="rte">
               {{ mf | metafield_tag }}
