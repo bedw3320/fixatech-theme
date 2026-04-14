@@ -457,6 +457,7 @@
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
           "name": "t:names.title",
+          "disabled": true,
           "static": true,
           "settings": {
             "text": "<h3>{{ closest.blog.title }}</h3>",
