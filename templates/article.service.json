@@ -764,15 +764,16 @@
         "padding-block-end": 48
       }
     },
-    "featured_blog_posts_89i3cV": {
+    "featured_blog_posts_ynpFHF": {
       "type": "featured-blog-posts",
       "blocks": {
         "static-blog-title": {
           "type": "_featured-blog-posts-title",
           "name": "t:names.title",
+          "disabled": true,
           "static": true,
           "settings": {
-            "text": "<h2>TOUS NOS SERVICES</h2>",
+            "text": "<h3>{{ closest.blog.title }}</h3>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -788,7 +789,7 @@
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 32,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -799,14 +800,14 @@
           "name": "t:names.blog_card",
           "static": true,
           "settings": {
-            "alignment": "left",
-            "gap": 16,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "alignment": "right",
+            "gap": 8,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-6",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
-            "border_radius": 0,
+            "border_radius": 12,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -818,16 +819,21 @@
               "static": true,
               "settings": {
                 "image_ratio": "square",
+                "toggle_overlay": true,
+                "overlay_color": "#0000004a",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
-                "border_radius": 0
+                "border_radius": 12
               },
               "blocks": {}
             },
             "title": {
               "type": "_heading",
               "name": "t:names.title",
+              "disabled": true,
               "static": true,
               "settings": {
                 "type_preset": "rte",
@@ -849,36 +855,19 @@
               },
               "blocks": {}
             },
-            "blog-post-info-text": {
-              "type": "_blog-post-info-text",
-              "name": "t:names.details",
+            "blog-post-button": {
+              "type": "_blog-post-button",
               "static": true,
               "settings": {
-                "show_date": true,
-                "show_author": true,
-                "type_preset": "",
-                "alignment": "left",
-                "show_alignment": false,
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "blog-post-description": {
-              "type": "_blog-post-description",
-              "name": "t:names.excerpt",
-              "static": true,
-              "settings": {
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 8,
-                "padding-block-end": 0
+                "label": "{{ closest.article.title }}",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "font": "",
+                "font_size": "0.875rem",
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -890,20 +879,20 @@
       "settings": {
         "blog": "decouvrez-nos-services",
         "layout_type": "grid",
-        "carousel_on_mobile": true,
+        "carousel_on_mobile": false,
         "post_limit": 3,
         "columns": 3,
-        "mobile_columns": "2",
-        "mobile_card_size": "44cqw",
+        "mobile_columns": "1",
+        "mobile_card_size": "60cqw",
         "columns_gap": 16,
         "rows_gap": 16,
         "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_shape": "square",
         "section_width": "page-width",
         "gap": 16,
-        "color_scheme": "scheme-3",
-        "padding-block-start": 72,
-        "padding-block-end": 72
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "padding-block-start": 48,
+        "padding-block-end": 100
       }
     },
     "section_W8WmMj": {
@@ -1025,7 +1014,7 @@
     "hero_9rYwqD",
     "section",
     "section_Vd3JyQ",
-    "featured_blog_posts_89i3cV",
+    "featured_blog_posts_ynpFHF",
     "section_W8WmMj"
   ]
 }
