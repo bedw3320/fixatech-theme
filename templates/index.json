@@ -458,7 +458,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Nouveautés</h2>",
+            "text": "<h3>DÉCOUVREZ NOS SERVICES</h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
