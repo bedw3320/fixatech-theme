@@ -112,7 +112,7 @@
                   "type": "sku",
                   "name": "t:names.product_sku",
                   "settings": {
-                    "type_preset": "",
+                    "type_preset": "paragraph",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
