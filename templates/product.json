@@ -317,6 +317,11 @@
         "tab_resources"
       ],
       "settings": {
+        "type_preset": "h4",
+        "font": "var(--font-heading--family)",
+        "font_size": "1.125rem",
+        "line_height": "normal",
+        "case": "uppercase",
         "color_scheme": "scheme-3",
         "padding-block-start": 0,
         "padding-block-end": 48
@@ -433,12 +438,49 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "buy_buttons_bVayD9": {
+              "type": "buy-buttons",
+              "name": "t:names.product_buy_buttons",
+              "settings": {
+                "stacking": false,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button-secondary"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
             }
           },
           "block_order": [
             "product_card_gallery_DNizbJ",
             "product_title_M7MJkb",
-            "price_gLWgA6"
+            "price_gLWgA6",
+            "buy_buttons_bVayD9"
           ]
         }
       },
