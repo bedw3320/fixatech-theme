@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "fixatech_breadcrumbs_nzTRea": {
+      "type": "fixatech-breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+        "padding-block-start": 16,
+        "padding-block-end": 0
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -943,20 +953,10 @@
         "padding-block-start": 100,
         "padding-block-end": 100
       }
-    },
-    "fixatech_breadcrumbs_TQAaAb": {
-      "type": "fixatech-breadcrumbs",
-      "name": "Breadcrumbs",
-      "settings": {
-        "menu": "main-menu",
-        "color_scheme": "scheme-3",
-        "padding-block-start": 16,
-        "padding-block-end": 0
-      }
     }
   },
   "order": [
-    "fixatech_breadcrumbs_TQAaAb",
+    "fixatech_breadcrumbs_nzTRea",
     "main",
     "fixatech_product_tabs",
     "product_recommendations_qggXJq",
