@@ -317,6 +317,7 @@
         "tab_resources"
       ],
       "settings": {
+        "hide_empty_tabs": true,
         "type_preset": "h4",
         "font": "var(--font-heading--family)",
         "font_size": "1.125rem",

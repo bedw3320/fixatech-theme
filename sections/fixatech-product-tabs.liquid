@@ -3,7 +3,7 @@
   class="section section--page-width spacing-style color-{{ section.settings.color_scheme }}"
   style="{% render 'spacing-style', settings: section.settings %}"
 >
-  <product-tabs{% if section.settings.hide_empty_tabs %} data-hide-empty{% endif %}>
+  <product-tabs{% unless section.settings.hide_empty_tabs == false %} data-hide-empty{% endunless %}>
     <div
       class="fixatech-product-tabs__nav"
       role="tablist"
