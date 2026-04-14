@@ -613,9 +613,9 @@
                 "style_class": "button",
                 "font": "",
                 "font_size": "0.875rem",
-                "width": "custom",
-                "custom_width": 100,
-                "width_mobile": "custom",
+                "width": "fit-content",
+                "custom_width": 80,
+                "width_mobile": "fit-content",
                 "custom_width_mobile": 100
               },
               "blocks": {}
