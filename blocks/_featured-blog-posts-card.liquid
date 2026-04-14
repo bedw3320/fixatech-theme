@@ -7,21 +7,9 @@
 
   if article == blank
     assign onboarding = true
-    # Assign placeholder variables
     assign display_title = 'placeholders.blog_post_title' | t
-    assign display_author = 'placeholders.blog_post_author' | t
-    assign display_date = 'placeholders.blog_post_date' | t
-    assign display_description = 'placeholders.blog_post_description' | t
   else
     assign display_title = article.title
-    assign display_author = article.author
-    assign display_date = article.published_at
-    assign display_description = null
-  endif
-
-  assign truncate_description = true
-  if section.settings.layout_type == 'editorial'
-    assign truncate_description = false
   endif
 %}
 
@@ -38,25 +26,8 @@
   {% content_for 'block', id: 'title', type: '_heading', text: display_title %}
 {% endcapture %}
 
-{% capture details %}
-  {% content_for 'block',
-    id: 'blog-post-info-text',
-    type: '_blog-post-info-text',
-    alignment: block_settings.alignment,
-    author: display_author,
-    date: display_date
-  %}
-{% endcapture %}
-
-{% capture description %}
-  {% content_for 'block',
-    id: 'blog-post-description',
-    type: '_blog-post-description',
-    article: article,
-    show_read_more: false,
-    should_truncate: truncate_description,
-    onboarding_text: display_description
-  %}
+{% capture button %}
+  {% content_for 'block', id: 'blog-post-button', type: '_blog-post-button' %}
 {% endcapture %}
 
 <div
@@ -89,14 +60,19 @@
   </a>
 
   <div class="featured-blog-posts-card__inner">
-    {% if onboarding or article.image %}
-      {{ image }}
-    {% endif %}
+    <div class="featured-blog-posts-card__media">
+      {% if onboarding or article.image %}
+        {{ image }}
+      {% endif %}
+    </div>
 
-    <div class="featured-blog-posts-card__content layout-panel-flex--column">
-      <h4>{{ title }}</h4>
-      {{ details }}
-      {{ description }}
+    <div class="featured-blog-posts-card__content">
+      <div class="featured-blog-posts-card__title">
+        {{ title }}
+      </div>
+      <div class="featured-blog-posts-card__button">
+        {{ button }}
+      </div>
     </div>
   </div>
 </div>
@@ -107,11 +83,51 @@
   }
 
   .featured-blog-posts-card__inner {
-    gap: var(--gap);
+    position: relative;
+    aspect-ratio: var(--ratio, 1);
+    overflow: hidden;
+  }
+
+  .featured-blog-posts-card__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .featured-blog-posts-card__media .resource-image {
+    aspect-ratio: unset;
   }
 
   .resource-list--grid .resource-list__item {
     min-width: 0;
+  }
+
+  .featured-blog-posts-card__inner a,
+  .featured-blog-posts-card__inner button {
+    pointer-events: auto;
+  }
+
+  /* allow all blocks to be selectable in editor preview */
+  .shopify-design-mode .featured-blog-posts-card__content * {
+    pointer-events: auto;
+  }
+
+  .featured-blog-posts-card__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 16px;
+    pointer-events: none;
+  }
+
+  .featured-blog-posts-card__title {
+    margin: 0;
+  }
+
+  .featured-blog-posts-card__title h4 {
+    margin: 0;
   }
 
   /* Editorial layout */
@@ -128,24 +144,6 @@
         aspect-ratio: unset;
       }
     }
-  }
-
-  .featured-blog-posts-card__inner a,
-  .featured-blog-posts-card__inner button {
-    pointer-events: auto;
-  }
-
-  /* allow all blocks to be selectable in editor preview */
-  .shopify-design-mode .featured-blog-posts-card__content * {
-    pointer-events: auto;
-  }
-
-  .featured-blog-posts-card__content {
-    --flex-wrap: wrap;
-  }
-
-  .featured-blog-posts-card__content h4 {
-    margin: 0;
   }
 {% endstylesheet %}
 
