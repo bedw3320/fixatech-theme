@@ -167,6 +167,20 @@
                   },
                   "blocks": {}
                 },
+                "variant_picker_dkacz4": {
+                  "type": "variant-picker",
+                  "name": "t:names.product_variant_picker",
+                  "settings": {
+                    "variant_style": "buttons",
+                    "show_swatches": true,
+                    "alignment": "left",
+                    "padding-block-start": 0,
+                    "padding-block-end": 8,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -194,6 +208,7 @@
                 "text_xrnftG",
                 "sku_qTGata",
                 "product_inventory_YRK4Fq",
+                "variant_picker_dkacz4",
                 "price_tVjtKg"
               ]
             },
