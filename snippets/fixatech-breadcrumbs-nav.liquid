@@ -13,7 +13,42 @@
     if collection != blank
       assign breadcrumb_collection = collection
     elsif product.collections.size > 0
-      assign breadcrumb_collection = product.collections.first
+      assign found_in_menu = false
+      for prod_collection in product.collections
+        if found_in_menu
+          break
+        endif
+        for parent_link in menu.links
+          if found_in_menu
+            break
+          endif
+          if parent_link.object == prod_collection or parent_link.url == prod_collection.url
+            assign breadcrumb_collection = prod_collection
+            assign found_in_menu = true
+            break
+          endif
+          for child_link in parent_link.links
+            if found_in_menu
+              break
+            endif
+            if child_link.object == prod_collection or child_link.url == prod_collection.url
+              assign breadcrumb_collection = prod_collection
+              assign found_in_menu = true
+              break
+            endif
+            for grandchild_link in child_link.links
+              if grandchild_link.object == prod_collection or grandchild_link.url == prod_collection.url
+                assign breadcrumb_collection = prod_collection
+                assign found_in_menu = true
+                break
+              endif
+            endfor
+          endfor
+        endfor
+      endfor
+      if breadcrumb_collection == blank
+        assign breadcrumb_collection = product.collections.first
+      endif
     endif
   elsif request.page_type == 'collection'
     assign breadcrumb_collection = collection
