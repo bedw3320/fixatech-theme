@@ -3,6 +3,9 @@ class ProductTabs extends HTMLElement {
     this.tabs = [...this.querySelectorAll('[ref="tabs[]"]')];
     this.panels = [...this.querySelectorAll('[ref="panels[]"]')];
 
+    // Set initial state: first tab active, rest hidden
+    this.selectTab(0);
+
     this.tablist = this.querySelector('[role="tablist"]');
     if (this.tablist) {
       this.tablist.addEventListener('click', this.handleClick.bind(this));

@@ -50,17 +50,22 @@
   }
 
   .fixatech-product-tabs__tab {
-    all: unset;
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin: 0;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
     font-family: var(--font-heading--family);
     font-weight: var(--font-heading--weight);
     font-size: var(--font-size--lg, 18px);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    padding-block: var(--padding-md, 16px);
+    padding: var(--padding-md, 16px) 0;
     white-space: nowrap;
     color: #a6a6a6;
-    border-bottom: 3px solid transparent;
     transition: color 0.2s ease;
     position: relative;
     bottom: -1px;
@@ -89,8 +94,17 @@
     min-height: 80px;
   }
 
+  /* Hide all panels except first by default (JS takes over on load) */
+  .fixatech-product-tabs__panel ~ .fixatech-product-tabs__panel {
+    display: none;
+  }
+
   .fixatech-product-tabs__panel[hidden] {
     display: none;
+  }
+
+  .fixatech-product-tabs__panel:not([hidden]) {
+    display: block;
   }
 
   .fixatech-product-tabs__files {
