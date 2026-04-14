@@ -55,6 +55,10 @@
       assign ratio = product.featured_media.preview_image.aspect_ratio | default: '1'
   endcase
 
+  if block_settings.image_fit
+    assign media_fit = block_settings.image_fit
+  endif
+
   if block_settings.image_ratio == 'adapt' and block_settings.constrain_to_viewport
     if block_settings.constrain_to_viewport != ''
       assign constrain_to_viewport = true
@@ -140,6 +144,9 @@
           endif
 
           assign class = 'product-media-container media-fit product-media-container--[media_type]' | replace: '[media_type]', media.media_type
+          if media_fit == 'contain'
+            assign class = class | append: ' media-fit-contain'
+          endif
           if constrain_to_viewport
             assign class = class | append: ' constrain-height'
           endif

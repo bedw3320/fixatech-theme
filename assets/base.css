@@ -1697,6 +1697,7 @@ media-gallery.media-gallery--grid .media-gallery__grid .product-media-container 
 
 .product-media-container.media-fit-contain img {
   object-position: center center;
+  background-color: var(--color-background);
 }
 
 .product-media-container.media-fit {
