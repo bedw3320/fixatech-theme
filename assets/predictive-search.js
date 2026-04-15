@@ -196,8 +196,10 @@ class PredictiveSearchComponent extends Component {
       }
     }
 
-    activeItem?.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'nearest' });
-    this.refs.searchInput.focus();
+    if (index >= 0) {
+      activeItem?.scrollIntoView({ behavior: prefersReducedMotion() ? 'instant' : 'smooth', block: 'nearest' });
+      this.refs.searchInput.focus();
+    }
   }
 
   get #currentItem() {
