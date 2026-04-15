@@ -286,6 +286,27 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   3c. MOBILE SEARCH MODAL — Fixatech polish
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 2-column product grid in mobile modal (empty state + recently viewed) */
+.search-modal .predictive-search-results__wrapper-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-md, 16px);
+}
+
+/* Reset button in search header — subtler text style */
+.search-modal .predictive-search__reset-button {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.search-modal .predictive-search__reset-button:hover {
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    4. HEADER ACTIONS — ordering, spacing, hover
    ═══════════════════════════════════════════════════════════════ */
 
