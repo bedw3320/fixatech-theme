@@ -199,7 +199,7 @@ header-component.header {
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
-  padding-block: 6px;
+  padding-block: 8px;
   padding-inline-start: calc(var(--margin-sm) + var(--icon-size-lg) + 4px);
   color: #fff;
 }
@@ -253,16 +253,29 @@ header-component.header {
   max-height: 60vh;
 }
 
-/* Product cards — multi-column grid inside the dropdown */
+/* Product cards — 2-col base, 4-col on desktop */
 #header-component .search-action--inline .predictive-search-results__wrapper-products {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--gap-md, 16px);
+}
+
+@media screen and (min-width: 990px) {
+  #header-component .search-action--inline .predictive-search-results__wrapper-products {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* Footer "View all" button inside dropdown */
 #header-component .search-action--inline .predictive-search-form__footer {
   position: relative;
+}
+
+/* Tablet — wider dropdown to avoid clipping */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  #header-component .search-action--inline .predictive-search-form__content-wrapper {
+    width: 90vw;
+  }
 }
 
 /* Hide inline search on mobile — drawer_search icon takes over */
