@@ -304,9 +304,15 @@ header-component.header {
 }
 
 /* Hide "Effacer" reset button on mobile — users have backspace and X close */
+/* Square off the search bar — matches the "typing" state, cleaner look */
 @media screen and (max-width: 749px) {
   .search-modal .predictive-search__reset-button {
     display: none;
+  }
+
+  .search-modal .predictive-search-form__header,
+  .search-modal .predictive-search-form__header-inner {
+    border-radius: 0;
   }
 }
 
