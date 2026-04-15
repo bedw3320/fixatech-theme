@@ -213,21 +213,6 @@ header-component.header {
   color: rgb(255 255 255 / 0.6);
 }
 
-/* Reset (clear) button — minimal text style, no border */
-#header-component .search-action--inline .predictive-search__reset-button {
-  color: rgb(255 255 255 / 0.6);
-  background: none;
-  border: none;
-  box-shadow: none;
-  padding: 0 var(--margin-xs);
-  margin-inline-end: var(--margin-xs);
-  font-size: 12px;
-}
-
-#header-component .search-action--inline .predictive-search__reset-button:hover {
-  color: #fff;
-}
-
 /* Dropdown panel — fixed to viewport center, below header.
    Use visibility/opacity instead of display:none to avoid specificity
    fight with search-modal.liquid scoped stylesheet (display:flex). */
@@ -271,9 +256,32 @@ header-component.header {
   }
 }
 
-/* Footer "View all" button inside dropdown */
+/* Product card images — square, white bg, contain-fit (match rest of store) */
+#header-component .search-action--inline .resource-card__media {
+  background-color: #fff;
+  border-radius: var(--product-corner-radius, 8px);
+  overflow: hidden;
+}
+
+#header-component .search-action--inline .resource-card__image {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+/* Heading size — use theme h4 defaults (scoped stylesheet shrinks to body-md) */
+#header-component .search-action--inline .predictive-search-results__title {
+  font-size: var(--font-h4--size);
+  font-weight: var(--font-h4--weight);
+  letter-spacing: var(--font-h4--letter-spacing);
+  text-transform: var(--font-h4--case);
+}
+
+/* Footer "View all" button — no gradient, clean placement */
 #header-component .search-action--inline .predictive-search-form__footer {
   position: relative;
+  background-image: none;
+  padding-block: var(--padding-sm) var(--padding-md);
+  text-align: center;
 }
 
 /* Tablet — wider dropdown to avoid clipping */
@@ -301,6 +309,26 @@ header-component.header {
   gap: var(--gap-md, 16px);
 }
 
+/* Product card images — square, white bg, contain-fit (match rest of store) */
+.search-modal .resource-card__media {
+  background-color: #fff;
+  border-radius: var(--product-corner-radius, 8px);
+  overflow: hidden;
+}
+
+.search-modal .resource-card__image {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+/* Heading size — use theme h4 defaults (consistent with empty state) */
+.search-modal .predictive-search-results__title {
+  font-size: var(--font-h4--size);
+  font-weight: var(--font-h4--weight);
+  letter-spacing: var(--font-h4--letter-spacing);
+  text-transform: var(--font-h4--case);
+}
+
 /* Let content fill the full modal on mobile (stock Horizon caps at 50dvh) */
 @media screen and (max-width: 749px) {
   .search-modal .predictive-search-form__content {
@@ -308,21 +336,11 @@ header-component.header {
   }
 }
 
-/* Hide "Effacer" reset button on mobile — users have backspace and X close */
 /* Square off the search bar — matches the "typing" state, cleaner look */
 @media screen and (max-width: 749px) {
-  .search-modal .predictive-search__reset-button {
-    display: none;
-  }
-
   .search-modal .predictive-search-form__header,
   .search-modal .predictive-search-form__header-inner {
     border-radius: 0;
-  }
-
-  /* Remove the divider line that appears when reset button is un-hidden by JS */
-  .search-modal .predictive-search-form__header::before {
-    display: none;
   }
 
   /* Strip default .button borders from the X close button */

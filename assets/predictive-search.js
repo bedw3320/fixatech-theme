@@ -11,7 +11,6 @@ import { DialogCloseEvent, DialogOpenEvent, DialogComponent } from '@theme/dialo
  * @typedef {object} Refs
  * @property {HTMLInputElement} searchInput - The search input element.
  * @property {HTMLElement} predictiveSearchResults - The predictive search results container.
- * @property {HTMLElement} resetButton - The reset button element.
  * @property {HTMLElement[]} [resultsItems] - The search results items elements.
  * @property {HTMLElement} [recentlyViewedWrapper] - The recently viewed products wrapper.
  * @property {HTMLElement[]} [recentlyViewedTitle] - The recently viewed title elements.
@@ -19,7 +18,7 @@ import { DialogCloseEvent, DialogOpenEvent, DialogComponent } from '@theme/dialo
  * @extends {Component<Refs>}
  */
 class PredictiveSearchComponent extends Component {
-  requiredRefs = ['searchInput', 'predictiveSearchResults', 'resetButton'];
+  requiredRefs = ['searchInput', 'predictiveSearchResults'];
 
   #controller = new AbortController();
 
@@ -43,10 +42,6 @@ class PredictiveSearchComponent extends Component {
 
     const { dialog } = this;
     const { signal } = this.#controller;
-
-    if (this.refs.searchInput.value.length > 0) {
-      this.#showResetButton();
-    }
 
     if (dialog) {
       document.addEventListener('keydown', this.#handleKeyboardShortcut, { signal });
@@ -327,7 +322,6 @@ class PredictiveSearchComponent extends Component {
       return;
     }
 
-    this.#showResetButton();
     this.#showDropdown();
     this.#getSearchResults(searchTerm);
   }, 200);
@@ -391,18 +385,6 @@ class PredictiveSearchComponent extends Component {
     return sectionRenderer.getSectionHTML(this.dataset.sectionId, false, url);
   }
 
-  #hideResetButton() {
-    const { resetButton } = this.refs;
-
-    resetButton.hidden = true;
-  }
-
-  #showResetButton() {
-    const { resetButton } = this.refs;
-
-    resetButton.hidden = false;
-  }
-
   #createAbortController() {
     const abortController = new AbortController();
     if (this.#activeFetch) {
@@ -418,7 +400,6 @@ class PredictiveSearchComponent extends Component {
 
     this.#currentIndex = -1;
     searchInput.value = '';
-    this.#hideResetButton();
 
     const abortController = this.#createAbortController();
     const url = new URL(window.location.href);
