@@ -55,8 +55,8 @@ class PredictiveSearchComponent extends Component {
 
       this.addEventListener('click', this.#handleModalClick, { signal });
     } else {
-      // Inline mode: show dropdown on focus, hide on click-outside
-      this.refs.searchInput.addEventListener('focus', this.#showDropdown, { signal });
+      // Inline mode: show dropdown on click, hide on click-outside
+      this.refs.searchInput.addEventListener('click', this.#showDropdown, { signal });
       document.addEventListener('click', this.#handleClickOutside, { signal });
     }
 
@@ -326,6 +326,7 @@ class PredictiveSearchComponent extends Component {
     }
 
     this.#showResetButton();
+    this.#showDropdown();
     this.#getSearchResults(searchTerm);
   }, 200);
 
