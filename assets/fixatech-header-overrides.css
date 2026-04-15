@@ -228,9 +228,13 @@ header-component.header {
   color: #fff;
 }
 
-/* Dropdown panel — fixed to viewport center, below header */
+/* Dropdown panel — fixed to viewport center, below header.
+   Use visibility/opacity instead of display:none to avoid specificity
+   fight with search-modal.liquid scoped stylesheet (display:flex). */
 #header-component .search-action--inline .predictive-search-form__content-wrapper {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
   position: fixed;
   top: auto;
   left: 50%;
@@ -245,8 +249,9 @@ header-component.header {
 }
 
 #header-component .search-action--inline .predictive-search-form__content-wrapper.is-open {
-  display: flex;
-  flex-direction: column;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 #header-component .search-action--inline .predictive-search-form__content {
