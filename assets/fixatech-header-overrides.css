@@ -228,12 +228,13 @@ header-component.header {
   color: #fff;
 }
 
-/* Dropdown panel — hidden by default, positioned below the input */
+/* Dropdown panel — fixed to viewport center, below header */
 #header-component .search-action--inline .predictive-search-form__content-wrapper {
   display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
+  position: fixed;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
   width: 66vw;
   max-height: 70vh;
   z-index: 101;
@@ -250,6 +251,13 @@ header-component.header {
 
 #header-component .search-action--inline .predictive-search-form__content {
   max-height: 60vh;
+}
+
+/* Product cards — multi-column grid inside the dropdown */
+#header-component .search-action--inline .predictive-search-results__wrapper-products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-md, 16px);
 }
 
 /* Footer "View all" button inside dropdown */
