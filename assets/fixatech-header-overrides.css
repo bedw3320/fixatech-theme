@@ -296,6 +296,13 @@ header-component.header {
   gap: var(--gap-md, 16px);
 }
 
+/* Let content fill the full modal on mobile (stock Horizon caps at 50dvh) */
+@media screen and (max-width: 749px) {
+  .search-modal .predictive-search-form__content {
+    max-height: calc(100dvh - 80px);
+  }
+}
+
 /* Reset button in search header — subtler text style */
 .search-modal .predictive-search__reset-button {
   font-size: 12px;
