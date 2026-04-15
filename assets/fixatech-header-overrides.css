@@ -314,6 +314,17 @@ header-component.header {
   .search-modal .predictive-search-form__header-inner {
     border-radius: 0;
   }
+
+  /* Remove the divider line that appears when reset button is un-hidden by JS */
+  .search-modal .predictive-search-form__header::before {
+    display: none;
+  }
+
+  /* Strip default .button borders from the X close button */
+  .search-modal .predictive-search__close-modal-button {
+    border: none;
+    box-shadow: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
