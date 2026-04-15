@@ -54,6 +54,10 @@ class PredictiveSearchComponent extends Component {
       dialog.addEventListener(DialogOpenEvent.eventName, this.#handleDialogOpen, { signal, once: true });
 
       this.addEventListener('click', this.#handleModalClick, { signal });
+    } else {
+      // Inline mode: show dropdown on focus, hide on click-outside
+      this.refs.searchInput.addEventListener('focus', this.#showDropdown, { signal });
+      document.addEventListener('click', this.#handleClickOutside, { signal });
     }
 
     if (RecentlyViewed.getProducts().length > 0) {
@@ -107,6 +111,30 @@ class PredictiveSearchComponent extends Component {
   #handleDialogOpen = () => {
     if (!this.#emptyStateLoaded && RecentlyViewed.getProducts().length > 0) {
       this.#loadEmptyState();
+    }
+  };
+
+  get #contentWrapper() {
+    return this.refs.predictiveSearchResults.closest('.predictive-search-form__content-wrapper');
+  }
+
+  #showDropdown = () => {
+    this.#contentWrapper?.classList.add('is-open');
+    if (!this.#emptyStateLoaded) {
+      this.#loadEmptyState();
+    }
+  };
+
+  #hideDropdown = () => {
+    this.#contentWrapper?.classList.remove('is-open');
+  };
+
+  /**
+   * @param {MouseEvent} event
+   */
+  #handleClickOutside = (event) => {
+    if (!this.contains(/** @type {Node} */ (event.target))) {
+      this.#hideDropdown();
     }
   };
 
@@ -182,7 +210,12 @@ class PredictiveSearchComponent extends Component {
    */
   onSearchKeyDown = (event) => {
     if (event.key === 'Escape') {
-      this.#resetSearch();
+      if (this.dialog) {
+        this.#resetSearch();
+      } else {
+        this.#hideDropdown();
+        this.refs.searchInput.blur();
+      }
       return;
     }
 

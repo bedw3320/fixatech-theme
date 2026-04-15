@@ -155,6 +155,87 @@ header-component.header {
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   3b. INLINE SEARCH DROPDOWN
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Container — same width as the old search bar trigger */
+@media screen and (min-width: 750px) {
+  #header-component .search-action--inline {
+    position: relative;
+    width: 100%;
+    max-width: 240px;
+  }
+}
+
+/* Search input — match the existing bordered-input look */
+#header-component .search-action--inline .predictive-search-form__header {
+  border: 0.5px solid var(--fixatech-white-40);
+  border-radius: 12px;
+  background-color: transparent;
+  padding: 0;
+  transition: var(--fixatech-transition-fast);
+}
+
+#header-component .search-action--inline .predictive-search-form__header:focus-within {
+  background-color: var(--fixatech-white-5);
+}
+
+#header-component .search-action--inline .predictive-search-form__header-inner {
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+}
+
+#header-component .search-action--inline input.search-input {
+  font-family: var(--fixatech-font-body, 'Geist', sans-serif);
+  font-size: 14px;
+  font-weight: 500;
+  padding-block: 6px;
+  color: var(--color-foreground);
+}
+
+#header-component .search-action--inline .predictive-search__icon {
+  left: var(--margin-sm);
+}
+
+#header-component .search-action--inline input.search-input {
+  padding-inline-start: calc(var(--margin-sm) + var(--icon-size-lg) + 4px);
+}
+
+/* Dropdown panel — hidden by default, positioned below the input */
+#header-component .search-action--inline .predictive-search-form__content-wrapper {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: min(500px, 90vw);
+  max-height: 70vh;
+  z-index: 101;
+  background-color: var(--color-background);
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.25);
+  border-radius: var(--search-border-radius, 12px);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  overflow: hidden;
+}
+
+#header-component .search-action--inline .predictive-search-form__content-wrapper.is-open {
+  display: flex;
+  flex-direction: column;
+}
+
+#header-component .search-action--inline .predictive-search-form__content {
+  max-height: 60vh;
+}
+
+/* Hide inline search on mobile — drawer_search icon takes over */
+@media screen and (max-width: 749px) {
+  #header-component .search-action--inline {
+    display: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    4. HEADER ACTIONS — ordering, spacing, hover
    ═══════════════════════════════════════════════════════════════ */
 

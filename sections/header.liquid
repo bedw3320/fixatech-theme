@@ -11,7 +11,7 @@
   assign search_style = 'none'
 
   if section.settings.show_search
-    assign search_style = 'modal'
+    assign search_style = 'inline'
   endif
 
   if section.settings.enable_transparent_header_home and template.name == 'index'
@@ -106,7 +106,7 @@
   if section.settings.search_row == 'bottom' or search_style != 'none' and skip_drawer_search == false
     # Mobile search duplicate for when search is not in the right order for mobile layout
     capture drawer_search
-      render 'search', class: 'search-action--hidden-on-menu', style: search_style, display_style: 'icon'
+      render 'search', class: 'search-action--hidden-on-menu', style: 'modal', display_style: 'icon'
     endcapture
   endif
 
