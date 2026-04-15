@@ -351,7 +351,7 @@
       },
       "name": "Featured collection",
       "settings": {
-        "collection": "tournevis-a-chocs",
+        "collection": "tournevis-chocs",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
