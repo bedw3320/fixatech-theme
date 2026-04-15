@@ -303,14 +303,11 @@ header-component.header {
   }
 }
 
-/* Reset button in search header — subtler text style */
-.search-modal .predictive-search__reset-button {
-  font-size: 12px;
-  opacity: 0.5;
-}
-
-.search-modal .predictive-search__reset-button:hover {
-  opacity: 0.8;
+/* Hide "Effacer" reset button on mobile — users have backspace and X close */
+@media screen and (max-width: 749px) {
+  .search-modal .predictive-search__reset-button {
+    display: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
