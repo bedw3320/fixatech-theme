@@ -613,7 +613,7 @@
       },
       "name": "Featured collection",
       "settings": {
-        "collection": "outils-sans-fil",
+        "collection": "ponceuses",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
