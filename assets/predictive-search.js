@@ -141,7 +141,7 @@ class PredictiveSearchComponent extends Component {
   #loadEmptyState() {
     if (this.#emptyStateLoaded) return;
     this.#emptyStateLoaded = true;
-    this.resetSearch(false);
+    this.#resetSearch();
   }
 
   get #allResultsItems() {
