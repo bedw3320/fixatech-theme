@@ -158,10 +158,19 @@
             {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
           >
             {{- cell_d_cta_text -}}
-            <svg class="bento-hero__cta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
+            {%- liquid
+              assign show_arrow = false
+              if section.settings.cta_style == 'button-secondary'
+                assign show_arrow = settings.secondary_button_show_arrow
+              else
+                assign show_arrow = settings.primary_button_show_arrow
+              endif
+            -%}
+            {%- if show_arrow -%}
+              <span class="svg-wrapper button-arrow" aria-hidden="true">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+            {%- endif -%}
           </a>
         {%- endif -%}
       </div>
@@ -315,15 +324,6 @@
   position: absolute;
   bottom: 30px;
   left: 30px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.bento-hero__cta-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
 }
 
 /* ── Placeholder SVGs ───────────────────────────────────────── */
