@@ -500,12 +500,14 @@ header-component.header {
    9. MEGA MENU — parent links white by default, yellow + arrow on hover
    ═══════════════════════════════════════════════════════════════ */
 
-/* Parent category links — white at rest, yellow on hover */
+/* Parent category links — white at rest, yellow on hover, sm font to match nav */
 #header-component .mega-menu__link--parent {
   color: var(--fixatech-white, #fff);
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-size: var(--menu-font-sm--size);
+  line-height: var(--menu-font-sm--line-height);
   transition: color 150ms ease;
 }
 
@@ -793,5 +795,46 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
     height: 3rem;
     pointer-events: auto;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   14. GLOBAL BUTTON ARROW HOVER
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Enable inline layout for the ::after arrow (buttons default to display: grid) */
+.button:not(.button-unstyled, .predictive-search__close-modal-button)::after,
+.button-secondary::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 16px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: width 150ms ease, opacity 150ms ease, transform 150ms ease;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.button:not(.button-unstyled, .predictive-search__close-modal-button):hover::after,
+.button-secondary:hover::after {
+  width: 16px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Buttons need inline flow for the arrow to sit beside text */
+.button:not(.button-unstyled, .predictive-search__close-modal-button),
+.button-secondary {
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
 }
 
