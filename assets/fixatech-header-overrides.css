@@ -798,43 +798,23 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   14. GLOBAL BUTTON ARROW HOVER
+   14. GLOBAL BUTTON ARROW — hidden by default, slides in on hover
+   Uses the .button-arrow span injected by Liquid when
+   primary/secondary_button_show_arrow is enabled in theme settings.
    ═══════════════════════════════════════════════════════════════ */
 
-/* Enable inline layout for the ::after arrow (buttons default to display: grid) */
-.button:not(.button-unstyled, .predictive-search__close-modal-button)::after,
-.button-secondary::after {
-  content: '';
-  display: inline-block;
-  width: 0;
-  height: 16px;
+.button-arrow {
   opacity: 0;
+  width: 0;
+  overflow: hidden;
   transform: translateX(-4px);
-  transition: width 150ms ease, opacity 150ms ease, transform 150ms ease;
-  background-color: currentColor;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  vertical-align: middle;
-  flex-shrink: 0;
+  transition: opacity 150ms ease, width 150ms ease, transform 150ms ease;
 }
 
-.button:not(.button-unstyled, .predictive-search__close-modal-button):hover::after,
-.button-secondary:hover::after {
-  width: 16px;
+.button:hover .button-arrow,
+.button-secondary:hover .button-arrow {
   opacity: 1;
+  width: 20px;
   transform: translateX(0);
-}
-
-/* Buttons need inline flow for the arrow to sit beside text */
-.button:not(.button-unstyled, .predictive-search__close-modal-button),
-.button-secondary {
-  grid-auto-flow: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
 }
 
