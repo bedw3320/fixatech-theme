@@ -589,12 +589,13 @@
         "padding-block-end": 48
       }
     },
-    "fixatech_cta_banner_tENQ87": {
+    "fixatech_cta_banner_BiAjyM": {
       "type": "fixatech-cta-banner",
       "blocks": {
-        "text_8wY9ct": {
+        "text_eEgemU": {
           "type": "text",
           "name": "t:names.text",
+          "disabled": true,
           "settings": {
             "text": "<h1><em>ON T'ÉQUIPE POUR ÇA</em></h1>",
             "width": "fit-content",
@@ -618,7 +619,7 @@
           },
           "blocks": {}
         },
-        "button_h77xUL": {
+        "button_nmYrKM": {
           "type": "button",
           "name": "t:names.button",
           "settings": {
@@ -635,8 +636,8 @@
         }
       },
       "block_order": [
-        "text_8wY9ct",
-        "button_h77xUL"
+        "text_eEgemU",
+        "button_nmYrKM"
       ],
       "name": "Fixatech CTA Banner",
       "settings": {
@@ -648,7 +649,7 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 36,
         "section_width": "page-width",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "outer_color_scheme": "scheme-3",
         "border": "none",
         "border_width": 1,
@@ -656,8 +657,8 @@
         "border_radius": 12,
         "padding-block-start": 60,
         "padding-block-end": 60,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
+        "padding-inline-start": 30,
+        "padding-inline-end": 30
       }
     },
     "section_QPz3JW": {
@@ -973,7 +974,7 @@
     "main",
     "fixatech_product_tabs",
     "product_recommendations_qggXJq",
-    "fixatech_cta_banner_tENQ87",
+    "fixatech_cta_banner_BiAjyM",
     "section_QPz3JW",
     "featured_blog_posts_YbdaY6",
     "section_mD84GY"
