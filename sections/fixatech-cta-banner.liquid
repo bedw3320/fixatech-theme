@@ -25,6 +25,9 @@
         {% render 'spacing-style', settings: section.settings %}
       "
     >
+      <div class="fixatech-cta-wordmark">
+        {{- 'ontequipepourca.svg' | inline_asset_content -}}
+      </div>
       {% content_for 'blocks' %}
     </div>
   </div>
@@ -35,10 +38,27 @@
     background-color: var(--color-background);
   }
 
+  .fixatech-cta-wordmark {
+    display: flex;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  .fixatech-cta-wordmark svg {
+    width: 100%;
+    height: auto;
+    max-width: 704px;
+    display: block;
+  }
+
   @media screen and (max-width: 749px) {
     .fixatech-cta-card .mobile-column {
       align-items: center;
       text-align: center;
+    }
+
+    .fixatech-cta-wordmark {
+      width: 100%;
     }
   }
 {% endstylesheet %}
@@ -332,16 +352,6 @@
         "padding-inline-end": 32
       },
       "blocks": {
-        "text_1": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong><em>ON T'ÉQUIPE POUR ÇA</em></strong></p>",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "var(--font-size--h3)",
-            "width": "fit-content"
-          }
-        },
         "button_1": {
           "type": "button",
           "settings": {
@@ -351,7 +361,7 @@
           }
         }
       },
-      "block_order": ["text_1", "button_1"]
+      "block_order": ["button_1"]
     }
   ]
 }
