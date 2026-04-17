@@ -649,6 +649,7 @@
         "text_FDK8MG": {
           "type": "text",
           "name": "t:names.text",
+          "disabled": true,
           "settings": {
             "text": "<h1><em>ON T'ÉQUIPE POUR ÇA</em></h1>",
             "width": "fit-content",
