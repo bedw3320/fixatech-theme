@@ -12,6 +12,7 @@
     "logo": "shopify://shop_images/Logo_Blanc_bfb2f0af-4534-49a4-af67-0bed2f6eb39b.png",
     "logo_height": 40,
     "logo_height_mobile": 28,
+    "favicon": "shopify://shop_images/Favicon_50x50px.jpg",
     "type_body_font": "geist_n4",
     "type_subheading_font": "geist_n4",
     "type_heading_font": "geist_n7",
