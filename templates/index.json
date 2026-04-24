@@ -528,7 +528,8 @@
         "collection_list": [
           "makita",
           "dewalt",
-          "milwaukee"
+          "milwaukee",
+          "3m"
         ],
         "layout_type": "grid",
         "carousel_on_mobile": true,
