@@ -632,6 +632,7 @@
       "block_order": [
         "ai_gen_block_1bd7a07_RBewUG"
       ],
+      "name": "Collection list: Brands",
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
