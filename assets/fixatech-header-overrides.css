@@ -386,9 +386,8 @@ header-component.header {
   color: var(--fixatech-primary, #ffc600);
 }
 
-/* Language selector — text and caret turn yellow together on hover */
-#header-component .language-selector:hover .localization-form__select,
-#header-component .language-selector:hover .icon-caret {
+/* Language selector button — text and caret turn yellow on hover */
+#header-component .dropdown-localization__button:hover {
   color: var(--fixatech-primary, #ffc600);
 }
 

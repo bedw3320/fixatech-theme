@@ -237,7 +237,7 @@
     {% endif %}
 
     {% if show_language %}
-      <div class="language-selector{% if show_country %} top-shadow{% else %} language-selector--collapse-space{% endif %}{% if show_country == false and localization_style == 'drawer' %} h5{% endif %}">
+      <div class="language-selector{% if show_country %} top-shadow{% endif %}{% if show_country == false and localization_style == 'drawer' %} h5{% endif %}">
         <h2
           class="visually-hidden"
           id="{{ localization_style }}-LanguageLabel"
@@ -247,29 +247,35 @@
         {% if show_country == true %}
           <span class="language-selector__label">{{ 'content.language' | t }}</span>
         {% endif %}
-        <select
-          id="{{ localization_style }}Select"
-          class="localization-form__select"
-          name="language_code"
-          aria-label="{{ 'content.language' | t }}"
-          ref="languageInput"
-          on:change="/changeLanguage"
+        <ul
+          role="listbox"
+          aria-labelledby="{{ localization_style }}-LanguageLabel"
+          class="list-unstyled localization-form__language-list"
         >
           {%- for language in localization.available_languages -%}
-            <option
-              value="{{ language.iso_code }}"
-              lang="{{ language.iso_code }}"
+            <li
+              class="localization-form__list-item"
               {% if language.iso_code == localization.language.iso_code %}
-                selected
+                aria-current="true"
               {% endif %}
+              role="option"
+              tabindex="-1"
+              ref="languageListItems[]"
+              on:click="/selectLanguage/{{ language.iso_code }}"
             >
-              {{ language.endonym_name | capitalize }}
-            </option>
+              <span class="svg-wrapper icon-checkmark">
+                {{- 'icon-checkmark.svg' | inline_asset_content -}}
+              </span>
+              <span class="language">{{ language.endonym_name | capitalize }}</span>
+            </li>
           {%- endfor -%}
-        </select>
-        <span class="svg-wrapper icon-caret">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
+        </ul>
+        <input
+          type="hidden"
+          name="language_code"
+          value="{{ localization.language.iso_code }}"
+          ref="languageInput"
+        >
       </div>
     {% endif %}
   {%- endform -%}
@@ -429,71 +435,16 @@
 
   .language-selector {
     display: flex;
+    flex-direction: column;
     gap: var(--gap-xs);
     padding: var(--padding-md) var(--padding-lg);
     position: relative;
-    align-items: center;
-    justify-content: space-between;
     width: 100%;
   }
 
   .language-selector__label {
     flex-shrink: 0;
     color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
-  }
-
-  .localization-form__select {
-    border: none;
-    color: var(--color-foreground);
-    appearance: none;
-    background-color: var(--color-input-background);
-    padding-block: var(--padding-3xs);
-    padding-inline: var(--padding-xs) calc(var(--icon-size-xs) + var(--padding-xs));
-    text-align: right;
-    cursor: pointer;
-    max-width: 40vw;
-    text-overflow: ellipsis;
-    field-sizing: content;
-
-    &:focus-visible {
-      outline: var(--focus-outline-width) solid currentcolor;
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-
-  #header-component[transparent] localization-form-component .localization-form .localization-form__select {
-    background-color: transparent;
-  }
-
-  .localization-form__select option {
-    background-color: var(--color-input-background);
-    color: var(--color-input-text);
-  }
-
-  .language-selector .svg-wrapper.icon-caret {
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-  }
-
-  .language-selector--collapse-space {
-    padding-inline-end: var(--padding-2xs);
-  }
-
-  .language-selector--collapse-space .localization-form__select {
-    padding-inline-end: var(--icon-size-xs);
-  }
-
-  .language-selector--collapse-space .svg-wrapper.icon-caret {
-    right: 0;
   }
 
   .localization-form .icon-checkmark {

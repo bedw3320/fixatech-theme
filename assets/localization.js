@@ -10,7 +10,8 @@ import { isClickedOutside, normalizeString, onAnimationEnd } from '@theme/utilit
  * @property {HTMLUListElement[]} countryListItems - The country list items element.
  * @property {HTMLFormElement} form - The form element.
  * @property {HTMLDivElement} liveRegion - The live region element.
- * @property {HTMLSelectElement} languageInput - The language input element.
+ * @property {HTMLInputElement} languageInput - The hidden language input element.
+ * @property {HTMLElement[]} languageListItems - The language list items.
  * @property {HTMLSpanElement} noResultsMessage - The no results message element.
  * @property {HTMLUListElement} popularCountries - The popular countries element.
  * @property {HTMLInputElement} search - The search input element.
@@ -25,10 +26,6 @@ class LocalizationFormComponent extends Component {
     this.refs.search && this.refs.search.addEventListener('keydown', this.#onSearchKeyDown);
     this.refs.countryList && this.refs.countryList.addEventListener('keydown', this.#onContainerKeyDown);
     this.refs.countryList && this.refs.countryList.addEventListener('scroll', this.#onCountryListScroll);
-
-    // Resizing the language input can be expensive for browsers that don't support field-sizing: content.
-    // Spliting it into separate tasks at least helps when there are multiple localization forms on the page.
-    setTimeout(() => this.resizeLanguageInput(), 0);
   }
 
   disconnectedCallback() {
@@ -100,51 +97,17 @@ class LocalizationFormComponent extends Component {
   };
 
   /**
-   * Changes the language of the localization form.
+   * Selects a language.
    *
+   * @param {string} languageCode - The ISO code of the language to select.
    * @param {Event} event - The event object.
    */
-  changeLanguage(event) {
-    const { form, languageInput } = this.refs;
-    const value = event.target instanceof HTMLSelectElement ? event.target.value : null;
-
-    if (value) {
-      languageInput.value = value;
-      this.resizeLanguageInput();
-      form.submit();
-    }
-  }
-
-  resizeLanguageInput() {
-    const { languageInput } = this.refs;
-
-    if (!languageInput || CSS.supports('field-sizing', 'content')) return;
-
-    // Hide all options except the selected option
-    for (const option of languageInput.options) {
-      if (!option.selected) {
-        option.dataset.optionLabel = option.textContent || '';
-        option.innerText = '';
-      }
-    }
-
-    // Calculate the width of the select element (which is based on the width of the widest option)
-    languageInput.style.width = 'fit-content';
-    const originalElementWidth = `${Math.ceil(languageInput.offsetWidth) + 1}px`;
-
-    // Fix the width of the select element
-    if (languageInput.offsetWidth > 0) {
-      languageInput.style.width = originalElementWidth;
-    }
-
-    // Add back all option labels
-    for (const option of languageInput.options) {
-      if (option.dataset.optionLabel) {
-        option.textContent = option.dataset.optionLabel;
-        delete option.dataset.optionLabel;
-      }
-    }
-  }
+  selectLanguage = (languageCode, event) => {
+    event.preventDefault();
+    const { languageInput, form } = this.refs;
+    languageInput.value = languageCode;
+    form?.submit();
+  };
 
   /**
    * Finds matches for a given search value in a country element.
