@@ -570,7 +570,16 @@
       ],
       "name": "t:names.collections_grid",
       "settings": {
-        "collection_list": [],
+        "collection_list": [
+          "3m",
+          "adler",
+          "airmax",
+          "akka",
+          "alcot",
+          "bissett",
+          "black-jack",
+          "big-timber"
+        ],
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "columns": 3,
