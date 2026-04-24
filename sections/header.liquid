@@ -1127,6 +1127,17 @@
     {%- endif -%}
     color: rgba(255, 255, 255, 1);
   }
+
+  #header-component .search-action--inline .predictive-search-form__header {
+    {%- if section.settings.search_border_style == 'all' -%}
+      border-width: {{ section.settings.search_border_width }}px;
+      border-style: solid;
+      border-color: rgba(255, 255, 255, {{ search_opacity }});
+      border-radius: {{ section.settings.search_border_radius }}px;
+    {%- else -%}
+      border-style: none;
+    {%- endif -%}
+  }
 {% endstyle %}
 
 {% unless request.design_mode %}
