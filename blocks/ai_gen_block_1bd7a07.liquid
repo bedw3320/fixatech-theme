@@ -26,6 +26,8 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
   }
 
   .ai-brand-card-{{ ai_gen_id }}:hover {
@@ -149,7 +151,7 @@
     {% if all_brands.size > 0 %}
       <div class="ai-brand-grid__container-{{ ai_gen_id }}">
         {% for brand in all_brands %}
-          <div class="ai-brand-card-{{ ai_gen_id }}">
+          <a href="/collections/{{ brand[block.settings.collection_field].handle }}" class="ai-brand-card-{{ ai_gen_id }}">
             <div class="ai-brand-card__image-wrapper-{{ ai_gen_id }}">
               {% if brand[block.settings.image_field] %}
                 <img
@@ -177,16 +179,16 @@
               {% endif %}
 
               {% if brand[block.settings.collection_field] %}
-                <a href="{{ brand[block.settings.collection_field].url }}" class="ai-brand-card__link-{{ ai_gen_id }}">
+                <span class="ai-brand-card__link-{{ ai_gen_id }}">
                   {{ block.settings.link_text }}
                   <svg class="ai-brand-card__link-arrow-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>
-                </a>
+                </span>
               {% endif %}
             </div>
-          </div>
+          </a>
         {% endfor %}
       </div>
     {% else %}
