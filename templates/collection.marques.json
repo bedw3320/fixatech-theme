@@ -570,7 +570,9 @@
       ],
       "name": "t:names.collections_grid",
       "settings": {
-        "collection_list": [],
+        "collection_list": [
+          "makita"
+        ],
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "columns": 3,
