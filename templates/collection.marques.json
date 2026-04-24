@@ -568,6 +568,7 @@
       "block_order": [
         "group_mm4TRU"
       ],
+      "disabled": true,
       "name": "t:names.collections_grid",
       "settings": {
         "collection_list": [
@@ -602,7 +603,7 @@
             "image_field": "logo",
             "description_field": "description",
             "collection_field": "collection",
-            "link_text": "View collection",
+            "link_text": "Voir les produits",
             "show_description": false,
             "columns_desktop": 4,
             "columns_tablet": 3,
