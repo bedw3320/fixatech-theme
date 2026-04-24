@@ -454,7 +454,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Toutes les marques",
+                "label": "Tout afficher",
                 "link": "shopify://collections/marques",
                 "open_in_new_tab": false,
                 "style_class": "button",
