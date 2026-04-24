@@ -134,7 +134,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<h2>{{ closest.collection.title }}</h2>",
+            "text": "<h1>Magasiner par {{ closest.collection.title }}</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -570,16 +570,7 @@
       ],
       "name": "t:names.collections_grid",
       "settings": {
-        "collection_list": [
-          "3m",
-          "adler",
-          "airmax",
-          "akka",
-          "alcot",
-          "bissett",
-          "black-jack",
-          "big-timber"
-        ],
+        "collection_list": [],
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "columns": 3,
