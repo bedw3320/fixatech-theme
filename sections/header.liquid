@@ -1111,10 +1111,11 @@
   #header-component .search-action--hidden-on-drawer .button-unstyled {
     {%- if section.settings.search_border_style == 'all' -%}
       border-width: {{ section.settings.search_border_width }}px;
+      border-style: solid;
       border-color: rgba(255, 255, 255, {{ search_opacity }});
       border-radius: {{ section.settings.search_border_radius }}px;
     {%- else -%}
-      border-width: 0;
+      border-style: none;
     {%- endif -%}
     color: rgba(255, 255, 255, {{ search_opacity }});
   }

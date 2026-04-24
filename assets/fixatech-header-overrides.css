@@ -113,10 +113,6 @@ header-component.header {
   width: 100%;
   padding: 0;
   background-color: transparent;
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: var(--fixatech-white-40);
-  border-radius: 12px;
   font-family: var(--fixatech-font-body, 'Geist', sans-serif);
   font-size: 14px;
   font-weight: 500;
