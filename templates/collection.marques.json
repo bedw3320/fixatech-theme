@@ -520,6 +520,7 @@
             "button_9CdiCz": {
               "type": "button",
               "name": "t:names.button",
+              "disabled": true,
               "settings": {
                 "label": "{{ closest.collection.title }}",
                 "link": "{{ closest.collection.url }}",
@@ -535,7 +536,6 @@
             "collection_title_DzKKn3": {
               "type": "collection-title",
               "name": "t:names.collection_title",
-              "disabled": true,
               "settings": {
                 "width": "fit-content",
                 "max_width": "normal",
