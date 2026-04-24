@@ -449,10 +449,26 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "button_mFcNYY": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Acheter maintenant",
+                "link": "shopify://collections/marques",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "text_nYj3Ln"
+            "text_nYj3Ln",
+            "button_mFcNYY"
           ]
         },
         "static-collection-card": {
