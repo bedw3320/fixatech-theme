@@ -151,7 +151,7 @@
     {% if all_brands.size > 0 %}
       <div class="ai-brand-grid__container-{{ ai_gen_id }}">
         {% for brand in all_brands %}
-          <a href="/collections/{{ brand[block.settings.collection_field].handle }}" class="ai-brand-card-{{ ai_gen_id }}">
+          <a href="/collections/{{ brand.collection.handle }}" class="ai-brand-card-{{ ai_gen_id }}">
             <div class="ai-brand-card__image-wrapper-{{ ai_gen_id }}">
               {% if brand[block.settings.image_field] %}
                 <img
@@ -257,13 +257,6 @@
       "label": "Description field",
       "default": "description",
       "info": "Field handle for the brand description"
-    },
-    {
-      "type": "text",
-      "id": "collection_field",
-      "label": "Collection field",
-      "default": "collection",
-      "info": "Field handle for the collection reference"
     },
     {
       "type": "text",
