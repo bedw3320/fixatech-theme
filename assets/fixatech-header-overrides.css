@@ -811,3 +811,8 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
   transform: translateX(0);
 }
 
+/* Product grid — ATC button always hugs the bottom of the card */
+.product-card__content > .buy-buttons-block {
+  margin-top: auto;
+}
+
