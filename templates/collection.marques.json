@@ -517,9 +517,25 @@
             "border_radius": 12
           },
           "blocks": {
+            "button_9CdiCz": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "{{ closest.collection.title }}",
+                "link": "{{ closest.collection.url }}",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            },
             "collection_title_DzKKn3": {
               "type": "collection-title",
               "name": "t:names.collection_title",
+              "disabled": true,
               "settings": {
                 "width": "fit-content",
                 "max_width": "normal",
@@ -561,6 +577,7 @@
             }
           },
           "block_order": [
+            "button_9CdiCz",
             "collection_title_DzKKn3"
           ]
         }
