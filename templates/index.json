@@ -458,7 +458,7 @@
                 "link": "shopify://collections/marques",
                 "open_in_new_tab": false,
                 "style_class": "button",
-                "width": "custom",
+                "width": "fit-content",
                 "custom_width": 15,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
