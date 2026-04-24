@@ -151,12 +151,12 @@
     {% if all_brands.size > 0 %}
       <div class="ai-brand-grid__container-{{ ai_gen_id }}">
         {% for brand in all_brands %}
-          <a href="{{ brand.collection }}" class="ai-brand-card-{{ ai_gen_id }}">
+          <a href="{{ brand[block.settings.collection_field].value }}" class="ai-brand-card-{{ ai_gen_id }}">
             <div class="ai-brand-card__image-wrapper-{{ ai_gen_id }}">
-              {% if brand[block.settings.image_field] %}
+              {% if brand[block.settings.image_field].value %}
                 <img
-                  src="{{ brand[block.settings.image_field] | image_url: width: 600 }}"
-                  alt="{{ brand[block.settings.image_field].alt | default: brand[block.settings.name_field] | escape }}"
+                  src="{{ brand[block.settings.image_field].value | image_url: width: 600 }}"
+                  alt="{{ brand[block.settings.image_field].value.alt | default: brand[block.settings.name_field].value | escape }}"
                   class="ai-brand-card__image-{{ ai_gen_id }}"
                   loading="lazy"
                   width="600"
@@ -170,15 +170,15 @@
             </div>
 
             <div class="ai-brand-card__content-{{ ai_gen_id }}">
-              {% if brand[block.settings.name_field] %}
-                <h3 class="ai-brand-card__name-{{ ai_gen_id }}">{{ brand[block.settings.name_field] }}</h3>
+              {% if brand[block.settings.name_field].value %}
+                <h3 class="ai-brand-card__name-{{ ai_gen_id }}">{{ brand[block.settings.name_field].value }}</h3>
               {% endif %}
 
-              {% if brand[block.settings.description_field] and block.settings.show_description %}
-                <p class="ai-brand-card__description-{{ ai_gen_id }}">{{ brand[block.settings.description_field] }}</p>
+              {% if brand[block.settings.description_field].value and block.settings.show_description %}
+                <p class="ai-brand-card__description-{{ ai_gen_id }}">{{ brand[block.settings.description_field].value }}</p>
               {% endif %}
 
-              {% if brand[block.settings.collection_field] %}
+              {% if brand[block.settings.collection_field].value %}
                 <span class="ai-brand-card__link-{{ ai_gen_id }}">
                   {{ block.settings.link_text }}
                   <svg class="ai-brand-card__link-arrow-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -235,20 +235,21 @@
       "type": "text",
       "id": "metaobject_type",
       "label": "Metaobject type",
-      "info": "Enter the metaobject type handle (e.g., brand)"
+      "default": "marques",
+      "info": "Enter the metaobject type handle (e.g., marques)"
     },
     {
       "type": "text",
       "id": "name_field",
       "label": "Name field",
-      "default": "name",
+      "default": "nom",
       "info": "Field handle for the brand name"
     },
     {
       "type": "text",
       "id": "image_field",
       "label": "Image field",
-      "default": "image",
+      "default": "logo",
       "info": "Field handle for the brand image"
     },
     {
@@ -257,6 +258,13 @@
       "label": "Description field",
       "default": "description",
       "info": "Field handle for the brand description"
+    },
+    {
+      "type": "text",
+      "id": "collection_field",
+      "label": "Collection URL field",
+      "default": "collection_url",
+      "info": "Field handle for the collection URL"
     },
     {
       "type": "text",
