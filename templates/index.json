@@ -525,7 +525,7 @@
                 "border": "solid",
                 "border_width": 1,
                 "border_opacity": 30,
-                "border_radius": 100
+                "border_radius": 12
               },
               "blocks": {}
             }
