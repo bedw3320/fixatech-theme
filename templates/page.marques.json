@@ -98,7 +98,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h3>Magasiner par collection</h3>",
+                "text": "<h1>Magasiner par marques</h1>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
