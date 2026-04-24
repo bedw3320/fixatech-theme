@@ -134,7 +134,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<h1>Magasiner par {{ closest.collection.title }}</h1>",
+            "text": "<h2>Magasiner par {{ closest.collection.title }}</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
