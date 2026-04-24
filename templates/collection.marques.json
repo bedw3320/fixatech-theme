@@ -511,10 +511,10 @@
             "collection_card_gap": 8,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "border": "solid",
-            "border_width": 2,
+            "border": "none",
+            "border_width": 0,
             "border_opacity": 30,
-            "border_radius": 12
+            "border_radius": 0
           },
           "blocks": {
             "collection_title_DzKKn3": {
