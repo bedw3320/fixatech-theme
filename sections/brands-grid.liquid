@@ -6,7 +6,6 @@
     width: {{ section.settings.desktop_width_percent }}%;
     max-width: 100%;
     margin: 0 auto;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
   .brands-grid__container-{{ bg_id }} {
@@ -134,55 +133,60 @@
   }
 {% endstyle %}
 
-<div class="page-width">
-  <div class="brands-grid-{{ bg_id }}" {{ section.shopify_attributes }}>
-    {% paginate shop.metaobjects["marques"].values by 250 %}
-      {% assign all_brands = shop.metaobjects["marques"].values %}
-      {% if all_brands.size > 0 %}
-        <div class="brands-grid__container-{{ bg_id }}">
-          {% for brand in all_brands %}
-            <a href="{{ brand[section.settings.collection_field].value }}" class="brands-grid__card-{{ bg_id }}">
-              <div class="brands-grid__image-wrapper-{{ bg_id }}">
-                {% if brand[section.settings.image_field].value %}
-                  <img
-                    src="{{ brand[section.settings.image_field].value | image_url: width: 600 }}"
-                    alt="{{ brand[section.settings.image_field].value.alt | default: brand[section.settings.name_field].value | escape }}"
-                    class="brands-grid__image-{{ bg_id }}"
-                    loading="lazy"
-                    width="600"
-                    height="{{ 600 | times: section.settings.image_aspect_ratio | divided_by: 100 }}"
-                  >
-                {% else %}
-                  <div class="brands-grid__placeholder-{{ bg_id }}">
-                    {{ 'image' | placeholder_svg_tag }}
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div class="section section--page-width color-{{ section.settings.color_scheme }}" {{ section.shopify_attributes }}>
+  <div class="custom-section-content">
+    <div class="spacing-style" style="{% render 'spacing-style', settings: section.settings %}">
+      <div class="brands-grid-{{ bg_id }}">
+        {% paginate shop.metaobjects["marques"].values by 250 %}
+          {% assign all_brands = shop.metaobjects["marques"].values %}
+          {% if all_brands.size > 0 %}
+            <div class="brands-grid__container-{{ bg_id }}">
+              {% for brand in all_brands %}
+                <a href="{{ brand[section.settings.collection_field].value }}" class="brands-grid__card-{{ bg_id }}">
+                  <div class="brands-grid__image-wrapper-{{ bg_id }}">
+                    {% if brand[section.settings.image_field].value %}
+                      <img
+                        src="{{ brand[section.settings.image_field].value | image_url: width: 600 }}"
+                        alt="{{ brand[section.settings.image_field].value.alt | default: brand[section.settings.name_field].value | escape }}"
+                        class="brands-grid__image-{{ bg_id }}"
+                        loading="lazy"
+                        width="600"
+                        height="{{ 600 | times: section.settings.image_aspect_ratio | divided_by: 100 }}"
+                      >
+                    {% else %}
+                      <div class="brands-grid__placeholder-{{ bg_id }}">
+                        {{ 'image' | placeholder_svg_tag }}
+                      </div>
+                    {% endif %}
                   </div>
-                {% endif %}
-              </div>
 
-              <div class="brands-grid__content-{{ bg_id }}">
-                {% if brand[section.settings.name_field].value %}
-                  <h3 class="brands-grid__name-{{ bg_id }}">{{ brand[section.settings.name_field].value }}</h3>
-                {% endif %}
+                  <div class="brands-grid__content-{{ bg_id }}">
+                    {% if brand[section.settings.name_field].value %}
+                      <h3 class="brands-grid__name-{{ bg_id }}">{{ brand[section.settings.name_field].value }}</h3>
+                    {% endif %}
 
-                {% if brand[section.settings.collection_field].value %}
-                  <span class="brands-grid__link-{{ bg_id }}">
-                    {{ section.settings.link_text }}
-                    <svg class="brands-grid__link-arrow-{{ bg_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </span>
-                {% endif %}
-              </div>
-            </a>
-          {% endfor %}
-        </div>
-      {% else %}
-        <div class="brands-grid__empty-{{ bg_id }}">
-          No brand entries found.
-        </div>
-      {% endif %}
-    {% endpaginate %}
+                    {% if brand[section.settings.collection_field].value %}
+                      <span class="brands-grid__link-{{ bg_id }}">
+                        {{ section.settings.link_text }}
+                        <svg class="brands-grid__link-arrow-{{ bg_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </span>
+                    {% endif %}
+                  </div>
+                </a>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="brands-grid__empty-{{ bg_id }}">
+              No brand entries found.
+            </div>
+          {% endif %}
+        {% endpaginate %}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -267,11 +271,27 @@
       "default": 100
     },
     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
       "type": "range",
-      "id": "padding_bottom",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
       "label": "Bottom padding",
       "min": 0,
-      "max": 148,
+      "max": 100,
       "step": 4,
       "unit": "px",
       "default": 100
