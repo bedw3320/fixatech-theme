@@ -583,73 +583,33 @@
         "padding-block-end": 100
       }
     },
-    "17769975133eba6960": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_1bd7a07_RBewUG": {
-          "type": "ai_gen_block_1bd7a07",
-          "settings": {
-            "metaobject_type": "marques",
-            "name_field": "nom",
-            "image_field": "logo",
-            "description_field": "description",
-            "collection_field": "collection_url",
-            "link_text": "Voir les produits",
-            "show_description": false,
-            "columns_desktop": 6,
-            "columns_tablet": 4,
-            "columns_mobile": "2",
-            "grid_gap": 24,
-            "desktop_width_percent": 100,
-            "card_background": "#ffffff",
-            "card_border_color": "#e6e6e6",
-            "card_border_width": 1,
-            "card_border_radius": 12,
-            "card_padding": 20,
-            "image_aspect_ratio": 100,
-            "image_fit": "cover",
-            "image_background": "#f4f4f4",
-            "brand_name_size": 20,
-            "text_color": "#141414",
-            "description_size": 14,
-            "description_color": "#666666",
-            "link_size": 14,
-            "link_color": "#ffc600",
-            "link_hover_color": "#e9b217"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_1bd7a07_RBewUG"
-      ],
-      "name": "Collection list: Brands",
+    "brands-grid": {
+      "type": "brands-grid",
+      "name": "Brands grid",
       "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "center",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-3",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 100
+        "name_field": "nom",
+        "image_field": "logo",
+        "collection_field": "collection_url",
+        "link_text": "Voir les produits",
+        "columns_desktop": 6,
+        "columns_tablet": 4,
+        "columns_mobile": "2",
+        "grid_gap": 24,
+        "desktop_width_percent": 100,
+        "padding_bottom": 100,
+        "card_background": "#ffffff",
+        "card_border_color": "#e6e6e6",
+        "card_border_width": 1,
+        "card_border_radius": 12,
+        "card_padding": 20,
+        "image_aspect_ratio": 100,
+        "image_fit": "cover",
+        "image_background": "#f4f4f4",
+        "brand_name_size": 20,
+        "text_color": "#141414",
+        "link_size": 14,
+        "link_color": "#ffc600",
+        "link_hover_color": "#e9b217"
       }
     }
   },
@@ -659,6 +619,6 @@
     "section",
     "main",
     "collection_list_X9D7mb",
-    "17769975133eba6960"
+    "brands-grid"
   ]
 }
