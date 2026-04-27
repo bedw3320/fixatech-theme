@@ -146,8 +146,8 @@
 
 <brand-grid-{{ ai_gen_id }} class="ai-brand-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
   {% if block.settings.metaobject_type != blank %}
-    {% assign all_brands = shop.metaobjects[block.settings.metaobject_type].values %}
-    
+    {% paginate shop.metaobjects[block.settings.metaobject_type] by 250 %}
+    {% assign all_brands = shop.metaobjects[block.settings.metaobject_type] %}
     {% if all_brands.size > 0 %}
       <div class="ai-brand-grid__container-{{ ai_gen_id }}">
         {% for brand in all_brands %}
@@ -196,6 +196,7 @@
         No brand entries found. Create brand metaobjects to display them here.
       </div>
     {% endif %}
+    {% endpaginate %}
   {% else %}
     <div class="ai-brand-grid__empty-{{ ai_gen_id }}">
       Next, enter your metaobject type below (e.g., "brand")
