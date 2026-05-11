@@ -1,18 +1,28 @@
 /**
- * Fixatech Cart Page — CSS Overrides
+ * Fixatech Cart Page + Cart Drawer — CSS Overrides
  * Theme: Shopify Horizon
  *
- * Design system: dark bg (#141414), Geist body 14px, Flintstock headings,
- * yellow accent (#FFC600), 12px radius, 8px spacing base unit.
+ * Design system:
+ *   - Cart page: dark bg (#141414) via scheme-1
+ *   - Cart drawer: white bg (#ffffff) via scheme-3 (drawer_color_scheme)
+ *   Geist body 14px, Flintstock headings, yellow accent (#FFC600),
+ *   12px radius, 8px spacing base unit.
  *
- * DOM structure (from main-cart.liquid + snippets):
+ * DOM structure (cart page — main-cart.liquid + snippets):
  *   .cart-page
  *     .cart-page__title  → cart-title block
  *     .cart-page__items  → cart-products block (table layout)
  *     .cart-page__summary → cart-summary block (sidebar on desktop)
  *
+ * DOM structure (cart drawer — snippets/header-actions.liquid):
+ *   cart-drawer-component
+ *     dialog.cart-drawer__dialog.color-scheme-3
+ *       .cart-drawer__inner
+ *
  * Approach: additive overrides only, no Horizon file edits.
  * All values reference fixatech-variables.css.liquid tokens.
+ * rgba() fallbacks use 0 0 0 (dark) so they degrade gracefully
+ * on light backgrounds (scheme-3 sets --color-foreground-rgb from #333333).
  */
 
 /* ═══════════════════════════════════════════════════════════════
@@ -39,7 +49,7 @@
 }
 
 .cart-title__count {
-  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.5);
+  color: rgba(var(--color-foreground-rgb, 0 0 0) / 0.5);
   font-weight: normal;
 }
 
@@ -72,7 +82,7 @@
 /* Variant options (size, color, etc.) */
 .cart-items__variants {
   font-size: 13px;
-  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.6);
+  color: rgba(var(--color-foreground-rgb, 0 0 0) / 0.6);
 }
 
 /* Thumbnail image — slight radius */
@@ -96,18 +106,18 @@
 /* Unit price smaller and muted */
 .cart-items__unit-price-wrapper {
   font-size: 13px;
-  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.6);
+  color: rgba(var(--color-foreground-rgb, 0 0 0) / 0.6);
 }
 
 /* Compare at (original) price — strikethrough */
 .cart-items .compare-at-price {
-  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.4);
+  color: rgba(var(--color-foreground-rgb, 0 0 0) / 0.4);
   font-size: 12px;
 }
 
 /* Remove button — subtle, red on hover */
 .cart-items__remove {
-  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.5);
+  color: rgba(var(--color-foreground-rgb, 0 0 0) / 0.5);
   transition: color 0.2s ease;
 }
 
@@ -149,7 +159,7 @@
 /* Tax note — muted */
 .cart-totals__tax-note {
   font-size: 12px;
-  color: rgba(var(--color-foreground-rgb, 255 255 255) / 0.5);
+  color: rgba(var(--color-foreground-rgb, 0 0 0) / 0.5);
 }
 
 /* Discount code label */
@@ -327,5 +337,31 @@
 
   .cart-totals__total-value {
     font-size: 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9. CART DRAWER — white background (scheme-3)
+   The drawer dialog gets class color-scheme-3 via
+   settings.drawer_color_scheme = "scheme-3".
+   Horizon's color scheme CSS vars handle bg/fg automatically.
+   These rules reinforce drawer-specific styles and ensure
+   the yellow checkout button stays prominent on white.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Ensure the drawer dialog has no stray dark background */
+.cart-drawer__dialog {
+  background-color: var(--color-background);
+}
+
+/* Item row dividers — use Horizon's scheme border on white */
+.cart-drawer .cart-items--dividers .cart-items__table-row {
+  border-bottom-color: var(--color-border);
+}
+
+/* Mobile summary divider inside drawer — use scheme border */
+@media screen and (max-width: 767px) {
+  .cart-drawer .cart-page__summary {
+    border-block-start-color: var(--color-border);
   }
 }
