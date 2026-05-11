@@ -41,152 +41,330 @@
 
 <div class="section section--{{ section.settings.section_width }} spacing-style bento-hero bento-hero--{{ section.id }}">
   <div>
-    <div class="bento-hero__grid">
+    {%- if section.settings.carousel_on_mobile -%}
 
       {%- comment -%}
-        Cells A + B are wrapped in bento-hero__secondary.
-        On desktop/tablet: display:contents makes the wrapper invisible to the
-        grid algorithm, so A and B participate in the grid directly as before.
-        On mobile with carousel_on_mobile: the wrapper becomes a horizontal
-        scroll track (display:flex, overflow-x:scroll, scroll-snap-type:x).
+        ── Mobile carousel layout (carousel_on_mobile = true) ──────────────
+        On mobile: C, A, B are scroll-snap slides inside a track wrapper.
+        On desktop/tablet: the track uses display:contents, making all cells
+        invisible to the grid algorithm — they participate as direct grid
+        children, preserving the original grid-column/grid-row assignments.
+        Cell D is excluded from the track (always hidden on mobile anyway)
+        and rendered as a direct grid child for both breakpoints.
       {%- endcomment -%}
-      <div class="bento-hero__secondary{% if section.settings.carousel_on_mobile %} bento-hero__secondary--carousel{% endif %}">
 
-      {%- comment -%} ── Cell A — Text card or image ───────────────────── {%- endcomment -%}
-      <div class="bento-hero__cell bento-hero__cell-a{% if cell_a_image != blank %} bento-hero__cell-a--image{% endif %}">
-        {%- if cell_a_image != blank -%}
-          {{
-            cell_a_image
-            | image_url: width: 800
-            | image_tag:
-              class: 'bento-hero__fill-img',
-              loading: 'lazy',
-              widths: '400, 800',
-              sizes: '(max-width: 749px) 100vw, 33vw',
-              alt: cell_a_image.alt | default: ''
-          }}
-        {%- else -%}
-          <div class="bento-hero__cell-a-content">
-            {%- if cell_a_heading != blank -%}
-              <h2 class="bento-hero__cell-a-heading">{{ cell_a_heading }}</h2>
-            {%- endif -%}
-            {%- if cell_a_text != blank -%}
-              <p class="bento-hero__cell-a-text">{{ cell_a_text }}</p>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
-      </div>
+      <div class="bento-hero__grid bento-hero__grid--carousel-mobile">
 
-      {%- comment -%} ── Cell B — Photo ─────────────────────────────────── {%- endcomment -%}
-      <div class="bento-hero__cell bento-hero__cell-b">
-        {%- if cell_b_image != blank -%}
-          {{
-            cell_b_image
-            | image_url: width: 800
-            | image_tag:
-              class: 'bento-hero__fill-img',
-              loading: 'lazy',
-              widths: '400, 800',
-              sizes: '(max-width: 749px) 100vw, 33vw',
-              alt: cell_b_image.alt | default: ''
-          }}
-        {%- else -%}
-          {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
-        {%- endif -%}
-      </div>
+        {%- comment -%} Carousel track: wraps C, A, B {%- endcomment -%}
+        <div class="bento-hero__carousel-track" id="bento-track-{{ section.id }}">
 
-      </div>{%- comment -%} /bento-hero__secondary {%- endcomment -%}
-
-      {%- comment -%} ── Cell C — Promo panel or image ───────────────────── {%- endcomment -%}
-      <div class="bento-hero__cell bento-hero__cell-c{% if cell_c_image != blank %} bento-hero__cell-c--image{% endif %}">
-        {%- if cell_c_image != blank -%}
-          {{
-            cell_c_image
-            | image_url: width: 800
-            | image_tag:
-              class: 'bento-hero__fill-img',
-              loading: 'lazy',
-              widths: '400, 800',
-              sizes: '(max-width: 749px) 100vw, 33vw',
-              alt: cell_c_image.alt | default: ''
-          }}
-        {%- else -%}
-          <div class="bento-hero__cell-c-text">
-            {%- if cell_c_heading != blank -%}
-              <h3 class="bento-hero__cell-c-heading">{{ cell_c_heading }}</h3>
-            {%- endif -%}
-            {%- if cell_c_subtext != blank -%}
-              <p class="bento-hero__cell-c-subtext">{{ cell_c_subtext }}</p>
-            {%- endif -%}
-          </div>
-
-          <div class="bento-hero__cell-c-product">
-            {%- if cell_c_product_image != blank -%}
+          {%- comment -%} ── Cell C — Promo panel (FIRST on mobile) ──────── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-c{% if cell_c_image != blank %} bento-hero__cell-c--image{% endif %}">
+            {%- if cell_c_image != blank -%}
               {{
-                cell_c_product_image
-                | image_url: width: 600
+                cell_c_image
+                | image_url: width: 800
                 | image_tag:
-                  class: 'bento-hero__cell-c-product-img',
+                  class: 'bento-hero__fill-img',
                   loading: 'lazy',
-                  widths: '300, 600',
-                  sizes: '(max-width: 749px) 80vw, 25vw',
-                  alt: cell_c_product_image.alt | default: ''
+                  widths: '400, 800',
+                  sizes: '(max-width: 749px) 100vw, 33vw',
+                  alt: cell_c_image.alt | default: ''
               }}
             {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+              <div class="bento-hero__cell-c-text">
+                {%- if cell_c_heading != blank -%}
+                  <h3 class="bento-hero__cell-c-heading">{{ cell_c_heading }}</h3>
+                {%- endif -%}
+                {%- if cell_c_subtext != blank -%}
+                  <p class="bento-hero__cell-c-subtext">{{ cell_c_subtext }}</p>
+                {%- endif -%}
+              </div>
+
+              <div class="bento-hero__cell-c-product">
+                {%- if cell_c_product_image != blank -%}
+                  {{
+                    cell_c_product_image
+                    | image_url: width: 600
+                    | image_tag:
+                      class: 'bento-hero__cell-c-product-img',
+                      loading: 'lazy',
+                      widths: '300, 600',
+                      sizes: '(max-width: 749px) 80vw, 25vw',
+                      alt: cell_c_product_image.alt | default: ''
+                  }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+                {%- endif -%}
+              </div>
+
+              {%- if cell_c_price != blank -%}
+                <div class="bento-hero__price-badge">{{ cell_c_price }}</div>
+              {%- endif -%}
             {%- endif -%}
           </div>
 
-          {%- if cell_c_price != blank -%}
-            <div class="bento-hero__price-badge">{{ cell_c_price }}</div>
-          {%- endif -%}
-        {%- endif -%}
-      </div>
-
-      {%- comment -%} ── Cell D — Wide photo + CTA ───────────────────────── {%- endcomment -%}
-      <div class="bento-hero__cell bento-hero__cell-d">
-        {%- if cell_d_image != blank -%}
-          {{
-            cell_d_image
-            | image_url: width: 1200
-            | image_tag:
-              class: 'bento-hero__fill-img',
-              loading: 'lazy',
-              widths: '600, 900, 1200',
-              sizes: '(max-width: 749px) 100vw, 66vw',
-              alt: cell_d_image.alt | default: ''
-          }}
-        {%- else -%}
-          {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
-        {%- endif -%}
-
-        <div class="bento-hero__cell-d-overlay" aria-hidden="true"></div>
-
-        {%- if cell_d_cta_text != blank -%}
-          <a
-            href="{{ cell_d_cta_link | default: '#' }}"
-            class="bento-hero__cta {{ section.settings.cta_style }}"
-            {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
-          >
-            {{- cell_d_cta_text -}}
-            {%- liquid
-              assign show_arrow = false
-              if section.settings.cta_style == 'button-secondary'
-                assign show_arrow = settings.secondary_button_show_arrow
-              else
-                assign show_arrow = settings.primary_button_show_arrow
-              endif
-            -%}
-            {%- if show_arrow -%}
-              <span class="svg-wrapper button-arrow" aria-hidden="true">
-                {{- 'icon-arrow.svg' | inline_asset_content -}}
-              </span>
+          {%- comment -%} ── Cell A — Text card or image ──────────────────── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-a{% if cell_a_image != blank %} bento-hero__cell-a--image{% endif %}">
+            {%- if cell_a_image != blank -%}
+              {{
+                cell_a_image
+                | image_url: width: 800
+                | image_tag:
+                  class: 'bento-hero__fill-img',
+                  loading: 'lazy',
+                  widths: '400, 800',
+                  sizes: '(max-width: 749px) 100vw, 33vw',
+                  alt: cell_a_image.alt | default: ''
+              }}
+            {%- else -%}
+              <div class="bento-hero__cell-a-content">
+                {%- if cell_a_heading != blank -%}
+                  <h2 class="bento-hero__cell-a-heading">{{ cell_a_heading }}</h2>
+                {%- endif -%}
+                {%- if cell_a_text != blank -%}
+                  <p class="bento-hero__cell-a-text">{{ cell_a_text }}</p>
+                {%- endif -%}
+              </div>
             {%- endif -%}
-          </a>
-        {%- endif -%}
+          </div>
+
+          {%- comment -%} ── Cell B — Photo ───────────────────────────────── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-b">
+            {%- if cell_b_image != blank -%}
+              {{
+                cell_b_image
+                | image_url: width: 800
+                | image_tag:
+                  class: 'bento-hero__fill-img',
+                  loading: 'lazy',
+                  widths: '400, 800',
+                  sizes: '(max-width: 749px) 100vw, 33vw',
+                  alt: cell_b_image.alt | default: ''
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+            {%- endif -%}
+          </div>
+
+        </div>{%- comment -%} /bento-hero__carousel-track {%- endcomment -%}
+
+        {%- comment -%} ── Cell D — Wide photo + CTA (direct grid child) ─── {%- endcomment -%}
+        <div class="bento-hero__cell bento-hero__cell-d">
+          {%- if cell_d_image != blank -%}
+            {{
+              cell_d_image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'bento-hero__fill-img',
+                loading: 'lazy',
+                widths: '600, 900, 1200',
+                sizes: '(max-width: 749px) 100vw, 66vw',
+                alt: cell_d_image.alt | default: ''
+            }}
+          {%- else -%}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+          {%- endif -%}
+
+          <div class="bento-hero__cell-d-overlay" aria-hidden="true"></div>
+
+          {%- if cell_d_cta_text != blank -%}
+            <a
+              href="{{ cell_d_cta_link | default: '#' }}"
+              class="bento-hero__cta {{ section.settings.cta_style }}"
+              {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- cell_d_cta_text -}}
+              {%- liquid
+                assign show_arrow = false
+                if section.settings.cta_style == 'button-secondary'
+                  assign show_arrow = settings.secondary_button_show_arrow
+                else
+                  assign show_arrow = settings.primary_button_show_arrow
+                endif
+              -%}
+              {%- if show_arrow -%}
+                <span class="svg-wrapper button-arrow" aria-hidden="true">
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                </span>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Navigation arrows — visible on mobile only via CSS {%- endcomment -%}
+        <button
+          class="bento-hero__arrow bento-hero__arrow--prev"
+          data-bento-prev="{{ section.id }}"
+          aria-label="Précédent"
+          disabled
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <button
+          class="bento-hero__arrow bento-hero__arrow--next"
+          data-bento-next="{{ section.id }}"
+          aria-label="Suivant"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
       </div>
 
-    </div>
+    {%- else -%}
+
+      {%- comment -%}
+        ── Non-carousel layout (carousel_on_mobile = false) ────────────────
+        Original structure: bento-hero__secondary wrapper (display:contents)
+        keeps A and B as direct grid children on all breakpoints.
+      {%- endcomment -%}
+
+      <div class="bento-hero__grid">
+
+        <div class="bento-hero__secondary">
+
+          {%- comment -%} ── Cell A — Text card or image ───────────────────── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-a{% if cell_a_image != blank %} bento-hero__cell-a--image{% endif %}">
+            {%- if cell_a_image != blank -%}
+              {{
+                cell_a_image
+                | image_url: width: 800
+                | image_tag:
+                  class: 'bento-hero__fill-img',
+                  loading: 'lazy',
+                  widths: '400, 800',
+                  sizes: '(max-width: 749px) 100vw, 33vw',
+                  alt: cell_a_image.alt | default: ''
+              }}
+            {%- else -%}
+              <div class="bento-hero__cell-a-content">
+                {%- if cell_a_heading != blank -%}
+                  <h2 class="bento-hero__cell-a-heading">{{ cell_a_heading }}</h2>
+                {%- endif -%}
+                {%- if cell_a_text != blank -%}
+                  <p class="bento-hero__cell-a-text">{{ cell_a_text }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} ── Cell B — Photo ─────────────────────────────────── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-b">
+            {%- if cell_b_image != blank -%}
+              {{
+                cell_b_image
+                | image_url: width: 800
+                | image_tag:
+                  class: 'bento-hero__fill-img',
+                  loading: 'lazy',
+                  widths: '400, 800',
+                  sizes: '(max-width: 749px) 100vw, 33vw',
+                  alt: cell_b_image.alt | default: ''
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+            {%- endif -%}
+          </div>
+
+        </div>{%- comment -%} /bento-hero__secondary {%- endcomment -%}
+
+        {%- comment -%} ── Cell C — Promo panel or image ───────────────────── {%- endcomment -%}
+        <div class="bento-hero__cell bento-hero__cell-c{% if cell_c_image != blank %} bento-hero__cell-c--image{% endif %}">
+          {%- if cell_c_image != blank -%}
+            {{
+              cell_c_image
+              | image_url: width: 800
+              | image_tag:
+                class: 'bento-hero__fill-img',
+                loading: 'lazy',
+                widths: '400, 800',
+                sizes: '(max-width: 749px) 100vw, 33vw',
+                alt: cell_c_image.alt | default: ''
+            }}
+          {%- else -%}
+            <div class="bento-hero__cell-c-text">
+              {%- if cell_c_heading != blank -%}
+                <h3 class="bento-hero__cell-c-heading">{{ cell_c_heading }}</h3>
+              {%- endif -%}
+              {%- if cell_c_subtext != blank -%}
+                <p class="bento-hero__cell-c-subtext">{{ cell_c_subtext }}</p>
+              {%- endif -%}
+            </div>
+
+            <div class="bento-hero__cell-c-product">
+              {%- if cell_c_product_image != blank -%}
+                {{
+                  cell_c_product_image
+                  | image_url: width: 600
+                  | image_tag:
+                    class: 'bento-hero__cell-c-product-img',
+                    loading: 'lazy',
+                    widths: '300, 600',
+                    sizes: '(max-width: 749px) 80vw, 25vw',
+                    alt: cell_c_product_image.alt | default: ''
+                }}
+              {%- else -%}
+                {{ 'product-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+              {%- endif -%}
+            </div>
+
+            {%- if cell_c_price != blank -%}
+              <div class="bento-hero__price-badge">{{ cell_c_price }}</div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} ── Cell D — Wide photo + CTA ───────────────────────── {%- endcomment -%}
+        <div class="bento-hero__cell bento-hero__cell-d">
+          {%- if cell_d_image != blank -%}
+            {{
+              cell_d_image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'bento-hero__fill-img',
+                loading: 'lazy',
+                widths: '600, 900, 1200',
+                sizes: '(max-width: 749px) 100vw, 66vw',
+                alt: cell_d_image.alt | default: ''
+            }}
+          {%- else -%}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+          {%- endif -%}
+
+          <div class="bento-hero__cell-d-overlay" aria-hidden="true"></div>
+
+          {%- if cell_d_cta_text != blank -%}
+            <a
+              href="{{ cell_d_cta_link | default: '#' }}"
+              class="bento-hero__cta {{ section.settings.cta_style }}"
+              {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- cell_d_cta_text -}}
+              {%- liquid
+                assign show_arrow = false
+                if section.settings.cta_style == 'button-secondary'
+                  assign show_arrow = settings.secondary_button_show_arrow
+                else
+                  assign show_arrow = settings.primary_button_show_arrow
+                endif
+              -%}
+              {%- if show_arrow -%}
+                <span class="svg-wrapper button-arrow" aria-hidden="true">
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                </span>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        </div>
+
+      </div>
+
+    {%- endif -%}
   </div>
 </div>
 
@@ -346,12 +524,31 @@
 }
 
 /*
-  ── Secondary wrapper (A + B) ────────────────────────────────
-  display:contents on desktop/tablet: the wrapper is invisible to
-  the grid algorithm — A and B act as direct grid children.
+  ── Secondary wrapper (A + B, non-carousel mode) ─────────────
+  display:contents on all breakpoints: the wrapper is invisible
+  to the grid algorithm — A and B act as direct grid children.
 */
 .bento-hero__secondary {
   display: contents;
+}
+
+/*
+  ── Carousel track (carousel_on_mobile = true) ───────────────
+  Desktop/tablet: display:contents makes the track invisible to
+  the grid — C, A, B each land on their grid-column/grid-row as
+  if the track element does not exist.
+*/
+.bento-hero__carousel-track {
+  display: contents;
+}
+
+/*
+  ── Arrow buttons — hidden on desktop, shown on mobile ───────
+  position:absolute is relative to .bento-hero__grid--carousel-mobile
+  which gets position:relative on mobile (see below).
+*/
+.bento-hero__arrow {
+  display: none;
 }
 
 /* ── Tablet (≤ 989px) ───────────────────────────────────────── */
@@ -359,25 +556,22 @@
   .bento-hero__grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    /* Fixatech: override {% style %} height/aspect-ratio so stacked cells aren't clipped */
+    /* Override {% style %} height/aspect-ratio so stacked cells aren't clipped */
     aspect-ratio: auto !important;
     height: auto !important;
   }
 
-  /* Fixatech: Figma tablet — C (promo) on top full-width, A+B side by side, D hidden */
+  /* Figma tablet — C on top full-width, A+B side by side, D hidden */
   .bento-hero__cell-c { grid-column: 1 / -1; grid-row: 1; min-height: 300px; }
   .bento-hero__cell-a { grid-column: 1; grid-row: 2; min-height: 150px; }
   .bento-hero__cell-b { grid-column: 2; grid-row: 2; min-height: 150px; }
   .bento-hero__cell-d { display: none; }
 }
 
-/* ── Mobile (≤ 767px) — matches Horizon bento-box breakpoint ──────── */
-/* Fixatech: Figma mobile layout:
-   Row 1: Cell C (promo) — full width, dominant
-   Row 2: Cells A + B — side by side, short strip (default)
-          or horizontal carousel (carousel_on_mobile = true)
-   Cell D: hidden on mobile */
+/* ── Mobile (≤ 767px) ───────────────────────────────────────── */
 @media screen and (max-width: 767px) {
+
+  /* ── Non-carousel mode: C full-width row 1, A+B side-by-side row 2 ── */
   .bento-hero__grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
@@ -389,7 +583,6 @@
   .bento-hero__cell-c--image { padding: 0; }
   .bento-hero__cell-c-heading { font-size: 20px; }
 
-  /* Without carousel: A + B sit side-by-side as before (display:contents keeps grid placement) */
   .bento-hero__cell-a { grid-column: 1; grid-row: 2; min-height: 120px; padding: 20px 16px; }
   .bento-hero__cell-a--image { padding: 0; }
   .bento-hero__cell-a-heading { font-size: 18px; }
@@ -406,50 +599,178 @@
     right: 16px;
   }
 
-  /*
-    ── Carousel mode (carousel_on_mobile = true) ───────────────
-    The wrapper becomes a real block element spanning the full
-    grid width (row 2, cols 1/-1). A and B lose their grid
-    placement and become horizontal scroll-snap slides inside it.
+  /* ── Carousel mode (carousel_on_mobile = true) ──────────────
+     .bento-hero__grid--carousel-mobile collapses to a single
+     column with the track as a horizontal scroll container.
+     display:contents on the track is overridden to display:flex.
+     All three cells (C, A, B) become flex slides.
+     Cell D stays display:none (inherited from rule above).
   */
-  .bento-hero__secondary--carousel {
-    /* display:flex overrides the base display:contents rule */
-    display: flex;
-    grid-column: 1 / -1;
-    grid-row: 2;
-    flex-direction: row;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    gap: 8px;
-    /* hide scrollbar visually while keeping it functional */
-    scrollbar-width: none;
+  .bento-hero__grid--carousel-mobile {
+    /* Single-column grid: track fills row 1, D (hidden) in row 2 */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    position: relative;  /* anchor for absolute-positioned arrows */
+    overflow: hidden;
+    height: auto !important;
+    aspect-ratio: auto !important;
   }
 
-  .bento-hero__secondary--carousel::-webkit-scrollbar {
+  /* Track: override display:contents → becomes the scroll container */
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track {
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+  }
+
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track::-webkit-scrollbar {
     display: none;
   }
 
-  .bento-hero__secondary--carousel .bento-hero__cell-a,
-  .bento-hero__secondary--carousel .bento-hero__cell-b {
-    /* override grid-column/grid-row — not grid children in carousel mode */
-    grid-column: unset;
-    grid-row: unset;
-    /* each slide shows roughly 80% of the viewport, hinting at the next */
-    flex: 0 0 78vw;
-    min-height: 160px;
+  /* Each cell inside the track becomes a scroll-snap slide */
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell {
+    /* Clear all grid placement — not grid children in carousel mode */
+    grid-column: unset !important;
+    grid-row: unset !important;
+    /* Slide width: 85vw shows a peek of the next slide */
+    flex: 0 0 85vw;
+    min-width: 0;
+    min-height: 240px;
     scroll-snap-align: start;
+    height: auto;
   }
 
-  .bento-hero__secondary--carousel .bento-hero__cell-a {
+  /* Restore cell-specific padding overrides stripped by the rule above */
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell-c {
+    padding: 24px 16px;
+  }
+
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell-c--image {
+    padding: 0;
+  }
+
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell-a {
     padding: 20px 16px;
   }
 
-  .bento-hero__secondary--carousel .bento-hero__cell-a--image {
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell-a--image {
     padding: 0;
+  }
+
+  /* Arrow buttons — shown on mobile only */
+  .bento-hero__arrow {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background 0.2s ease;
+  }
+
+  .bento-hero__arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .bento-hero__arrow:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .bento-hero__arrow:focus-visible {
+    outline: 2px solid #FFC600;
+    outline-offset: 2px;
+  }
+
+  .bento-hero__arrow--prev {
+    left: 8px;
+  }
+
+  .bento-hero__arrow--next {
+    right: 8px;
+  }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track {
+    scroll-behavior: auto;
   }
 }
 {% endstylesheet %}
+
+<script>
+(function () {
+  /* Bento hero carousel controller — runs after DOM is ready */
+  function initBentoCarousels() {
+    document.querySelectorAll('[data-bento-next]').forEach(function (nextBtn) {
+      var sectionId = nextBtn.getAttribute('data-bento-next');
+      var prevBtn   = document.querySelector('[data-bento-prev="' + sectionId + '"]');
+      var track     = document.getElementById('bento-track-' + sectionId);
+
+      if (!track || !prevBtn) return;
+
+      /* ── Helpers ───────────────────────────────────────────── */
+      function firstSlide() {
+        return track.querySelector(':scope > .bento-hero__cell');
+      }
+
+      function slideWidth() {
+        var slide = firstSlide();
+        if (!slide) return 0;
+        /* offsetWidth + gap (8px) */
+        return slide.offsetWidth + 8;
+      }
+
+      function updateArrows() {
+        prevBtn.disabled = track.scrollLeft <= 4;
+        nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+      }
+
+      /* ── Arrow click handlers ──────────────────────────────── */
+      nextBtn.addEventListener('click', function () {
+        track.scrollBy({ left: slideWidth(), behavior: 'smooth' });
+      });
+
+      prevBtn.addEventListener('click', function () {
+        track.scrollBy({ left: -slideWidth(), behavior: 'smooth' });
+      });
+
+      /* ── Sync arrow state on scroll ───────────────────────── */
+      var scrollTimer;
+      track.addEventListener('scroll', function () {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateArrows, 80);
+      }, { passive: true });
+
+      /* ── Re-evaluate on resize (orientation change, etc.) ─── */
+      window.addEventListener('resize', updateArrows);
+
+      /* ── Initial state ─────────────────────────────────────── */
+      updateArrows();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBentoCarousels);
+  } else {
+    initBentoCarousels();
+  }
+})();
+</script>
 
 {% schema %}
 {

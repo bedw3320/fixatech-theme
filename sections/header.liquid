@@ -328,6 +328,7 @@
   style="
     --color-scheme-top-row: rgba({{ section.settings.color_scheme_top.settings.background.rgba }});
     --color-scheme-bottom-row: rgba({{ section.settings.color_scheme_bottom.settings.background.rgba }});
+    --header-search-dropdown-bg: {{ section.settings.search_dropdown_bg }};
     {%- comment -%} Fixatech: utilities locked to icon mode — text-mode CSS vars removed {%- endcomment -%}
     {%- comment -%} Search border vars moved to {% style %} block below {%- endcomment -%}
   "
@@ -1697,6 +1698,12 @@
       ],
       "default": "default",
       "visible_if": "{{ section.settings.enable_transparent_header_collection }}"
+    },
+    {
+      "type": "color",
+      "id": "search_dropdown_bg",
+      "label": "Search dropdown background",
+      "default": "#141414"
     }
   ],
   "presets": []
