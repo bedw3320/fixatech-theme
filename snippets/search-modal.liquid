@@ -211,7 +211,10 @@
     position: relative;
     margin-inline: auto;
     align-items: center;
-    background-color: var(--color-background);
+    /* D9: semi-transparent background with frosted-glass blur */
+    background-color: rgba(20, 20, 20, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: var(--layer-heightened);
   }
 
