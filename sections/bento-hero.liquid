@@ -147,10 +147,8 @@
             {%- endif -%}
           </div>
 
-        </div>{%- comment -%} /bento-hero__carousel-track {%- endcomment -%}
-
-        {%- comment -%} ── Cell D — Wide photo + CTA (direct grid child) ─── {%- endcomment -%}
-        <div class="bento-hero__cell bento-hero__cell-d">
+          {%- comment -%} ── Cell D — Wide photo + CTA (4th slide on mobile) ─── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-d">
           {%- if cell_d_image != blank -%}
             {{
               cell_d_image
@@ -191,6 +189,8 @@
             </a>
           {%- endif -%}
         </div>
+
+        </div>{%- comment -%} /bento-hero__carousel-track {%- endcomment -%}
 
         {%- comment -%} Navigation arrows — visible on mobile only via CSS {%- endcomment -%}
         <button
@@ -603,8 +603,7 @@
      .bento-hero__grid--carousel-mobile collapses to a single
      column with the track as a horizontal scroll container.
      display:contents on the track is overridden to display:flex.
-     All three cells (C, A, B) become flex slides.
-     Cell D stays display:none (inherited from rule above).
+     All four cells (C, A, B, D) become flex slides.
   */
   .bento-hero__grid--carousel-mobile {
     /* Single-column grid: track fills row 1, D (hidden) in row 2 */
@@ -659,6 +658,12 @@
   }
 
   .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell-a--image {
+    padding: 0;
+  }
+
+  /* Cell D: override the global mobile display:none when inside the carousel track */
+  .bento-hero__grid--carousel-mobile .bento-hero__carousel-track > .bento-hero__cell-d {
+    display: block;
     padding: 0;
   }
 
@@ -959,7 +964,7 @@
       "type": "checkbox",
       "id": "carousel_on_mobile",
       "label": "Carousel on mobile",
-      "info": "On mobile, boxes A and B scroll horizontally instead of stacking. Box C always stays as the full-width header.",
+      "info": "On mobile, all boxes scroll horizontally as slides (C, A, B, D). Box C is always the first slide.",
       "default": true
     },
     {
