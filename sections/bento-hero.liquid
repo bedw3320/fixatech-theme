@@ -43,6 +43,15 @@
   <div>
     <div class="bento-hero__grid">
 
+      {%- comment -%}
+        Cells A + B are wrapped in bento-hero__secondary.
+        On desktop/tablet: display:contents makes the wrapper invisible to the
+        grid algorithm, so A and B participate in the grid directly as before.
+        On mobile with carousel_on_mobile: the wrapper becomes a horizontal
+        scroll track (display:flex, overflow-x:scroll, scroll-snap-type:x).
+      {%- endcomment -%}
+      <div class="bento-hero__secondary{% if section.settings.carousel_on_mobile %} bento-hero__secondary--carousel{% endif %}">
+
       {%- comment -%} ── Cell A — Text card or image ───────────────────── {%- endcomment -%}
       <div class="bento-hero__cell bento-hero__cell-a{% if cell_a_image != blank %} bento-hero__cell-a--image{% endif %}">
         {%- if cell_a_image != blank -%}
@@ -85,6 +94,8 @@
           {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
         {%- endif -%}
       </div>
+
+      </div>{%- comment -%} /bento-hero__secondary {%- endcomment -%}
 
       {%- comment -%} ── Cell C — Promo panel or image ───────────────────── {%- endcomment -%}
       <div class="bento-hero__cell bento-hero__cell-c{% if cell_c_image != blank %} bento-hero__cell-c--image{% endif %}">
@@ -334,6 +345,15 @@
   fill: #343434;
 }
 
+/*
+  ── Secondary wrapper (A + B) ────────────────────────────────
+  display:contents on desktop/tablet: the wrapper is invisible to
+  the grid algorithm — A and B act as direct grid children.
+*/
+.bento-hero__secondary {
+  display: contents;
+}
+
 /* ── Tablet (≤ 989px) ───────────────────────────────────────── */
 @media screen and (max-width: 989px) {
   .bento-hero__grid {
@@ -354,7 +374,8 @@
 /* ── Mobile (≤ 767px) — matches Horizon bento-box breakpoint ──────── */
 /* Fixatech: Figma mobile layout:
    Row 1: Cell C (promo) — full width, dominant
-   Row 2: Cells A + B — side by side, short strip
+   Row 2: Cells A + B — side by side, short strip (default)
+          or horizontal carousel (carousel_on_mobile = true)
    Cell D: hidden on mobile */
 @media screen and (max-width: 767px) {
   .bento-hero__grid {
@@ -368,6 +389,7 @@
   .bento-hero__cell-c--image { padding: 0; }
   .bento-hero__cell-c-heading { font-size: 20px; }
 
+  /* Without carousel: A + B sit side-by-side as before (display:contents keeps grid placement) */
   .bento-hero__cell-a { grid-column: 1; grid-row: 2; min-height: 120px; padding: 20px 16px; }
   .bento-hero__cell-a--image { padding: 0; }
   .bento-hero__cell-a-heading { font-size: 18px; }
@@ -382,6 +404,49 @@
     font-size: 13px;
     bottom: 16px;
     right: 16px;
+  }
+
+  /*
+    ── Carousel mode (carousel_on_mobile = true) ───────────────
+    The wrapper becomes a real block element spanning the full
+    grid width (row 2, cols 1/-1). A and B lose their grid
+    placement and become horizontal scroll-snap slides inside it.
+  */
+  .bento-hero__secondary--carousel {
+    /* display:flex overrides the base display:contents rule */
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 8px;
+    /* hide scrollbar visually while keeping it functional */
+    scrollbar-width: none;
+  }
+
+  .bento-hero__secondary--carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bento-hero__secondary--carousel .bento-hero__cell-a,
+  .bento-hero__secondary--carousel .bento-hero__cell-b {
+    /* override grid-column/grid-row — not grid children in carousel mode */
+    grid-column: unset;
+    grid-row: unset;
+    /* each slide shows roughly 80% of the viewport, hinting at the next */
+    flex: 0 0 78vw;
+    min-height: 160px;
+    scroll-snap-align: start;
+  }
+
+  .bento-hero__secondary--carousel .bento-hero__cell-a {
+    padding: 20px 16px;
+  }
+
+  .bento-hero__secondary--carousel .bento-hero__cell-a--image {
+    padding: 0;
   }
 }
 {% endstylesheet %}
@@ -568,6 +633,13 @@
         { "value": "full-width", "label": "Full width" }
       ],
       "default": "page-width"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_on_mobile",
+      "label": "Carousel on mobile",
+      "info": "On mobile, boxes A and B scroll horizontally instead of stacking. Box C always stays as the full-width header.",
+      "default": true
     },
     {
       "type": "header",
