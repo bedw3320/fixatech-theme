@@ -798,7 +798,7 @@
       "name": "Featured collection",
       "settings": {
         "collection": "ponceuses",
-        "layout_type": "grid",
+        "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 4,
         "cta_enabled": true,
@@ -939,7 +939,7 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
+        "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
         "gap": 25,
         "section_width": "page-width",
