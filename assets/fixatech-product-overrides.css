@@ -1,5 +1,0 @@
-/* PDP media gallery — match product card object-fit treatment */
-.product-media-container :is(img, video) {
-  object-fit: contain;
-  background-color: #ffffff;
-}
