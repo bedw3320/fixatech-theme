@@ -12,7 +12,7 @@
 {% enddoc %}
 
 {%- liquid
-  assign show_vendor = show_vendor | default: false
+  assign show_vendor = show_vendor | default: true
   assign show_quantity = show_quantity | default: false
   assign card_class = class | default: ''
   assign featured_image = product.featured_image
@@ -164,20 +164,19 @@
     position: relative;
     width: 100%;
     aspect-ratio: 316 / 320;
-    background: #D9D9D9;
+    background: #ffffff; /* B6: white so contain letterboxing is clean */
     overflow: hidden;
   }
 
   .fixatech-card__img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    object-fit: contain; /* B6: contain so full image shows without cropping */
+    background-color: #ffffff; /* B6: white fill behind transparent/padded images */
+    /* A4: hover zoom removed */
   }
 
-  .fixatech-card:hover .fixatech-card__img {
-    transform: scale(1.05);
-  }
+  /* A4: no hover zoom on image */
 
   .fixatech-card__placeholder {
     width: 100%;
@@ -216,10 +215,10 @@
 
   .fixatech-card__title {
     font-family: var(--fixatech-font-body, 'Geist', sans-serif);
-    font-size: 16px;
+    font-size: 13px; /* A2: reduced from 16px so long titles fit in 2 lines */
     font-weight: var(--fixatech-font-weight-medium, 500);
     color: #000000;
-    line-height: 24px;
+    line-height: 20px;
     margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -430,8 +429,8 @@
     }
 
     .fixatech-card__title {
-      font-size: 14px;
-      line-height: 20px;
+      font-size: 11px; /* A2: reduced from 14px for mobile */
+      line-height: 17px;
     }
 
     .fixatech-card__sku {
@@ -455,15 +454,10 @@
 
   /* ─── Reduced Motion ───────────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
-    .fixatech-card__img,
     .fixatech-card__atc-btn,
     .fixatech-card__atc-icon,
     .fixatech-card__atc-text {
       transition: none;
-    }
-
-    .fixatech-card:hover .fixatech-card__img {
-      transform: none;
     }
   }
 {% endstylesheet %}
