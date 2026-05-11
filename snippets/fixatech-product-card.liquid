@@ -57,8 +57,8 @@
       <div class="fixatech-card__info">
         <h3 class="fixatech-card__title">{{ product.title }}</h3>
 
-        {%- if show_vendor and product.variants.first.sku != blank -%}
-          <p class="fixatech-card__sku">{{ product.variants.first.sku }}</p>
+        {%- if show_vendor and product.vendor != blank -%}
+          <p class="fixatech-card__sku">{{ product.vendor }}</p>
         {%- endif -%}
 
         {%- comment -%} Stock status {%- endcomment -%}
