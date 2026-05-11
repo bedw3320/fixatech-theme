@@ -214,14 +214,19 @@ header-component.header {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
+  position: fixed;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 66vw;
   max-height: 70vh;
   z-index: 101;
   box-shadow: 0 8px 32px rgb(0 0 0 / 0.25);
   border-radius: 12px;
   border: 1px solid rgb(255 255 255 / 0.1);
   overflow: hidden;
-  /* D9: schema-controlled background with frosted-glass blur */
-  background-color: var(--header-search-dropdown-bg, var(--color-background));
+  /* D9: semi-transparent background with frosted-glass blur */
+  background-color: rgba(20, 20, 20, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
