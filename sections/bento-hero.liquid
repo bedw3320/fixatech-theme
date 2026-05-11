@@ -55,7 +55,7 @@
 
       <div class="bento-hero__grid bento-hero__grid--carousel-mobile">
 
-        {%- comment -%} Carousel track: wraps C, A, B {%- endcomment -%}
+        {%- comment -%} Carousel track: wraps C, D, A, B {%- endcomment -%}
         <div class="bento-hero__carousel-track" id="bento-track-{{ section.id }}">
 
           {%- comment -%} ── Cell C — Promo panel (FIRST on mobile) ──────── {%- endcomment -%}
@@ -104,6 +104,49 @@
             {%- endif -%}
           </div>
 
+          {%- comment -%} ── Cell D — Wide photo + CTA (2nd slide on mobile) ─── {%- endcomment -%}
+          <div class="bento-hero__cell bento-hero__cell-d">
+          {%- if cell_d_image != blank -%}
+            {{
+              cell_d_image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'bento-hero__fill-img',
+                loading: 'lazy',
+                widths: '600, 900, 1200',
+                sizes: '(max-width: 749px) 100vw, 66vw',
+                alt: cell_d_image.alt | default: ''
+            }}
+          {%- else -%}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
+          {%- endif -%}
+
+          <div class="bento-hero__cell-d-overlay" aria-hidden="true"></div>
+
+          {%- if cell_d_cta_text != blank -%}
+            <a
+              href="{{ cell_d_cta_link | default: '#' }}"
+              class="bento-hero__cta {{ section.settings.cta_style }}"
+              {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
+            >
+              {{- cell_d_cta_text -}}
+              {%- liquid
+                assign show_arrow = false
+                if section.settings.cta_style == 'button-secondary'
+                  assign show_arrow = settings.secondary_button_show_arrow
+                else
+                  assign show_arrow = settings.primary_button_show_arrow
+                endif
+              -%}
+              {%- if show_arrow -%}
+                <span class="svg-wrapper button-arrow" aria-hidden="true">
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                </span>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+          </div>
+
           {%- comment -%} ── Cell A — Text card or image ──────────────────── {%- endcomment -%}
           <div class="bento-hero__cell bento-hero__cell-a{% if cell_a_image != blank %} bento-hero__cell-a--image{% endif %}">
             {%- if cell_a_image != blank -%}
@@ -146,49 +189,6 @@
               {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
             {%- endif -%}
           </div>
-
-          {%- comment -%} ── Cell D — Wide photo + CTA (4th slide on mobile) ─── {%- endcomment -%}
-          <div class="bento-hero__cell bento-hero__cell-d">
-          {%- if cell_d_image != blank -%}
-            {{
-              cell_d_image
-              | image_url: width: 1200
-              | image_tag:
-                class: 'bento-hero__fill-img',
-                loading: 'lazy',
-                widths: '600, 900, 1200',
-                sizes: '(max-width: 749px) 100vw, 66vw',
-                alt: cell_d_image.alt | default: ''
-            }}
-          {%- else -%}
-            {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
-          {%- endif -%}
-
-          <div class="bento-hero__cell-d-overlay" aria-hidden="true"></div>
-
-          {%- if cell_d_cta_text != blank -%}
-            <a
-              href="{{ cell_d_cta_link | default: '#' }}"
-              class="bento-hero__cta {{ section.settings.cta_style }}"
-              {% if cell_d_cta_link == blank %}aria-disabled="true"{% endif %}
-            >
-              {{- cell_d_cta_text -}}
-              {%- liquid
-                assign show_arrow = false
-                if section.settings.cta_style == 'button-secondary'
-                  assign show_arrow = settings.secondary_button_show_arrow
-                else
-                  assign show_arrow = settings.primary_button_show_arrow
-                endif
-              -%}
-              {%- if show_arrow -%}
-                <span class="svg-wrapper button-arrow" aria-hidden="true">
-                  {{- 'icon-arrow.svg' | inline_asset_content -}}
-                </span>
-              {%- endif -%}
-            </a>
-          {%- endif -%}
-        </div>
 
         </div>{%- comment -%} /bento-hero__carousel-track {%- endcomment -%}
 
