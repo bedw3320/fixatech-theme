@@ -230,7 +230,7 @@ header-component.header {
 
 #header-component .search-action--inline .predictive-search-form__content-wrapper.is-open {
   visibility: visible;
-  opacity: 0.9;
+  opacity: 0.95;
   pointer-events: auto;
 }
 
@@ -247,7 +247,7 @@ header-component.header {
 
 @media screen and (min-width: 990px) {
   #header-component .search-action--inline .predictive-search-results__wrapper-products {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
