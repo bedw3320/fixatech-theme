@@ -85,7 +85,7 @@
       aria-label="{{ title }}"
     >
       {% liquid
-        assign limit = limit | default: 8
+        assign limit = limit | default: 10
       %}
       {% for product in products limit: limit %}
         <li
