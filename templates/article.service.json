@@ -544,7 +544,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Nous fabriquons des articles plus performants et plus durables. Nos produits résolvent de vrais problèmes avec un design épuré et des matériaux honnêtes.</p>",
+                    "text": "<p>Réparations conformes <br/>aux normes de la CNESST.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
