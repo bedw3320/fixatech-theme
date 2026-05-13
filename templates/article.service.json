@@ -159,7 +159,7 @@
             "custom_height": 75,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "background_media": "none",
+            "background_media": "image",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
