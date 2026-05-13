@@ -16,10 +16,10 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>L'EXPERT EN RÉPARATION D'OUTILS À QUÉBEC</h2>",
+            "text": "<h2>L'EXPERT EN RÉPARATION <br/>D'OUTILS À QUÉBEC</h2>",
             "width": "fit-content",
             "max_width": "narrow",
-            "alignment": "left",
+            "alignment": "center",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
