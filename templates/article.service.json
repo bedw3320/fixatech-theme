@@ -628,7 +628,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Nouveautés</p>",
+                    "text": "<p>Garantie <br/>totale</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
