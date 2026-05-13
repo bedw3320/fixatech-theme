@@ -6,8 +6,7 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign variant = product_resource.selected_or_first_available_variant | default: product_resource.variants.first
-  assign barcode = variant.barcode
+  assign barcode = product_resource.metafields.custom.manufacturer_part_number
 -%}
 
 <div ref="barcodeContainer">
