@@ -5,9 +5,3 @@
   object-fit: contain;
   background-color: #ffffff;
 }
-
-/* PDP: hide "Épuisé" sold-out state — show nothing when out of stock */
-[data-template="product"] .product-form-buttons:has(.add-to-cart-button:disabled),
-[data-template="product"] product-inventory:has(.product-inventory__icon-out_of_stock) {
-  display: none;
-}
