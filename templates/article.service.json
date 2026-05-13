@@ -738,7 +738,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Nouveautés</p>",
+                    "text": "<p>Inventaire massif</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
