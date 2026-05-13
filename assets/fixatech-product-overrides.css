@@ -3,3 +3,8 @@
   object-fit: contain;
   background-color: #ffffff;
 }
+
+/* Collection product cards: hide out-of-stock inventory indicator */
+.product-grid__card product-inventory:has(.product-inventory__icon-out_of_stock) {
+  display: none;
+}
