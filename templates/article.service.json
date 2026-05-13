@@ -518,7 +518,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Nouveautés</p>",
+                    "text": "<p>Expertise <br/>certifiée</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
