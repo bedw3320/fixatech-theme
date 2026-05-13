@@ -373,7 +373,7 @@
           "settings": {
             "heading": "Ressources",
             "content_source": "metafield",
-            "metafield_key": "custom.product_documentation"
+            "metafield_key": "custom.product_documents"
           },
           "blocks": {}
         }
