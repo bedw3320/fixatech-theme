@@ -115,6 +115,7 @@
         "section_height": "custom",
         "section_height_custom": 70,
         "section_width": "page-width",
+        "carousel_on_mobile": true,
         "padding-block-start": 12,
         "padding-block-end": 48
       }
@@ -421,7 +422,7 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 48
           },
           "blocks": {
             "text_nYj3Ln": {
@@ -547,7 +548,7 @@
           "dewalt",
           "3m"
         ],
-        "layout_type": "grid",
+        "layout_type": "carousel",
         "carousel_on_mobile": true,
         "columns": 4,
         "mobile_columns": "2",
