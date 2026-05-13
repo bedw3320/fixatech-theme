@@ -371,7 +371,7 @@
         "tab_resources": {
           "type": "_fixatech-tab",
           "settings": {
-            "heading": "Ressources",
+            "heading": "Documents",
             "content_source": "metafield",
             "metafield_key": "custom.product_documents"
           },
