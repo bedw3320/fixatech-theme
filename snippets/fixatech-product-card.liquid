@@ -61,16 +61,13 @@
           <p class="fixatech-card__sku">{{ product.vendor }}</p>
         {%- endif -%}
 
-        {%- comment -%} Stock status {%- endcomment -%}
-        <div class="fixatech-card__stock">
-          {%- if available -%}
+        {%- comment -%} Stock status — only show indicator when in stock {%- endcomment -%}
+        {%- if available -%}
+          <div class="fixatech-card__stock">
             <span class="fixatech-card__stock-dot fixatech-card__stock-dot--in" aria-hidden="true"></span>
             <span class="fixatech-card__stock-text">{{ 'products.card.in_stock' | t | default: 'En stock' }}</span>
-          {%- else -%}
-            <span class="fixatech-card__stock-dot fixatech-card__stock-dot--out" aria-hidden="true"></span>
-            <span class="fixatech-card__stock-text">{{ 'products.card.out_of_stock' | t | default: 'Rupture de stock' }}</span>
-          {%- endif -%}
-        </div>
+          </div>
+        {%- endif -%}
       </div>
 
       {%- comment -%} Pricing {%- endcomment -%}

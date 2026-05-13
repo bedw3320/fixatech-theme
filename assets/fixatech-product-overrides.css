@@ -1,0 +1,5 @@
+/* PDP media gallery — white background + contain for non-square product images */
+.product-media-container :is(img, video) {
+  object-fit: contain;
+  background-color: #ffffff;
+}
