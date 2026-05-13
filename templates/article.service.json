@@ -139,6 +139,21 @@
     "section": {
       "type": "main-blog-post",
       "blocks": {
+        "button_FaxQ7R": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Acheter maintenant",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        },
         "blog-post-title": {
           "type": "text",
           "name": "Title",
@@ -212,6 +227,9 @@
           "blocks": {}
         }
       },
+      "block_order": [
+        "button_FaxQ7R"
+      ],
       "settings": {
         "content_direction": "column",
         "gap": 32,
