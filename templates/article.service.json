@@ -953,6 +953,7 @@
       "block_order": [
         "text_TRLj7M"
       ],
+      "disabled": true,
       "name": "t:names.rich_text_section",
       "settings": {
         "content_direction": "column",
