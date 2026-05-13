@@ -411,6 +411,18 @@
           },
           "blocks": {}
         },
+        "divider_i6EmYP": {
+          "type": "_divider",
+          "name": "t:names.divider",
+          "settings": {
+            "thickness": 1,
+            "corner_radius": "square",
+            "width_percent": 100,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        },
         "group_wTY9iD": {
           "type": "group",
           "name": "t:names.group",
@@ -791,6 +803,7 @@
       },
       "block_order": [
         "text_9r4DV3",
+        "divider_i6EmYP",
         "group_wTY9iD"
       ],
       "name": "Process",
