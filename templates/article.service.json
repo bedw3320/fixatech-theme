@@ -250,7 +250,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Nouveautés</h2>",
+                "text": "<h2>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -302,7 +302,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Nous fabriquons des articles plus performants et plus durables. Nos produits résolvent de vrais problèmes avec un design épuré et des matériaux honnêtes.</p>",
+                "text": "<p>Complétez les informations ci-dessous, réglez les frais d'administration de 24,99 $ ainsi que les frais de transport et recevez instantanément votre étiquette d'expédition par courriel. Il ne vous reste plus qu'à déposer votre colis dans le point de service de votre choix (Postes Canada, Purolator, etc.). Dès que votre colis est en route, notre équipe technique est alertée et se tient prête pour le diagnostic. Une fois la réparation effectuée, votre outil vous est réexpédié directement à votre adresse. (notez que les frais de retour sont à votre charge.)</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -330,81 +330,11 @@
             "text_VPUqER",
             "text_AXUfzF"
           ]
-        },
-        "text_A4WbVb": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2>UNE PRISE EN CHARGE SIMPLE, PARTOUT AU QUÉBEC.</h2>",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_xxbPrY": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>Nous fabriquons des articles plus performants et plus durables. Nos produits résolvent de vrais problèmes avec un design épuré et des matériaux honnêtes.</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_dW9MCe": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Acheter maintenant",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
         }
       },
       "block_order": [
         "group_X3DmyC",
-        "group_cbga6T",
-        "text_A4WbVb",
-        "text_xxbPrY",
-        "button_dW9MCe"
+        "group_cbga6T"
       ],
       "name": "t:names.rich_text_section",
       "settings": {
