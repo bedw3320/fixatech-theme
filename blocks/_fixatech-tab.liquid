@@ -54,15 +54,29 @@
             <div class="fixatech-product-tabs__files">
               {% if mf.type == 'list.file_reference' %}
                 {% for file in mf.value %}
+                  {%- liquid
+                    assign file_label = file.alt
+                    if file_label == blank
+                      assign raw_name = file.url | split: '/' | last | split: '?' | first | url_decode
+                      assign file_label = raw_name | remove: '.pdf' | remove: '.PDF'
+                    endif
+                  -%}
                   <a href="{{ file.url }}" target="_blank" class="fixatech-product-tabs__file-link">
                     <span class="svg-wrapper">{{- 'icon-external.svg' | inline_asset_content -}}</span>
-                    {{ file.alt | default: file.filename }}
+                    {{ file_label }}
                   </a>
                 {% endfor %}
               {% else %}
+                {%- liquid
+                  assign file_label = mf.value.alt
+                  if file_label == blank
+                    assign raw_name = mf.value.url | split: '/' | last | split: '?' | first | url_decode
+                    assign file_label = raw_name | remove: '.pdf' | remove: '.PDF'
+                  endif
+                -%}
                 <a href="{{ mf.value.url }}" target="_blank" class="fixatech-product-tabs__file-link">
                   <span class="svg-wrapper">{{- 'icon-external.svg' | inline_asset_content -}}</span>
-                  {{ mf.value.alt | default: mf.value.filename }}
+                  {{ file_label }}
                 </a>
               {% endif %}
             </div>
