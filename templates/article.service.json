@@ -518,7 +518,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Expertise <br/>certifiée</p>",
+                    "text": "<p>Expertise certifiée</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -544,7 +544,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Réparations conformes <br/>aux normes de la CNESST.</p>",
+                    "text": "<p>Réparations conformes aux normes de la CNESST.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -628,7 +628,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Garantie <br/>totale</p>",
+                    "text": "<p>Garantie totale</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -654,7 +654,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>30 jours sur les pièces <br/>et la main-d'œuvre.</p>",
+                    "text": "<p>30 jours sur les pièces et la main-d'œuvre.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -764,7 +764,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Nous fabriquons des articles plus performants et plus durables. Nos produits résolvent de vrais problèmes avec un design épuré et des matériaux honnêtes.</p>",
+                    "text": "<p>Large stock de pièces pour un retour rapide sur vos chantiers.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1093,6 +1093,7 @@
           "block_order": []
         }
       },
+      "disabled": true,
       "name": "t:names.blog_posts_grid",
       "settings": {
         "blog": "decouvrez-nos-services",
@@ -1290,6 +1291,7 @@
         "faq_heading",
         "faq_accordion"
       ],
+      "disabled": true,
       "name": "t:names.faq_section",
       "settings": {
         "content_direction": "column",
@@ -1404,6 +1406,7 @@
         "text_CBQJDc",
         "email_signup_L8FFJx"
       ],
+      "disabled": true,
       "name": "t:names.email_signup",
       "settings": {
         "content_direction": "column",
