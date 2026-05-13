@@ -1,5 +1,7 @@
-/* PDP media gallery — white background + contain for non-square product images */
-.product-media-container :is(img, video) {
+/* PDP media gallery — white background + contain for non-square product images.
+   .media-fit-cover added to specificity to beat the inline <style> block in
+   product-media-gallery-content.liquid that sets object-fit: cover */
+.product-media-container.media-fit-cover :is(img, video) {
   object-fit: contain;
   background-color: #ffffff;
 }
