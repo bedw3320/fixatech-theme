@@ -57,8 +57,7 @@
                   {%- liquid
                     assign file_label = file.alt
                     if file_label == blank
-                      assign raw_name = file.url | split: '/' | last | split: '?' | first | url_decode
-                      assign file_label = raw_name | remove: '.pdf' | remove: '.PDF'
+                      assign file_label = file.url | split: '/' | last | split: '?' | first | url_decode
                     endif
                   -%}
                   <a href="{{ file.url }}" target="_blank" class="fixatech-product-tabs__file-link">
@@ -70,8 +69,7 @@
                 {%- liquid
                   assign file_label = mf.value.alt
                   if file_label == blank
-                    assign raw_name = mf.value.url | split: '/' | last | split: '?' | first | url_decode
-                    assign file_label = raw_name | remove: '.pdf' | remove: '.PDF'
+                    assign file_label = mf.value.url | split: '/' | last | split: '?' | first | url_decode
                   endif
                 -%}
                 <a href="{{ mf.value.url }}" target="_blank" class="fixatech-product-tabs__file-link">
