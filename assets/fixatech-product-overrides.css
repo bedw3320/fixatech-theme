@@ -10,3 +10,8 @@
 .product-grid__card product-inventory:has(.product-inventory__icon-out_of_stock) {
   display: none;
 }
+
+/* Collection product cards: hide "Épuisé" sold-out button */
+product-card .product-form-buttons:has(.add-to-cart-button:disabled) {
+  display: none;
+}
