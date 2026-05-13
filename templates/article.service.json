@@ -251,7 +251,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</h2>",
+                "text": "<h2>Une prise en charge simple, <br/>partout au Québec.</h2>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
