@@ -328,7 +328,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Acheter maintenant",
+                "label": "Remplir le formulaire",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
