@@ -353,8 +353,8 @@
       "name": "Featured collection",
       "settings": {
         "collection": "tournevis-chocs",
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
+        "layout_type": "grid",
+        "carousel_on_mobile": true,
         "max_products": 4,
         "cta_enabled": true,
         "cta_first_position": 4,
