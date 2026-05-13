@@ -277,7 +277,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</strong></p>",
+                "text": "<p><strong>Service rapide, certifié CNESST et garanti 30 jours. <br/>Envoyez-nous votre outil, on s'occupe du reste.</strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
