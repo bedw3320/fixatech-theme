@@ -380,6 +380,9 @@
           },
           "remove_item": {
             "many": "Remove the items"
+          },
+          "remove_item_only": {
+            "many": "Remove the items"
           }
         },
         "pickup_items_count": {
