@@ -108,7 +108,7 @@
         "cell_c_text_color": "#141414",
         "cell_d_image": "shopify://shop_images/lawn-mower-sitting-on-grass.jpg",
         "cell_d_cta_text": "PRODUITS SAISONNIERS",
-        "cell_d_cta_link": "shopify://collections/all",
+        "cell_d_cta_link": "shopify://collections/saisonnier",
         "cta_style": "button-secondary",
         "cell_c_width_pct": 35,
         "cell_d_height_pct": 60,
