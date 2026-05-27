@@ -346,7 +346,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>OUVERT DE 7H00 À 17H00, DU LUNDI AU VENDREDI</p>",
+                "text": "<p>OUVERT de 7H00 à 17H00                           Du Lundi au Vendredi</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -372,7 +372,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>1010, route des Rivières, local 100 Lévis (Québec)  G7A 2V1</p>",
+                "text": "<p>1010, route des Rivières, local 100           Lévis (Québec)  G7A 2V1</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
