@@ -251,7 +251,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Une prise en charge simple, <br/>partout au Québec.</h2>",
+                "text": "<h3>Une prise en charge simple, <br/>partout au Québec.</h3>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -277,7 +277,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</strong></p>",
+                "text": "<p><em><strong>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</strong></em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -303,7 +303,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>1) Complétez les <strong>informations </strong>ci-dessous.</p><p>2) Réglez les <strong>frais</strong> d'administration de 24,99 $ ainsi que les frais de transport </p><p>3) Recevez instantanément votre <strong>étiquette d'expédition</strong> par courriel.</p><p>4) <strong>Déposer votre colis</strong> dans le point de service de votre choix (Postes Canada, Purolator, etc.). </p><p>5) Une fois la <strong>réparation </strong>effectuée, votre outil vous est réexpédié directement à votre adresse. (Notez que les frais de retour sont à votre charge.)</p>",
+                "text": "<p>1)<strong> Contactez-nous</strong> à l'adresse <a href=\"mailto:service@fixatech.com\" title=\"mailto:service@fixatech.com\"><strong>service@fixatech.com</strong></a> avec : nom, prénom, #téléphone, adresse, facture d’achat (si garantie), description du bris, et #PO.</p><p>2) <strong>Réglez les frais</strong> d'administration de 24,99 $ ainsi que les frais de transport </p><p>3) Recevez instantanément votre <strong>étiquette d'expédition</strong> par courriel.</p><p>4) <strong>Déposer votre colis</strong> dans le point de service de votre choix (Postes Canada, Purolator, etc.). </p><p>5) Une fois la <strong>réparation </strong>effectuée, votre outil vous est réexpédié directement à votre adresse. (Notez que les frais de retour sont à votre charge.)</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
