@@ -346,7 +346,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>OUVERT de 7H00 à 17H00.                                                                                                .Du LUNDI au VENDREDI</p>",
+                "text": "<p>OUVERT de 7H00 à 17H00.                            Du LUNDI au VENDREDI.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
