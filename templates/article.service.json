@@ -941,7 +941,7 @@
               "settings": {
                 "heading": "Quels types d'appareils réparez-vous?",
                 "open_by_default": true,
-                "icon": "none",
+                "icon": "ruler",
                 "width": 20
               },
               "blocks": {
@@ -980,7 +980,7 @@
               "settings": {
                 "heading": "Combien de temps dure une réparation?",
                 "open_by_default": true,
-                "icon": "none",
+                "icon": "stopwatch",
                 "width": 20
               },
               "blocks": {
@@ -1019,7 +1019,7 @@
               "settings": {
                 "heading": "Offrez-vous une garantie sur les réparations?",
                 "open_by_default": true,
-                "icon": "none",
+                "icon": "question_mark",
                 "width": 20
               },
               "blocks": {
