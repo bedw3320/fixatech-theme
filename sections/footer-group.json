@@ -368,37 +368,11 @@
               },
               "blocks": {}
             },
-            "text_UWPHKm": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>Lundi au Vendredi</p>",
-                "width": "fit-content",
-                "max_width": "narrow",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "text_YbHVkf": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>1010, route des Rivières, local 100.         Lévis (Québec)  G7A 2V1</p>",
+                "text": "<ul><li>1010, route des Rivières, local 100</li><li>Lévis (Québec)  G7A 2V1</li></ul>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -439,7 +413,6 @@
           "block_order": [
             "text_nXL68h",
             "text_xwMtah",
-            "text_UWPHKm",
             "text_YbHVkf",
             "button_gLrrAb"
           ]
