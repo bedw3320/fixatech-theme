@@ -279,19 +279,6 @@
                 "price_tVjtKg"
               ]
             },
-            "variant_picker_R3rGDr": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": false,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -330,7 +317,6 @@
           },
           "block_order": [
             "group_icgrde",
-            "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi"
           ]
         }
