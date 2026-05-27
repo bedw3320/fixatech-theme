@@ -82,7 +82,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "418-871-1211 poste 2",
+                "label": "Nous contacter",
                 "link": "shopify://pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button",
@@ -329,7 +329,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Nous contacter",
+                "label": "418-871-1211 poste 2",
                 "link": "shopify://pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button",
@@ -507,7 +507,7 @@
                   "type": "icon",
                   "name": "t:names.icon",
                   "settings": {
-                    "icon": "price_tag",
+                    "icon": "eye",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
@@ -617,7 +617,7 @@
                   "type": "icon",
                   "name": "t:names.icon",
                   "settings": {
-                    "icon": "price_tag",
+                    "icon": "check_box",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
@@ -727,7 +727,7 @@
                   "type": "icon",
                   "name": "t:names.icon",
                   "settings": {
-                    "icon": "price_tag",
+                    "icon": "box",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
