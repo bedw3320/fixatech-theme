@@ -303,7 +303,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Complétez les informations ci-dessous, réglez les frais d'administration de 24,99 $ ainsi que les frais de transport et recevez instantanément votre étiquette d'expédition par courriel. Il ne vous reste plus qu'à déposer votre colis dans le point de service de votre choix (Postes Canada, Purolator, etc.). Dès que votre colis est en route, notre équipe technique est alertée et se tient prête pour le diagnostic. Une fois la réparation effectuée, votre outil vous est réexpédié directement à votre adresse. (notez que les frais de retour sont à votre charge.)</p>",
+                "text": "<p>1) Complétez les <strong>informations </strong>ci-dessous.</p><p>2) Réglez les <strong>frais</strong> d'administration de 24,99 $ ainsi que les frais de transport </p><p>3) Recevez instantanément votre <strong>étiquette d'expédition</strong> par courriel.</p><p>4) <strong>Déposer votre colis</strong> dans le point de service de votre choix (Postes Canada, Purolator, etc.). </p><p>5) Une fois la <strong>réparation </strong>effectuée, votre outil vous est réexpédié directement à votre adresse. (Notez que les frais de retour sont à votre charge.)</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -940,7 +940,7 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "Quels types d'appareils réparez-vous?",
-                "open_by_default": false,
+                "open_by_default": true,
                 "icon": "none",
                 "width": 20
               },
@@ -948,7 +948,7 @@
                 "text": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Nous réparons une grande variété d'appareils électroniques et électroménagers. Consultez notre liste de services pour plus de détails.</p>",
+                    "text": "<p>Nous réparons une grande variété d'appareils électroniques et électroménagers. </p><p>Liste des marques réparables sont : </p><ul><li>BE Power Equipment</li><li>Bissett</li><li>Bostitch</li><li>Dewalt</li><li>ET&F</li><li>Foresto</li><li>Makita</li><li>Max</li><li>Metabo-HPT</li><li>Milwaukee</li><li>Mi-T-M</li><li>Muro</li><li>Pneutools</li><li>QuikDrive</li><li>Senco</li><li>Spotnails</li><li>Stabila</li><li>Stiletto</li><li>Stinger</li><li>Simpson Strong-Tie</li></ul>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -979,7 +979,7 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "Combien de temps dure une réparation?",
-                "open_by_default": false,
+                "open_by_default": true,
                 "icon": "none",
                 "width": 20
               },
@@ -987,7 +987,7 @@
                 "text": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Le délai dépend du type de réparation et de la disponibilité des pièces. Contactez-nous pour une estimation.</p>",
+                    "text": "<p>Le délai dépend du type de réparation et de la disponibilité des pièces. </p><ul><li><strong>Réception de l’outil brisé : </strong>48 à 72h </li><li><strong>Diagnostic</strong> : 1 à 3 semaines (variable selon le type d’outil)</li><li><strong>Réparation</strong> : 1 à 2 semaines (variable selon le type d’outil et la disponibilité des pièces)</li><li><strong>Délai de livraison</strong> : 48 à 7h</li></ul><p>Option réparation express : <strong>   </strong>      </p><ul><li><strong>Diagnostic </strong>: 24 à 48h</li><li><strong>Réparation</strong> : 2 à 14 jours selon la disponibilité des pièces.</li></ul>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1018,7 +1018,7 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "Offrez-vous une garantie sur les réparations?",
-                "open_by_default": false,
+                "open_by_default": true,
                 "icon": "none",
                 "width": 20
               },
@@ -1026,7 +1026,7 @@
                 "text": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Oui, toutes nos réparations sont couvertes par une garantie. Les détails varient selon le type de service effectué.</p>",
+                    "text": "<p>Politique de réparation (Frais, garantie, délais)</p><ul><li><strong>Frais de transport d’envoi</strong> : variables selon le lieu de départ (aux frais du client)</li><li><strong>Frais de soumission</strong> : 24,99$ (remboursés si le client accepte les frais de réparation)</li><li><strong>Taux horaire </strong>: 85,00$ (sauf si sous garantie)</li><li><strong>Pièces</strong> : variables selon les réparations (sauf si sous garantie)</li><li><strong>Garantie offerte</strong> : selon la garantie du manufacturier</li></ul>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
