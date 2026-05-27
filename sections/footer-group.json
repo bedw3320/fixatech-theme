@@ -372,9 +372,9 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<ul><li>1010, route des Rivières, local 100</li><li>Lévis (Québec)  G7A 2V1</li></ul>",
-                "width": "fit-content",
-                "max_width": "normal",
+                "text": "<p>1010, route des Rivières, local 100, Lévis (Québec)  G7A 2V1</p>",
+                "width": "100%",
+                "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
