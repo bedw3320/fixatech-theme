@@ -812,7 +812,7 @@
         "cta_style": "button",
         "cta_link": "",
         "cta_open_in_new_tab": false,
-        "cta_toggle_overlay": false,
+        "cta_toggle_overlay": true,
         "cta_overlay_color": "#00000040",
         "cta_border_radius": 12,
         "columns": 4,
