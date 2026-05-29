@@ -56,11 +56,10 @@
         },
         "blog-post-image": {
           "type": "_blog-post-featured-image",
-          "disabled": true,
           "static": true,
           "settings": {
-            "image_ratio": "square",
-            "width": "fit-content",
+            "image_ratio": "landscape",
+            "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
