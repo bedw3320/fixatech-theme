@@ -547,11 +547,12 @@
           "milwaukee",
           "makita",
           "dewalt",
-          "3m"
+          "3m",
+          "bostitch"
         ],
         "layout_type": "grid",
         "carousel_on_mobile": true,
-        "columns": 4,
+        "columns": 5,
         "mobile_columns": "2",
         "mobile_card_size": "44cqw",
         "columns_gap": 60,
