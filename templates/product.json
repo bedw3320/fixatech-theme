@@ -568,7 +568,7 @@
         "recommendation_type": "complementary",
         "layout_type": "grid",
         "carousel_on_mobile": true,
-        "max_products": 4,
+        "max_products": 5,
         "columns": 5,
         "mobile_columns": "1",
         "columns_gap": 12,
@@ -578,8 +578,8 @@
         "section_width": "page-width",
         "gap": 28,
         "color_scheme": "scheme-3",
-        "padding-block-start": 45,
-        "padding-block-end": 45
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     },
     "fixatech_cta_banner_BiAjyM": {
