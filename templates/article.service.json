@@ -940,7 +940,7 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "Quels types d'appareils réparez-vous?",
-                "open_by_default": true,
+                "open_by_default": false,
                 "icon": "ruler",
                 "width": 20
               },
@@ -979,7 +979,7 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "Combien de temps dure une réparation?",
-                "open_by_default": true,
+                "open_by_default": false,
                 "icon": "stopwatch",
                 "width": 20
               },
@@ -1018,7 +1018,7 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "Offrez-vous une garantie sur les réparations?",
-                "open_by_default": true,
+                "open_by_default": false,
                 "icon": "question_mark",
                 "width": 20
               },
