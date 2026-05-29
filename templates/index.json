@@ -1060,7 +1060,7 @@
               "static": true,
               "settings": {
                 "label": "{{ closest.article.title }}",
-                "open_in_new_tab": false,
+                "open_in_new_tab": true,
                 "style_class": "button-secondary",
                 "font": "",
                 "font_size": "0.875rem",

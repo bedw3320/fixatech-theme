@@ -85,6 +85,7 @@
         "text_KWG3j7",
         "button_CzQx9Q"
       ],
+      "disabled": true,
       "name": "Promotion de la semaine",
       "settings": {
         "content_direction": "row",
