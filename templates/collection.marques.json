@@ -110,8 +110,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 24,
-        "padding-block-end": 24
+        "padding-block-start": 15,
+        "padding-block-end": 15
       }
     },
     "fixatech_breadcrumbs_Pxmf8R": {
@@ -432,7 +432,7 @@
         "name_field": "nom",
         "image_field": "logo",
         "collection_field": "collection_url",
-        "link_text": "Voir les produits",
+        "link_text": "Magasiner",
         "columns_desktop": 6,
         "columns_tablet": 4,
         "columns_mobile": "2",
