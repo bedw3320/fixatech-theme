@@ -282,9 +282,12 @@
             {% endif %}
             <button
               on:click="/showDialog"
-              class="button-unstyled pickup-location__button"
+              class="button-secondary pickup-location__button"
             >
-              {{ 'actions.view_store_information' | t }}
+              {{- 'actions.view_store_information' | t -}}
+              <span class="svg-wrapper button-arrow" aria-hidden="true">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
             </button>
           </div>
         </div>
@@ -521,12 +524,7 @@
   }
 
   .pickup-location__button {
-    width: fit-content;
-    color: var(--color-primary);
     font-size: var(--font-size--xs);
-    font-family: var(--font-body--family);
-    padding: 0;
-    cursor: pointer;
     margin-block: var(--margin-xs);
   }
 
