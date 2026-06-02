@@ -162,10 +162,10 @@
   }
 
   {% if section.settings.image_hover_zoom %}
-    .brands-grid__image-{{ bg_id }} {
+    .brands-grid__image-wrapper-{{ bg_id }} {
       transition: transform var(--hover-transition-duration) var(--hover-transition-timing);
     }
-    .brands-grid__card-{{ bg_id }}:hover .brands-grid__image-{{ bg_id }} {
+    .brands-grid__card-{{ bg_id }}:hover .brands-grid__image-wrapper-{{ bg_id }} {
       transform: scale(var(--hover-subtle-zoom-amount));
     }
   {% endif %}
