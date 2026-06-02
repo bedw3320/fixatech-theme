@@ -282,7 +282,7 @@
             {% endif %}
             <button
               on:click="/showDialog"
-              class="button-secondary pickup-location__button"
+              class="button-unstyled pickup-location__button"
             >
               {{- 'actions.view_store_information' | t -}}
               <span class="svg-wrapper button-arrow" aria-hidden="true">
@@ -524,12 +524,36 @@
   }
 
   .pickup-location__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: var(--font-size--xs);
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
     margin-block: var(--margin-xs);
+    cursor: pointer;
   }
 
   .pickup-location__button:hover {
     color: var(--color-primary-hover);
+    text-decoration: none;
+  }
+
+  .pickup-location__button .button-arrow {
+    opacity: 1;
+    width: 14px;
+    transform: none;
+    transition: transform 150ms ease;
+  }
+
+  .pickup-location__button .button-arrow svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .pickup-location__button:hover .button-arrow {
+    transform: translateX(3px);
   }
 
   .pickup-location__h4 {
