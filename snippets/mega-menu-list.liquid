@@ -74,28 +74,15 @@
   endif
 %}
 {% if mega_menu_layout == 'cascade' %}
-  {%- comment -%}
-    CASCADE LAYOUT: 2-column flyout
-    Column 1 = parent links, Column 2 = child panels (hidden until hover), Column 3 = category image
-  {%- endcomment -%}
-  {%- liquid
-    assign cascade_has_images = false
-    for link in parent_link.links
-      if link.type == 'collection_link' or link.type == 'collections_link' or link.type == 'catalog_link'
-        assign cascade_has_images = true
-        break
-      endif
-    endfor
-  -%}
-  <div class="mega-menu__cascade{% if cascade_has_images %} mega-menu__cascade--with-featured{% endif %}" data-cascade-menu data-menu-list-id="{{ id }}">
+  <div class="mega-menu__cascade mega-menu__cascade--with-featured" data-cascade-menu data-menu-list-id="{{ id }}">
     <ul class="mega-menu__cascade-parents list-unstyled">
       {% for link in parent_link.links %}
         <li class="mega-menu__cascade-parent-item">
           <a
             href="{{ link.url }}"
             class="mega-menu__link {% if link.links != blank %}mega-menu__link--parent{% endif %}"
-            data-cascade-trigger="{{ forloop.index }}"
             {% if link.links != blank %}
+              data-cascade-trigger="{{ forloop.index }}"
               aria-expanded="false"
             {% endif %}
           >
@@ -123,6 +110,7 @@
                   <a
                     href="{{ childLink.url }}"
                     class="mega-menu__link"
+                    data-cascade-img-trigger="{{ forloop.parentloop.index }}-{{ forloop.index }}"
                   >
                     <span class="wrap-text">{{ childLink.title }}</span>
                   </a>
@@ -134,26 +122,44 @@
       {% endfor %}
     </div>
 
-    {%- comment -%} Column 3: category image, swapped by JS on parent link hover {%- endcomment -%}
-    {%- if cascade_has_images -%}
-      <div class="mega-menu__cascade-featured mega-menu__cascade-images">
-        {% for link in parent_link.links %}
-          {%- capture img -%}
-            {%- render 'link-featured-image', link: link, class: 'mega-menu__cascade-image', sizes: '280px' -%}
-          {%- endcapture -%}
-          {%- unless img == blank -%}
-            <a
-              href="{{ link.url }}"
-              class="mega-menu__cascade-image-wrap"
-              data-cascade-image="{{ forloop.index }}"
-              tabindex="-1"
+    <div class="mega-menu__cascade-featured mega-menu__cascade-images">
+      {% for link in parent_link.links %}
+        {% if link.links != blank %}
+          {% for childLink in link.links %}
+            {%- liquid
+              assign img_collection = nil
+              if childLink.type == 'collection_link'
+                assign img_collection = childLink.object
+              elsif childLink.url contains '/collections/'
+                assign url_parts = childLink.url | split: '/collections/'
+                assign collection_handle = url_parts[1] | split: '?' | first | split: '/' | first
+                assign img_collection = collections[collection_handle]
+              endif
+            -%}
+            {%- capture img -%}
+              {%- if img_collection.featured_image -%}
+                {{- img_collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'mega-menu__cascade-image', sizes: '280px' -}}
+              {%- elsif img_collection != nil and img_collection.products.size > 0 -%}
+                {%- assign first_product = img_collection.products | where: 'featured_image' | first -%}
+                {%- if first_product.featured_image -%}
+                  {{- first_product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'mega-menu__cascade-image', sizes: '280px' -}}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endcapture -%}
+            {%- unless img == blank -%}
+              <a
+                href="{{ childLink.url }}"
+                class="mega-menu__cascade-image-wrap"
+                data-cascade-image="{{ forloop.parentloop.index }}-{{ forloop.index }}"
+                tabindex="-1"
               >
                 {{- img -}}
               </a>
             {%- endunless -%}
-        {% endfor %}
-      </div>
-    {%- endif -%}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 {% else %}
 <ul
