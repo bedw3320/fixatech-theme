@@ -115,33 +115,10 @@
     font-size: 16px;
   }
 
-  .brands-grid__sort-controls-{{ bg_id }} {
+  .brands-grid__sort-bar-{{ bg_id }} {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .brands-grid__sort-label-{{ bg_id }} {
-    font-size: 14px;
-    color: #666;
-  }
-
-  .brands-grid__sort-btn-{{ bg_id }} {
-    background: none;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    padding: 6px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .brands-grid__sort-btn-{{ bg_id }}.is-active,
-  .brands-grid__sort-btn-{{ bg_id }}:hover {
-    border-color: #ffc600;
-    color: #ffc600;
+    justify-content: flex-end;
+    padding-bottom: var(--padding-xs, 8px);
   }
 
   @media screen and (max-width: 989px) {
@@ -170,12 +147,48 @@
         {% paginate shop.metaobjects["marques"].values by 250 %}
           {% assign all_brands = shop.metaobjects["marques"].values %}
           {% if all_brands.size > 0 %}
-            <div class="brands-grid__sort-controls-{{ bg_id }}">
-              <span class="brands-grid__sort-label-{{ bg_id }}">Trier par :</span>
-              <button class="brands-grid__sort-btn-{{ bg_id }} is-active" data-sort="default">Par défaut</button>
-              <button class="brands-grid__sort-btn-{{ bg_id }}" data-sort="name-asc">A → Z</button>
-              <button class="brands-grid__sort-btn-{{ bg_id }}" data-sort="name-desc">Z → A</button>
-            </div>
+            {% if section.settings.enable_sorting %}
+              {% assign default_sort = section.settings.default_sort_order | default: 'default' %}
+              {% case default_sort %}
+                {% when 'name-asc' %}{% assign default_sort_name = 'A → Z' %}
+                {% when 'name-desc' %}{% assign default_sort_name = 'Z → A' %}
+                {% else %}{% assign default_sort_name = 'Par défaut' %}
+              {% endcase %}
+              <div class="brands-grid__sort-bar-{{ bg_id }}">
+                <details class="facets__panel sorting-filter" id="BrandsSort-{{ bg_id }}" data-default-sort="{{ default_sort }}">
+                  <summary class="facets__summary">
+                    <span class="facets__label">Trier par</span>
+                    <span class="facets__status h6">{{ default_sort_name }}</span>
+                    <span class="svg-wrapper icon-caret icon-animated">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+                  </summary>
+                  <div class="sorting-filter__options color-{{ settings.popover_color_scheme }}">
+                    <div class="sorting-filter__options-inner">
+                      <label>
+                        <div class="sorting-filter__option" role="option" aria-selected="{{ default_sort == 'default' }}" tabindex="{% if default_sort == 'default' %}0{% else %}-1{% endif %}">
+                          <input type="radio" name="brands_sort_{{ bg_id }}" value="default" class="sorting-filter__input" data-option-name="Par défaut" {% if default_sort == 'default' %}checked{% endif %} aria-hidden="true">
+                          <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">{{ 'icon-checkmark.svg' | inline_asset_content }}</span>
+                          <span class="sorting-filter__label">Par défaut</span>
+                        </div>
+                      </label>
+                      <label>
+                        <div class="sorting-filter__option" role="option" aria-selected="{{ default_sort == 'name-asc' }}" tabindex="{% if default_sort == 'name-asc' %}0{% else %}-1{% endif %}">
+                          <input type="radio" name="brands_sort_{{ bg_id }}" value="name-asc" class="sorting-filter__input" data-option-name="A → Z" {% if default_sort == 'name-asc' %}checked{% endif %} aria-hidden="true">
+                          <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">{{ 'icon-checkmark.svg' | inline_asset_content }}</span>
+                          <span class="sorting-filter__label">A → Z</span>
+                        </div>
+                      </label>
+                      <label>
+                        <div class="sorting-filter__option" role="option" aria-selected="{{ default_sort == 'name-desc' }}" tabindex="{% if default_sort == 'name-desc' %}0{% else %}-1{% endif %}">
+                          <input type="radio" name="brands_sort_{{ bg_id }}" value="name-desc" class="sorting-filter__input" data-option-name="Z → A" {% if default_sort == 'name-desc' %}checked{% endif %} aria-hidden="true">
+                          <span class="svg-wrapper icon-checkmark sorting-filter__checkmark">{{ 'icon-checkmark.svg' | inline_asset_content }}</span>
+                          <span class="sorting-filter__label">Z → A</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            {% endif %}
             <div class="brands-grid__container-{{ bg_id }}">
               {% for brand in all_brands %}
                 <a
@@ -232,24 +245,43 @@
 
 <script>
 (function() {
-  const container = document.querySelector('.brands-grid__container-{{ bg_id }}');
-  if (!container) return;
-  const cards = [...container.children];
+  var details = document.getElementById('BrandsSort-{{ bg_id }}');
+  var container = document.querySelector('.brands-grid__container-{{ bg_id }}');
+  if (!container || !details) return;
+  var cards = Array.from(container.children);
 
-  document.querySelectorAll('.brands-grid__sort-btn-{{ bg_id }}').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.brands-grid__sort-btn-{{ bg_id }}')
-        .forEach(b => b.classList.remove('is-active'));
-      this.classList.add('is-active');
-
-      const sort = this.dataset.sort;
-      const sorted = [...cards].sort((a, b) => {
-        if (sort === 'name-asc') return a.dataset.sortName.localeCompare(b.dataset.sortName, 'fr');
-        if (sort === 'name-desc') return b.dataset.sortName.localeCompare(a.dataset.sortName, 'fr');
-        return parseInt(a.dataset.originalIndex) - parseInt(b.dataset.originalIndex);
-      });
-      sorted.forEach(card => container.appendChild(card));
+  function sortCards(sort) {
+    var sorted = cards.slice().sort(function(a, b) {
+      if (sort === 'name-asc') return a.dataset.sortName.localeCompare(b.dataset.sortName, 'fr');
+      if (sort === 'name-desc') return b.dataset.sortName.localeCompare(a.dataset.sortName, 'fr');
+      return parseInt(a.dataset.originalIndex) - parseInt(b.dataset.originalIndex);
     });
+    sorted.forEach(function(card) { container.appendChild(card); });
+  }
+
+  var defaultSort = details.dataset.defaultSort;
+  if (defaultSort && defaultSort !== 'default') sortCards(defaultSort);
+
+  details.querySelectorAll('.sorting-filter__input').forEach(function(input) {
+    input.addEventListener('change', function() {
+      var status = details.querySelector('.facets__status');
+      if (status) status.textContent = this.dataset.optionName;
+
+      details.querySelectorAll('.sorting-filter__option').forEach(function(opt) {
+        opt.setAttribute('aria-selected', 'false');
+        opt.setAttribute('tabindex', '-1');
+      });
+      var opt = this.closest('.sorting-filter__option');
+      opt.setAttribute('aria-selected', 'true');
+      opt.setAttribute('tabindex', '0');
+
+      sortCards(this.value);
+      details.removeAttribute('open');
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!details.contains(e.target)) details.removeAttribute('open');
   });
 })();
 </script>
@@ -258,6 +290,31 @@
 {
   "name": "Brands grid",
   "settings": [
+    {
+      "type": "header",
+      "content": "Sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Show sort controls",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "default_sort_order",
+      "label": "Default sort order",
+      "options": [
+        { "value": "default", "label": "Par défaut" },
+        { "value": "name-asc", "label": "A → Z" },
+        { "value": "name-desc", "label": "Z → A" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "header",
+      "content": "Fields"
+    },
     {
       "type": "text",
       "id": "name_field",
