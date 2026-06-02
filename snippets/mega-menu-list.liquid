@@ -76,15 +76,23 @@
 {% if mega_menu_layout == 'cascade' %}
   {%- comment -%}
     CASCADE LAYOUT: 2-column flyout
-    Column 1 = parent links, Column 2 = child panels (hidden until hover)
+    Column 1 = parent links, Column 2 = child panels (hidden until hover), Column 3 = category image
   {%- endcomment -%}
   {%- liquid
-    assign cascade_has_featured = false
-    if menu_content_type == 'featured_products' and collection_object != blank
-      assign cascade_has_featured = true
-    endif
+    assign cascade_has_images = false
+    for link in parent_link.links
+      if link.links != blank
+        if link.type == 'collection_link' and link.object.featured_image
+          assign cascade_has_images = true
+          break
+        elsif link.type == 'collections_link' or link.type == 'catalog_link'
+          assign cascade_has_images = true
+          break
+        endif
+      endif
+    endfor
   -%}
-  <div class="mega-menu__cascade{% if cascade_has_featured %} mega-menu__cascade--with-featured{% endif %}" data-cascade-menu data-menu-list-id="{{ id }}">
+  <div class="mega-menu__cascade{% if cascade_has_images %} mega-menu__cascade--with-featured{% endif %}" data-cascade-menu data-menu-list-id="{{ id }}">
     <ul class="mega-menu__cascade-parents list-unstyled">
       {% for link in parent_link.links %}
         <li class="mega-menu__cascade-parent-item">
@@ -131,20 +139,26 @@
       {% endfor %}
     </div>
 
-    {%- comment -%} Column 3: featured product card (1 product) {%- endcomment -%}
-    {%- if cascade_has_featured and eager_loading -%}
-      <div class="mega-menu__cascade-featured" style="--resource-card-corner-radius: {{ image_border_radius }}px;">
-        {% paginate collection_object.products by 1 %}
-          {% for item in collection_object.products %}
-            {% render 'resource-card',
-              resource: item,
-              resource_type: 'product',
-              image_hover: true,
-              image_aspect_ratio: content_aspect_ratio,
-              image_sizes: '(min-width: 990px) 280px, 0px'
-            %}
-          {% endfor %}
-        {% endpaginate %}
+    {%- comment -%} Column 3: category image, swapped by JS on parent link hover {%- endcomment -%}
+    {%- if cascade_has_images -%}
+      <div class="mega-menu__cascade-featured mega-menu__cascade-images">
+        {% for link in parent_link.links %}
+          {%- if link.links != blank -%}
+            {%- capture img -%}
+              {%- render 'link-featured-image', link: link, class: 'mega-menu__cascade-image', sizes: '280px' -%}
+            {%- endcapture -%}
+            {%- unless img == blank -%}
+              <a
+                href="{{ link.url }}"
+                class="mega-menu__cascade-image-wrap"
+                data-cascade-image="{{ forloop.index }}"
+                tabindex="-1"
+              >
+                {{- img -}}
+              </a>
+            {%- endunless -%}
+          {%- endif -%}
+        {% endfor %}
       </div>
     {%- endif -%}
   </div>

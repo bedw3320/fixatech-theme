@@ -328,6 +328,13 @@ class HeaderMenu extends Component {
     }
     this.#state.activeCascadeParent = trigger;
 
+    // Swap category image in column 3
+    const imageContainer = submenuContainer.querySelector('.mega-menu__cascade-images');
+    if (imageContainer) {
+      imageContainer.querySelectorAll('[data-cascade-image]').forEach((el) => el.classList.remove('is-active'));
+      imageContainer.querySelector(`[data-cascade-image="${panelId}"]`)?.classList.add('is-active');
+    }
+
     // Recalculate submenu height since column 2 content changed
     requestAnimationFrame(() => {
       const height = submenuContainer.offsetHeight;
@@ -365,6 +372,9 @@ class HeaderMenu extends Component {
     this.#state.activeCascadeParent = null;
     this.querySelectorAll('[data-cascade-panel]').forEach((panel) => {
       panel.classList.remove('is-active');
+    });
+    this.querySelectorAll('[data-cascade-image]').forEach((el) => {
+      el.classList.remove('is-active');
     });
     this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
       /** @type {HTMLElement} */ (trigger).ariaExpanded = 'false';
