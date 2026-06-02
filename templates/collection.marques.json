@@ -450,6 +450,7 @@
         "image_aspect_ratio": 100,
         "image_fit": "cover",
         "image_background": "#f4f4f4",
+        "image_hover_zoom": true,
         "brand_name_size": 20,
         "text_color": "#141414",
         "link_size": 14,
