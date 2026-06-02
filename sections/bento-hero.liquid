@@ -38,10 +38,12 @@
     {% endif %}
   }
   {% if section.settings.image_hover_zoom %}
-    .bento-hero--{{ section.id }} .bento-hero__cell .bento-hero__fill-img {
+    .bento-hero--{{ section.id }} .bento-hero__cell .bento-hero__fill-img,
+    .bento-hero--{{ section.id }} .bento-hero__cell-c .bento-hero__cell-c-product-img {
       transition: transform var(--hover-transition-duration) var(--hover-transition-timing);
     }
-    .bento-hero--{{ section.id }} .bento-hero__cell:hover .bento-hero__fill-img {
+    .bento-hero--{{ section.id }} .bento-hero__cell:hover .bento-hero__fill-img,
+    .bento-hero--{{ section.id }} .bento-hero__cell-c:hover .bento-hero__cell-c-product-img {
       transform: scale(var(--hover-subtle-zoom-amount));
     }
   {% endif %}
