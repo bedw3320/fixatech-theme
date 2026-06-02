@@ -25,6 +25,7 @@
     section-resource-list
     spacing-style
     gap-style
+    {% if section.settings.image_hover_zoom %}card-hover-effect-subtle-zoom{% endif %}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -115,6 +116,12 @@
       "type": "collection_list",
       "id": "collection_list",
       "label": "t:settings.collection_list"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_hover_zoom",
+      "label": "Image zoom on hover",
+      "default": true
     },
     {
       "type": "header",
