@@ -43,6 +43,10 @@
     {% endif %}
 
     {{ content_for_header }}
+
+    {% if settings.card_hover_effect == 'subtle-zoom' %}
+      <style>.collection-card { overflow: hidden; }</style>
+    {% endif %}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
