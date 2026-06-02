@@ -112,6 +112,9 @@
                 <div class="bento-hero__price-badge">{{ cell_c_price }}</div>
               {%- endif -%}
             {%- endif -%}
+            {%- if section.settings.cell_c_link != blank -%}
+              <a href="{{ section.settings.cell_c_link }}" class="bento-hero__cell-overlay-link" aria-label="{{ cell_c_heading | escape }}"></a>
+            {%- endif -%}
           </div>
 
           {%- comment -%} ── Cell D — Wide photo + CTA (2nd slide on mobile) ─── {%- endcomment -%}
@@ -154,6 +157,9 @@
                 </span>
               {%- endif -%}
             </a>
+          {%- endif -%}
+          {%- if cell_d_cta_link != blank -%}
+            <a href="{{ cell_d_cta_link }}" class="bento-hero__cell-overlay-link" aria-hidden="true" tabindex="-1"></a>
           {%- endif -%}
           </div>
 
@@ -327,6 +333,9 @@
               <div class="bento-hero__price-badge">{{ cell_c_price }}</div>
             {%- endif -%}
           {%- endif -%}
+          {%- if section.settings.cell_c_link != blank -%}
+            <a href="{{ section.settings.cell_c_link }}" class="bento-hero__cell-overlay-link" aria-label="{{ cell_c_heading | escape }}"></a>
+          {%- endif -%}
         </div>
 
         {%- comment -%} ── Cell D — Wide photo + CTA ───────────────────────── {%- endcomment -%}
@@ -369,6 +378,9 @@
                 </span>
               {%- endif -%}
             </a>
+          {%- endif -%}
+          {%- if cell_d_cta_link != blank -%}
+            <a href="{{ cell_d_cta_link }}" class="bento-hero__cell-overlay-link" aria-hidden="true" tabindex="-1"></a>
           {%- endif -%}
         </div>
 
@@ -523,6 +535,18 @@
   position: absolute;
   bottom: 30px;
   left: 30px;
+  z-index: 2;
+}
+
+.bento-hero__cell-overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.bento-hero__cell-overlay-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: -3px;
 }
 
 /* ── Placeholder SVGs ───────────────────────────────────────── */
@@ -877,6 +901,11 @@
       "id": "cell_c_text_color",
       "label": "Text color",
       "default": "#141414"
+    },
+    {
+      "type": "url",
+      "id": "cell_c_link",
+      "label": "Link"
     },
     {
       "type": "header",
