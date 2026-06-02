@@ -296,12 +296,20 @@ class HeaderMenu extends Component {
       trigger.addEventListener('pointerenter', this.#activateCascadeParent);
       trigger.addEventListener('focus', this.#activateCascadeParent);
     });
+    this.querySelectorAll('[data-cascade-img-trigger]').forEach((trigger) => {
+      trigger.addEventListener('pointerenter', this.#activateCascadeChildImage);
+      trigger.addEventListener('focus', this.#activateCascadeChildImage);
+    });
   }
 
   #cleanupCascadeListeners() {
     this.querySelectorAll('[data-cascade-trigger]').forEach((trigger) => {
       trigger.removeEventListener('pointerenter', this.#activateCascadeParent);
       trigger.removeEventListener('focus', this.#activateCascadeParent);
+    });
+    this.querySelectorAll('[data-cascade-img-trigger]').forEach((trigger) => {
+      trigger.removeEventListener('pointerenter', this.#activateCascadeChildImage);
+      trigger.removeEventListener('focus', this.#activateCascadeChildImage);
     });
   }
 
@@ -328,12 +336,10 @@ class HeaderMenu extends Component {
     }
     this.#state.activeCascadeParent = trigger;
 
-    // Swap category image in column 3
-    const imageContainer = submenuContainer.querySelector('.mega-menu__cascade-images');
-    if (imageContainer) {
-      imageContainer.querySelectorAll('[data-cascade-image]').forEach((el) => el.classList.remove('is-active'));
-      imageContainer.querySelector(`[data-cascade-image="${panelId}"]`)?.classList.add('is-active');
-    }
+    // Clear image column when parent changes — image updates on child hover
+    submenuContainer.querySelector('.mega-menu__cascade-images')
+      ?.querySelectorAll('[data-cascade-image]')
+      .forEach((el) => el.classList.remove('is-active'));
 
     // Recalculate submenu height since column 2 content changed
     requestAnimationFrame(() => {
@@ -343,6 +349,23 @@ class HeaderMenu extends Component {
         this.#setFullOpenHeaderHeight(height);
       }
     });
+  };
+
+  /**
+   * Show the category image for the hovered child link in column 3.
+   * @param {Event} event
+   */
+  #activateCascadeChildImage = (event) => {
+    const trigger = /** @type {HTMLElement} */ (event.currentTarget);
+    const key = trigger.dataset.cascadeImgTrigger;
+    const submenuContainer = trigger.closest('.menu-list__submenu');
+    if (!submenuContainer || !key) return;
+
+    const imageContainer = submenuContainer.querySelector('.mega-menu__cascade-images');
+    if (!imageContainer) return;
+
+    imageContainer.querySelectorAll('[data-cascade-image]').forEach((el) => el.classList.remove('is-active'));
+    imageContainer.querySelector(`[data-cascade-image="${key}"]`)?.classList.add('is-active');
   };
 
   /**
