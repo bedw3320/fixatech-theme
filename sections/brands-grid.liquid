@@ -115,6 +115,35 @@
     font-size: 16px;
   }
 
+  .brands-grid__sort-controls-{{ bg_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .brands-grid__sort-label-{{ bg_id }} {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .brands-grid__sort-btn-{{ bg_id }} {
+    background: none;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .brands-grid__sort-btn-{{ bg_id }}.is-active,
+  .brands-grid__sort-btn-{{ bg_id }}:hover {
+    border-color: #ffc600;
+    color: #ffc600;
+  }
+
   @media screen and (max-width: 989px) {
     .brands-grid__container-{{ bg_id }} {
       grid-template-columns: repeat({{ section.settings.columns_tablet }}, 1fr);
@@ -141,9 +170,20 @@
         {% paginate shop.metaobjects["marques"].values by 250 %}
           {% assign all_brands = shop.metaobjects["marques"].values %}
           {% if all_brands.size > 0 %}
+            <div class="brands-grid__sort-controls-{{ bg_id }}">
+              <span class="brands-grid__sort-label-{{ bg_id }}">Trier par :</span>
+              <button class="brands-grid__sort-btn-{{ bg_id }} is-active" data-sort="default">Par défaut</button>
+              <button class="brands-grid__sort-btn-{{ bg_id }}" data-sort="name-asc">A → Z</button>
+              <button class="brands-grid__sort-btn-{{ bg_id }}" data-sort="name-desc">Z → A</button>
+            </div>
             <div class="brands-grid__container-{{ bg_id }}">
               {% for brand in all_brands %}
-                <a href="{{ brand[section.settings.collection_field].value }}" class="brands-grid__card-{{ bg_id }}">
+                <a
+                  href="{{ brand[section.settings.collection_field].value }}"
+                  class="brands-grid__card-{{ bg_id }}"
+                  data-sort-name="{{ brand[section.settings.name_field].value | downcase }}"
+                  data-original-index="{{ forloop.index0 }}"
+                >
                   <div class="brands-grid__image-wrapper-{{ bg_id }}">
                     {% if brand[section.settings.image_field].value %}
                       <img
@@ -189,6 +229,30 @@
     </div>
   </div>
 </div>
+
+<script>
+(function() {
+  const container = document.querySelector('.brands-grid__container-{{ bg_id }}');
+  if (!container) return;
+  const cards = [...container.children];
+
+  document.querySelectorAll('.brands-grid__sort-btn-{{ bg_id }}').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.brands-grid__sort-btn-{{ bg_id }}')
+        .forEach(b => b.classList.remove('is-active'));
+      this.classList.add('is-active');
+
+      const sort = this.dataset.sort;
+      const sorted = [...cards].sort((a, b) => {
+        if (sort === 'name-asc') return a.dataset.sortName.localeCompare(b.dataset.sortName, 'fr');
+        if (sort === 'name-desc') return b.dataset.sortName.localeCompare(a.dataset.sortName, 'fr');
+        return parseInt(a.dataset.originalIndex) - parseInt(b.dataset.originalIndex);
+      });
+      sorted.forEach(card => container.appendChild(card));
+    });
+  });
+})();
+</script>
 
 {% schema %}
 {
