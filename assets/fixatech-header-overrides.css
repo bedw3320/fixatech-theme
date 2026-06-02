@@ -773,6 +773,9 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-image-wrap {
   display: none;
   position: absolute;
   inset: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-image-wrap.is-active {
@@ -782,8 +785,7 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-image-wrap.is-a
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: var(--menu-image-border-radius, 0px);
+  object-fit: contain;
 }
 
 /* Hide featured column on tablet — not enough room */
