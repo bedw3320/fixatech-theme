@@ -37,6 +37,14 @@
       height: var(--section-height-{{ section.settings.section_height }});
     {% endif %}
   }
+  {% if section.settings.image_hover_zoom %}
+    .bento-hero--{{ section.id }} .bento-hero__cell .bento-hero__fill-img {
+      transition: transform var(--hover-transition-duration) var(--hover-transition-timing);
+    }
+    .bento-hero--{{ section.id }} .bento-hero__cell:hover .bento-hero__fill-img {
+      transform: scale(var(--hover-subtle-zoom-amount));
+    }
+  {% endif %}
 {% endstyle %}
 
 <div class="section section--{{ section.settings.section_width }} spacing-style bento-hero bento-hero--{{ section.id }}">
@@ -965,6 +973,12 @@
       "id": "carousel_on_mobile",
       "label": "Carousel on mobile",
       "info": "On mobile, all boxes scroll horizontally as slides (C, A, B, D). Box C is always the first slide.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "image_hover_zoom",
+      "label": "Image zoom on hover",
       "default": true
     },
     {
