@@ -160,6 +160,15 @@
       padding: {{ section.settings.card_padding | times: 0.75 }}px;
     }
   }
+
+  {% if section.settings.image_hover_zoom %}
+    .brands-grid__image-{{ bg_id }} {
+      transition: transform var(--hover-transition-duration) var(--hover-transition-timing);
+    }
+    .brands-grid__card-{{ bg_id }}:hover .brands-grid__image-{{ bg_id }} {
+      transform: scale(var(--hover-subtle-zoom-amount));
+    }
+  {% endif %}
 {% endstyle %}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
@@ -435,6 +444,12 @@
       "id": "image_background",
       "label": "Image background",
       "default": "#f4f4f4"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_hover_zoom",
+      "label": "Image zoom on hover",
+      "default": true
     },
     {
       "type": "header",
