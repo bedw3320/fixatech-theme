@@ -81,14 +81,9 @@
   {%- liquid
     assign cascade_has_images = false
     for link in parent_link.links
-      if link.links != blank
-        if link.type == 'collection_link' and link.object.featured_image
-          assign cascade_has_images = true
-          break
-        elsif link.type == 'collections_link' or link.type == 'catalog_link'
-          assign cascade_has_images = true
-          break
-        endif
+      if link.type == 'collection_link' or link.type == 'collections_link' or link.type == 'catalog_link'
+        assign cascade_has_images = true
+        break
       endif
     endfor
   -%}
@@ -99,8 +94,8 @@
           <a
             href="{{ link.url }}"
             class="mega-menu__link {% if link.links != blank %}mega-menu__link--parent{% endif %}"
+            data-cascade-trigger="{{ forloop.index }}"
             {% if link.links != blank %}
-              data-cascade-trigger="{{ forloop.index }}"
               aria-expanded="false"
             {% endif %}
           >
@@ -143,21 +138,19 @@
     {%- if cascade_has_images -%}
       <div class="mega-menu__cascade-featured mega-menu__cascade-images">
         {% for link in parent_link.links %}
-          {%- if link.links != blank -%}
-            {%- capture img -%}
-              {%- render 'link-featured-image', link: link, class: 'mega-menu__cascade-image', sizes: '280px' -%}
-            {%- endcapture -%}
-            {%- unless img == blank -%}
-              <a
-                href="{{ link.url }}"
-                class="mega-menu__cascade-image-wrap"
-                data-cascade-image="{{ forloop.index }}"
-                tabindex="-1"
+          {%- capture img -%}
+            {%- render 'link-featured-image', link: link, class: 'mega-menu__cascade-image', sizes: '280px' -%}
+          {%- endcapture -%}
+          {%- unless img == blank -%}
+            <a
+              href="{{ link.url }}"
+              class="mega-menu__cascade-image-wrap"
+              data-cascade-image="{{ forloop.index }}"
+              tabindex="-1"
               >
                 {{- img -}}
               </a>
             {%- endunless -%}
-          {%- endif -%}
         {% endfor %}
       </div>
     {%- endif -%}
