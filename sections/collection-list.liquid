@@ -1,5 +1,13 @@
 
 
+{% if section.settings.image_hover_zoom %}
+  {% style %}
+    #shopify-section-{{ section.id }} .collection-card {
+      overflow: hidden;
+    }
+  {% endstyle %}
+{% endif %}
+
 {% liquid
   if section.settings.collection_list != blank
     assign section_collections = section.settings.collection_list
