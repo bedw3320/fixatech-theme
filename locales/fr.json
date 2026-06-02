@@ -209,7 +209,7 @@
     "duties_and_taxes_included_shipping_at_checkout_without_policy_without_discounts": "Droits de douane et taxes inclus. L’expédition est calculée lors du paiement.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "Droits de douane inclus. L’expédition est calculée lors du paiement.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "Droits de douane inclus. L’expédition est calculée lors du paiement.",
-    "pickup_available_at_html": "Retrait disponible à notre <b>{{ location }}</b>",
+    "pickup_available_at_html": "Retrait disponible à la <b>{{ location }}</b>",
     "pickup_available_in": "Retrait disponible, {{ pickup_time }}",
     "pickup_not_available": "Retrait actuellement non disponible",
     "pickup_ready_in": "{{ pickup_time }}",
