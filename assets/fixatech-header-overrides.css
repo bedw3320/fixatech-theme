@@ -760,12 +760,13 @@ header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade--with-featured 
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-featured {
   border-left: 1px solid var(--fixatech-white-10);
   padding-left: var(--padding-xl, 32px);
+  align-self: stretch;
 }
 
 /* Category image column */
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-images {
   position: relative;
-  min-height: 200px;
+  height: 100%;
 }
 
 header-menu[data-mega-menu-layout="cascade"] .mega-menu__cascade-image-wrap {

@@ -137,11 +137,11 @@
               endif
             -%}
             {%- capture img -%}
-              {%- if img_collection.featured_image -%}
+              {%- if img_collection.featured_image != blank -%}
                 {{- img_collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'mega-menu__cascade-image', sizes: '280px' -}}
               {%- elsif img_collection != nil and img_collection.products.size > 0 -%}
                 {%- assign first_product = img_collection.products | where: 'featured_image' | first -%}
-                {%- if first_product.featured_image -%}
+                {%- if first_product.featured_image != blank -%}
                   {{- first_product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', class: 'mega-menu__cascade-image', sizes: '280px' -}}
                 {%- endif -%}
               {%- endif -%}
