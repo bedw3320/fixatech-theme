@@ -17,7 +17,7 @@
     data-close-with-escape="true"
   {% endif %}
 
-  {% if filter_style == 'vertical' %}
+  {% if filter_style == 'vertical' and filter_index == 1 %}
     open
     open-by-default-on-mobile
     open-by-default-on-desktop
@@ -28,7 +28,7 @@
     {% if filter_style == 'horizontal' %}
       data-auto-close-details="desktop"
     {% endif %}
-    {% if filter_style == 'vertical' %}
+    {% if filter_style == 'vertical' and filter_index == 1 %}
       open
     {% endif %}
   >
