@@ -526,7 +526,7 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
-                "border": "solid",
+                "border": "none",
                 "border_width": 1,
                 "border_opacity": 30,
                 "border_radius": 12
@@ -567,8 +567,7 @@
         "gap": 12,
         "color_scheme": "scheme-3",
         "padding-block-start": 48,
-        "padding-block-end": 48,
-        "image_hover_zoom": true
+        "padding-block-end": 48
       }
     },
     "product_list_ayYVyU": {
@@ -1081,7 +1080,6 @@
       "name": "t:names.blog_posts_grid",
       "settings": {
         "blog": "decouvrez-nos-services",
-        "image_hover_zoom": true,
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "post_limit": 4,
