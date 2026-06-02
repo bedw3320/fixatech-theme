@@ -106,6 +106,7 @@
         "cell_c_price": "",
         "cell_c_bg_color": "#ffc600",
         "cell_c_text_color": "#141414",
+        "cell_c_link": "shopify://collections/en-promotion",
         "cell_d_image": "shopify://shop_images/2827_10G.jpg",
         "cell_d_cta_text": "PRODUITS SAISONNIERS",
         "cell_d_cta_link": "shopify://collections/saisonnier",
@@ -116,6 +117,7 @@
         "section_height_custom": 70,
         "section_width": "page-width",
         "carousel_on_mobile": true,
+        "image_hover_zoom": true,
         "padding-block-start": 12,
         "padding-block-end": 48
       }
