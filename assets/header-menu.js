@@ -336,10 +336,15 @@ class HeaderMenu extends Component {
     }
     this.#state.activeCascadeParent = trigger;
 
-    // Clear image column when parent changes — image updates on child hover
-    submenuContainer.querySelector('.mega-menu__cascade-images')
-      ?.querySelectorAll('[data-cascade-image]')
-      .forEach((el) => el.classList.remove('is-active'));
+    // Show the first available child image immediately; child hover/focus refines it.
+    const imageContainer = submenuContainer.querySelector('.mega-menu__cascade-images');
+    if (imageContainer) {
+      imageContainer.querySelectorAll('[data-cascade-image]').forEach((el) => el.classList.remove('is-active'));
+      const firstChildImage = Array.from(imageContainer.querySelectorAll('[data-cascade-image]')).find((el) =>
+        /** @type {HTMLElement} */ (el).dataset.cascadeImage?.startsWith(`${panelId}-`)
+      );
+      firstChildImage?.classList.add('is-active');
+    }
 
     // Recalculate submenu height since column 2 content changed
     requestAnimationFrame(() => {
