@@ -99,6 +99,7 @@
 
     <div class="mega-menu__cascade-children" data-cascade-children>
       {% for link in parent_link.links %}
+        {% assign parent_index = forloop.index %}
         {% if link.links != blank %}
           <div
             class="mega-menu__cascade-child-panel"
@@ -110,7 +111,7 @@
                   <a
                     href="{{ childLink.url }}"
                     class="mega-menu__link"
-                    data-cascade-img-trigger="{{ forloop.parentloop.index }}-{{ forloop.index }}"
+                    data-cascade-img-trigger="{{ parent_index }}-{{ forloop.index }}"
                   >
                     <span class="wrap-text">{{ childLink.title }}</span>
                   </a>
@@ -124,6 +125,7 @@
 
     <div class="mega-menu__cascade-featured mega-menu__cascade-images">
       {% for link in parent_link.links %}
+        {% assign parent_index = forloop.index %}
         {% if link.links != blank %}
           {% for childLink in link.links %}
             {%- liquid
@@ -150,7 +152,7 @@
               <a
                 href="{{ childLink.url }}"
                 class="mega-menu__cascade-image-wrap"
-                data-cascade-image="{{ forloop.parentloop.index }}-{{ forloop.index }}"
+                data-cascade-image="{{ parent_index }}-{{ forloop.index }}"
                 tabindex="-1"
               >
                 {{- img -}}
