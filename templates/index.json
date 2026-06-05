@@ -866,7 +866,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Découvrez nos services",
+            "label": "Découvrez Fixatech",
             "link": "shopify://pages/contact",
             "open_in_new_tab": false,
             "style_class": "button",
