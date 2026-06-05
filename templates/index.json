@@ -910,6 +910,7 @@
         "text_p7FCRk": {
           "type": "text",
           "name": "t:names.heading",
+          "disabled": true,
           "settings": {
             "text": "<h3>DÉCOUVREZ NOS SERVICES</h3>",
             "width": "fit-content",
