@@ -508,6 +508,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "eye",
+                    "image_upload": "shopify://shop_images/Expertise.svg",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
@@ -618,6 +619,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "check_box",
+                    "image_upload": "shopify://shop_images/Large_Inventaire.svg",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
@@ -1357,6 +1359,7 @@
       "name": "t:names.blog_posts_grid",
       "settings": {
         "blog": "decouvrez-nos-services",
+        "image_hover_zoom": true,
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "post_limit": 3,
