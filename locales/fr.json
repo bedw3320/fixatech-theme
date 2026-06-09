@@ -402,6 +402,27 @@
           },
           "pick_up_in_store_shipping_method_html": "Ramassage en boutique - {{ location_name }}"
         }
+      },
+      "delivery_options": {
+        "pick_up_locations": "Centres de ramassage",
+        "subscription_pickup_information": "Ce sera le point de ramassage pour toutes les futures commandes de votre abonnement.",
+        "pick_up_from_store": "Ramassage en boutique",
+        "pickup_point_map_title": "Carte des points de ramassage"
+      },
+      "order_summary": {
+        "pickup_label": "Ramassage en boutique"
+      },
+      "shipping": {
+        "subscription_pickup": "Ramassage de votre abonnement",
+        "local_pickup": {
+          "rollup_accessibility_label": "Options de point de ramassage"
+        }
+      },
+      "thank_you": {
+        "pick_up_in_store_marker": {
+          "shipping": "Centre de ramassage"
+        },
+        "ready_for_pickup_description": "Votre commande est prête à être ramassée. Apporter votre confirmation de commande lors du ramassage de votre commande."
       }
     }
   }
