@@ -392,6 +392,15 @@
       },
       "split_delivery": {
         "items_for_pickup": "Articles pour le ramassage"
+      },
+      "review": {
+        "blocks": {
+          "pickup_items_at": {
+            "one": "Ramassage de {{ count }} article à",
+            "other": "Ramassage de {{ count }} articles à",
+            "many": "Ramassage de {{ count }} articles à"
+          }
+        }
       }
     }
   }
