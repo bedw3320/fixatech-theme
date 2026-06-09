@@ -619,7 +619,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "check_box",
-                    "image_upload": "shopify://shop_images/Large_Inventaire.svg",
+                    "image_upload": "shopify://shop_images/Garantie_a83b030c-24b5-4500-8e99-bf718565bf05.svg",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
@@ -730,6 +730,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "box",
+                    "image_upload": "shopify://shop_images/Large_Inventaire_5c226935-b9a4-4184-8239-c275395fc4d5.svg",
                     "width": 72,
                     "link": "",
                     "open_in_new_tab": false
