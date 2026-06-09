@@ -365,7 +365,7 @@
       "order_status": {
         "ready_for_pickup_label": "Prête pour ramassage",
         "ready_for_pickup_description": "Ces articles sont prêts à être ramassés. Veuillez apporter votre confirmation de commande lors du ramassage de votre commande.",
-        "ready_for_pickup_location": "Votre command est prête à être ramassée au point de ramassage"
+        "ready_for_pickup_location": "Votre commande est prête à être ramassée au point de ramassage"
       }
     },
     "order_details": {
