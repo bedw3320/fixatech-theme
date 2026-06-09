@@ -399,7 +399,8 @@
             "one": "Ramassage de {{ count }} article à",
             "other": "Ramassage de {{ count }} articles à",
             "many": "Ramassage de {{ count }} articles à"
-          }
+          },
+          "pick_up_in_store_shipping_method_html": "Ramassage en boutique - {{ location_name }}"
         }
       }
     }
