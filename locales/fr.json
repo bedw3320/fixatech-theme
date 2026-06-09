@@ -429,7 +429,8 @@
           "delivery": {
             "local_pickup_delivery_line_detail_changed": "L'option de ramassage en magasin doit être modifiée afin de continuer.",
             "local_pickup_no_delivery_strategy_available": "Aucune option de ramassage en magasin disponible trouvée",
-            "selected_pickup_option_no_longer_available": "L'option de ramassage précédemment sélectionnée n'est plus disponible."
+            "selected_pickup_option_no_longer_available": "L'option de ramassage précédemment sélectionnée n'est plus disponible.",
+            "pickup_points_unavailable": "Les points de ramassage ne sont pas disponibles actuellement."
           }
         }
       }
