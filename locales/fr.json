@@ -375,5 +375,24 @@
         "pickup_point": "Point de ramassage"
       }
     }
+  },
+  "shopify": {
+    "checkout": {
+      "pickup_point": {
+        "pickup_unavailable_banner_title": {
+          "one": "Aucun point de ramassage n'est disponible pour votre article",
+          "other": "Aucun point de ramassage n'est disponible pour vos articles",
+          "many": "Aucun point de ramassage n'est disponible pour vos articles"
+        }
+      },
+      "local_pickup": {
+        "paginator": {
+          "accessibility_label": "Pagination du ramassage en magasin"
+        }
+      },
+      "split_delivery": {
+        "items_for_pickup": "Articles pour le ramassage"
+      }
+    }
   }
 }
