@@ -209,9 +209,9 @@
     "duties_and_taxes_included_shipping_at_checkout_without_policy_without_discounts": "Droits de douane et taxes inclus. L’expédition est calculée lors du paiement.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "Droits de douane inclus. L’expédition est calculée lors du paiement.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "Droits de douane inclus. L’expédition est calculée lors du paiement.",
-    "pickup_available_at_html": "Retrait disponible à la <b>{{ location }}</b>",
-    "pickup_available_in": "Retrait disponible, {{ pickup_time }}",
-    "pickup_not_available": "Retrait actuellement non disponible",
+    "pickup_available_at_html": "Ramassage disponible à la <b>{{ location }}</b>",
+    "pickup_available_in": "Ramassage disponible, {{ pickup_time }}",
+    "pickup_not_available": "Ramassage actuellement non disponible",
     "pickup_ready_in": "{{ pickup_time }}",
     "taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "Taxes et <a href=\"{{ link }}\">expédition</a> calculés lors du paiement.",
     "taxes_at_checkout_shipping_at_checkout_without_policy_without_discounts": "Taxes et expédition calculés lors du paiement.",
@@ -358,6 +358,22 @@
       "post": "Publier le commentaire",
       "success_moderated": "Commentaire publié, en attente de modération",
       "success": "Commentaire publié"
+    }
+  },
+  "customer_accounts": {
+    "orders": {
+      "order_status": {
+        "ready_for_pickup_label": "Prête pour ramassage",
+        "ready_for_pickup_description": "Ces articles sont prêts à être ramassés. Veuillez apporter votre confirmation de commande lors du ramassage de votre commande.",
+        "ready_for_pickup_location": "Votre command est prête à être ramassée au point de ramassage"
+      }
+    },
+    "order_details": {
+      "pickup": {
+        "pickup": "Ramassage",
+        "pickup_location": "Endroit de ramassage",
+        "pickup_point": "Point de ramassage"
+      }
     }
   }
 }
