@@ -12,6 +12,20 @@
     "cart-section": {
       "type": "main-cart",
       "blocks": {
+        "spacer_g6dYHQ": {
+          "type": "spacer",
+          "name": "t:names.spacer",
+          "settings": {
+            "size": "pixel",
+            "percent_size": 100,
+            "pixel_size": 120,
+            "custom_mobile_size": false,
+            "size_mobile": "percent",
+            "percent_size_mobile": 100,
+            "pixel_size_mobile": 120
+          },
+          "blocks": {}
+        },
         "cart-page-title": {
           "type": "_cart-title",
           "static": true,
@@ -57,10 +71,13 @@
           "blocks": {}
         }
       },
+      "block_order": [
+        "spacer_g6dYHQ"
+      ],
       "settings": {
         "section_width": "page-width",
         "color_scheme": "scheme-3",
-        "padding-block-start": 72,
+        "padding-block-start": 100,
         "padding-block-end": 48
       }
     },
