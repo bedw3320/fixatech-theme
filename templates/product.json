@@ -566,7 +566,7 @@
       "settings": {
         "product": "{{ product }}",
         "recommendation_type": "complementary",
-        "layout_type": "grid",
+        "layout_type": "carousel",
         "carousel_on_mobile": true,
         "max_products": 5,
         "columns": 5,
