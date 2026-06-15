@@ -18,8 +18,8 @@
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Découvrez nos derniers arrivages !",
-            "link": "",
+            "text": "Découvrez nos promos de la semaine !",
+            "link": "shopify://collections/en-promotion",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
             "weight": "",
@@ -32,7 +32,7 @@
           "type": "_announcement",
           "settings": {
             "text": "Bienvenue sur notre nouveau site web!",
-            "link": "",
+            "link": "#",
             "font": "var(--font-subheading--family)",
             "font_size": "1rem",
             "weight": "",
