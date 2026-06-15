@@ -9,23 +9,23 @@
  */
 {
   "sections": {
+    "divider_NUnXNT": {
+      "type": "divider",
+      "name": "t:names.divider_section",
+      "settings": {
+        "color_scheme": "scheme-6",
+        "section_width": "full-width",
+        "thickness": 0,
+        "corner_radius": "square",
+        "width_percent": 100,
+        "alignment_horizontal": "center",
+        "padding-block-start": 24,
+        "padding-block-end": 0
+      }
+    },
     "cart-section": {
       "type": "main-cart",
       "blocks": {
-        "spacer_g6dYHQ": {
-          "type": "spacer",
-          "name": "t:names.spacer",
-          "settings": {
-            "size": "pixel",
-            "percent_size": 100,
-            "pixel_size": 120,
-            "custom_mobile_size": false,
-            "size_mobile": "percent",
-            "percent_size_mobile": 100,
-            "pixel_size_mobile": 120
-          },
-          "blocks": {}
-        },
         "cart-page-title": {
           "type": "_cart-title",
           "static": true,
@@ -71,9 +71,6 @@
           "blocks": {}
         }
       },
-      "block_order": [
-        "spacer_g6dYHQ"
-      ],
       "settings": {
         "section_width": "page-width",
         "color_scheme": "scheme-3",
@@ -126,7 +123,7 @@
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h4",
+                "type_preset": "h2",
                 "font": "var(--font-body--family)",
                 "font_size": "",
                 "line_height": "normal",
@@ -289,6 +286,7 @@
     }
   },
   "order": [
+    "divider_NUnXNT",
     "cart-section",
     "product_list_NNFgcy"
   ]
