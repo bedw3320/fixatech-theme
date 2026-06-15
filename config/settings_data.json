@@ -302,14 +302,14 @@
       },
       "scheme-6": {
         "settings": {
-          "background": "#D9D9D9",
+          "background": "#FFFFFF",
           "foreground_heading": "#141414",
           "foreground": "#141414",
           "primary": "#ffc600",
           "primary_hover": "#e9b217",
           "border": "#343434",
           "shadow": "#000000",
-          "primary_button_background": "#ffc600",
+          "primary_button_background": "#515151",
           "primary_button_text": "#141414",
           "primary_button_border": "#ffc600",
           "primary_button_hover_background": "#e9b217",
