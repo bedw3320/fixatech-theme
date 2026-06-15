@@ -241,10 +241,10 @@
       },
       "name": "Featured collection",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
+        "collection": "en-promotion",
+        "layout_type": "carousel",
         "carousel_on_mobile": false,
-        "max_products": 4,
+        "max_products": 16,
         "cta_enabled": false,
         "cta_first_position": 4,
         "cta_repeat_interval": 0,
