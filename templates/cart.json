@@ -46,7 +46,7 @@
           "type": "_cart-summary",
           "static": true,
           "settings": {
-            "extend_summary": true,
+            "extend_summary": false,
             "inherit_color_scheme": false,
             "color_scheme": "scheme-6",
             "border": "none",
@@ -105,7 +105,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>VOUS AIMERIEZ PEUT ÊTRE</h3>",
+                "text": "<h3>VOUS AIMERIEZ PEUT-ÊTRE</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
