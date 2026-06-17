@@ -866,8 +866,8 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Découvrez Fixatech",
-            "link": "shopify://blogs/decouvrez-nos-services/decouvrez-fixatech",
+            "label": "Créer un compte B2B",
+            "link": "https://forms.zohopublic.com/fixatech/form/Demandeouverturededossier/formperma/euf-cPGrVFOsDXIAx6GjHAhVoEFDzQpMd63tpRZ4GgM",
             "open_in_new_tab": false,
             "style_class": "button",
             "width": "fit-content",
