@@ -866,7 +866,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Créer un compte B2B",
+            "label": "Créer un compte",
             "link": "https://forms.zohopublic.com/fixatech/form/Demandeouverturededossier/formperma/euf-cPGrVFOsDXIAx6GjHAhVoEFDzQpMd63tpRZ4GgM",
             "open_in_new_tab": false,
             "style_class": "button",
