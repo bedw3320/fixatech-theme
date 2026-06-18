@@ -547,10 +547,10 @@
       "settings": {
         "collection_list": [
           "milwaukee",
-          "makita",
           "dewalt",
-          "3m",
-          "bostitch"
+          "makita",
+          "metabo-hpt",
+          "3m"
         ],
         "layout_type": "grid",
         "carousel_on_mobile": true,
