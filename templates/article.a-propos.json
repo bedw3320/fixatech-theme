@@ -183,7 +183,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/d51fa4bc97159c3b33fb1dc909c8261cadea981c.jpg",
+                "image": "shopify://shop_images/Fixatech_Original_Registered.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
@@ -251,7 +251,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h3>Une prise en charge simple, <br/>partout au Québec.</h3>",
+                "text": "<h2><strong>Depuis 40 ans, on t'équipe pour ça.</strong></h2>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -276,6 +276,7 @@
             "text_VPUqER": {
               "type": "text",
               "name": "t:names.heading",
+              "disabled": true,
               "settings": {
                 "text": "<p><em><strong>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</strong></em></p>",
                 "width": "fit-content",
@@ -303,7 +304,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>1)<strong> Contactez-nous</strong> à l'adresse <a href=\"mailto:service@fixatech.com\" title=\"mailto:service@fixatech.com\"><strong>service@fixatech.com</strong></a> avec : nom, prénom, #téléphone, adresse, facture d’achat (si garantie), description du bris et #PO.</p><p>2) <strong>Réglez les frais</strong> d'administration de 24,99 $ ainsi que les frais de transport </p><p>3) Recevez instantanément votre <strong>étiquette d'expédition</strong> par courriel.</p><p>4) <strong>Déposer votre colis</strong> dans le point de service de votre choix (Postes Canada, Purolator, etc.). </p><p>5) Une fois la <strong>réparation </strong>effectuée, votre outil vous est réexpédié directement à votre adresse. (Notez que les frais de retour sont à votre charge.)</p>",
+                "text": "<p>Située à Saint-Nicolas sur la Rive-Sud de Québec, Fixatech dessert des centaines d'entrepreneurs de la construction, de l'industrie manufacturière et du préfabriqué. Grâce à notre vaste entrepôt de 7000 pi² rempli de clous, d'agrafes et d'outils, et grâce à notre centre de réparation d'outils, on a tout ce qu'il faut sous un même toit.</p><p><a href=\"https://fixatech-2.myshopify.com/pages/contact\" title=\"Nous Contacter\">Nous Contacter</a></p><p>Ouvert tous les jours de la semaine, notre magasin offre une grande variété d'outils et de produits de construction de marques réputées comme Milwaukee, Makita, DeWalt, Metabo-HPT, MAX, Senco, Bostitch, 3M, Tuck Tape, Featherlite, Quick Drive et Diablo. Depuis 40 ans, nos conseillers experts sont là pour t'écouter, te guider et te proposer des solutions de qualité à des prix compétitifs.</p><p><a href=\"https://maps.app.goo.gl/wodwMbsYhtHmqdvj6\" target=\"_blank\" title=\"Visitez notre boutique\">Notre Boutique</a></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
