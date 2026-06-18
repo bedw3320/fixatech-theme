@@ -330,7 +330,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "NOUS CONTACTER",
+                "label": "Nous contacter",
                 "link": "shopify://pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button",
