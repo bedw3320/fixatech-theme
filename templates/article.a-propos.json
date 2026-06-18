@@ -304,7 +304,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Située à Saint-Nicolas sur la Rive-Sud de Québec, Fixatech dessert des centaines d'entrepreneurs de la construction, de l'industrie manufacturière et du préfabriqué. Grâce à notre vaste entrepôt de 7000 pi² rempli de clous, d'agrafes et d'outils, et grâce à notre centre de réparation d'outils, on a tout ce qu'il faut sous un même toit.</p><p><a href=\"https://fixatech-2.myshopify.com/pages/contact\" title=\"Nous Contacter\">Nous Contacter</a></p><p>Ouvert tous les jours de la semaine, notre magasin offre une grande variété d'outils et de produits de construction de marques réputées comme Milwaukee, Makita, DeWalt, Metabo-HPT, MAX, Senco, Bostitch, 3M, Tuck Tape, Featherlite, Quick Drive et Diablo. Depuis 40 ans, nos conseillers experts sont là pour t'écouter, te guider et te proposer des solutions de qualité à des prix compétitifs.</p><p><a href=\"https://maps.app.goo.gl/wodwMbsYhtHmqdvj6\" target=\"_blank\" title=\"Visitez notre boutique\">Notre Boutique</a></p>",
+                "text": "<p>Située à Saint-Nicolas sur la Rive-Sud de Québec, Fixatech dessert des centaines d'entrepreneurs de la construction, de l'industrie manufacturière et du préfabriqué. Grâce à notre vaste entrepôt de 7000 pi² rempli de clous, d'agrafes et d'outils, et grâce à notre centre de réparation d'outils, on a tout ce qu'il faut sous un même toit.</p><p><a href=\"https://fixatech-2.myshopify.com/pages/contact\" title=\"Nous Contacter\">Nous Contacter</a></p><p>Ouvert tous les jours de la semaine, notre magasin offre une grande variété d'outils et de produits de construction de marques réputées comme Milwaukee, Makita, DeWalt, Metabo-HPT, MAX, Senco, Bostitch, 3M, Tuck Tape, Featherlite, Quick Drive et Diablo. Depuis 40 ans, nos conseillers experts sont là pour t'écouter, te guider et te proposer des solutions de qualité à des prix compétitifs.</p><p><a href=\"https://maps.app.goo.gl/wodwMbsYhtHmqdvj6\" target=\"_blank\" title=\"Visitez notre boutique\">Notre Boutique<br/></a></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -330,7 +330,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "418-871-1211 poste 2",
+                "label": "NOUS CONTACTER",
                 "link": "shopify://pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button",
