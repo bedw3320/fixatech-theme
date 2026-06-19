@@ -225,11 +225,11 @@ header-component.header {
   border-radius: 12px;
   border: 1px solid rgb(0 0 0 / 0.08);
   overflow: hidden;
-  background-color: var(--color-background);
 
-  /* Fixatech: light dropdown — white panel, dark text.
-     Override the dark popover color scheme; the .is-open opacity below
-     keeps the frosted/transparent effect intact. */
+  /* Fixatech: light dropdown — translucent white PANEL background, dark text.
+     Translucency lives on the panel background (not the whole element) so the
+     product cards below can stay fully opaque white. */
+  background-color: rgb(255 255 255 / 0.95);
   --color-background: #ffffff;
   --color-background-rgb: 255 255 255;
   --color-foreground: #141414;
@@ -239,12 +239,14 @@ header-component.header {
 
 #header-component .search-action--inline .predictive-search-form__content-wrapper.is-open {
   visibility: visible;
-  opacity: 0.95;
+  opacity: 1;
   pointer-events: auto;
 }
 
+/* Transparent inner layer so the translucent panel background shows through */
 #header-component .search-action--inline .predictive-search-form__content {
   max-height: 60vh;
+  background-color: transparent;
 }
 
 /* Product cards — 2-col base, 6-col on desktop */
@@ -260,16 +262,31 @@ header-component.header {
   }
 }
 
-/* Product card images — square, white bg, contain-fit (match rest of store) */
+/* Product cards — solid white card with border + 12px radius (matches
+   fixatech-product-card elsewhere in the store). Opaque, so the translucent
+   panel background only shows in the gaps around the cards. */
+#header-component .search-action--inline .resource-card {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  overflow: hidden;
+  row-gap: 0;
+}
+
+#header-component .search-action--inline .resource-card__content {
+  padding: var(--padding-2xs) var(--padding-sm) var(--padding-sm);
+}
+
+/* Image area — square, white bg, contain-fit; corners clipped by the card */
 #header-component .search-action--inline .resource-card__media {
   background-color: #fff;
-  border-radius: var(--product-corner-radius, 8px);
-  overflow: hidden;
+  border-radius: 0;
 }
 
 #header-component .search-action--inline .resource-card__image {
   aspect-ratio: 1 / 1;
   object-fit: contain;
+  border-radius: 0;
 }
 
 /* Heading size — use theme h4 defaults (scoped stylesheet shrinks to body-md) */
@@ -325,16 +342,30 @@ header-component.header {
   gap: var(--gap-md, 16px);
 }
 
-/* Product card images — square, white bg, contain-fit (match rest of store) */
+/* Product cards — solid white card with border + 12px radius (matches
+   fixatech-product-card elsewhere in the store). */
+.search-modal .resource-card {
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  overflow: hidden;
+  row-gap: 0;
+}
+
+.search-modal .resource-card__content {
+  padding: var(--padding-2xs) var(--padding-sm) var(--padding-sm);
+}
+
+/* Image area — square, white bg, contain-fit; corners clipped by the card */
 .search-modal .resource-card__media {
   background-color: #fff;
-  border-radius: var(--product-corner-radius, 8px);
-  overflow: hidden;
+  border-radius: 0;
 }
 
 .search-modal .resource-card__image {
   aspect-ratio: 1 / 1;
   object-fit: contain;
+  border-radius: 0;
 }
 
 /* Heading size — use theme h4 defaults (consistent with empty state) */
