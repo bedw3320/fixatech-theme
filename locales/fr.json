@@ -407,7 +407,8 @@
         "pick_up_locations": "Centres de ramassage",
         "subscription_pickup_information": "Ce sera le point de ramassage pour toutes les futures commandes de votre abonnement.",
         "pick_up_from_store": "Ramassage en boutique",
-        "pickup_point_map_title": "Carte des points de ramassage"
+        "pickup_point_map_title": "Carte des points de ramassage",
+        "pick_up": "Ramasser"
       },
       "order_summary": {
         "pickup_label": "Ramassage"
