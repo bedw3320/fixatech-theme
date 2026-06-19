@@ -410,7 +410,7 @@
         "pickup_point_map_title": "Carte des points de ramassage"
       },
       "order_summary": {
-        "pickup_label": "Ramassage en boutique"
+        "pickup_label": "Ramassage"
       },
       "shipping": {
         "subscription_pickup": "Ramassage de votre abonnement",
