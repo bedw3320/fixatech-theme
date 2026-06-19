@@ -299,6 +299,7 @@ header-component.header {
   background: #fff;
   border-color: #d9d9d9;
   border-radius: 12px;
+  overflow: hidden;
 }
 
 /* Keep each card a solid white bordered box on hover/selection — the theme
