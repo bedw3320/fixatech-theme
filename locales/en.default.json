@@ -390,6 +390,9 @@
         },
         "ship_items_count": {
           "many": "Ship %{count} items"
+        },
+        "items_count": {
+          "many": "%{count} items"
         }
       },
       "merchandise_unavailable_in_buyer_location": {
@@ -795,6 +798,9 @@
         },
         "location_far_away_other_items": {
           "many": "%{count} locations with your items"
+        },
+        "selected_pickup_option_no_longer_available": {
+          "ship_to_address_link": "ship to address"
         }
       },
       "notice_banner": {
