@@ -408,7 +408,8 @@
         "subscription_pickup_information": "Ce sera le point de ramassage pour toutes les futures commandes de votre abonnement.",
         "pick_up_from_store": "Ramassage en boutique",
         "pickup_point_map_title": "Carte des points de ramassage",
-        "pick_up": "Ramasser"
+        "pick_up": "Ramasser",
+        "pickup_point_method_definition": "Expédier au point de ramassage"
       },
       "order_summary": {
         "pickup_label": "Ramassage"
