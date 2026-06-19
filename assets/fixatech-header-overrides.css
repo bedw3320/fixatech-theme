@@ -277,10 +277,12 @@ header-component.header {
   padding: var(--padding-2xs) var(--padding-sm) var(--padding-sm);
 }
 
-/* Image area — square, white bg, contain-fit; corners clipped by the card */
+/* Image area — square, white bg, contain-fit, padded so the product photo
+   has white breathing room inside the card; corners clipped by the card */
 #header-component .search-action--inline .resource-card__media {
   background-color: #fff;
   border-radius: 0;
+  padding: var(--padding-sm);
 }
 
 #header-component .search-action--inline .resource-card__image {
@@ -356,10 +358,12 @@ header-component.header {
   padding: var(--padding-2xs) var(--padding-sm) var(--padding-sm);
 }
 
-/* Image area — square, white bg, contain-fit; corners clipped by the card */
+/* Image area — square, white bg, contain-fit, padded so the product photo
+   has white breathing room inside the card; corners clipped by the card */
 .search-modal .resource-card__media {
   background-color: #fff;
   border-radius: 0;
+  padding: var(--padding-sm);
 }
 
 .search-modal .resource-card__image {
