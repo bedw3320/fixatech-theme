@@ -291,6 +291,37 @@ header-component.header {
   border-radius: 0;
 }
 
+/* Collection (non-product) cards — match product card border colour
+   (#d9d9d9) instead of the inherited --color-border, and give the title
+   the same bottom breathing room products have (--margin-xs). */
+#header-component .search-action--inline .predictive-search-results__card:not(.predictive-search-results__card--product),
+.search-modal .predictive-search-results__card:not(.predictive-search-results__card--product) {
+  background: #fff;
+  border-color: #d9d9d9;
+  border-radius: 12px;
+}
+
+/* Keep each card a solid white bordered box on hover/selection — the theme
+   default swaps to a translucent --card-bg-hover with no solid background,
+   which made the cards look merged into one white rectangle on the panel. */
+#header-component .search-action--inline .predictive-search-results__card:not(.predictive-search-results__card--product):hover,
+#header-component .search-action--inline .predictive-search-results__card:not(.predictive-search-results__card--product)[aria-selected='true'].keyboard-focus,
+.search-modal .predictive-search-results__card:not(.predictive-search-results__card--product):hover,
+.search-modal .predictive-search-results__card:not(.predictive-search-results__card--product)[aria-selected='true'].keyboard-focus {
+  background: #fff;
+  border-color: #d9d9d9;
+}
+
+#header-component .search-action--inline .predictive-search-results__resource-header {
+  height: auto;
+  margin-block-end: var(--margin-xs);
+}
+
+.search-modal .predictive-search-results__resource-header {
+  height: auto;
+  margin-block-end: var(--margin-sm);
+}
+
 /* Heading size — use theme h4 defaults (scoped stylesheet shrinks to body-md) */
 #header-component .search-action--inline .predictive-search-results__title {
   font-size: var(--font-h4--size);
