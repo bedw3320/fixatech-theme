@@ -84,6 +84,7 @@
     "show_second_image_on_hover": false,
     "product_corner_radius": 12,
     "card_corner_radius": 12,
+    "card_title_case": "uppercase",
     "show_variant_image": true,
     "variant_swatch_width": 34,
     "variant_swatch_height": 34,
@@ -302,7 +303,7 @@
       },
       "scheme-6": {
         "settings": {
-          "background": "#FFFFFF",
+          "background": "#ffffff",
           "foreground_heading": "#141414",
           "foreground": "#141414",
           "primary": "#ffc600",
@@ -310,9 +311,9 @@
           "border": "#141414",
           "shadow": "#000000",
           "primary_button_background": "#141414",
-          "primary_button_text": "#FFFFFF",
+          "primary_button_text": "#ffffff",
           "primary_button_border": "#141414",
-          "primary_button_hover_background": "#D9D9D9",
+          "primary_button_hover_background": "#d9d9d9",
           "primary_button_hover_text": "#141414",
           "primary_button_hover_border": "#141414",
           "secondary_button_background": "rgba(0,0,0,0)",
