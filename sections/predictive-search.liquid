@@ -74,7 +74,7 @@
             {%- liquid
               assign title = 'content.search_results_resource_products' | t
               assign products = predictive_search.resources.products
-              render 'predictive-search-products-list', title: title, products: products
+              render 'predictive-search-products-list', title: title, products: products, limit: 6
             -%}
           {% endif %}
 
