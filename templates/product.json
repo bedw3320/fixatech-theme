@@ -369,12 +369,22 @@
             "metafield_key": "custom.product_documents"
           },
           "blocks": {}
+        },
+        "tab_kit_contents": {
+          "type": "_fixatech-tab",
+          "settings": {
+            "heading": "Contenu de l'emballage",
+            "content_source": "metafield",
+            "metafield_key": "custom.kit_contents"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "tab_description",
         "tab_specs",
-        "tab_resources"
+        "tab_resources",
+        "tab_kit_contents"
       ],
       "settings": {
         "hide_empty_tabs": true,
