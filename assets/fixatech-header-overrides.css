@@ -218,14 +218,23 @@ header-component.header {
   top: auto;
   left: 50%;
   transform: translateX(-50%);
-  width: 66vw;
+  width: 80vw;
   max-height: 70vh;
   z-index: 101;
   box-shadow: 0 8px 32px rgb(0 0 0 / 0.25);
   border-radius: 12px;
-  border: 1px solid rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(0 0 0 / 0.08);
   overflow: hidden;
   background-color: var(--color-background);
+
+  /* Fixatech: light dropdown — white panel, dark text.
+     Override the dark popover color scheme; the .is-open opacity below
+     keeps the frosted/transparent effect intact. */
+  --color-background: #ffffff;
+  --color-background-rgb: 255 255 255;
+  --color-foreground: #141414;
+  --color-foreground-rgb: 20 20 20;
+  color: #141414;
 }
 
 #header-component .search-action--inline .predictive-search-form__content-wrapper.is-open {
@@ -238,7 +247,7 @@ header-component.header {
   max-height: 60vh;
 }
 
-/* Product cards — 2-col base, 4-col on desktop */
+/* Product cards — 2-col base, 6-col on desktop */
 #header-component .search-action--inline .predictive-search-results__wrapper-products {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -247,7 +256,7 @@ header-component.header {
 
 @media screen and (min-width: 990px) {
   #header-component .search-action--inline .predictive-search-results__wrapper-products {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -296,6 +305,18 @@ header-component.header {
 /* ═══════════════════════════════════════════════════════════════
    3c. MOBILE SEARCH MODAL — Fixatech polish
    ═══════════════════════════════════════════════════════════════ */
+
+/* Fixatech: light modal — white bg, dark text (overrides dark popover scheme).
+   Cascades to the input bar, headings, cards, prices and borders. */
+.search-modal predictive-search-component {
+  --color-background: #ffffff;
+  --color-background-rgb: 255 255 255;
+  --color-foreground: #141414;
+  --color-foreground-rgb: 20 20 20;
+  --color-input-background: #ffffff;
+  --color-input-text: #141414;
+  color: #141414;
+}
 
 /* 2-column product grid in mobile modal (empty state + recently viewed) */
 .search-modal .predictive-search-results__wrapper-products {
