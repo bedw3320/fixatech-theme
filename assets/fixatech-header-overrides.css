@@ -291,26 +291,52 @@ header-component.header {
   border-radius: 0;
 }
 
-/* Collection (non-product) cards — match product card border colour
-   (#d9d9d9) instead of the inherited --color-border, and give the title
-   the same bottom breathing room products have (--margin-xs). */
+/* Collection cards — mirror the product-card structure. Product cards put
+   their white box / border / radius on the inner .resource-card and leave the
+   list wrapper transparent. Collections were the opposite: the box lived on
+   the carousel cell (.predictive-search-results__card slide), a larger padded
+   rectangle whose edges/clipping didn't line up with the visible card, which
+   read as white overflow. So: make the carousel cell transparent, and move
+   the visible box onto the inner .resource-card[collection]. */
 #header-component .search-action--inline .predictive-search-results__card:not(.predictive-search-results__card--product),
 .search-modal .predictive-search-results__card:not(.predictive-search-results__card--product) {
-  background: #fff;
-  border-color: #d9d9d9;
-  border-radius: 12px;
-  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
 }
 
-/* Keep each card a solid white bordered box on hover/selection — the theme
-   default swaps to a translucent --card-bg-hover with no solid background,
-   which made the cards look merged into one white rectangle on the panel. */
+/* Neutralise the theme hover/selected swap on the cell so no tinted block
+   bleeds behind the card. */
 #header-component .search-action--inline .predictive-search-results__card:not(.predictive-search-results__card--product):hover,
 #header-component .search-action--inline .predictive-search-results__card:not(.predictive-search-results__card--product)[aria-selected='true'].keyboard-focus,
 .search-modal .predictive-search-results__card:not(.predictive-search-results__card--product):hover,
 .search-modal .predictive-search-results__card:not(.predictive-search-results__card--product)[aria-selected='true'].keyboard-focus {
+  background: transparent;
+  border-color: transparent;
+}
+
+/* The actual collection card — solid white box, #d9d9d9 border, 12px radius,
+   clipped to the corners (matches product cards). */
+#header-component .search-action--inline .resource-card[data-resource-type='collection'],
+.search-modal .resource-card[data-resource-type='collection'] {
   background: #fff;
-  border-color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  overflow: hidden;
+  row-gap: 0;
+}
+
+/* White padding around the thumbnail strip + content, like product cards. */
+#header-component .search-action--inline .resource-card[data-resource-type='collection'] .resource-card__media,
+.search-modal .resource-card[data-resource-type='collection'] .resource-card__media {
+  padding: var(--padding-sm) var(--padding-sm) 0;
+}
+
+#header-component .search-action--inline .resource-card[data-resource-type='collection'] .resource-card__content,
+.search-modal .resource-card[data-resource-type='collection'] .resource-card__content {
+  padding: var(--padding-2xs) var(--padding-sm) var(--padding-sm);
 }
 
 #header-component .search-action--inline .predictive-search-results__resource-header {
