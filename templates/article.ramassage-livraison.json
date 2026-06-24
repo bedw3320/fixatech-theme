@@ -277,9 +277,8 @@
             "text_VPUqER": {
               "type": "text",
               "name": "t:names.heading",
-              "disabled": true,
               "settings": {
-                "text": "<p><em><strong>Service rapide, certifié CNESST et garanti 30 jours. Envoyez-nous votre outil, on s'occupe du reste.</strong></em></p>",
+                "text": "<p>Pas le temps de passer au magasin? <strong>On se déplace pour toi. </strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
