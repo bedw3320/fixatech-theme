@@ -82,6 +82,7 @@
     "quick_add": false,
     "mobile_quick_add": false,
     "show_second_image_on_hover": false,
+    "empty_state_collection": "produits-vedettes",
     "product_corner_radius": 12,
     "card_corner_radius": 12,
     "card_title_case": "uppercase",
