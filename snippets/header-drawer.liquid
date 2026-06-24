@@ -473,7 +473,20 @@
                 class="menu-drawer__lang"
                 data-show-filter="false"
               >
-                {%- form 'localization', id: 'DrawerLanguageForm', class: 'localization-form', ref: 'form' -%}
+                {%- comment -%}
+                  return_to must be an explicit clean path. When the header is
+                  re-rendered through the Section Rendering API (e.g. after a cart
+                  update) the form's auto-captured return_to becomes the
+                  ?section_id=...header_section URL, so switching language would
+                  redirect to a bare, unstyled section render. request.path is
+                  always the real current page path with no section_id.
+                {%- endcomment -%}
+                {%- form 'localization',
+                  id: 'DrawerLanguageForm',
+                  class: 'localization-form',
+                  ref: 'form',
+                  return_to: request.path
+                -%}
                   <ul
                     class="menu-drawer__lang-list list-unstyled"
                     role="listbox"
