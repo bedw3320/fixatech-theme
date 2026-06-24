@@ -811,7 +811,7 @@
       },
       "name": "Featured collection",
       "settings": {
-        "collection": "ponceuses",
+        "collection": "cloueuses",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 4,
