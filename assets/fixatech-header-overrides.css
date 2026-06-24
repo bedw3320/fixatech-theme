@@ -583,8 +583,8 @@ header-component.header {
 }
 
 #header-component .mega-menu__arrow svg {
-  width: 16px;
-  height: 16px;
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
 }
 
 /* Cascade mode: active/expanded parent stays yellow with arrow visible */
@@ -704,14 +704,16 @@ header-component.header {
   color: var(--fixatech-white, #fff);
 }
 
-/* Arrow icon — match desktop mega menu arrow (yellow, icon-arrow.svg, 16px) */
+/* Arrow icon — match the desktop mega menu and site-wide button arrows:
+   yellow icon-arrow.svg sized at the standard --icon-size-sm (20px), not the
+   smaller hardcoded 16px that read undersized next to the rest of the site. */
 .fixatech-drawer-arrow {
   color: var(--fixatech-primary, #ffc600);
 }
 
 .menu-drawer .fixatech-drawer-arrow svg {
-  width: 16px;
-  height: 16px;
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
 }
 
 /* ═══════════════════════════════════════════════════════════════
