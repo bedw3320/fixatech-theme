@@ -46,7 +46,6 @@
     gap: var(--gap-xl, 32px);
     border-bottom: 1px solid var(--color-border, #d9d9d9);
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     /* Horizontal drag should only ever scroll the strip — never start a
        text selection or native element drag (the "floating tab" bug). */
@@ -78,8 +77,10 @@
     white-space: nowrap;
     color: #a6a6a6;
     transition: color 0.2s ease;
-    position: relative;
-    bottom: -1px;
+    /* Pull the tab down 1px so the active underline overlaps the nav's
+       bottom border. Negative margin (not position:relative) avoids
+       promoting the tab to a layer that floats during momentum scroll. */
+    margin-bottom: -1px;
     /* Prevent the button from being picked up as a draggable ghost */
     -webkit-user-drag: none;
     -webkit-user-select: none;
