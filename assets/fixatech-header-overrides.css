@@ -704,9 +704,9 @@ header-component.header {
   color: var(--fixatech-white, #fff);
 }
 
-/* Arrow icon — sizing, color, no extra padding */
+/* Arrow icon — match desktop mega menu arrow (yellow, icon-arrow.svg, 16px) */
 .fixatech-drawer-arrow {
-  color: var(--fixatech-white, #fff);
+  color: var(--fixatech-primary, #ffc600);
 }
 
 .menu-drawer .fixatech-drawer-arrow svg {
