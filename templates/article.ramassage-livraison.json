@@ -305,7 +305,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Pas le temps de passer au magasin? On se déplace pour toi. Fixatech offre un service de livraison rapide directement sur tes chantiers et dans tes ateliers, partout dans la grande région de Québec et sur la Rive-Sud. Clous, agrafes, outils, fournitures : tu passes ta commande, on s'occupe du reste.</p><p>Depuis 40 ans, nos conseillers experts sont là pour t'écouter, te guider et te proposer des solutions de qualité à des prix compétitifs - au comptoir, au téléphone ou livrées à ta porte.</p>",
+                "text": "<p>Fixatech offre un service de livraison rapide directement sur tes chantiers et dans tes ateliers, partout dans la grande région de Québec et sur la Rive-Sud. Clous, agrafes, outils, fournitures : tu passes ta commande, on s'occupe du reste.</p><p>Depuis 40 ans, nos conseillers experts sont là pour t'écouter, te guider et te proposer des solutions de qualité à des prix compétitifs - au comptoir, au téléphone ou livrées à ta porte.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
