@@ -1069,6 +1069,7 @@
         "faq_heading",
         "faq_accordion"
       ],
+      "disabled": true,
       "name": "t:names.faq_section",
       "settings": {
         "content_direction": "column",
