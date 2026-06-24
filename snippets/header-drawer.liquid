@@ -103,9 +103,8 @@
             {%- comment -%}
               Handle menus with 3 levels of links
             {%- endcomment -%}
-            {% if false %}
-              {% assign first_accordion_open = false %}
-              {% assign animation_index = 0 %}
+            {% assign first_accordion_open = false %}
+            {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {% assign animation_index = animation_index | plus: 1 %}
               <li
@@ -418,7 +417,6 @@
                 {%- endif -%}
               </li>
             {%- endfor -%}
-          {% endif %}
         </ul>
       </nav>
       <div
