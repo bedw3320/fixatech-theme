@@ -329,6 +329,15 @@
     }
   }
 
+  /* Mobile: drop the section's top padding so the product media sits close to the
+     breadcrumbs. Overrides the inline --padding-block-start from spacing-style.
+     Desktop keeps the configured padding. */
+  @media screen and (max-width: 749px) {
+    .product-information.section {
+      padding-block-start: 0;
+    }
+  }
+
   /* Small mobile - hide text content and compare price */
   @media screen and (max-width: 389px) {
     .sticky-add-to-cart__bar {
