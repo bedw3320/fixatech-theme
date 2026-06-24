@@ -48,6 +48,10 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    /* Horizontal drag should only ever scroll the strip — never start a
+       text selection or native element drag (the "floating tab" bug). */
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .fixatech-product-tabs__nav::-webkit-scrollbar {
@@ -76,6 +80,10 @@
     transition: color 0.2s ease;
     position: relative;
     bottom: -1px;
+    /* Prevent the button from being picked up as a draggable ghost */
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .fixatech-product-tabs__tab[aria-selected='true'] {
