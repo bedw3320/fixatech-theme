@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>L'EXPERT EN RÉPARATION <br/>D'OUTILS À QUÉBEC</h2>",
+            "text": "<h2>Ramassage et Livraison</h2>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "center",
@@ -41,6 +41,7 @@
         "group_FYMhDa": {
           "type": "group",
           "name": "t:names.group",
+          "disabled": true,
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
@@ -251,7 +252,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h3>Une prise en charge simple, <br/>partout au Québec.</h3>",
+                "text": "<p><strong>On te livre aussi tout ça.</strong></p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
