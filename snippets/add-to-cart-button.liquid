@@ -53,7 +53,21 @@
       <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
         <span>
           <span>
-            {{- add_to_cart_text | default: default_add_to_cart_text -}}
+            {%- if can_add_to_cart and icon_only_on_mobile != true -%}
+              {%- comment -%}
+                Fixatech: render two labels so French product cards can swap the
+                long "Ajouter au panier" for a short "Ajouter" when the button is
+                too narrow (see the FR rules in base.css). The short label is
+                hidden everywhere by default, so PDP and other locales are
+                unaffected. Only when the product is addable — sold-out /
+                unavailable text must never be replaced. The quick-add pill
+                (icon_only_on_mobile) keeps the original single-label markup.
+              {%- endcomment -%}
+              <span class="add-to-cart-text__full">{{- add_to_cart_text | default: default_add_to_cart_text -}}</span>
+              <span class="add-to-cart-text__short">{{- 'actions.add' | t -}}</span>
+            {%- else -%}
+              {{- add_to_cart_text | default: default_add_to_cart_text -}}
+            {%- endif -%}
           </span>
         </span>
       </span>

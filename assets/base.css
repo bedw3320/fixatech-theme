@@ -4939,6 +4939,50 @@ product-recommendations:has([data-has-recommendations='false']) {
   clip-path: circle(100% at 50% 50%);
 }
 
+/* ─── Fixatech: French add-to-cart label on product cards ──────────────
+   French "Ajouter au panier" is too long for the narrow 2-col mobile card
+   grid and wrapped onto three lines. The button now renders two labels
+   (full + short "Ajouter"); the short one is hidden everywhere by default.
+   Inside a French product card we make the in-content add-to-cart button an
+   inline-size container, stop the label from wrapping, and reveal the full
+   label as soon as the button is wide enough to fit it. Scoped to
+   .product-form-buttons so the quick-add pill, the PDP, and non-French
+   locales are all left untouched. */
+.add-to-cart-text__short {
+  display: none;
+}
+
+product-card .product-form-buttons .add-to-cart-button {
+  container-type: inline-size;
+  container-name: fixatech-atc;
+}
+
+product-card:lang(fr) .product-form-buttons .add-to-cart-text__content {
+  white-space: nowrap;
+}
+
+/* Narrow (default): show the short label, hide the full one. */
+product-card:lang(fr) .product-form-buttons .add-to-cart-text__full {
+  display: none;
+}
+
+product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
+  display: inline;
+}
+
+/* Wide enough for "Ajouter au panier": swap back to the full label.
+   ~200px is the button width at which the full French string fits on one
+   line; lower it to show the full label sooner, raise it to show it later. */
+@container fixatech-atc (min-width: 200px) {
+  product-card:lang(fr) .product-form-buttons .add-to-cart-text__full {
+    display: inline;
+  }
+
+  product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
+    display: none;
+  }
+}
+
 @keyframes atc-slide {
   to {
     opacity: var(--atc-opacity, 1);
