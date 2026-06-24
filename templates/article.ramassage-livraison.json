@@ -252,7 +252,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p><strong>On te livre aussi tout ça.</strong></p>",
+                "text": "<h3>On te livre aussi tout ça.</h3>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
