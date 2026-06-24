@@ -297,6 +297,13 @@
 </div>
 
 {% stylesheet %}
+/* Isolate the section's stacking context so internal z-indexes (notably the
+   mobile carousel arrows at z-index:10) cannot paint above the sticky header
+   layer (--layer-sticky: 8) and bleed over the open mobile menu drawer. */
+.bento-hero {
+  isolation: isolate;
+}
+
 .bento-hero__grid {
   display: grid;
   grid-template-columns: 1fr 1fr var(--bento-col-c, 35%);
