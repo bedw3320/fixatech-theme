@@ -232,7 +232,7 @@
               "name": "t:names.menu",
               "settings": {
                 "menu": "main-menu",
-                "heading": "",
+                "heading": "Menu",
                 "menu_spacing": 12,
                 "show_as_accordion": true,
                 "accordion_icon": "caret",
@@ -253,7 +253,7 @@
               "name": "t:names.menu",
               "settings": {
                 "menu": "footer",
-                "heading": "",
+                "heading": "Politiques",
                 "menu_spacing": 12,
                 "show_as_accordion": true,
                 "accordion_icon": "caret",
