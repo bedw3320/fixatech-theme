@@ -144,6 +144,7 @@
   "content": {
     "cancel": "Cancel",
     "discount": "Discount",
+    "contact_us": "Contact us",
     "account_title": "Account",
     "terms_and_policies": "Terms and Policies",
     "account_title_personalized": "Hi {{ first_name }}",

@@ -609,6 +609,16 @@
           {% endif %}
         {%- endif -%}
 
+        {%- comment -%} Fixatech: contact page link, between the language switcher and the phone {%- endcomment -%}
+        {% if data_header_drawer_type == 'mobile-drawer' %}
+          <a
+            href="{{ pages.contact.url | default: '/pages/contact' }}"
+            class="menu-drawer__utility-link link focus-inset"
+          >
+            <span class="menu-drawer__menu-item-text">{{ 'content.contact_us' | t }}</span>
+          </a>
+        {% endif %}
+
         {%- comment -%} Fixatech: phone number, shown in the desktop header, surfaced here on mobile {%- endcomment -%}
         {% if data_header_drawer_type == 'mobile-drawer' and section.settings.show_phone %}
           <a
