@@ -24,6 +24,21 @@
     assign on_sale = true
   endif
   assign available = product.available
+
+  comment
+    Add-to-cart label. French is long ("Ajouter au panier") and wraps in the
+    tight 2-col mobile grid, so for French we render both the full label and a
+    short one ("Ajouter") and let a container query (in CSS) swap to the full
+    label as soon as the card is wide enough. English ("Add to cart") fits at
+    every width, so it keeps a single, untouched label.
+  endcomment
+  assign atc_label = 'products.card.add_to_cart' | t | default: 'Ajouter au panier'
+  assign atc_label_short = 'actions.add' | t | default: 'Ajouter'
+  assign atc_lang = localization.language.iso_code | downcase | slice: 0, 2
+  assign atc_is_fr = false
+  if atc_lang == 'fr'
+    assign atc_is_fr = true
+  endif
 -%}
 
 <article class="fixatech-card{% if card_class != '' %} {{ card_class }}{% endif %}" data-fixatech-card>
@@ -120,7 +135,7 @@
     <button
       type="button"
       class="fixatech-card__atc-btn"
-      aria-label="{{ 'products.card.add_to_cart' | t | default: 'Ajouter au panier' }} — {{ product.title }}"
+      aria-label="{{ atc_label }} — {{ product.title }}"
       data-fixatech-atc
       data-variant-id="{{ current_variant.id }}"
       {%- unless available %} disabled{% endunless %}
@@ -128,7 +143,14 @@
       <svg class="fixatech-card__atc-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
         <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span class="fixatech-card__atc-text">{{ 'products.card.add_to_cart' | t | default: 'Ajouter au panier' }}</span>
+      <span class="fixatech-card__atc-text">
+        {%- if atc_is_fr -%}
+          <span class="fixatech-card__atc-full">{{ atc_label }}</span>
+          <span class="fixatech-card__atc-short">{{ atc_label_short }}</span>
+        {%- else -%}
+          {{ atc_label }}
+        {%- endif -%}
+      </span>
       <svg class="fixatech-card__atc-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
         <path d="M7 3v8M3 7h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
@@ -148,6 +170,9 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    /* Container context so the add-to-cart label can respond to the card's own
+       width (column-count aware), not just the viewport. See the ATC button. */
+    container: fixatech-card / inline-size;
   }
 
   .fixatech-card__link {
@@ -401,6 +426,31 @@
     color: #000000;
     line-height: 1;
     transition: color 0.2s ease;
+    /* Never let the button label wrap to a second line. */
+    white-space: nowrap;
+  }
+
+  /* ─── French label truncation (FR only) ────────────────────────
+     French "Ajouter au panier" is too long for the tight 2-col mobile grid.
+     Default to the short label ("Ajouter"); reveal the full label as soon as
+     the card itself is wide enough. These spans exist only in the FR DOM, so
+     English ("Add to cart") is unaffected. */
+  .fixatech-card__atc-full {
+    display: none;
+  }
+
+  .fixatech-card__atc-short {
+    display: inline;
+  }
+
+  @container fixatech-card (min-width: 240px) {
+    .fixatech-card__atc-full {
+      display: inline;
+    }
+
+    .fixatech-card__atc-short {
+      display: none;
+    }
   }
 
   /* ─── Responsive: Tablet (768px–1511px) ────────────────────── */
