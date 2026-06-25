@@ -89,14 +89,19 @@ class HeaderDrawer extends Component {
   }
 
   /**
-   * Fixatech: handle a tap on a top-level drawer item that has children.
+   * Fixatech: handle a tap on a drawer item that has children — both top-level
+   * slide-forward items and second-level accordion items.
    *
    * The title is a real link to the parent (umbrella) collection and the arrow
-   * to its right opens the submenu. A native `<summary>` toggles its `<details>`
-   * on every click, so we inspect what was actually tapped: a tap on the title
-   * link cancels the toggle and follows the link, anything else (the arrow or
-   * the space toward it) opens the submenu — matching desktop, where the title
-   * links and hover opens the flyout.
+   * to its right reveals the children. A native `<summary>` toggles its
+   * `<details>` on every click, so we inspect what was actually tapped: a tap on
+   * the title link cancels the toggle and follows the link, anything else (the
+   * arrow or the space toward it) reveals the children — matching desktop, where
+   * the title links and hover opens the flyout.
+   *
+   * Revealing differs by level: top-level items slide a submenu panel in via
+   * `open()`, while accordion items expand in place through their own native
+   * `<details>` toggle (handled by accordion-custom), so we leave those alone.
    *
    * Note: the declarative event is proxied so `event.target` is always the
    * `<summary>`; `composedPath()[0]` is the real innermost element tapped.
@@ -110,7 +115,7 @@ class HeaderDrawer extends Component {
     const href = titleLink?.getAttribute('href');
 
     // Follow the title link only when it points somewhere real. Container-only
-    // parents (href "#" or empty) fall through to opening the submenu so the
+    // parents (href "#" or empty) fall through to revealing the children so the
     // arrow isn't the only way in.
     if (titleLink instanceof HTMLAnchorElement && href && href !== '#') {
       // Cancel the native <summary> toggle and follow the link instead.
@@ -118,6 +123,11 @@ class HeaderDrawer extends Component {
       window.location.assign(titleLink.href);
       return;
     }
+
+    // Arrow / rest of the row. Accordion items expand in place — let their
+    // native <details> toggle run untouched. Top-level items slide a panel in.
+    const summary = tapped instanceof Element ? tapped.closest('summary') : null;
+    if (summary?.closest('accordion-custom')) return;
 
     this.open('submenu', event);
   }

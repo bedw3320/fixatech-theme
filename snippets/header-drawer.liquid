@@ -244,10 +244,23 @@
                                       <summary
                                         id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                                         class="menu-drawer__menu-item menu-drawer__menu-item--parent focus-inset"
+                                        on:click="header-drawer/openOrFollow"
                                       >
-                                        <span class="menu-drawer__menu-item-text wrap-text">
-                                          {{- childlink.title | escape -}}
-                                        </span>
+                                        {%- comment -%}
+                                          Fixatech: same split as the top level. The title links to the
+                                          parent (umbrella) collection; the arrow toggles the accordion.
+                                          header-drawer/openOrFollow follows the link on a title tap and
+                                          leaves accordion items to their native <details> toggle on an
+                                          arrow tap. See assets/header-drawer.js.
+                                        {%- endcomment -%}
+                                        <a
+                                          href="{{ childlink.url }}"
+                                          class="menu-drawer__menu-item-link"
+                                        >
+                                          <span class="menu-drawer__menu-item-text wrap-text">
+                                            {{- childlink.title | escape -}}
+                                          </span>
+                                        </a>
                                         <span class="svg-wrapper fixatech-drawer-arrow">
                                           {{- 'icon-arrow.svg' | inline_asset_content -}}
                                         </span>
