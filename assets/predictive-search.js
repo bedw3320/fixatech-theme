@@ -346,6 +346,14 @@ class PredictiveSearchComponent extends Component {
     const url = new URL(Theme.routes.predictive_search_url, location.origin);
     url.searchParams.set('q', searchTerm);
     url.searchParams.set('resources[limit_scope]', 'each');
+    // Predictive search defaults to searching only title/product_type/variants.title/vendor,
+    // while the full /search results page also searches SKU, barcode, tags and description.
+    // That mismatch made the dropdown show "no results" for queries (e.g. part numbers / SKUs)
+    // that the results page still matched. Expand predictive search to the same field set so
+    // both stay in parity. Note: metafields (e.g. custom.manufacturer_part_number) are NOT
+    // indexable here — mirror those into tags to make them searchable.
+    // Drop `body` if typeahead relevance gets too noisy.
+    url.searchParams.set('resources[options][fields]', 'title,product_type,variants.title,vendor,variants.sku,variants.barcode,tag,body');
 
     const { predictiveSearchResults } = this.refs;
 
