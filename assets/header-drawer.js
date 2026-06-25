@@ -89,6 +89,40 @@ class HeaderDrawer extends Component {
   }
 
   /**
+   * Fixatech: handle a tap on a top-level drawer item that has children.
+   *
+   * The title is a real link to the parent (umbrella) collection and the arrow
+   * to its right opens the submenu. A native `<summary>` toggles its `<details>`
+   * on every click, so we inspect what was actually tapped: a tap on the title
+   * link cancels the toggle and follows the link, anything else (the arrow or
+   * the space toward it) opens the submenu — matching desktop, where the title
+   * links and hover opens the flyout.
+   *
+   * Note: the declarative event is proxied so `event.target` is always the
+   * `<summary>`; `composedPath()[0]` is the real innermost element tapped.
+   *
+   * @param {Event} event
+   */
+  openOrFollow(event) {
+    const path = typeof event.composedPath === 'function' ? event.composedPath() : [];
+    const tapped = path[0];
+    const titleLink = tapped instanceof Element ? tapped.closest('.menu-drawer__menu-item-link') : null;
+    const href = titleLink?.getAttribute('href');
+
+    // Follow the title link only when it points somewhere real. Container-only
+    // parents (href "#" or empty) fall through to opening the submenu so the
+    // arrow isn't the only way in.
+    if (titleLink instanceof HTMLAnchorElement && href && href !== '#') {
+      // Cancel the native <summary> toggle and follow the link instead.
+      event.preventDefault();
+      window.location.assign(titleLink.href);
+      return;
+    }
+
+    this.open('submenu', event);
+  }
+
+  /**
    * Go back or close the main menu drawer
    * @param {Event} [event]
    */

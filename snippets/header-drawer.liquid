@@ -122,9 +122,24 @@
                     <summary
                       id="HeaderDrawer-{{ link.handle }}"
                       class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
-                      on:click="header-drawer/open/submenu"
+                      on:click="header-drawer/openOrFollow"
                     >
-                      <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                      {%- comment -%}
+                        Fixatech: split tap targets on mobile. The title is a real
+                        link to the parent (umbrella) collection — tapping it
+                        navigates there, mirroring the desktop mega menu. Tapping
+                        the arrow (or the space toward it) opens the submenu
+                        instead. A native <summary> toggles its <details> on any
+                        click, so header-drawer/openOrFollow inspects the tap
+                        target and either follows the link or opens the submenu.
+                        See assets/header-drawer.js.
+                      {%- endcomment -%}
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item-link"
+                      >
+                        <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                      </a>
                       <span class="svg-wrapper fixatech-drawer-arrow">
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                       </span>
@@ -1122,6 +1137,20 @@
   .menu-drawer__menu-item-text {
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* Fixatech: title link inside a top-level <summary>. It stretches to fill the
+     row's left region (full height for a comfortable tap target) so tapping the
+     label navigates to the parent collection, while the arrow span to its right
+     keeps opening the submenu. */
+  .menu-drawer__menu-item-link {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    flex: 1 1 auto;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
   }
 
   /** Styles when the country selector is hidden */
