@@ -1,16 +1,21 @@
 {%- liquid
-  assign cell_a_image         = section.settings.cell_a_image
-  assign cell_a_heading       = section.settings.cell_a_heading
-  assign cell_a_text          = section.settings.cell_a_text
-  assign cell_b_image         = section.settings.cell_b_image
-  assign cell_c_image         = section.settings.cell_c_image
-  assign cell_c_heading       = section.settings.cell_c_heading
-  assign cell_c_subtext       = section.settings.cell_c_subtext
-  assign cell_c_product_image = section.settings.cell_c_product_image
-  assign cell_c_price         = section.settings.cell_c_price
-  assign cell_d_image         = section.settings.cell_d_image
-  assign cell_d_cta_text      = section.settings.cell_d_cta_text
-  assign cell_d_cta_link      = section.settings.cell_d_cta_link
+  assign cell_a_image                 = section.settings.cell_a_image
+  assign cell_a_image_mobile          = section.settings.cell_a_image_mobile
+  assign cell_a_heading               = section.settings.cell_a_heading
+  assign cell_a_text                  = section.settings.cell_a_text
+  assign cell_b_image                 = section.settings.cell_b_image
+  assign cell_b_image_mobile          = section.settings.cell_b_image_mobile
+  assign cell_c_image                 = section.settings.cell_c_image
+  assign cell_c_image_mobile          = section.settings.cell_c_image_mobile
+  assign cell_c_heading               = section.settings.cell_c_heading
+  assign cell_c_subtext               = section.settings.cell_c_subtext
+  assign cell_c_product_image         = section.settings.cell_c_product_image
+  assign cell_c_product_image_mobile  = section.settings.cell_c_product_image_mobile
+  assign cell_c_price                 = section.settings.cell_c_price
+  assign cell_d_image                 = section.settings.cell_d_image
+  assign cell_d_image_mobile          = section.settings.cell_d_image_mobile
+  assign cell_d_cta_text              = section.settings.cell_d_cta_text
+  assign cell_d_cta_link              = section.settings.cell_d_cta_link
 -%}
 
 {%- comment -%}
@@ -23,16 +28,25 @@
 {%- capture cell_a_html -%}
   <div class="bento-hero__cell bento-hero__cell-a{% if cell_a_image != blank %} bento-hero__cell-a--image{% endif %}{% unless section.settings.cell_a_show_mobile %} bento-hero__cell--hide-mobile{% endunless %}">
     {%- if cell_a_image != blank -%}
-      {{
-        cell_a_image
-        | image_url: width: 800
-        | image_tag:
-          class: 'bento-hero__fill-img',
-          loading: 'lazy',
-          widths: '400, 800',
-          sizes: '(max-width: 749px) 100vw, 33vw',
-          alt: cell_a_image.alt | default: ''
-      }}
+      <picture>
+        {%- if cell_a_image_mobile != blank -%}
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ cell_a_image_mobile | image_url: width: 400 }} 400w, {{ cell_a_image_mobile | image_url: width: 800 }} 800w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {{
+          cell_a_image
+          | image_url: width: 800
+          | image_tag:
+            class: 'bento-hero__fill-img',
+            loading: 'lazy',
+            widths: '400, 800',
+            sizes: '(max-width: 749px) 100vw, 33vw',
+            alt: cell_a_image.alt | default: ''
+        }}
+      </picture>
     {%- else -%}
       <div class="bento-hero__cell-a-content">
         {%- if cell_a_heading != blank -%}
@@ -49,16 +63,25 @@
 {%- capture cell_b_html -%}
   <div class="bento-hero__cell bento-hero__cell-b{% unless section.settings.cell_b_show_mobile %} bento-hero__cell--hide-mobile{% endunless %}">
     {%- if cell_b_image != blank -%}
-      {{
-        cell_b_image
-        | image_url: width: 800
-        | image_tag:
-          class: 'bento-hero__fill-img',
-          loading: 'lazy',
-          widths: '400, 800',
-          sizes: '(max-width: 749px) 100vw, 33vw',
-          alt: cell_b_image.alt | default: ''
-      }}
+      <picture>
+        {%- if cell_b_image_mobile != blank -%}
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ cell_b_image_mobile | image_url: width: 400 }} 400w, {{ cell_b_image_mobile | image_url: width: 800 }} 800w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {{
+          cell_b_image
+          | image_url: width: 800
+          | image_tag:
+            class: 'bento-hero__fill-img',
+            loading: 'lazy',
+            widths: '400, 800',
+            sizes: '(max-width: 749px) 100vw, 33vw',
+            alt: cell_b_image.alt | default: ''
+        }}
+      </picture>
     {%- else -%}
       {{ 'image' | placeholder_svg_tag: 'bento-hero__placeholder' }}
     {%- endif -%}
@@ -68,16 +91,25 @@
 {%- capture cell_c_html -%}
   <div class="bento-hero__cell bento-hero__cell-c{% if cell_c_image != blank %} bento-hero__cell-c--image{% endif %}{% unless section.settings.cell_c_show_mobile %} bento-hero__cell--hide-mobile{% endunless %}">
     {%- if cell_c_image != blank -%}
-      {{
-        cell_c_image
-        | image_url: width: 800
-        | image_tag:
-          class: 'bento-hero__fill-img',
-          loading: 'lazy',
-          widths: '400, 800',
-          sizes: '(max-width: 749px) 100vw, 33vw',
-          alt: cell_c_image.alt | default: ''
-      }}
+      <picture>
+        {%- if cell_c_image_mobile != blank -%}
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ cell_c_image_mobile | image_url: width: 400 }} 400w, {{ cell_c_image_mobile | image_url: width: 800 }} 800w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {{
+          cell_c_image
+          | image_url: width: 800
+          | image_tag:
+            class: 'bento-hero__fill-img',
+            loading: 'lazy',
+            widths: '400, 800',
+            sizes: '(max-width: 749px) 100vw, 33vw',
+            alt: cell_c_image.alt | default: ''
+        }}
+      </picture>
     {%- else -%}
       <div class="bento-hero__cell-c-text">
         {%- if cell_c_heading != blank -%}
@@ -90,16 +122,25 @@
 
       <div class="bento-hero__cell-c-product">
         {%- if cell_c_product_image != blank -%}
-          {{
-            cell_c_product_image
-            | image_url: width: 600
-            | image_tag:
-              class: 'bento-hero__cell-c-product-img',
-              loading: 'lazy',
-              widths: '300, 600',
-              sizes: '(max-width: 749px) 80vw, 25vw',
-              alt: cell_c_product_image.alt | default: ''
-          }}
+          <picture>
+            {%- if cell_c_product_image_mobile != blank -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ cell_c_product_image_mobile | image_url: width: 400 }} 400w, {{ cell_c_product_image_mobile | image_url: width: 800 }} 800w"
+                sizes="80vw"
+              >
+            {%- endif -%}
+            {{
+              cell_c_product_image
+              | image_url: width: 600
+              | image_tag:
+                class: 'bento-hero__cell-c-product-img',
+                loading: 'lazy',
+                widths: '300, 600',
+                sizes: '(max-width: 749px) 80vw, 25vw',
+                alt: cell_c_product_image.alt | default: ''
+            }}
+          </picture>
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
         {%- endif -%}
@@ -118,16 +159,25 @@
 {%- capture cell_d_html -%}
   <div class="bento-hero__cell bento-hero__cell-d{% unless section.settings.cell_d_show_mobile %} bento-hero__cell--hide-mobile{% endunless %}">
     {%- if cell_d_image != blank -%}
-      {{
-        cell_d_image
-        | image_url: width: 1200
-        | image_tag:
-          class: 'bento-hero__fill-img',
-          loading: 'lazy',
-          widths: '600, 900, 1200',
-          sizes: '(max-width: 749px) 100vw, 66vw',
-          alt: cell_d_image.alt | default: ''
-      }}
+      <picture>
+        {%- if cell_d_image_mobile != blank -%}
+          <source
+            media="(max-width: 767px)"
+            srcset="{{ cell_d_image_mobile | image_url: width: 600 }} 600w, {{ cell_d_image_mobile | image_url: width: 900 }} 900w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {{
+          cell_d_image
+          | image_url: width: 1200
+          | image_tag:
+            class: 'bento-hero__fill-img',
+            loading: 'lazy',
+            widths: '600, 900, 1200',
+            sizes: '(max-width: 749px) 100vw, 66vw',
+            alt: cell_d_image.alt | default: ''
+        }}
+      </picture>
     {%- else -%}
       {{ 'hero-apparel-1' | placeholder_svg_tag: 'bento-hero__placeholder' }}
     {%- endif -%}
@@ -462,6 +512,11 @@
   outline-offset: -3px;
 }
 
+/* ── Picture wrapper — transparent to layout ───────────────── */
+.bento-hero picture {
+  display: contents;
+}
+
 /* ── Placeholder SVGs ───────────────────────────────────────── */
 .bento-hero__placeholder {
   width: 100%;
@@ -753,6 +808,12 @@
       "info": "If set, the image replaces the text content below."
     },
     {
+      "type": "image_picker",
+      "id": "cell_a_image_mobile",
+      "label": "Image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
+    },
+    {
       "type": "text",
       "id": "cell_a_heading",
       "label": "Heading",
@@ -801,6 +862,12 @@
       "label": "Image"
     },
     {
+      "type": "image_picker",
+      "id": "cell_b_image_mobile",
+      "label": "Image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
+    },
+    {
       "type": "checkbox",
       "id": "cell_b_show_mobile",
       "label": "Show in mobile",
@@ -827,6 +894,12 @@
       "info": "If set, the image replaces the product content below."
     },
     {
+      "type": "image_picker",
+      "id": "cell_c_image_mobile",
+      "label": "Image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
+    },
+    {
       "type": "text",
       "id": "cell_c_heading",
       "label": "Heading",
@@ -841,6 +914,12 @@
       "type": "image_picker",
       "id": "cell_c_product_image",
       "label": "Product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_c_product_image_mobile",
+      "label": "Product image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
     },
     {
       "type": "text",
@@ -890,6 +969,12 @@
       "type": "image_picker",
       "id": "cell_d_image",
       "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cell_d_image_mobile",
+      "label": "Image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
     },
     {
       "type": "text",

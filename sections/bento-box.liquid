@@ -1,14 +1,19 @@
 {%- liquid
-  assign brand_image         = section.settings.brand_image
-  assign store_image         = section.settings.store_image
-  assign contest_image       = section.settings.contest_image
-  assign button_text         = section.settings.button_text
-  assign button_url          = section.settings.button_url
-  assign promo_title_image   = section.settings.promo_title_image
-  assign promo_product_image = section.settings.promo_product_image
-  assign promo_price         = section.settings.promo_price
-  assign promo_price_cents   = section.settings.promo_price_cents
-  assign promo_bg_color      = section.settings.promo_bg_color
+  assign brand_image                = section.settings.brand_image
+  assign brand_image_mobile         = section.settings.brand_image_mobile
+  assign store_image                = section.settings.store_image
+  assign store_image_mobile         = section.settings.store_image_mobile
+  assign contest_image              = section.settings.contest_image
+  assign contest_image_mobile       = section.settings.contest_image_mobile
+  assign button_text                = section.settings.button_text
+  assign button_url                 = section.settings.button_url
+  assign promo_title_image          = section.settings.promo_title_image
+  assign promo_title_image_mobile   = section.settings.promo_title_image_mobile
+  assign promo_product_image        = section.settings.promo_product_image
+  assign promo_product_image_mobile = section.settings.promo_product_image_mobile
+  assign promo_price                = section.settings.promo_price
+  assign promo_price_cents          = section.settings.promo_price_cents
+  assign promo_bg_color             = section.settings.promo_bg_color
 -%}
 
 {% style %}
@@ -30,16 +35,25 @@
           {%- comment -%} Brand card {%- endcomment -%}
           <div class="bento-box__brand-card">
             {%- if brand_image != blank -%}
-              {{
-                brand_image
-                | image_url: width: 762
-                | image_tag:
-                  class: 'bento-box__brand-img',
-                  loading: 'lazy',
-                  widths: '381, 762',
-                  sizes: '381px',
-                  alt: brand_image.alt | default: 'Brand image'
-              }}
+              <picture>
+                {%- if brand_image_mobile != blank -%}
+                  <source
+                    media="(max-width: 767px)"
+                    srcset="{{ brand_image_mobile | image_url: width: 400 }} 400w, {{ brand_image_mobile | image_url: width: 800 }} 800w"
+                    sizes="50vw"
+                  >
+                {%- endif -%}
+                {{
+                  brand_image
+                  | image_url: width: 762
+                  | image_tag:
+                    class: 'bento-box__brand-img',
+                    loading: 'lazy',
+                    widths: '381, 762',
+                    sizes: '381px',
+                    alt: brand_image.alt | default: 'Brand image'
+                }}
+              </picture>
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'bento-box__brand-img bento-box__placeholder' }}
             {%- endif -%}
@@ -48,16 +62,25 @@
           {%- comment -%} Store photo {%- endcomment -%}
           <div class="bento-box__store-card">
             {%- if store_image != blank -%}
-              {{
-                store_image
-                | image_url: width: 900
-                | image_tag:
-                  class: 'bento-box__store-img',
-                  loading: 'lazy',
-                  widths: '450, 900',
-                  sizes: '(max-width: 767px) 100vw, 50vw',
-                  alt: store_image.alt | default: 'Store photo'
-              }}
+              <picture>
+                {%- if store_image_mobile != blank -%}
+                  <source
+                    media="(max-width: 767px)"
+                    srcset="{{ store_image_mobile | image_url: width: 400 }} 400w, {{ store_image_mobile | image_url: width: 800 }} 800w"
+                    sizes="50vw"
+                  >
+                {%- endif -%}
+                {{
+                  store_image
+                  | image_url: width: 900
+                  | image_tag:
+                    class: 'bento-box__store-img',
+                    loading: 'lazy',
+                    widths: '450, 900',
+                    sizes: '(max-width: 767px) 100vw, 50vw',
+                    alt: store_image.alt | default: 'Store photo'
+                }}
+              </picture>
             {%- else -%}
               {{ 'lifestyle-1' | placeholder_svg_tag: 'bento-box__store-img bento-box__placeholder' }}
             {%- endif -%}
@@ -68,16 +91,25 @@
         {%- comment -%} Contest / bottom photo {%- endcomment -%}
         <div class="bento-box__contest-card">
           {%- if contest_image != blank -%}
-            {{
-              contest_image
-              | image_url: width: 1200
-              | image_tag:
-                class: 'bento-box__contest-img',
-                loading: 'lazy',
-                widths: '600, 900, 1200',
-                sizes: '(max-width: 767px) 100vw, 60vw',
-                alt: contest_image.alt | default: 'Contest photo'
-            }}
+            <picture>
+              {%- if contest_image_mobile != blank -%}
+                <source
+                  media="(max-width: 767px)"
+                  srcset="{{ contest_image_mobile | image_url: width: 600 }} 600w, {{ contest_image_mobile | image_url: width: 900 }} 900w"
+                  sizes="100vw"
+                >
+              {%- endif -%}
+              {{
+                contest_image
+                | image_url: width: 1200
+                | image_tag:
+                  class: 'bento-box__contest-img',
+                  loading: 'lazy',
+                  widths: '600, 900, 1200',
+                  sizes: '(max-width: 767px) 100vw, 60vw',
+                  alt: contest_image.alt | default: 'Contest photo'
+              }}
+            </picture>
           {%- else -%}
             {{ 'lifestyle-2' | placeholder_svg_tag: 'bento-box__contest-img bento-box__placeholder' }}
           {%- endif -%}
@@ -106,31 +138,49 @@
       <div class="bento-box__promo">
 
         {%- if promo_title_image != blank -%}
-          {{
-            promo_title_image
-            | image_url: width: 471
-            | image_tag:
-              class: 'bento-box__promo-title',
-              loading: 'lazy',
-              widths: '235, 471',
-              sizes: '(max-width: 767px) 80vw, 235px',
-              alt: promo_title_image.alt | default: 'Promotion de la semaine'
-          }}
+          <picture>
+            {%- if promo_title_image_mobile != blank -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ promo_title_image_mobile | image_url: width: 400 }} 400w, {{ promo_title_image_mobile | image_url: width: 800 }} 800w"
+                sizes="80vw"
+              >
+            {%- endif -%}
+            {{
+              promo_title_image
+              | image_url: width: 471
+              | image_tag:
+                class: 'bento-box__promo-title',
+                loading: 'lazy',
+                widths: '235, 471',
+                sizes: '(max-width: 767px) 80vw, 235px',
+                alt: promo_title_image.alt | default: 'Promotion de la semaine'
+            }}
+          </picture>
         {%- else -%}
           <p class="bento-box__promo-title-fallback">Promotion de la semaine</p>
         {%- endif -%}
 
         {%- if promo_product_image != blank -%}
-          {{
-            promo_product_image
-            | image_url: width: 471
-            | image_tag:
-              class: 'bento-box__promo-product',
-              loading: 'lazy',
-              widths: '235, 471',
-              sizes: '(max-width: 767px) 80vw, 235px',
-              alt: promo_product_image.alt | default: 'Produit en promotion'
-          }}
+          <picture>
+            {%- if promo_product_image_mobile != blank -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ promo_product_image_mobile | image_url: width: 400 }} 400w, {{ promo_product_image_mobile | image_url: width: 800 }} 800w"
+                sizes="80vw"
+              >
+            {%- endif -%}
+            {{
+              promo_product_image
+              | image_url: width: 471
+              | image_tag:
+                class: 'bento-box__promo-product',
+                loading: 'lazy',
+                widths: '235, 471',
+                sizes: '(max-width: 767px) 80vw, 235px',
+                alt: promo_product_image.alt | default: 'Produit en promotion'
+            }}
+          </picture>
         {%- else -%}
           {{ 'product-5' | placeholder_svg_tag: 'bento-box__promo-product bento-box__placeholder' }}
         {%- endif -%}
@@ -342,6 +392,11 @@
   font-weight: 500;
 }
 
+/* ─── Picture wrapper — transparent to layout ──────────────── */
+.bento-box picture {
+  display: contents;
+}
+
 /* ─── Placeholder SVGs ──────────────────────────────────────── */
 .bento-box__placeholder {
   width: 100%;
@@ -435,9 +490,21 @@
     },
     {
       "type": "image_picker",
+      "id": "brand_image_mobile",
+      "label": "Brand / graphic image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
+    },
+    {
+      "type": "image_picker",
       "id": "store_image",
       "label": "Store photo",
       "info": "Fills the remaining width of the top row. Recommended: 16:9."
+    },
+    {
+      "type": "image_picker",
+      "id": "store_image_mobile",
+      "label": "Store photo — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
     },
     {
       "type": "header",
@@ -448,6 +515,12 @@
       "id": "contest_image",
       "label": "Contest / people photo",
       "info": "Large photo with dark overlay. Recommended: 16:9 or wider."
+    },
+    {
+      "type": "image_picker",
+      "id": "contest_image_mobile",
+      "label": "Contest / people photo — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
     },
     {
       "type": "text",
@@ -472,9 +545,21 @@
     },
     {
       "type": "image_picker",
+      "id": "promo_title_image_mobile",
+      "label": "Promo title image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
+    },
+    {
+      "type": "image_picker",
       "id": "promo_product_image",
       "label": "Product image",
       "info": "The featured promotional product. Recommended: 439×400px, transparent PNG."
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_product_image_mobile",
+      "label": "Product image — mobile",
+      "info": "Optional. Shown instead of the desktop image on screens ≤ 767px."
     },
     {
       "type": "text",

@@ -106,7 +106,7 @@
       "name": "t:names.hero_bottom_aligned",
       "settings": {
         "media_type_1": "image",
-        "image_1": "{{ article.image }}",
+        "image_1": "shopify://shop_images/DSC04896.jpg",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
@@ -304,7 +304,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Située à Saint-Nicolas sur la Rive-Sud de Québec, Fixatech dessert des centaines d'entrepreneurs de la construction, de l'industrie manufacturière et du préfabriqué. Grâce à notre vaste entrepôt de 7000 pi² rempli de clous, d'agrafes et d'outils, et grâce à notre centre de réparation d'outils, on a tout ce qu'il faut sous un même toit.</p><p>Ouvert tous les jours de la semaine, notre magasin offre une grande variété d'outils et de produits de construction de marques réputées comme Milwaukee, Makita, DeWalt, Metabo-HPT, MAX, Senco, Bostitch, 3M, Tuck Tape, Featherlite, Quick Drive et Diablo. Depuis 40 ans, nos conseillers experts sont là pour t'écouter, te guider et te proposer des solutions de qualité à des prix compétitifs.<a href=\"https://maps.app.goo.gl/wodwMbsYhtHmqdvj6\" target=\"_blank\" title=\"Visitez notre boutique\"><br/></a></p>",
+                "text": "<p>Depuis 1986, Fixatech accompagne les particuliers, les entrepreneurs, les manufacturiers et les quincailleries partout au Québec en leur offrant les outils, les équipements et les produits dont ils ont besoin pour mener leurs projets à terme.</p><p>Située à Lévis, dans le secteur Saint-Nicolas, notre entreprise combine l'expérience acquise au cours des 40 dernières années à l'énergie d'une jeune relève passionnée, déterminée à faire évoluer Fixatech tout en préservant les valeurs qui ont fait sa réputation.</p><p>Grâce à un vaste inventaire, à un centre de réparation certifié et à une équipe qui comprend les réalités du terrain, nous nous engageons à offrir un service rapide, des conseils adaptés et des solutions fiables, tant aux professionnels qu'aux bricoleurs.</p><p>Depuis près de quatre décennies, notre mission demeure la même : fournir les bons produits, au bon moment, avec le service que nos clients méritent, à un prix juste.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -520,7 +520,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Expertise certifiée</p>",
+                    "text": "<p>40 ans d'expérience</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -546,7 +546,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Réparations conformes aux normes de la CNESST.</p>",
+                    "text": "<p>On équipe les bâtisseurs du Québec depuis 1986.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -631,7 +631,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Garantie totale</p>",
+                    "text": "<p>Une équipe qui livre</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -657,7 +657,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>30 jours sur les pièces et la main-d'œuvre.</p>",
+                    "text": "<p>Des conseils honnêtes, un service rapide et un prix juste.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -742,7 +742,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Inventaire massif</p>",
+                    "text": "<p>Des produits en stock</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -768,7 +768,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Large stock de pièces pour un retour rapide sur vos chantiers.</p>",
+                    "text": "<p>Les plus grandes marques de l'industrie, prêtes à partir.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
