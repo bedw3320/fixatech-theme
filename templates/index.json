@@ -95,7 +95,6 @@
       "type": "bento-hero",
       "settings": {
         "cell_a_image": "shopify://shop_images/Layer_1_1_1.jpg",
-        "cell_a_image_mobile": "shopify://shop_images/48-22-4071_Primary_Image.jpg",
         "cell_a_heading": "",
         "cell_a_text": "",
         "cell_a_bg_color": "#141414",
