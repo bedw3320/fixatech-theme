@@ -4991,19 +4991,3 @@ product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
     translate: 0px var(--atc-destination, 0px);
   }
 }
-
-/* The Bogos gift-with-purchase icon sits flush at top:0/right:0, which
-   clips against the product card's rounded corner. Inset it to match the
-   product badge's corner inset so both sit at a consistent distance from
-   the edge. */
-.sca-gift-icon-collection-img {
-  top: var(--padding-xs);
-  right: var(--padding-xs);
-}
-
-@media screen and (max-width: 749px) {
-  .sca-gift-icon-collection-img {
-    top: 4px;
-    right: 4px;
-  }
-}
