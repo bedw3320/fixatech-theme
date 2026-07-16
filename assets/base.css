@@ -5000,3 +5000,10 @@ product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
   top: var(--padding-xs);
   right: var(--padding-xs);
 }
+
+@media screen and (max-width: 749px) {
+  .sca-gift-icon-collection-img {
+    top: 4px;
+    right: 4px;
+  }
+}
