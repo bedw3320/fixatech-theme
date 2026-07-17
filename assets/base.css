@@ -4993,15 +4993,16 @@ product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
 }
 
 /* The Bogos gift-with-purchase icon (.sca-gift-icon-collection-img) ships
-   with a same-specificity top:0/right:0 rule in the app's own stylesheet
+   with a top:0/right:0 rule in the app's own stylesheet
    (freegifts-main.min.css), which is injected inline in the page body —
-   later in document order than this file — so it wins any specificity tie.
-   !important guarantees this override applies regardless of load order.
-   --card-padding-inline-end/--card-padding-block-start match the same
-   edges the card's title/price/button align to (see product-card.liquid),
-   so the icon lines up with them instead of sitting flush on the card's
-   bled image edge. */
-.sca-gift-icon-collection-img {
-  top: var(--card-padding-block-start, 8px) !important;
-  right: var(--card-padding-inline-end, 8px) !important;
+   later in document order than this file. The compound selector plus
+   !important were verified directly in the live DOM to reliably win over
+   the app's rule (and any per-shop custom style block the app injects,
+   which can also use a compound selector at equal specificity). 14px
+   (not the card's 16px padding) because the icon image itself has ~2px
+   of built-in transparent padding baked into the asset; 16 - 2 = 14
+   makes the icon's visible content line up with the rest of the card. */
+.sca-gift-icon-collection-page .sca-gift-icon-collection-img {
+  top: 14px !important;
+  right: 14px !important;
 }
