@@ -4991,3 +4991,16 @@ product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
     translate: 0px var(--atc-destination, 0px);
   }
 }
+
+/* The Bogos gift-with-purchase icon (.sca-gift-icon-collection-img) ships
+   with a same-specificity top:0/right:0 rule in the app's own stylesheet
+   (freegifts-main.min.css), which is injected inline in the page body —
+   later in document order than this file — so it wins any specificity tie.
+   !important guarantees this override applies regardless of load order.
+   --card-padding-inline-end matches the same edge the card's title/price/
+   button align to (see product-card.liquid), so the icon lines up with
+   them instead of sitting flush on the card's bled image edge. */
+.sca-gift-icon-collection-img {
+  top: var(--card-padding-inline-end, 8px) !important;
+  right: var(--card-padding-inline-end, 8px) !important;
+}
