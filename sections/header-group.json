@@ -14,39 +14,24 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
-        "announcement_G4nJrw": {
+        "announcement_GCrLdd": {
           "type": "_announcement",
           "name": "t:names.announcement",
           "settings": {
-            "text": "Découvrez nos promos de la semaine !",
-            "link": "shopify://collections/en-promotion",
-            "font": "var(--font-subheading--family)",
-            "font_size": "1rem",
+            "text": "<strong>EN VACANCES DU 18 JUILLET AU 2 AOÛT. LES COMMANDES EN LIGNE DEMEURENT OUVERTES ET SERONT EXPÉDIÉES À NOTRE RETOUR. MERCI DE VOTRE COMPRÉHENSION !</strong>",
+            "link": "",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
             "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
-        },
-        "announcement_BxgCk9": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Bienvenue sur notre nouveau site web!",
-            "link": "#",
-            "font": "var(--font-subheading--family)",
-            "font_size": "1rem",
-            "weight": "",
-            "letter_spacing": "normal",
+            "letter_spacing": "tight",
             "case": "none"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "announcement_G4nJrw",
-        "announcement_BxgCk9"
+        "announcement_GCrLdd"
       ],
-      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
