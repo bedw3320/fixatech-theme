@@ -45,17 +45,17 @@
 
   .product-badges--bottom-left {
     bottom: calc(var(--badge-inset) + var(--padding-block-start));
-    left: var(--padding-inline-start);
+    left: var(--card-padding-inline-start, var(--badge-inset));
   }
 
   .product-badges--top-left {
     top: calc(var(--badge-inset) + var(--padding-block-start));
-    left: var(--padding-inline-start);
+    left: var(--card-padding-inline-start, var(--badge-inset));
   }
 
   .product-badges--top-right {
     top: calc(var(--badge-inset) + var(--padding-block-start));
-    right: var(--padding-inline-start);
+    right: var(--card-padding-inline-end, var(--badge-inset));
   }
 
   .product-badges__badge {
