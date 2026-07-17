@@ -99,6 +99,7 @@
       {% comment %} Fixatech: expose card padding for gallery bleed {% endcomment %}
       --card-padding-inline-start: {{ block_settings.padding-inline-start | default: 0 }}px;
       --card-padding-inline-end: {{ block_settings.padding-inline-end | default: 0 }}px;
+      --card-padding-block-start: {{ block_settings.padding-block-start | default: 0 }}px;
       {% render 'gap-style', value: product_card_gap_value, name: 'product-card-gap' %}
       --quick-add-display: {% if has_quick_add %}flex{% else %}none{% endif %};
       --quick-add-mobile-display: {% if has_mobile_quick_add %}flex{% else %}none{% endif %};

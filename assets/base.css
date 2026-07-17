@@ -4997,10 +4997,11 @@ product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
    (freegifts-main.min.css), which is injected inline in the page body —
    later in document order than this file — so it wins any specificity tie.
    !important guarantees this override applies regardless of load order.
-   --card-padding-inline-end matches the same edge the card's title/price/
-   button align to (see product-card.liquid), so the icon lines up with
-   them instead of sitting flush on the card's bled image edge. */
+   --card-padding-inline-end/--card-padding-block-start match the same
+   edges the card's title/price/button align to (see product-card.liquid),
+   so the icon lines up with them instead of sitting flush on the card's
+   bled image edge. */
 .sca-gift-icon-collection-img {
-  top: var(--card-padding-inline-end, 8px) !important;
+  top: var(--card-padding-block-start, 8px) !important;
   right: var(--card-padding-inline-end, 8px) !important;
 }
