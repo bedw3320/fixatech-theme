@@ -4998,8 +4998,10 @@ product-card:lang(fr) .product-form-buttons .add-to-cart-text__short {
    later in document order than this file. The compound selector plus
    !important were verified directly in the live DOM to reliably win over
    the app's rule (and any per-shop custom style block the app injects,
-   which can also use a compound selector at equal specificity). 14px was
-   confirmed by hand to visually align with the rest of the card. */
+   which can also use a compound selector at equal specificity). 14px
+   (not the card's 16px padding) because the icon image itself has ~2px
+   of built-in transparent padding baked into the asset; 16 - 2 = 14
+   makes the icon's visible content line up with the rest of the card. */
 .sca-gift-icon-collection-page .sca-gift-icon-collection-img {
   top: 14px !important;
   right: 14px !important;
